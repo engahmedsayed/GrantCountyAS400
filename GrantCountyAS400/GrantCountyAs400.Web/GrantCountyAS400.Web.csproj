@@ -9,7 +9,7 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GrantCounty.Persistence\GrantCounty.Persistence.csproj" />
     <ProjectReference Include="..\GrantCountyAs400.Domain\GrantCountyAs400.Domain.csproj" />
+    <ProjectReference Include="..\GrantCountyAs400.PersistenceAdapter\GrantCountyAs400.PersistenceAdapter.csproj" />
   </ItemGroup>
 </Project>

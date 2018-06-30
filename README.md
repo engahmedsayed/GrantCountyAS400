@@ -1,2 +1,2 @@
-# MegaGrandCountyAS400
-GrandCountyAs400
+# GrantCountyAS400
+GrantCountyAs400
