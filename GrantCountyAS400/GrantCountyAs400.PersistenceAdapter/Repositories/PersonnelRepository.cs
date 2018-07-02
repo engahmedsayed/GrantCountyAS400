@@ -24,6 +24,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
 
         public IEnumerable<Personnel> GetAllWithContracts()
         {
+            List<Personnel> results = new List<Personnel>();
+
             var personnelRecords = _context.AcctPersonnel
                                     .Select(PersonnelMapper.Map)
                                     .ToList();
@@ -37,10 +39,13 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
 
             foreach (var personnel in personnelRecords)
             {
-                personnel.SetPersonnelContracts(employeeRecords.Where(emp => emp.SSNumber == personnel.SSNumber).ToList());
+                results.Add(new Personnel(
+                    personnel.Id, personnel.Name, personnel.SSNumber, personnel.PersonNumber,
+                    employeeRecords.Where(emp => emp.SSNumber == personnel.SSNumber)
+                ));
             }
 
-            return personnelRecords;
+            return results;
         }
     }
 }

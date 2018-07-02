@@ -18,7 +18,8 @@ namespace GrantCountyAs400.Domain.Accounting
             PersonNumber = personNumber;
         }
 
-        public void SetPersonnelContracts(List<Contract> contracts)
+        public Personnel(int id, string name, decimal ssNumber, decimal personNumber, IEnumerable<Contract> contracts)
+            : this(id, name, ssNumber, personNumber)
         {
             Contracts = contracts;
         }
