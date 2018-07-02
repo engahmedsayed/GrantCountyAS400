@@ -1,4 +1,6 @@
+using GrantCountyAs400.Domain.Accounting;
 using GrantCountyAs400.PersistenceAdapter.Models;
+using GrantCountyAs400.PersistenceAdapter.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +25,9 @@ namespace MegaGrandCountyAS400
             services.AddMvc();
             services.AddDbContext<GrantCountyDbContext>(options => 
                         options.UseSqlServer(Configuration.GetConnectionString("GrantCountyDbContext")));
+
+            // Add application services.
+            services.AddScoped<IPersonnelRepository, PersonnelRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
