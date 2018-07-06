@@ -12,15 +12,21 @@
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Id)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SSNumber)
-                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HasContracts)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PersonNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SSNumber)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -32,6 +38,12 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HasContracts)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PersonNumber)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SSNumber)

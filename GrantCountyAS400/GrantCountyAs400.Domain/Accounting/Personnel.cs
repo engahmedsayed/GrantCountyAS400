@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace GrantCountyAs400.Domain.Accounting
 {
@@ -8,6 +9,8 @@ namespace GrantCountyAs400.Domain.Accounting
         public string Name { get; }
         public decimal SSNumber { get; }
         public decimal PersonNumber { get; }
+        public string HasContracts { get { return Contracts != null && Contracts.Any() ? "P" : string.Empty; } }
+
         public IEnumerable<Contract> Contracts { get; private set; }
 
         public Personnel(int id, string name, decimal ssNumber, decimal personNumber)
