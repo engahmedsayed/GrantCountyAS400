@@ -28,7 +28,7 @@ namespace GrantCountyAs400.Web.Controllers.Accounting
 
             pagingInfo.Total = resultCount;
             ViewBag.FilterViewModel = filter;
-            return View(results.ToManualPagedList(pagingInfo));
+            return View(results.ToMappedPagedList<Personnel, PersonnelViewModel>(pagingInfo));
         }
     }
 }

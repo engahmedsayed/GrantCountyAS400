@@ -1,5 +1,4 @@
-﻿
-@model IEnumerable<GrantCountyAs400.Domain.Accounting.Personnel>
+﻿@model IEnumerable<GrantCountyAs400.Web.ViewModels.AccountingVM.PersonnelViewModel>
 @using X.PagedList.Mvc.Core;
 @using GrantCountyAs400.Web.ViewModels.AccountingVM
 @using X.PagedList;
@@ -9,10 +8,8 @@
     var filterViewModel = ViewBag.FilterViewModel as AccountingFilterVm;
 }
 
-<h2>Personnel</h2>
-<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
-
 <h2>Employees</h2>
+
 <p>
     @using (Html.BeginForm("Index", "Personnel", FormMethod.Get))
     {
@@ -64,7 +61,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().Id)
+                #
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FirstOrDefault().Name)
@@ -86,7 +83,10 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Id)
+                    <a class="toggle-row-details" data-toggle="collapse" data-target="#@item.Id" aria-expanded="false" aria-controls="@item.Id">
+                        <i class="glyphicon glyphicon-chevron-right pull-right"></i>
+                        <i class="glyphicon glyphicon-chevron-down pull-right"></i>
+                    </a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
@@ -101,6 +101,91 @@
                     @Html.DisplayFor(modelItem => item.SSNumber)
                 </td>
             </tr>
+            <tr class="row-details">
+                <td colspan="100">
+                    <div class="collapse" id="@item.Id">
+                        <table class="table table-hover">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(modelItem => item.Contracts.FirstOrDefault().Organization)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(modelItem => item.Contracts.FirstOrDefault().Status)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(modelItem => item.Contracts.FirstOrDefault().CountDisplay)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(modelItem => item.Contracts.FirstOrDefault().PayCode)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(modelItem => item.Contracts.FirstOrDefault().Rate)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(modelItem => item.Contracts.FirstOrDefault().Table)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(modelItem => item.Contracts.FirstOrDefault().Grade)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(modelItem => item.Contracts.FirstOrDefault().Step)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(modelItem => item.Contracts.FirstOrDefault().JobCode)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(modelItem => item.Contracts.FirstOrDefault().HireDate)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(modelItem => item.Contracts.FirstOrDefault().TerminationDate)
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var contract in item.Contracts)
+                                {
+                                    <tr>
+                                        <td>
+                                            @contract.Organization.DisplayName
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => contract.Status)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => contract.CountDisplay)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => contract.PayCode)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => contract.Rate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => contract.Table)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => contract.Grade)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => contract.Step)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => contract.JobCode)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => contract.HireDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => contract.TerminationDate)
+                                        </td>
+                                    </tr>
+                                }
+                            <tbody>
+                        </table>
+                    </div>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
@@ -112,5 +197,25 @@
     sSN = filterViewModel.SSN
 }))
 </nav>
+<style>
+    tr.row-details td, tr.row-details th {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
 
+    tr.row-details td {
+        border: none !important;
+    }
 
+    a.toggle-row-details {
+        display: inline-block;
+    }
+
+        a.toggle-row-details[aria-expanded=true] .glyphicon-chevron-right {
+            display: none;
+        }
+
+        a.toggle-row-details[aria-expanded=false] .glyphicon-chevron-down {
+            display: none;
+        }
+</style>
