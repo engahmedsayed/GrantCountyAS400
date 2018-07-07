@@ -23,6 +23,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
         public virtual DbSet<AcctEmployeeYtdhistory> AcctEmployeeYtdhistory { get; set; }
         public virtual DbSet<AcctGeneralLedger> AcctGeneralLedger { get; set; }
         public virtual DbSet<AcctGlperiodAmounts> AcctGlperiodAmounts { get; set; }
+        public virtual DbSet<AcctGltransactions> AcctGltransactions { get; set; }
         public virtual DbSet<AcctPayrollJobCodes> AcctPayrollJobCodes { get; set; }
         public virtual DbSet<AcctPersonnel> AcctPersonnel { get; set; }
         public virtual DbSet<AcctPrWarrant> AcctPrWarrant { get; set; }
@@ -549,10 +550,6 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                     .HasMaxLength(2)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Emyretemp)
-                    .HasColumnName("EMYRETEMP")
-                    .HasColumnType("decimal(9, 2)");
-
                 entity.Property(e => e.FicaCode).HasColumnType("decimal(4, 0)");
 
                 entity.Property(e => e.FicaExempt).HasColumnType("decimal(1, 0)");
@@ -642,9 +639,11 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
 
                 entity.Property(e => e.YearlyRetirement).HasColumnType("decimal(9, 2)");
 
-                entity.Property(e => e.YearlyRetirementBenefit).HasColumnType("decimal(9, 2)");
+                entity.Property(e => e.YearlyRetirementBenefitEmployee).HasColumnType("decimal(9, 2)");
 
-                entity.Property(e => e.YearlyRetirementGoss).HasColumnType("decimal(9, 2)");
+                entity.Property(e => e.YearlyRetirementBenefitEmployer).HasColumnType("decimal(9, 2)");
+
+                entity.Property(e => e.YearlyRetirementGross).HasColumnType("decimal(9, 2)");
 
                 entity.Property(e => e.YearlyStatWithholding).HasColumnType("decimal(9, 2)");
 
@@ -673,6 +672,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                     .HasMaxLength(8)
                     .IsUnicode(false);
 
+                entity.Property(e => e.CurrentAction).HasColumnType("decimal(11, 2)");
+
                 entity.Property(e => e.CurrentBudget).HasColumnType("decimal(11, 2)");
 
                 entity.Property(e => e.CurrentEncumbrance).HasColumnType("decimal(11, 2)");
@@ -681,23 +682,17 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                     .HasMaxLength(8)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Encumbrance).HasColumnType("decimal(11, 2)");
-
                 entity.Property(e => e.FiscalYear).HasColumnType("decimal(4, 0)");
 
                 entity.Property(e => e.Fund)
                     .HasMaxLength(8)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Glcuract)
-                    .HasColumnName("GLCURACT")
-                    .HasColumnType("decimal(11, 2)");
-
-                entity.Property(e => e.Glpenact)
-                    .HasColumnName("GLPENACT")
-                    .HasColumnType("decimal(11, 2)");
-
                 entity.Property(e => e.NetBalance).HasColumnType("decimal(11, 2)");
+
+                entity.Property(e => e.PendingAction).HasColumnType("decimal(11, 2)");
+
+                entity.Property(e => e.PendingEncumbrance).HasColumnType("decimal(11, 2)");
 
                 entity.Property(e => e.Program)
                     .HasMaxLength(8)
@@ -722,7 +717,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.AcctBalance).HasColumnType("decimal(11, 2)");
+                entity.Property(e => e.Action).HasColumnType("decimal(11, 2)");
 
                 entity.Property(e => e.Base)
                     .HasMaxLength(8)
@@ -734,7 +729,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                     .HasMaxLength(8)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Encumbrance).HasColumnType("decimal(11, 0)");
+                entity.Property(e => e.Encumbrance).HasColumnType("decimal(11, 2)");
 
                 entity.Property(e => e.FiscalYear).HasColumnType("decimal(4, 0)");
 
@@ -742,15 +737,13 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                     .HasMaxLength(8)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Glpenc)
-                    .HasColumnName("GLPENC")
-                    .HasColumnType("decimal(11, 2)");
-
                 entity.Property(e => e.Glppenact)
                     .HasColumnName("GLPPENACT")
                     .HasColumnType("decimal(11, 2)");
 
                 entity.Property(e => e.Month).HasColumnType("decimal(2, 0)");
+
+                entity.Property(e => e.PendingEncumbrance).HasColumnType("decimal(11, 0)");
 
                 entity.Property(e => e.Program)
                     .HasMaxLength(8)
@@ -758,6 +751,81 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
 
                 entity.Property(e => e.Project)
                     .HasMaxLength(8)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Year).HasColumnType("decimal(4, 0)");
+            });
+
+            modelBuilder.Entity<AcctGltransactions>(entity =>
+            {
+                entity.ToTable("AcctGLTransactions");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Amount).HasColumnType("decimal(11, 2)");
+
+                entity.Property(e => e.Base)
+                    .HasMaxLength(8)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Department)
+                    .HasMaxLength(8)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FiscalYear).HasColumnType("decimal(4, 0)");
+
+                entity.Property(e => e.Fund)
+                    .HasMaxLength(8)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Jenumber)
+                    .HasColumnName("JENumber")
+                    .HasColumnType("decimal(4, 0)");
+
+                entity.Property(e => e.Kind)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Line).HasColumnType("decimal(4, 0)");
+
+                entity.Property(e => e.Month).HasColumnType("decimal(2, 0)");
+
+                entity.Property(e => e.Notation1)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Notation2)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Notation3)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Notation4)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Program)
+                    .HasMaxLength(8)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Project)
+                    .HasMaxLength(8)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Source)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Status)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TransactionDate).HasColumnType("date");
+
+                entity.Property(e => e.Type)
+                    .HasMaxLength(1)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Year).HasColumnType("decimal(4, 0)");
@@ -1016,6 +1084,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
 
                 entity.Property(e => e.MedicalBenefits).HasColumnType("decimal(7, 2)");
 
+                entity.Property(e => e.MedicalGross).HasColumnType("decimal(7, 2)");
+
                 entity.Property(e => e.Month).HasColumnType("decimal(2, 0)");
 
                 entity.Property(e => e.Name)
@@ -1041,16 +1111,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                     .HasMaxLength(2)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Prwemployr)
-                    .HasColumnName("PRWEMPLOYR")
-                    .HasColumnType("decimal(7, 2)");
-
                 entity.Property(e => e.Prwmed)
                     .HasColumnName("PRWMED")
-                    .HasColumnType("decimal(7, 2)");
-
-                entity.Property(e => e.Prwmedgrs)
-                    .HasColumnName("PRWMEDGRS")
                     .HasColumnType("decimal(7, 2)");
 
                 entity.Property(e => e.Prwper)
@@ -1060,10 +1122,6 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                 entity.Property(e => e.Prwpertype)
                     .HasColumnName("PRWPERTYPE")
                     .HasColumnType("decimal(2, 0)");
-
-                entity.Property(e => e.Prwretgrs)
-                    .HasColumnName("PRWRETGRS")
-                    .HasColumnType("decimal(7, 2)");
 
                 entity.Property(e => e.Prwretipmgr)
                     .HasColumnName("PRWRETIPMGR")
@@ -1087,9 +1145,13 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                     .HasColumnName("PRWSTSUPDT")
                     .HasColumnType("decimal(2, 0)");
 
-                entity.Property(e => e.RetirementBenefits).HasColumnType("decimal(7, 2)");
+                entity.Property(e => e.RetirementBenefitsEmployee).HasColumnType("decimal(7, 2)");
+
+                entity.Property(e => e.RetirementBenefitsEmployer).HasColumnType("decimal(7, 2)");
 
                 entity.Property(e => e.RetirementCode).HasColumnType("decimal(2, 0)");
+
+                entity.Property(e => e.RetirementGross).HasColumnType("decimal(7, 2)");
 
                 entity.Property(e => e.RetirementOption)
                     .HasMaxLength(1)

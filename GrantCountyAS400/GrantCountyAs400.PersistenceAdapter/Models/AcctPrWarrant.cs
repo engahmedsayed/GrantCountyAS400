@@ -5,6 +5,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
 {
     public partial class AcctPrWarrant
     {
+        public int Id { get; set; }
         public decimal? Group { get; set; }
         public decimal WarrantNumber { get; set; }
         public decimal? CheckNumber { get; set; }
@@ -44,14 +45,13 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
         public decimal? FicaBenefits { get; set; }
         public decimal? NetPay { get; set; }
         public decimal? FicaGrossPay { get; set; }
-        public decimal? Prwretgrs { get; set; }
+        public decimal? RetirementGross { get; set; }
         public decimal? RetirementPay { get; set; }
-        public decimal? RetirementBenefits { get; set; }
-        public decimal? Prwemployr { get; set; }
-        public decimal? Prwmedgrs { get; set; }
+        public decimal? RetirementBenefitsEmployee { get; set; }
+        public decimal? RetirementBenefitsEmployer { get; set; }
+        public decimal? MedicalGross { get; set; }
         public decimal? Prwmed { get; set; }
         public decimal? MedicalBenefits { get; set; }
         public decimal? TaxableMedicalBenefits { get; set; }
-        public int Id { get; set; }
     }
 }

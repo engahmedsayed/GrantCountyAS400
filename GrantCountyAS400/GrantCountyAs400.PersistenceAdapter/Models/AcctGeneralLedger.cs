@@ -5,6 +5,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
 {
     public partial class AcctGeneralLedger
     {
+        public int Id { get; set; }
         public decimal? FiscalYear { get; set; }
         public string Fund { get; set; }
         public string Department { get; set; }
@@ -17,11 +18,10 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
         public string ClosedAcct { get; set; }
         public decimal? BeginBudget { get; set; }
         public decimal? CurrentBudget { get; set; }
-        public decimal? Encumbrance { get; set; }
+        public decimal? PendingEncumbrance { get; set; }
         public decimal? CurrentEncumbrance { get; set; }
-        public decimal? Glpenact { get; set; }
-        public decimal? Glcuract { get; set; }
+        public decimal? PendingAction { get; set; }
+        public decimal? CurrentAction { get; set; }
         public decimal? NetBalance { get; set; }
-        public int Id { get; set; }
     }
 }

@@ -5,6 +5,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
 {
     public partial class AcctEmployeeYtdhistory
     {
+        public int Id { get; set; }
         public decimal? Year { get; set; }
         public decimal? Group { get; set; }
         public string Name { get; set; }
@@ -53,10 +54,9 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
         public decimal? YearlyTaxableBenefit { get; set; }
         public decimal? YearlyNetPay { get; set; }
         public decimal? YearlyTotalPay { get; set; }
-        public decimal? YearlyRetirementGoss { get; set; }
+        public decimal? YearlyRetirementGross { get; set; }
         public decimal? YearlyRetirement { get; set; }
-        public decimal? YearlyRetirementBenefit { get; set; }
-        public decimal? Emyretemp { get; set; }
-        public int Id { get; set; }
+        public decimal? YearlyRetirementBenefitEmployee { get; set; }
+        public decimal? YearlyRetirementBenefitEmployer { get; set; }
     }
 }
