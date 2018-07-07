@@ -18,48 +18,52 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
         public IEnumerable<Personnel> GetAll()
         {
             return _context.AcctPersonnel
-                            .Select(PersonnelMapper.Map)
-                            .ToList();
+                           .Select(PersonnelMapper.Map)
+                           .ToList();
         }
 
-        public IEnumerable<Personnel> GetAllWithContracts(string firstName, string lastName, decimal Ssn, out int resultCount, int pageNumber = 1, int pageSize = 50)
+        public IEnumerable<Personnel> GetAllWithContracts(string firstName, string lastName, decimal ssn, out int resultCount, int pageNumber = 1, int pageSize = 50)
         {
             List<Personnel> results = new List<Personnel>();
             IQueryable<AcctPersonnel> query = _context.AcctPersonnel;
+
             if (!string.IsNullOrWhiteSpace(firstName))
             {
                 query = query.Where(t => t.Name.Contains(firstName));
             }
-            if(!string.IsNullOrWhiteSpace(lastName))
+            if (!string.IsNullOrWhiteSpace(lastName))
             {
                 query = query.Where(t => t.Name.Contains(lastName));
             }
-            if (Ssn > 0)
+            if (ssn > 0)
             {
-                query = query.Where(t => t.Ssnumber == Ssn);
+                query = query.Where(t => t.Ssnumber == ssn);
             }
+
             List<Personnel> personnelRecords = new List<Personnel>();
-            if(pageNumber > 0)
+            if (pageNumber > 0)
             {
                 resultCount = query.Count();
-                personnelRecords = query.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList()
-                                .Select(PersonnelMapper.Map)
-                                .ToList();
+                personnelRecords = query.Skip((pageNumber - 1) * pageSize)
+                                        .Take(pageSize)
+                                        .OrderBy(t => t.Name)
+                                        .Select(PersonnelMapper.Map)
+                                        .ToList();
             }
             else
             {
-                resultCount = results.Count();
-                personnelRecords = query.ToList()
-                              .Select(PersonnelMapper.Map)
-                              .ToList();
+                personnelRecords = query.OrderBy(t => t.Name)
+                                        .Select(PersonnelMapper.Map)
+                                        .ToList();
+                resultCount = personnelRecords.Count();
             }
 
             var listOfRetrievedSSNumbers = personnelRecords.Select(personnel => personnel.SSNumber).ToList();
 
             var employeeRecords = _context.AcctEmployee
-                                    .Where(emp => listOfRetrievedSSNumbers.Contains(emp.Ssnumber.Value))
-                                    .Select(EmployeeMapper.Map)
-                                    .ToList();
+                                          .Where(emp => listOfRetrievedSSNumbers.Contains(emp.Ssnumber.Value))
+                                          .Select(EmployeeMapper.Map)
+                                          .ToList();
 
             foreach (var personnel in personnelRecords)
             {
