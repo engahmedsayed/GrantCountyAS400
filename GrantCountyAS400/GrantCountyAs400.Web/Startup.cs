@@ -23,7 +23,7 @@ namespace MegaGrandCountyAS400
         {
             // Add framework services.
             services.AddMvc();
-            services.AddDbContext<GrantCountyDbContext>(options => 
+            services.AddDbContext<GrantCountyDbContext>(options =>
                         options.UseSqlServer(Configuration.GetConnectionString("GrantCountyDbContext")));
 
             // Add application services.
@@ -46,6 +46,8 @@ namespace MegaGrandCountyAS400
             app.UseStaticFiles();
 
             app.UseMvc();
+
+            AutoMapperConfig.Configure();
         }
     }
 }
