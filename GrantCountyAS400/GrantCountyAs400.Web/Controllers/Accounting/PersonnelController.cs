@@ -21,6 +21,10 @@ namespace GrantCountyAs400.Web.Controllers.Accounting
         {
             int resultCount;
             var pagingInfo = new PagingInfo() { PageNumber = pageNumber };
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             var results = _personnelRepository
                                 .GetAllWithContracts(filter.FirstName, filter.LastName, filter.SSN, out resultCount, pageNumber, AppSettings.PageSize)
                                 .ToList();

@@ -1,4 +1,5 @@
 ﻿using GrantCountyAs400.Domain.Accounting;
+using GrantCountyAs400.PersistenceAdapter.Extensions;
 using GrantCountyAs400.PersistenceAdapter.Mappers;
 using GrantCountyAs400.PersistenceAdapter.Models;
 using System.Collections.Generic;
@@ -29,11 +30,11 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
 
             if (!string.IsNullOrWhiteSpace(firstName))
             {
-                query = query.Where(t => t.Name.Contains(firstName));
+                query = query.Where(t => t.Name.SplitName(',',NameEnum.FirstName).Contains(firstName));
             }
             if (!string.IsNullOrWhiteSpace(lastName))
             {
-                query = query.Where(t => t.Name.Contains(lastName));
+                query = query.Where(t => t.Name.SplitName(',',NameEnum.LastName).Contains(lastName));
             }
             if (ssn > 0)
             {
