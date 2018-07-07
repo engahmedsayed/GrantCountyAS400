@@ -1,5 +1,5 @@
 ﻿
-@model X.PagedList.IPagedList<GrantCountyAs400.Domain.Accounting.Personnel>
+@model IEnumerable<GrantCountyAs400.Domain.Accounting.Personnel>
 @using X.PagedList.Mvc.Core;
 @using GrantCountyAs400.Web.ViewModels.AccountingVM
 @using X.PagedList;
@@ -52,7 +52,12 @@
 </p>
 
 <nav aria-label="navigation">
-    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+    @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
+    pageNumber = pageNumber,
+    firstname = filterViewModel.FirstName,
+    lastname = filterViewModel.LastName,
+    status = filterViewModel.SSN
+}))
 </nav>
 
 <table class="table">
@@ -100,7 +105,12 @@
     </tbody>
 </table>
 <nav aria-label="navigation">
-    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+    @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", "Personnel", new {
+    pageNumber = pageNumber,
+    firstname = filterViewModel.FirstName,
+    lastname = filterViewModel.LastName,
+    sSN = filterViewModel.SSN
+}))
 </nav>
 
 
