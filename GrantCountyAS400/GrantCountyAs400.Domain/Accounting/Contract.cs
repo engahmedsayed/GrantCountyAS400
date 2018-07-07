@@ -32,7 +32,6 @@ namespace GrantCountyAs400.Domain.Accounting
         public Organization Organization { get; }
         public DateTime? HireDate { get; }
         public DateTime? TerminationDate { get; }
-        public string Status { get { return TerminationDate.HasValue ? "T" : ""; } }
         public int Count { get; }
         public PayCode PayCode { get; }
         public decimal Rate { get; }
