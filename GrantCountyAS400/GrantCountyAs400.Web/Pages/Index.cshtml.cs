@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MegaGrandCountyAS400.Pages
+namespace GrantCountyAs400.Web.Pages
 {
     public class IndexModel : PageModel
     {

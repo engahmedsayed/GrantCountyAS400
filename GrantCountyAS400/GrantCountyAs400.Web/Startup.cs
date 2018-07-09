@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MegaGrandCountyAS400
+namespace GrantCountyAs400.Web
 {
     public class Startup
     {

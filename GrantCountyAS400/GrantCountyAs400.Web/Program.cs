@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace MegaGrandCountyAS400
+namespace GrantCountyAs400.Web
 {
     public class Program
     {

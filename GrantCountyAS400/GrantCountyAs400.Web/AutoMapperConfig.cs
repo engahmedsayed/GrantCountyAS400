@@ -2,7 +2,7 @@
 using GrantCountyAs400.Domain.Accounting;
 using GrantCountyAs400.Web.ViewModels.AccountingVM;
 
-namespace MegaGrandCountyAS400
+namespace GrantCountyAs400.Web
 {
     public class AutoMapperConfig
     {
