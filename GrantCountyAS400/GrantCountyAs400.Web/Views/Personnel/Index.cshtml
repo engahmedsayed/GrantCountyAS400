@@ -147,7 +147,7 @@
                                 {
                                     <tr>
                                         <td>
-                                            @contract.Organization.DisplayName
+                                            <a asp-action="Details" asp-route-id="@contract.Id">@contract.Organization.DisplayName</a>
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => contract.Status)

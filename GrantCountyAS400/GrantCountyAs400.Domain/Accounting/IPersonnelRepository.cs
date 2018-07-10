@@ -7,5 +7,6 @@ namespace GrantCountyAs400.Domain.Accounting
     {
         IEnumerable<Personnel> GetAll();
         IEnumerable<Personnel> GetAllWithContracts(string firstName,string lastName,decimal Ssn,out int resultCount, int pageNumber = 1, int pageSize = 50);
+        PersonnelWithContractFullDetails Details(int id);
     }
 }

@@ -15,6 +15,7 @@ namespace GrantCountyAs400.Web
                 cfg.CreateMap<Personnel, PersonnelViewModel>();
                 cfg.CreateMap<Contract, ContractViewModel>();
                 cfg.CreateMap<Organization, OrganizationViewModel>();
+                cfg.CreateMap<PersonnelWithContractFullDetails, PersonnelWithContractFullDetailsViewModel>();
 
                 #endregion Accounting
             });

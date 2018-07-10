@@ -17,11 +17,12 @@ namespace GrantCountyAs400.Web.Controllers.Accounting
             _personnelRepository = personnelRepository;
         }
 
+        [HttpGet]
         public IActionResult Index(int pageNumber = 1, AccountingFilterVm filter = default(AccountingFilterVm))
         {
             int resultCount;
             var pagingInfo = new PagingInfo() { PageNumber = pageNumber };
-          
+
             var results = _personnelRepository
                                 .GetAllWithContracts(filter.FirstName, filter.LastName, filter.SSN, out resultCount, pageNumber, AppSettings.PageSize)
                                 .ToList();
@@ -29,6 +30,18 @@ namespace GrantCountyAs400.Web.Controllers.Accounting
             pagingInfo.Total = resultCount;
             ViewBag.FilterViewModel = filter;
             return View(results.ToMappedPagedList<Personnel, PersonnelViewModel>(pagingInfo));
+        }
+
+        [HttpGet]
+        [Route("{id:int}")]
+        public IActionResult Details(int id)
+        {
+            var entity = _personnelRepository.Details(id);
+            if (entity == null)
+                return NotFound();
+
+            var viewmodel = AutoMapper.Mapper.Map<PersonnelWithContractFullDetailsViewModel>(entity);
+            return View(viewmodel);
         }
     }
 }

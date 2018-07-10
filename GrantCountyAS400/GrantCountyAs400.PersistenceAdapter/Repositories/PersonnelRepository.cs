@@ -30,11 +30,11 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
 
             if (!string.IsNullOrWhiteSpace(firstName))
             {
-                query = query.Where(t => t.Name.SplitName(',',NameEnum.FirstName).Contains(firstName));
+                query = query.Where(t => t.Name.SplitName(',', NameEnum.FirstName).Contains(firstName));
             }
             if (!string.IsNullOrWhiteSpace(lastName))
             {
-                query = query.Where(t => t.Name.SplitName(',',NameEnum.LastName).Contains(lastName));
+                query = query.Where(t => t.Name.SplitName(',', NameEnum.LastName).Contains(lastName));
             }
             if (ssn > 0)
             {
@@ -75,6 +75,18 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             }
 
             return results.ToList();
+        }
+
+        public PersonnelWithContractFullDetails Details(int id)
+        {
+            var result = (from employee in _context.AcctEmployee
+                          join personnel in _context.AcctPersonnel on employee.Ssnumber equals personnel.Ssnumber
+                          join jobCode in _context.AcctPayrollJobCodes on employee.JobCode equals jobCode.JobCode
+                          where employee.Id == id
+                          select EmployeeMapper.Map(personnel, employee, jobCode)
+                         ).SingleOrDefault();
+
+            return result;
         }
     }
 }

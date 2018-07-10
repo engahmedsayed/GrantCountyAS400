@@ -1,0 +1,131 @@
+﻿@model GrantCountyAs400.Web.ViewModels.AccountingVM.PersonnelWithContractFullDetailsViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div>
+    <h2>@Model.Name</h2>
+
+    <div class="entity-details">
+        <div class="entity-info clearfix">
+            <div class="col-xs-6">
+                <table class="table col-xs-6">
+                    <tbody>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.SSNumber) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.SSNumber) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.Organization) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.Organization.DisplayName) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.Status) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.Status) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.TableRangeStepDisplay) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.TableRangeStepDisplay) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.Rate) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.Rate) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.PayCode) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.PayCode) </span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-6">
+                <table class="table col-xs-6">
+                    <tbody>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.EmpLongevityAmount) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.EmpLongevityAmount) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.Type) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.Type) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.EmpFilled) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.EmpFilled) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.RetirementCode) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.RetirementCode) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.RetirementLock) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.RetirementLock) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.RetirementNumber) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.RetirementNumber) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.HireDate) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.HireDate) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.ServiceDate) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.ServiceDate) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.AnniversaryDate) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.AnniversaryDate) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.TerminationDate) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.TerminationDate) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.TerminationType) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.TerminationType) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.JobCode) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.JobCode) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.JobTitle) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.JobTitle) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.MeritStatus) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.MeritStatus) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.EmpEeofunction) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.EmpEeofunction) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.Type) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.Type) </span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+<style>
+    .list-unstyled {
+        padding-left: 0;
+        list-style: none;
+    }
+
+    .entity-info ul > li {
+        margin-bottom: 8px;
+    }
+
+    ul.list-justify > li span {
+        float: right;
+    }
+</style>
