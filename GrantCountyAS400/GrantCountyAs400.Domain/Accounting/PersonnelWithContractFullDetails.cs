@@ -1,34 +1,14 @@
 ﻿using System;
-using System.Diagnostics;
 
 namespace GrantCountyAs400.Domain.Accounting
 {
-    public enum PayCode
+    public class PersonnelWithContractFullDetails
     {
-        Hourly,
-        Salaried
-    }
-
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class Organization
-    {
-        public int Fund { get; }
-        public int Department { get; }
-
-        public Organization(int fund, int department)
-        {
-            Fund = fund;
-            Department = department;
-        }
-
-        private string DebuggerDisplay => $"Fund: {Fund}, Department: {Department}";
-    }
-
-    public class Contract
-    {
-        public int Id { get; }
+        public string Name { get; }
         public decimal SSNumber { get; }
         public decimal PersonNumber { get; }
+
+        public int Id { get; }
         public Organization Organization { get; }
         public DateTime? HireDate { get; }
         public DateTime? TerminationDate { get; }
@@ -50,15 +30,18 @@ namespace GrantCountyAs400.Domain.Accounting
         public string TerminationType { get; }
         public string MeritStatus { get; }
         public string EmpEeofunction { get; }
+        public string JobTitle { get; set; }
 
-        public Contract(int id, decimal ssNumber, decimal personNumber, Organization organization, DateTime? hireDate, DateTime? terminationDate, int count, PayCode payCode,
+        public PersonnelWithContractFullDetails(string name, decimal ssNumber, decimal personNumber, int contractId, Organization organization, DateTime? hireDate, DateTime? terminationDate, int count, PayCode payCode,
             decimal rate, string table, string grade, string step, string jobCode, decimal empLongevityAmount, decimal type, decimal empFilled,
             decimal retirementLock, decimal retirementCode, DateTime? serviceDate, DateTime? anniversaryDate, decimal retirementNumber,
-            string terminationType, string meritStatus, string empEeofunction)
+            string terminationType, string meritStatus, string empEeofunction, string jobTitle)
         {
-            Id = id;
+            Name = name;
             SSNumber = ssNumber;
             PersonNumber = personNumber;
+
+            Id = contractId;
             Organization = organization;
             HireDate = hireDate;
             TerminationDate = terminationDate;
@@ -80,6 +63,7 @@ namespace GrantCountyAs400.Domain.Accounting
             TerminationType = terminationType;
             MeritStatus = meritStatus;
             EmpEeofunction = empEeofunction;
+            JobTitle = JobTitle;
         }
     }
 }
