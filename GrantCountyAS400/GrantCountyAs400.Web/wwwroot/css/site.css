@@ -10,26 +10,56 @@ body {
     padding-right: 15px;
 }
 
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
+/*Herlpers*/
+.no-pad-horizontal {
+    padding-left: 0;
+    padding-right: 0;
 }
 
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
+.upper-case {
+    text-transform: uppercase;
 }
 
-/* QR code generator */
-#qrCode {
-    margin: 15px;
+.bold {
+    font-weight: bold;
 }
 
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
-    }
+.italic {
+    font-style: italic;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.pad-bottom-15 {
+    padding-bottom: 15px;
+}
+
+.gi-2x {
+    font-size: 2em;
+}
+
+.gi-3x {
+    font-size: 3em;
+}
+
+.gi-4x {
+    font-size: 4em;
+}
+
+.gi-5x {
+    font-size: 5em;
+}
+
+/********************************HOME***********************************/
+#home-cards {
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.panel.panel-card .panel-body {
+    padding-top: 40px;
+    padding-bottom: 20px;
+    background-color: #f4f6f8;
 }
