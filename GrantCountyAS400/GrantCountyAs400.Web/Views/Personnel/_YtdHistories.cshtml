@@ -1,0 +1,60 @@
+﻿@model List<GrantCountyAs400.Web.ViewModels.AccountingVM.YtdHistoryViewModel>
+
+@if (Model.Any())
+{
+    <table class="table table-hover">
+        <thead class="upper-case">
+            <tr>
+                <th>@Html.LabelFor(model => model[0].Year)</th>
+                <th>@Html.LabelFor(model => model[0].Group)</th>
+                <th>@Html.LabelFor(model => model[0].YearlyGrossPay)</th>
+                <th>@Html.LabelFor(model => model[0].YearlyGrossPayDeferred)</th>
+                <th>@Html.LabelFor(model => model[0].YearlyNonTaxable)</th>
+                <th>@Html.LabelFor(model => model[0].YearlyTaxable)</th>
+                <th>@Html.LabelFor(model => model[0].YearlyFicaGross)</th>
+                <th>@Html.LabelFor(model => model[0].YearlyFederalWithholding)</th>
+                <th>@Html.LabelFor(model => model[0].YearlyStatWithholding)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Group)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YearlyGrossPay)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YearlyGrossPayDeferred)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YearlyNonTaxable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YearlyTaxable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YearlyFicaGross)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YearlyFederalWithholding)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YearlyStatWithholding)
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p class="empty-results">
+        <span class="label label-info label-small">No YTD history records found for the specified employee</span>
+    </p>
+}

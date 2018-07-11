@@ -1,0 +1,40 @@
+﻿@model List<GrantCountyAs400.Web.ViewModels.AccountingVM.DeductionViewModel>
+
+@if (Model.Any())
+{
+    <table class="table table-hover">
+        <thead class="upper-case">
+            <tr>
+                <th>@Html.LabelFor(model => model[0].MiscYear)</th>
+                <th>@Html.LabelFor(model => model[0].EmployeeNumber)</th>
+                <th>@Html.LabelFor(model => model[0].MiscDeduction)</th>
+                <th>@Html.LabelFor(model => model[0].MiscBenefit)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MiscYear)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmployeeNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MiscDeduction)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MiscBenefit)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p class="empty-results">
+        <span class="label label-info label-small">No dedution records found for the specified employee</span>
+    </p>
+}

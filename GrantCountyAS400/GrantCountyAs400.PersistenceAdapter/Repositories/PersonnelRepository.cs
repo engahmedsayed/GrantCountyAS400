@@ -79,14 +79,34 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
 
         public PersonnelWithContractFullDetails Details(int id)
         {
-            var result = (from employee in _context.AcctEmployee
-                          join personnel in _context.AcctPersonnel on employee.Ssnumber equals personnel.Ssnumber
-                          join jobCode in _context.AcctPayrollJobCodes on employee.JobCode equals jobCode.JobCode
-                          where employee.Id == id
-                          select EmployeeMapper.Map(personnel, employee, jobCode)
-                         ).SingleOrDefault();
+            var detailsRecord = (from employee in _context.AcctEmployee
+                                 join personnel in _context.AcctPersonnel on employee.Ssnumber equals personnel.Ssnumber
+                                 join jobCode in _context.AcctPayrollJobCodes on employee.JobCode equals jobCode.JobCode
+                                 where employee.Id == id
+                                 select new
+                                 {
+                                     Peronnel = PersonnelMapper.Map(personnel),
+                                     Contract = EmployeeMapper.Map(employee),
+                                     JobCode = JobCodeMapper.Map(jobCode)
+                                 }
+                                ).SingleOrDefault();
 
-            return result;
+            if (detailsRecord != null)
+            {
+                var deductions = _context.AcctEmployeeMiscDeductions.Where(t => t.EmployeeNumber == detailsRecord.Contract.PersonNumber)
+                                                                    .OrderBy(t => t.MiscYear)
+                                                                    .Select(DeductionMapper.Map)
+                                                                    .ToList();
+                var ytdHistories = _context.AcctEmployeeYtdhistory.Where(t => t.Ssnumber == detailsRecord.Contract.SSNumber)
+                                                                  .OrderBy(t=>t.Year)
+                                                                  .Select(YtdHistoryMapper.Map)
+                                                                  .ToList();
+                return EmployeeMapper.Map(detailsRecord.Peronnel, detailsRecord.Contract, detailsRecord.JobCode, deductions, ytdHistories);
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

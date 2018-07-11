@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GrantCountyAs400.Domain.Accounting
 {
@@ -30,12 +31,16 @@ namespace GrantCountyAs400.Domain.Accounting
         public string TerminationType { get; }
         public string MeritStatus { get; }
         public string EmpEeofunction { get; }
-        public string JobTitle { get; set; }
+        public string JobTitle { get; }
+
+        public IEnumerable<Deduction> Deductions { get; }
+        public IEnumerable<YtdHistory> YtdHistories { get; }
 
         public PersonnelWithContractFullDetails(string name, decimal ssNumber, decimal personNumber, int contractId, Organization organization, DateTime? hireDate, DateTime? terminationDate, int count, PayCode payCode,
             decimal rate, string table, string grade, string step, string jobCode, decimal empLongevityAmount, decimal type, decimal empFilled,
             decimal retirementLock, decimal retirementCode, DateTime? serviceDate, DateTime? anniversaryDate, decimal retirementNumber,
-            string terminationType, string meritStatus, string empEeofunction, string jobTitle)
+            string terminationType, string meritStatus, string empEeofunction, string jobTitle, IEnumerable<Deduction> deductions,
+           IEnumerable<YtdHistory> ytdHistories)
         {
             Name = name;
             SSNumber = ssNumber;
@@ -64,6 +69,8 @@ namespace GrantCountyAs400.Domain.Accounting
             MeritStatus = meritStatus;
             EmpEeofunction = empEeofunction;
             JobTitle = JobTitle;
+            Deductions = deductions;
+            YtdHistories = ytdHistories;
         }
     }
 }

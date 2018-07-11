@@ -1,5 +1,6 @@
 ﻿using GrantCountyAs400.Domain.Accounting;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace GrantCountyAs400.Web.ViewModels.AccountingVM
@@ -56,7 +57,7 @@ namespace GrantCountyAs400.Web.ViewModels.AccountingVM
         [Display(Name = "P")]
         public string CountDisplay => Count == 1 ? "P" : string.Empty;
 
-        [Display(Name ="Table/Range/Step")]
+        [Display(Name = "Table/Range/Step")]
         public string TableRangeStepDisplay => $"{Table}/Range/{Step}";
 
         [Display(Name = "Longevity")]
@@ -65,27 +66,41 @@ namespace GrantCountyAs400.Web.ViewModels.AccountingVM
         [Display(Name = "Employee Type")]
         [DisplayFormat(DataFormatString = "{0:00}")]
         public decimal Type { get; set; }
+
         [Display(Name = "Positions Filled")]
         public decimal EmpFilled { get; set; }
+
         [Display(Name = "Retirement - Lock")]
         public decimal RetirementLock { get; set; }
+
         [Display(Name = "Retirement - Plan")]
         public decimal RetirementCode { get; set; }
+
         [Display(Name = "Retirement - Account Number")]
         public decimal RetirementNumber { get; set; }
+
         [Display(Name = "Service Date")]
         [DataType(DataType.Date)]
         public DateTime? ServiceDate { get; set; }
+
         [Display(Name = "Anniversary Date")]
         [DataType(DataType.Date)]
-        public DateTime? AnniversaryDate { get; set; }        
+        public DateTime? AnniversaryDate { get; set; }
+
         [Display(Name = "Termination Type")]
         public string TerminationType { get; set; }
+
         [Display(Name = "Merit Status")]
         public string MeritStatus { get; set; }
+
         [Display(Name = "EEO Function")]
         public string EmpEeofunction { get; set; }
+
         [Display(Name = "Position Title")]
-        public string JobTitle{ get; set; }
+        public string JobTitle { get; set; }
+
+        public List<DeductionViewModel> Deductions { get; set; }
+
+        public List<YtdHistoryViewModel> YtdHistories { get; set; }
     }
 }
