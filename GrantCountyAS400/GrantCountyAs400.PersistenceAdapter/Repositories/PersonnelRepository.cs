@@ -81,13 +81,14 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
         {
             var detailsRecord = (from employee in _context.AcctEmployee
                                  join personnel in _context.AcctPersonnel on employee.Ssnumber equals personnel.Ssnumber
-                                 join jobCode in _context.AcctPayrollJobCodes on employee.JobCode equals jobCode.JobCode
+                                 join jobCodeRecord in _context.AcctPayrollJobCodes on employee.JobCode equals jobCodeRecord.JobCode into employeeJobCode
+                                 from jobCode in employeeJobCode.DefaultIfEmpty()
                                  where employee.Id == id
                                  select new
                                  {
                                      Peronnel = PersonnelMapper.Map(personnel),
                                      Contract = EmployeeMapper.Map(employee),
-                                     JobCode = JobCodeMapper.Map(jobCode)
+                                     JobCode = (jobCode == null) ? null : JobCodeMapper.Map(jobCode)
                                  }
                                 ).SingleOrDefault();
 
@@ -98,7 +99,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                                                     .Select(DeductionMapper.Map)
                                                                     .ToList();
                 var ytdHistories = _context.AcctEmployeeYtdhistory.Where(t => t.Ssnumber == detailsRecord.Contract.SSNumber)
-                                                                  .OrderBy(t=>t.Year)
+                                                                  .OrderBy(t => t.Year)
                                                                   .Select(YtdHistoryMapper.Map)
                                                                   .ToList();
                 return EmployeeMapper.Map(detailsRecord.Peronnel, detailsRecord.Contract, detailsRecord.JobCode, deductions, ytdHistories);
