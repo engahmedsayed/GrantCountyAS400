@@ -6,6 +6,7 @@
         <thead class="upper-case">
             <tr>
                 <th>@Html.LabelFor(model => model[0].MiscYear)</th>
+                <th>@Html.LabelFor(model => model[0].MiscCode)</th>
                 <th>@Html.LabelFor(model => model[0].EmployeeNumber)</th>
                 <th>@Html.LabelFor(model => model[0].MiscDeduction)</th>
                 <th>@Html.LabelFor(model => model[0].MiscBenefit)</th>
@@ -14,20 +15,23 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MiscYear)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EmployeeNumber)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MiscDeduction)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MiscBenefit)
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MiscYear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MiscCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MiscDeduction)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MiscBenefit)
+                </td>
+            </tr>
             }
         </tbody>
     </table>
