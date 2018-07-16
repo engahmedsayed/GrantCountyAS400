@@ -28,6 +28,7 @@ namespace GrantCountyAs400.Web
 
             // Add application services.
             services.AddScoped<IPersonnelRepository, PersonnelRepository>();
+            services.AddScoped<IGeneralLedgerRepository, GeneralLedgerRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

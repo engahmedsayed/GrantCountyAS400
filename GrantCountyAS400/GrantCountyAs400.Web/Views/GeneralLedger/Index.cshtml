@@ -1,0 +1,142 @@
+﻿@model IEnumerable<GrantCountyAs400.Web.ViewModels.GeneralLedgerVM.GeneralLedgerViewModel>
+@using X.PagedList.Mvc.Core;
+@using GrantCountyAs400.Web.ViewModels.GeneralLedgerVM
+@using X.PagedList;
+
+@{
+    ViewData["Title"] = "General Ledger";
+    var filterViewModel = ViewBag.FilterViewModel as GeneralLedgerFilterVM;
+}
+
+<h2>Employees</h2>
+
+<p>
+    @using (Html.BeginForm("Index", "GeneralLedger", FormMethod.Get))
+    {
+        <div class="form-horizontal">
+            <hr />
+            <div class="form-group">
+                @Html.LabelFor(model => filterViewModel.FiscalYear, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => filterViewModel.FiscalYear, null, "fiscalYear", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => filterViewModel.Department, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => filterViewModel.Department, null, "department", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => filterViewModel.Fund, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => filterViewModel.Fund, null, "fund", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <div class="form-group pull-right">
+                        <input type="submit" value="Filter" class="btn btn-success" />
+                        <input type="button" value="Clear" class="btn btn-default" id="btnReset" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</p>
+
+<nav aria-label="navigation">
+    @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
+    pageNumber = pageNumber,
+    fiscalYear = filterViewModel.FiscalYear,
+    department = filterViewModel.Department,
+    fund = filterViewModel.Fund
+}))
+</nav>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().AccountNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().AccountName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Kind)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                <a class="toggle-row-details" data-toggle="collapse" data-target="#@item.AccountNumber" aria-expanded="false" aria-controls="@item.AccountNumber">
+                    <i class="glyphicon glyphicon-chevron-right pull-right"></i>
+                    <i class="glyphicon glyphicon-chevron-down pull-right"></i>
+                </a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kind)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<nav aria-label="navigation">   
+    @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
+    pageNumber = pageNumber,
+    fiscalYear = filterViewModel.FiscalYear,
+    department = filterViewModel.Department,
+    fund = filterViewModel.Fund
+}))
+</nav>
+<style>
+    tr.row-details td, tr.row-details th {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    tr.row-details td {
+        border: none !important;
+    }
+
+    a.toggle-row-details {
+        display: inline-block;
+    }
+
+        a.toggle-row-details[aria-expanded=true] .glyphicon-chevron-right {
+            display: none;
+        }
+
+        a.toggle-row-details[aria-expanded=false] .glyphicon-chevron-down {
+            display: none;
+        }
+</style>
