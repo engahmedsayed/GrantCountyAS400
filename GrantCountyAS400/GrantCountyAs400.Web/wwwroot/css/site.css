@@ -52,6 +52,14 @@ body {
     font-size: 5em;
 }
 
+.tab-pane {
+    padding-top: 15px;
+}
+
+.shared-tab-content{
+    
+    padding-top:20px;
+}
 /********************************HOME***********************************/
 #home-cards {
     padding-top: 80px;
