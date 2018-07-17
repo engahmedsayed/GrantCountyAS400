@@ -77,7 +77,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             return results.ToList();
         }
 
-        public PersonnelWithContractFullDetails Details(int id)
+        public PersonnelWithContractFullDetails Details(int id, string deductionCode, int? fromYear, int? toYear)
         {
             var detailsRecord = (from employee in _context.AcctEmployee
                                  join personnel in _context.AcctPersonnel on employee.Ssnumber equals personnel.Ssnumber
@@ -94,11 +94,16 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
 
             if (detailsRecord != null)
             {
-                var deductions = _context.AcctEmployeeMiscDeductions.Where(t => t.EmployeeNumber == detailsRecord.Contract.PersonNumber)
+                var deductions = _context.AcctEmployeeMiscDeductions.Where(t => t.EmployeeNumber == detailsRecord.Contract.PersonNumber
+                                                                     && (string.IsNullOrWhiteSpace(deductionCode) || t.MiscCode == deductionCode.Trim())
+                                                                     && (fromYear == null || t.MiscYear.Value >= fromYear.Value)
+                                                                     && (toYear == null || t.MiscYear.Value <= toYear.Value))
                                                                     .OrderBy(t => t.MiscYear)
                                                                     .Select(DeductionMapper.Map)
                                                                     .ToList();
-                var ytdHistories = _context.AcctEmployeeYtdhistory.Where(t => t.Ssnumber == detailsRecord.Contract.SSNumber)
+                var ytdHistories = _context.AcctEmployeeYtdhistory.Where(t => t.Ssnumber == detailsRecord.Contract.SSNumber
+                                                                   && (fromYear == null || t.Year.Value >= fromYear.Value)
+                                                                   && (toYear == null || t.Year.Value <= toYear.Value))
                                                                   .OrderBy(t => t.Year)
                                                                   .Select(YtdHistoryMapper.Map)
                                                                   .ToList();

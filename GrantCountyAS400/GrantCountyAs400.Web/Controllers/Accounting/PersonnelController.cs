@@ -3,6 +3,7 @@ using GrantCountyAs400.Web.Extensions;
 using GrantCountyAs400.Web.ViewModels;
 using GrantCountyAs400.Web.ViewModels.AccountingVM;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
 
 namespace GrantCountyAs400.Web.Controllers.Accounting
@@ -11,10 +12,12 @@ namespace GrantCountyAs400.Web.Controllers.Accounting
     public class PersonnelController : Controller
     {
         private readonly IPersonnelRepository _personnelRepository;
+        private readonly IDeductionRepository _deductionRepository;
 
-        public PersonnelController(IPersonnelRepository personnelRepository)
+        public PersonnelController(IPersonnelRepository personnelRepository, IDeductionRepository deductionRepository)
         {
             _personnelRepository = personnelRepository;
+            _deductionRepository = deductionRepository;
         }
 
         [HttpGet]
@@ -34,11 +37,18 @@ namespace GrantCountyAs400.Web.Controllers.Accounting
 
         [HttpGet]
         [Route("{id:int}")]
-        public IActionResult Details(int id)
+        public IActionResult Details(int id, PersonnelDetailsFilterViewModel filter)
         {
-            var entity = _personnelRepository.Details(id);
+            var entity = _personnelRepository.Details(id, filter.DeductionCode, filter.FromYear, filter.ToYear);
             if (entity == null)
                 return NotFound();
+
+            ViewBag.FilterViewModel = filter;
+            ViewBag.DeductionCodes = _deductionRepository.GetAllCodes().Select(deductionCode => new SelectListItem()
+            {
+                Value = deductionCode,
+                Text = deductionCode
+            });
 
             var viewmodel = AutoMapper.Mapper.Map<PersonnelWithContractFullDetailsViewModel>(entity);
             return View(viewmodel);

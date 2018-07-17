@@ -122,7 +122,11 @@
                 </ul>
 
                 <div class="tab-content">
+                    <div class="shared-tab-content">
+                        @Html.Partial("_DetailsFilter")
+                    </div>
                     <div id="deductions" class="tab-pane fade in active">
+
                         @Html.Partial("_Deductions", Model.Deductions)
                     </div>
                     <div id="ytdHistory" class="tab-pane fade in">
@@ -149,7 +153,29 @@
     ul.list-justify > li span {
         float: right;
     }
-    .empty-results{
-        margin-bottom:30px;
+
+    .empty-results {
+        margin-bottom: 30px;
     }
 </style>
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            $('.year-datepicker', '.personneldetailsfilterviewmodel').datetimepicker({
+                viewMode: 'years',
+                format: 'YYYY',
+                ignoreReadonly: true,
+                useCurrent: false,
+                allowInputToggle: true,
+            });
+
+            $('.year-datepicker[name="fromyear"]', '.personneldetailsfilterviewmodel').on('dp.change', function (e) {
+                $('.year-datepicker[name="toyear"]', '.personneldetailsfilterviewmodel').data('DateTimePicker').minDate(e.date);
+            });
+            $('.year-datepicker[name="toyear"]', '.personneldetailsfilterviewmodel').on('dp.change', function (e) {
+                $('.year-datepicker[name="fromyear"]', '.personneldetailsfilterviewmodel').data('DateTimePicker').maxDate(e.date);
+            });
+
+        });
+    </script>
+}

@@ -1,0 +1,37 @@
+﻿@using GrantCountyAs400.Web.ViewModels.AccountingVM;
+
+@{
+    var filterViewModel = ViewBag.FilterViewModel as PersonnelDetailsFilterViewModel;
+}
+<form asp-action="Details" method="get">
+    <div class="form-horizontal personneldetailsfilterviewmodel">
+        <div class="form-group">
+            <label asp-for="@filterViewModel.FromYear" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => filterViewModel.FromYear, null, "fromyear", new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@filterViewModel.ToYear" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => filterViewModel.ToYear, null, "toyear", new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="@filterViewModel.DeductionCode" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <select asp-items="ViewBag.DeductionCodes" asp-for="@filterViewModel.DeductionCode" class="form-control" name="deductioncode">
+                    <option value="">--Please Select--</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12 text-right">
+                <input type="submit" value="Filter" class="btn btn-success" />
+                <input type="button" value="Clear" class="btn btn-default" id="btnReset" />
+            </div>
+        </div>
+    </div>
+</form>
