@@ -1,4 +1,5 @@
 ﻿using GrantCountyAs400.Domain.Accounting;
+using GrantCountyAs400.Domain.Accounting.Repository;
 using GrantCountyAs400.PersistenceAdapter.Models;
 using System.Collections.Generic;
 using System.Linq;

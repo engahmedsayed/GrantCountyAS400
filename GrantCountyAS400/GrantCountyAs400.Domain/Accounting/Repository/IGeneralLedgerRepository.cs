@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GrantCountyAs400.Domain.Accounting
+namespace GrantCountyAs400.Domain.Accounting.Repository
 {
    public interface IGeneralLedgerRepository
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GrantCountyAs400.Domain.Accounting
+namespace GrantCountyAs400.Domain.Accounting.Repository
 {
     public interface IPersonnelRepository
     {

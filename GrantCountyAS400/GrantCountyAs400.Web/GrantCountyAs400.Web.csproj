@@ -3,6 +3,12 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Mappers\**" />
+    <Content Remove="Mappers\**" />
+    <EmbeddedResource Remove="Mappers\**" />
+    <None Remove="Mappers\**" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="7.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
@@ -16,7 +22,6 @@
     <ProjectReference Include="..\GrantCountyAs400.PersistenceAdapter\GrantCountyAs400.PersistenceAdapter.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Mappers\" />
     <Folder Include="wwwroot\dist\" />
     <Folder Include="wwwroot\js\" />
   </ItemGroup>
