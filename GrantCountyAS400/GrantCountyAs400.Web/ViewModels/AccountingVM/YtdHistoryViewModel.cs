@@ -15,7 +15,7 @@ namespace GrantCountyAs400.Web.ViewModels.AccountingVM
         [Display(Name = "Gross Pay")]
         public decimal YearlyGrossPay { get; set; }
 
-        [Display(Name = "Gross Pay Deferred")]
+        [Display(Name = "Gross Deferred")]
         public decimal YearlyGrossPayDeferred { get; set; }
 
         [Display(Name = "Non Taxable")]
@@ -27,19 +27,27 @@ namespace GrantCountyAs400.Web.ViewModels.AccountingVM
         [Display(Name = "Fica Gross")]
         public decimal YearlyFicaGross { get; set; }
 
-        [Display(Name = "Federal With Holding")]
+        [Display(Name = "Federal WH")]
         public decimal YearlyFederalWithholding { get; set; }
 
-        [Display(Name = "Stat With Holding")]
+        [Display(Name = "Stat WH")]
         public decimal YearlyStatWithholding { get; set; }
 
+        [Display(Name = "Fica")]
         public decimal YearlyFica { get; set; }
+
         public decimal YearlyFicaBenefit { get; set; }
         public decimal YearlyMedicalGross { get; set; }
+
+        [Display(Name = "FICM")]
         public decimal YearlyMedical { get; set; }
+
         public decimal YearlyMedicalBenefit { get; set; }
         public decimal YearlyTaxableBenefit { get; set; }
+
+        [Display(Name = "Net Pay")]
         public decimal YearlyNetPay { get; set; }
+
         public decimal YearlyTotalPay { get; set; }
         public decimal YearlyRetirementGross { get; set; }
         public decimal YearlyRetirement { get; set; }

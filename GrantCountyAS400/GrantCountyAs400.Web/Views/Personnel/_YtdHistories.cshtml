@@ -6,7 +6,6 @@
         <thead class="upper-case">
             <tr>
                 <th>@Html.LabelFor(model => model[0].Year)</th>
-                <th>@Html.LabelFor(model => model[0].Group)</th>
                 <th>@Html.LabelFor(model => model[0].YearlyGrossPay)</th>
                 <th>@Html.LabelFor(model => model[0].YearlyGrossPayDeferred)</th>
                 <th>@Html.LabelFor(model => model[0].YearlyNonTaxable)</th>
@@ -14,6 +13,9 @@
                 <th>@Html.LabelFor(model => model[0].YearlyFicaGross)</th>
                 <th>@Html.LabelFor(model => model[0].YearlyFederalWithholding)</th>
                 <th>@Html.LabelFor(model => model[0].YearlyStatWithholding)</th>
+                <th>@Html.LabelFor(model => model[0].YearlyFica)</th>
+                <th>@Html.LabelFor(model => model[0].YearlyMedical)</th>
+                <th>@Html.LabelFor(model => model[0].YearlyNetPay)</th>
             </tr>
         </thead>
         <tbody>
@@ -22,9 +24,6 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Year)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Group)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.YearlyGrossPay)
@@ -46,6 +45,15 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.YearlyStatWithholding)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YearlyFica)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YearlyMedical)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YearlyNetPay)
                 </td>
             </tr>
             }
