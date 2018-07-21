@@ -123,14 +123,13 @@
 
                 <div class="tab-content">
                     <div class="shared-tab-content">
-                        @Html.Partial("_DetailsFilter")
+                        <partial name="_DetailsFilter" />
                     </div>
                     <div id="deductions" class="tab-pane fade in active">
-
-                        @Html.Partial("_Deductions", Model.Deductions)
+                        <partial name="_Deductions" for="@Model.Deductions" />
                     </div>
                     <div id="ytdHistory" class="tab-pane fade in">
-                        @Html.Partial("_YtdHistories", Model.YtdHistories)
+                        <partial name="_YtdHistories" for="@Model.YtdHistories" />
                     </div>
                 </div>
             </div>
