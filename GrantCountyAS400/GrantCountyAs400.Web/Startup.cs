@@ -1,5 +1,5 @@
-using GrantCountyAs400.Domain.Accounting;
 using GrantCountyAs400.Domain.Accounting.Repository;
+using GrantCountyAs400.Domain.Assessment.Repository;
 using GrantCountyAs400.PersistenceAdapter.Models;
 using GrantCountyAs400.PersistenceAdapter.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -31,6 +31,7 @@ namespace GrantCountyAs400.Web
             services.AddScoped<IPersonnelRepository, PersonnelRepository>();
             services.AddScoped<IGeneralLedgerRepository, GeneralLedgerRepository>();
             services.AddScoped<IDeductionRepository, DeductionRepository>();
+            services.AddScoped<ILegalDescriptionRepository, LegalDescriptionRepository>(); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
