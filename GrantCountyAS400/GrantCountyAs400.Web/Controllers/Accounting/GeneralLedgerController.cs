@@ -31,12 +31,30 @@ namespace GrantCountyAs400.Web.Controllers.Accounting
                 filter.FiscalYear = 2008;
             }
             var results = _generalLedgerRepository
-                                .GetAll(out resultCount, pageNumber, AppSettings.PageSize, filter.FiscalYear,filter.Fund,filter.Department,filter.Program)
+                                .GetAll(filter.FiscalYear,filter.Fund,filter.Department,filter.Program,
+                                out resultCount, pageNumber, AppSettings.PageSize)
                                 .ToList();
 
             pagingInfo.Total = resultCount;
             ViewBag.FilterViewModel = filter;
             return View(results.ToMappedPagedList<GeneralLedger, GeneralLedgerViewModel>(pagingInfo));
+        }
+
+        [HttpGet]
+        [Route("{id}/{fiscalYear}")]
+        public IActionResult Details(string id,int fiscalYear,int pageNumber=1)
+        {
+            ViewBag.baseId = id;
+            var results = new List<GeneralLedgerDetailsViewModel>();
+            int resultCount;
+            var pagingInfo = new PagingInfo() { PageNumber = pageNumber };
+            
+            var queryResults = _generalLedgerRepository
+                                .GetAll(fiscalYear, id.ToString(),
+                                out resultCount, pageNumber, AppSettings.PageSize);
+
+            pagingInfo.Total = resultCount;
+            return View(queryResults.GeneralLedgers.ToMappedPagedList<GeneralLedgerDetailItem, GeneralLedgerDetailsViewModel>(pagingInfo));
         }
     }
 }

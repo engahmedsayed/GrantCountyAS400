@@ -92,7 +92,8 @@
                 </a>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AccountNumber)
+                <a asp-action="Details" asp-route-id="@item.Base" asp-route-fiscalYear="2008">@item.AccountNumber</a>
+               
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AccountName)

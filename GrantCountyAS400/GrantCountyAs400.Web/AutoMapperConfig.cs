@@ -24,7 +24,7 @@ namespace GrantCountyAs400.Web
 
                 #region General Ledger
                 cfg.CreateMap<GeneralLedger, GeneralLedgerViewModel>();
-
+                cfg.CreateMap<GeneralLedgerDetailItem, GeneralLedgerDetailsViewModel>();
                 #endregion
             });
         }

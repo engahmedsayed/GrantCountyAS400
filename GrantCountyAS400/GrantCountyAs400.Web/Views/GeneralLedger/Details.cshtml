@@ -1,0 +1,115 @@
+﻿@model IEnumerable<GrantCountyAs400.Web.ViewModels.GeneralLedgerVM.GeneralLedgerDetailsViewModel>
+@using X.PagedList.Mvc.Core;
+@using GrantCountyAs400.Web.ViewModels.GeneralLedgerVM
+@using X.PagedList;
+
+@{
+    ViewData["Title"] = "General Ledger Details";
+}
+
+<h2>Details</h2>
+
+
+@*<nav aria-label="navigation">
+    @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
+    pageNumber = pageNumber,
+    fiscalYear = filterViewModel.FiscalYear,
+    department = filterViewModel.Department,
+    fund = filterViewModel.Fund
+}))*@
+<label>Name : Cash; General</label>
+<label> Organization: Current Expense ; Current Expense</label>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Per")
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Budget)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().PendingEncumbrance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Encumbrance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Action)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @{var formattedYear = item.Month + "/" + item.Year; }
+                    @Html.DisplayFor(modelItem => formattedYear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Budget)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PendingEncumbrance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Encumbrance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Action)
+                </td>
+            </tr>
+        }
+        <tr>
+            <td></td>
+            <td>
+                @{var sumBudget = Model.Sum(t =>t.Budget.HasValue? double.Parse(t.Budget?.ToString()):0);}
+                @Html.DisplayFor(modelItem => sumBudget)
+            </td>
+            <td>
+                @{ var sumPendingEncumbrance = Model.Sum(t => t.PendingEncumbrance.HasValue? double.Parse(t.PendingEncumbrance?.ToString()):0);}
+                @Html.DisplayFor(modelItem => sumPendingEncumbrance)
+            </td>
+            <td>
+                @{ var sumEncumbrance = Model.Sum(t =>t.Encumbrance.HasValue? double.Parse(t.Encumbrance?.ToString()):0);}
+                @Html.DisplayFor(modelItem => sumEncumbrance)
+            </td>
+            <td>
+                @{ var sumAction = Model.Sum(t =>t.Action.HasValue? double.Parse(t.Action?.ToString()):0);}
+                @Html.DisplayFor(modelItem => sumAction)
+            </td>
+        </tr>
+    </tbody>
+</table>
+<nav aria-label="navigation">
+    @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Details", new {
+    pageNumber = pageNumber,
+    fiscalYear = 2008,
+    id = ViewBag.baseId
+}))
+</nav>
+<style>
+    tr.row-details td, tr.row-details th {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    tr.row-details td {
+        border: none !important;
+    }
+
+    a.toggle-row-details {
+        display: inline-block;
+    }
+
+        a.toggle-row-details[aria-expanded=true] .glyphicon-chevron-right {
+            display: none;
+        }
+
+        a.toggle-row-details[aria-expanded=false] .glyphicon-chevron-down {
+            display: none;
+        }
+</style>
+

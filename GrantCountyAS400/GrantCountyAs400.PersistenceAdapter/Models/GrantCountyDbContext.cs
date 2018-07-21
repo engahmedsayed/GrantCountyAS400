@@ -28,7 +28,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
         public virtual DbSet<AcctPersonnel> AcctPersonnel { get; set; }
         public virtual DbSet<AcctPrWarrant> AcctPrWarrant { get; set; }
         public virtual DbSet<AcctVendor> AcctVendor { get; set; }
-        
+        public virtual DbSet<AccountChartOfAccountsView> AccountChartOfAccountsView { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AcctApWarrant>(entity =>
@@ -1280,6 +1281,29 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                 entity.Property(e => e.ZipCodeSuffix)
                     .HasMaxLength(4)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<AccountChartOfAccountsView>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.AccountNumberFixed).HasMaxLength(4000);
+
+                entity.Property(e => e.AcctCategory)
+                    .IsRequired()
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AcctDescription)
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AcctNumber)
+                    .IsRequired()
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FiscalYear).HasColumnType("numeric(4, 0)");
             });
         }
     }

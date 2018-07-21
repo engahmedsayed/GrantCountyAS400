@@ -9,6 +9,8 @@ namespace GrantCountyAs400.Web.ViewModels.GeneralLedgerVM
     {
         public string AccountNumber { get; set; }
 
+        public string Base { get; set; }
+
         public string AccountName { get; set; }
 
         public string Kind { get; set; }
