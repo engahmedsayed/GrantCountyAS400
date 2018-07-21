@@ -14,9 +14,9 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers
                 employee.Type.Value, employee.EmpFilled.Value, employee.RetirementLock.Value, employee.RetirementCode.Value, employee.ServiceDate,
                 employee.AnniversaryDate, employee.RetirementNumber.Value, employee.TerminationType, employee.MeritStatus, employee.EmpEeofunction);
 
-        internal static PersonnelWithContractFullDetails Map(Personnel personnel, Contract employee, JobCode jobCode,
+        internal static PersonnelWithContractDetails Map(Personnel personnel, Contract employee, JobCode jobCode,
             IEnumerable<Deduction> deductions, IEnumerable<YtdHistory> ytdHistories) =>
-            new PersonnelWithContractFullDetails(personnel.Name, personnel.SSNumber, personnel.PersonNumber, employee.Id, employee.Organization,
+            new PersonnelWithContractDetails(personnel.Name, personnel.SSNumber, personnel.PersonNumber, employee.Id, employee.Organization,
                 employee.HireDate, employee.TerminationDate, employee.Count, employee.PayCode, employee.Rate, employee.Table, employee.Grade,
                 employee.Step, employee.JobCode.Trim(), employee.EmpLongevityAmount, employee.Type, employee.EmpFilled, employee.RetirementLock,
                 employee.RetirementCode, employee.ServiceDate, employee.AnniversaryDate, employee.RetirementNumber, employee.TerminationType,

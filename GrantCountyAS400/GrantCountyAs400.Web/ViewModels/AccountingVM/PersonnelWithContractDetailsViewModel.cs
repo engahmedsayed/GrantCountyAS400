@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GrantCountyAs400.Web.ViewModels.AccountingVM
 {
-    public class PersonnelWithContractFullDetailsViewModel
+    public class PersonnelWithContractDetailsViewModel
     {
         public int Id { get; set; }
 

@@ -22,7 +22,7 @@ namespace GrantCountyAs400.Web.Controllers.Accounting
         }
 
         [HttpGet]
-        public IActionResult Index(int pageNumber = 1, AccountingFilterVm filter = default(AccountingFilterVm))
+        public IActionResult Index(int pageNumber = 1, PersonnelFilterViewModel filter = default(PersonnelFilterViewModel))
         {
             int resultCount;
             var pagingInfo = new PagingInfo() { PageNumber = pageNumber };
@@ -51,7 +51,7 @@ namespace GrantCountyAs400.Web.Controllers.Accounting
                 Text = deductionCode
             });
 
-            var viewmodel = AutoMapper.Mapper.Map<PersonnelWithContractFullDetailsViewModel>(entity);
+            var viewmodel = AutoMapper.Mapper.Map<PersonnelWithContractDetailsViewModel>(entity);
             return View(viewmodel);
         }
     }

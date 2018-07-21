@@ -18,7 +18,7 @@ namespace GrantCountyAs400.Web
                 cfg.CreateMap<Personnel, PersonnelViewModel>();
                 cfg.CreateMap<Contract, ContractViewModel>();
                 cfg.CreateMap<Organization, OrganizationViewModel>();
-                cfg.CreateMap<PersonnelWithContractFullDetails, PersonnelWithContractFullDetailsViewModel>();
+                cfg.CreateMap<PersonnelWithContractDetails, PersonnelWithContractDetailsViewModel>();
                 cfg.CreateMap<Deduction, DeductionViewModel>();
                 cfg.CreateMap<YtdHistory, YtdHistoryViewModel>();
 

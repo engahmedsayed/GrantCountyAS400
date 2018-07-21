@@ -8,6 +8,6 @@ namespace GrantCountyAs400.Domain.Accounting.Repository
 
         IEnumerable<Personnel> GetAllWithContracts(string firstName, string lastName, decimal Ssn, out int resultCount, int pageNumber = 1, int pageSize = 50);
 
-        PersonnelWithContractFullDetails Details(int id, string deductionCode, int? fromYear, int? toYear);
+        PersonnelWithContractDetails Details(int id, string deductionCode, int? fromYear, int? toYear);
     }
 }

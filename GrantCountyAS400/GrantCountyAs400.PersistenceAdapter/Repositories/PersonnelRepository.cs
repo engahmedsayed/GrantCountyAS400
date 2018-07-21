@@ -78,7 +78,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             return results.ToList();
         }
 
-        public PersonnelWithContractFullDetails Details(int id, string deductionCode, int? fromYear, int? toYear)
+        public PersonnelWithContractDetails Details(int id, string deductionCode, int? fromYear, int? toYear)
         {
             var detailsRecord = (from employee in _context.AcctEmployee
                                  join personnel in _context.AcctPersonnel on employee.Ssnumber equals personnel.Ssnumber
