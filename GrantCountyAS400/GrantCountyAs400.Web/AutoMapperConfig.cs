@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using GrantCountyAs400.Domain.Accounting;
+using GrantCountyAs400.Domain.Assessment;
 using GrantCountyAs400.Web.ViewModels.AccountingVM;
+using GrantCountyAs400.Web.ViewModels.Assessment.LegalDescription;
 using GrantCountyAs400.Web.ViewModels.GeneralLedgerVM;
 
 namespace GrantCountyAs400.Web
@@ -23,9 +25,18 @@ namespace GrantCountyAs400.Web
                 #endregion Accounting
 
                 #region General Ledger
+
                 cfg.CreateMap<GeneralLedger, GeneralLedgerViewModel>();
                 cfg.CreateMap<GeneralLedgerDetailItem, GeneralLedgerDetailsViewModel>();
-                #endregion
+
+                #endregion General Ledger
+
+                #region Assessment Module
+
+                cfg.CreateMap<LegalDescription, LegalDescriptionViewModel>();
+                cfg.CreateMap<LegalDescriptionDetails, LegalDescriptionDetailsViewModel>();
+
+                #endregion Assessment Module
             });
         }
     }
