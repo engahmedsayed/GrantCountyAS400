@@ -15,27 +15,39 @@
     {
         <div class="form-horizontal">
             <hr />
-            <div class="row" data-search-type="fiscalYear">
+            <div class="row" data-search-type="fiscalYearAndBase">
                 <div class="form-group">
                     @Html.LabelFor(model => filterViewModel.FiscalYear, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="col-md-4">
                         @Html.EditorFor(model => filterViewModel.FiscalYear, null, "fiscalYear", new { htmlAttributes = new { @class = "form-control" } })
                     </div>
-                </div>
-            </div>
-            <div class="row" data-search-type="department">
-                <div class="form-group">
-                    @Html.LabelFor(model => filterViewModel.Department, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => filterViewModel.Department, null, "department", new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.LabelFor(model => filterViewModel.Base, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => filterViewModel.Base, null, "base", new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
             </div>
-            <div class="row" data-search-type="fund">
+            <div class="row" data-search-type="departmentAndProject">
+                <div class="form-group">
+                    @Html.LabelFor(model => filterViewModel.Department, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => filterViewModel.Department, null, "department", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    @Html.LabelFor(model => filterViewModel.Project, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => filterViewModel.Project, null, "project", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            </div>
+            <div class="row" data-search-type="fundAndProgram">
                 <div class="form-group">
                     @Html.LabelFor(model => filterViewModel.Fund, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="col-md-4">
                         @Html.EditorFor(model => filterViewModel.Fund, null, "fund", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    @Html.LabelFor(model => filterViewModel.Program, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => filterViewModel.Program, null, "program", new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
             </div>

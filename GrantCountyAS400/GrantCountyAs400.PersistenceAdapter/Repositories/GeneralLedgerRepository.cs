@@ -17,7 +17,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
         {
             _context = dbContext;
         }
-        public IEnumerable<GeneralLedger> GetAll( int fiscalYear, string fund, string department, string program, out int resultCount, int pageNumber = 1, int pageSize = 50)
+        public IEnumerable<GeneralLedger> GetAll( int fiscalYear, string fund, string department, string program,string project,string @base, out int resultCount, int pageNumber = 1, int pageSize = 50)
         {
             List<GeneralLedger> results = new List<GeneralLedger>();
             //IQueryable<AcctGeneralLedger> query = _context.AcctGeneralLedger.Where(t => t.FiscalYear == fiscalYear);
@@ -29,6 +29,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                         where (accountGeneralLedger.Fund == fund || string.IsNullOrWhiteSpace(fund)) 
                         && (accountGeneralLedger.Department == department || string.IsNullOrWhiteSpace(department))
                         && (accountGeneralLedger.Program == program || string.IsNullOrWhiteSpace(program))
+                        &&(accountGeneralLedger.Project == project || string.IsNullOrWhiteSpace(project))
+                        &&(accountGeneralLedger.Base == @base || string.IsNullOrWhiteSpace(@base))
                         && accChartOfAccountView.AcctCategory == "BASEELEM"
                         && accChartOfAccountView.FiscalYear == fiscalYear 
                         //&& (string.Concat(accountGeneralLedger.Base.Trim(), "0")) ==

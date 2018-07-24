@@ -31,8 +31,9 @@ namespace GrantCountyAs400.Web.Controllers.Accounting
                 filter.FiscalYear = 2008;
             }
             var results = _generalLedgerRepository
-                                .GetAll(filter.FiscalYear,filter.Fund,filter.Department,filter.Program,
-                                out resultCount, pageNumber, AppSettings.PageSize)
+                                .GetAll(filter.FiscalYear, filter.Fund, filter.Department, 
+                                        filter.Program, filter.Project, filter.Base,
+                                        out resultCount, pageNumber, AppSettings.PageSize)
                                 .ToList();
 
             pagingInfo.Total = resultCount;
