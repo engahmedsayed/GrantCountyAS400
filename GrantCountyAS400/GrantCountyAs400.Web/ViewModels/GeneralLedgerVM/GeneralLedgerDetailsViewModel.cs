@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,7 +19,9 @@ namespace GrantCountyAs400.Web.ViewModels.GeneralLedgerVM
 
         public decimal? Budget { get; set; }
 
-        public decimal? PendingEncumbrance { get; set; }
+        [Display(Name ="Pend. Encumb.")]
+        [DefaultValue(0)]
+        public decimal? PendingEncumbrance { get; set; } 
 
         public decimal? Encumbrance { get; set; }
 

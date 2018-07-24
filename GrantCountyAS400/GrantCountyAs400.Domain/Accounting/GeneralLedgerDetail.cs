@@ -15,13 +15,16 @@ namespace GrantCountyAs400.Domain.Accounting
 
         public decimal? Action { get; private set; }
 
-        public GeneralLedgerDetailItem(decimal? month,decimal? year,decimal? budget,decimal? encumbrance,decimal? action)
+        public decimal? PendingEncumbrance { get; set; }
+
+        public GeneralLedgerDetailItem(decimal? month,decimal? year,decimal? budget,decimal? encumbrance,decimal? pendingEncumbrance,decimal? action)
         {
             Month = month;
             Year = year;
             Budget = budget;
             Encumbrance = encumbrance;
             Action = action;
+            PendingEncumbrance = pendingEncumbrance;
         }
     }
 

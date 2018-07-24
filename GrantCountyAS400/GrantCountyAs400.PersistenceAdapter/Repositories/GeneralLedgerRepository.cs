@@ -63,7 +63,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                         join pa
                         in _context.AcctGlperiodAmounts
                         on accChartOfAccountView.AccountNumberFixed equals pa.Base
-                        where pa.FiscalYear == fiscalYear
+                        where pa.FiscalYear == fiscalYear && pa.Base == accountNumber
                         orderby pa.Month
                         select GeneralLedgerMapper.Map(pa)).Distinct();
             if (pageNumber > 0)

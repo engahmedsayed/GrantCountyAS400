@@ -16,6 +16,6 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers
 
         internal static GeneralLedgerDetailItem Map(AcctGlperiodAmounts pa) =>
                                                                                 new GeneralLedgerDetailItem(pa.Month, pa.Year,
-                                                                                pa.Budget, pa.Encumbrance, pa.Action);
+                                                                                pa.Budget, pa.Encumbrance, pa.PendingEncumbrance, pa.Action);
     }
 }
