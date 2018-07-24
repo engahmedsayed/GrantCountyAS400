@@ -27,8 +27,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                         in _context.AccountChartOfAccountsView
                         on accountGeneralLedger.Base.Trim() equals accChartOfAccountView.AccountNumberFixed
                         where (accountGeneralLedger.Fund == fund || string.IsNullOrWhiteSpace(fund)) 
-                        && (accountGeneralLedger.Department == fund || string.IsNullOrWhiteSpace(department))
-                        && (accountGeneralLedger.Program == fund || string.IsNullOrWhiteSpace(program))
+                        && (accountGeneralLedger.Department == department || string.IsNullOrWhiteSpace(department))
+                        && (accountGeneralLedger.Program == program || string.IsNullOrWhiteSpace(program))
                         && accChartOfAccountView.AcctCategory == "BASEELEM"
                         && accChartOfAccountView.FiscalYear == fiscalYear 
                         //&& (string.Concat(accountGeneralLedger.Base.Trim(), "0")) ==
@@ -36,7 +36,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                         orderby accountGeneralLedger.Id
                         select GeneralLedgerMapper.Map(accountGeneralLedger,accChartOfAccountView);
 
-            if(pageNumber > 0)
+            if (pageNumber > 0)
             {
                 resultCount = query.Count();
                 results = query.Skip((pageNumber - 1) * pageSize)

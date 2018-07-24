@@ -9,8 +9,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers
     internal static class GeneralLedgerMapper
     {
         internal static GeneralLedger Map(AcctGeneralLedger generalLedger, AccountChartOfAccountsView acctChartOfAccountsView)
-            => new GeneralLedger($"{generalLedger.Fund}-{generalLedger.Department}-{generalLedger.Program}-{generalLedger.Project}-{generalLedger.Base}", acctChartOfAccountsView.AcctDescription,
-                generalLedger.RecordType == "D" ? "detail" : "Summary", !string.IsNullOrWhiteSpace
+            => new GeneralLedger($"{generalLedger.Department}-{generalLedger.Fund}-{generalLedger.Program}-{generalLedger.Project}-{generalLedger.Base}", acctChartOfAccountsView.AcctDescription,
+                generalLedger.RecordType == "D" ? "Detail" : "Summary", !string.IsNullOrWhiteSpace
                 (generalLedger.Base) && generalLedger.Base.StartsWith('1') ? "Asset" : generalLedger.Base.StartsWith('2')
                 ? "Liability" : generalLedger.Base.StartsWith('3') ? "Revenue" : "Expense", generalLedger.RecordStatus,generalLedger.Base);
 
