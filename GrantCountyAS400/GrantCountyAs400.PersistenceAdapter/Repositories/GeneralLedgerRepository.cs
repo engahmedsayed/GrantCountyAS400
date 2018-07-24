@@ -81,5 +81,24 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             return results;
 
         }
+
+        public IEnumerable<GeneralLedgerMonthDetail> GetMonthDetails(int month, int fiscalYear, string fund, string department, string program, string project, out int resultCount, int pageNumber = 1, int pageSize = 50)
+        {
+            List<GeneralLedgerMonthDetail> results = new List<GeneralLedgerMonthDetail>();
+            var query = _context.AcctGltransactions.Where(t => t.FiscalYear == fiscalYear && t.Fund == fund &&
+                                                             t.Department == department && t.Program == program);
+            if (pageNumber > 0)
+            {
+                resultCount = query.Count();
+                results = query.Skip((pageNumber - 1) * pageSize)
+                                      .Take(pageSize).Select(t => GeneralLedgerMapper.Map(t)).ToList();
+            }
+            else
+            {
+                results = query.Select(t => GeneralLedgerMapper.Map(t)).ToList();
+                resultCount = results.Count();
+            }
+            return results;
+        }
     }
 }

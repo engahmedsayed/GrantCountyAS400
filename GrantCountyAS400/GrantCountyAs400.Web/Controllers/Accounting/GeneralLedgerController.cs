@@ -57,5 +57,15 @@ namespace GrantCountyAs400.Web.Controllers.Accounting
             pagingInfo.Total = resultCount;
             return View(queryResults.GeneralLedgers.ToMappedPagedList<GeneralLedgerDetailItem, GeneralLedgerDetailsViewModel>(pagingInfo));
         }
+
+        [HttpGet]
+        [Route("{month}/{fiscalYear}/{fund}/{department}/{program}/{project}/{pageNumber}")]
+        public IActionResult MonthDetails(int month, int fiscalYear, string fund, string department, string program, string project,int pageNumber=1)
+        {
+            int resultCount;
+            var pagingInfo = new PagingInfo() { PageNumber = pageNumber };
+            var results = _generalLedgerRepository.GetMonthDetails(month, fiscalYear, fund, department, program, project, out resultCount);
+            return View(results.ToMappedPagedList<GeneralLedgerMonthDetail, GeneralLedgerMonthDetailsViewModel>(pagingInfo));
+        }
     }
 }

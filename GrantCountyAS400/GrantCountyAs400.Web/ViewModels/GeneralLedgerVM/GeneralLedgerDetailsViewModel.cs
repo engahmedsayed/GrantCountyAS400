@@ -26,5 +26,13 @@ namespace GrantCountyAs400.Web.ViewModels.GeneralLedgerVM
         public decimal? Encumbrance { get; set; }
 
         public decimal? Action { get; set; }
+
+        public string Fund { get; set; }
+
+        public string Department { get; set; }
+
+        public string Program { get; set; }
+
+        public string Project { get; set; }
     }
 }
