@@ -34,18 +34,19 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                         //&& (string.Concat(accountGeneralLedger.Base.Trim(), "0")) ==
                         //    string.Concat(accChartOfAccount.AcctNumber.Replace(".", "").Trim(), "0")
                         orderby accountGeneralLedger.Id
-                        select GeneralLedgerMapper.Map(accountGeneralLedger,accChartOfAccountView);
+                        select new { accountGeneralLedger, accChartOfAccountView };
 
             if (pageNumber > 0)
             {
                 resultCount = query.Count();
                 results = query.Skip((pageNumber - 1) * pageSize)
                                       .Take(pageSize)
+                                      .Select(t => GeneralLedgerMapper.Map(t.accountGeneralLedger, t.accChartOfAccountView))
                                       .ToList();
             }
             else
             {
-                results = query.ToList();
+                results = query.Select(t=> GeneralLedgerMapper.Map(t.accountGeneralLedger, t.accChartOfAccountView)).ToList();
                 resultCount = results.Count();
             }
             return results;
