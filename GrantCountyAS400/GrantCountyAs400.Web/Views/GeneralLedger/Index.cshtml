@@ -15,27 +15,30 @@
     {
         <div class="form-horizontal">
             <hr />
-            <div class="form-group">
-                @Html.LabelFor(model => filterViewModel.FiscalYear, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => filterViewModel.FiscalYear, null, "fiscalYear", new { htmlAttributes = new { @class = "form-control" } })
+            <div class="row" data-search-type="fiscalYear">
+                <div class="form-group">
+                    @Html.LabelFor(model => filterViewModel.FiscalYear, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => filterViewModel.FiscalYear, null, "fiscalYear", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
                 </div>
             </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => filterViewModel.Department, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => filterViewModel.Department, null, "department", new { htmlAttributes = new { @class = "form-control" } })
+            <div class="row" data-search-type="department">
+                <div class="form-group">
+                    @Html.LabelFor(model => filterViewModel.Department, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => filterViewModel.Department, null, "department", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
                 </div>
             </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => filterViewModel.Fund, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => filterViewModel.Fund, null, "fund", new { htmlAttributes = new { @class = "form-control" } })
+            <div class="row" data-search-type="fund">
+                <div class="form-group">
+                    @Html.LabelFor(model => filterViewModel.Fund, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => filterViewModel.Fund, null, "fund", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
                 </div>
             </div>
-
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <div class="form-group pull-right">
@@ -84,34 +87,34 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                <a class="toggle-row-details" data-toggle="collapse" data-target="#@item.AccountNumber" aria-expanded="false" aria-controls="@item.AccountNumber">
-                    <i class="glyphicon glyphicon-chevron-right pull-right"></i>
-                    <i class="glyphicon glyphicon-chevron-down pull-right"></i>
-                </a>
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.Base" asp-route-fiscalYear="2008">@item.AccountNumber</a>
-               
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AccountName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Kind)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    <a class="toggle-row-details" data-toggle="collapse" data-target="#@item.AccountNumber" aria-expanded="false" aria-controls="@item.AccountNumber">
+                        <i class="glyphicon glyphicon-chevron-right pull-right"></i>
+                        <i class="glyphicon glyphicon-chevron-down pull-right"></i>
+                    </a>
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Base" asp-route-fiscalYear="2008">@item.AccountNumber</a>
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kind)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+            </tr>
         }
     </tbody>
 </table>
-<nav aria-label="navigation">   
+<nav aria-label="navigation">
     @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
     pageNumber = pageNumber,
     fiscalYear = filterViewModel.FiscalYear,
@@ -141,3 +144,16 @@
             display: none;
         }
 </style>
+
+@section Scripts{
+
+    <script>
+        $(function () {
+            $('#btnReset').click(function () {
+                $('input[type="text"]', 'div.row[data-search-type]').val('');
+                $('input[type="number"]', 'div.row[data-search-type]').val('');
+            });
+        });
+    </script>
+
+}
