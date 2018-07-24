@@ -1,0 +1,78 @@
+﻿@model GrantCountyAs400.Web.ViewModels.Assessment.HomePark.ManufacturedHomeParkDetailsViewModel
+
+@{
+    ViewData["Title"] = Model.Name + " - Details";
+}
+
+<div>
+    <h2>@Html.DisplayFor(model => model.Name)</h2>
+
+    <div class="entity-details">
+        <div class="entity-info clearfix">
+            <div class="col-xs-6">
+                <table class="table col-xs-6">
+                    <tbody>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.MhparkCode) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.MhparkCode) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.Name) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.Name) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.AddressLine1) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.AddressLine1) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.ContactNameCode) </strong></td>
+                            <td class="text-right">
+                                <span> @Html.DisplayFor(model => model.ContactNameCode) </span>&nbsp;-&nbsp;
+                                <span> @Html.DisplayFor(model => model.ContactName) </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.TelephoneNumber) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.TelephoneNumberDisplay) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.ParcelNumber) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.ParcelNumber) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Description</strong></td>
+                            <td class="text-right">
+                                <span> @Html.DisplayFor(model => model.Description1) </span><br />
+                                <span> @Html.DisplayFor(model => model.Description2) </span><br />
+                                <span> @Html.DisplayFor(model => model.Description3) </span><br />
+                                <span> @Html.DisplayFor(model => model.Description4) </span><br />
+                                <span> @Html.DisplayFor(model => model.Description5) </span><br />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-6">
+                <table class="table col-xs-6">
+                    <tbody>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.Filler01) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.Filler01) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.SpaceNumber) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.SpaceNumber) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.QualCode) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.QualCode) </span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

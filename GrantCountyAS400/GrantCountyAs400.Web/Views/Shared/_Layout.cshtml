@@ -34,9 +34,24 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-controller="Personnel" asp-action="Index">Personnel</a></li>
-                    <li><a asp-controller="GeneralLedger" asp-action="Index">General Ledger</a></li>
-                    <li><a asp-controller="LegalDescription" asp-action="Index">Legal Descriptions</a></li>
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Accounting<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a asp-controller="Personnel" asp-action="Index">Personnel</a></li>
+                            <li><a asp-controller="GeneralLedger" asp-action="Index">General Ledger</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Assessment<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a asp-controller="ManufacturedHomePark" asp-action="Index">Home Parks</a></li>
+                            <li><a asp-controller="LegalDescription" asp-action="Index">Legal Descriptions</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
