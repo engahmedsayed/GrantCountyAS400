@@ -23,6 +23,10 @@ namespace GrantCountyAs400.Web
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.Configure<IISOptions>(options =>
+            {
+
+            });
             services.AddMvc();
             services.AddDbContext<GrantCountyDbContext>(options =>
                         options.UseSqlServer(Configuration.GetConnectionString("GrantCountyDbContext")));
