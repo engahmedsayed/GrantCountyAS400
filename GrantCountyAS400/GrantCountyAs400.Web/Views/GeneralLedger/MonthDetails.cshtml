@@ -89,7 +89,8 @@
                 @Html.DisplayFor(modelItem => item.Kind)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Amount)
+                @{ var formattedAmount = item.Amount.HasValue ? item.Amount.Value.ToString("N0") : "0";}
+                @Html.DisplayFor(modelItem => formattedAmount, new { @class = "pull-right", @dir = "rtl" })
             </td>
         </tr>
         }
