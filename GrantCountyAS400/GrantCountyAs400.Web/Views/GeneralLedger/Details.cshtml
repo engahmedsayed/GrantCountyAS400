@@ -46,7 +46,7 @@
             <tr>
                 <td>
                     @{var formattedYear = item.Month + "/" + item.Year; }
-                    <a asp-action="MonthDetails" asp-route-month="@item.Month.Value" asp-route-pageNumber="1" asp-route-fiscalYear="@item.Year.Value" asp-route-fund="@item.Fund" asp-route-department="@item.Department" asp-route-program="@item.Program" asp-route-project="@item.Project">@formattedYear</a>
+                    <a  asp-action="MonthDetails" asp-route-month="@item.Month.Value" asp-route-pageNumber="1" asp-route-baseId="@item.Base" asp-route-fiscalYear="@item.Year.Value" asp-route-fund="@item.Fund" asp-route-department="@item.Department" asp-route-program="@item.Program" asp-route-project="@item.Project">@formattedYear</a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Budget)

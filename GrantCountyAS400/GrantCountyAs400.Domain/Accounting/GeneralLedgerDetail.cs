@@ -10,6 +10,8 @@ namespace GrantCountyAs400.Domain.Accounting
 
         public decimal? Year { get; private set; }
 
+        public string Base { get; private set; }
+
         public decimal? Budget { get; private set; }
         public decimal? Encumbrance { get;private set; }
 
@@ -25,7 +27,7 @@ namespace GrantCountyAs400.Domain.Accounting
 
         public string Project { get; set; }
 
-        public GeneralLedgerDetailItem(decimal? month,decimal? year,decimal? budget,decimal? encumbrance,decimal? pendingEncumbrance,decimal? action,string fund,string department,string program,string project)
+        public GeneralLedgerDetailItem(decimal? month,decimal? year,decimal? budget,decimal? encumbrance,decimal? pendingEncumbrance,decimal? action,string fund,string department,string program,string project,string @base)
         {
             Month = month;
             Year = year;
@@ -37,6 +39,7 @@ namespace GrantCountyAs400.Domain.Accounting
             Department = department;
             Program = program;
             Project = project;
+            Base = @base;
         }
     }
 

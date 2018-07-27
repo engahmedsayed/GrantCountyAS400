@@ -108,7 +108,7 @@
                 </td>
                 <td>
                     @{var selectedFiscalYear = filterViewModel.FiscalYear != 0 ? filterViewModel.FiscalYear : 2008;}
-                    <a asp-action="Details" asp-route-id="@item.Base" asp-route-fiscalYear="@selectedFiscalYear">@item.AccountNumber</a>
+                    <a asp-action="Details" asp-controller="GeneralLedger" asp-route-fund="@item.Fund" asp-route-department="@item.Department" asp-route-program="@item.Program" asp-route-project="@item.Project" asp-route-baseId="@item.Base" asp-route-fiscalYear="@selectedFiscalYear" asp-route-pageNumber="1">@item.AccountNumber</a>
 
                 </td>
                 <td>

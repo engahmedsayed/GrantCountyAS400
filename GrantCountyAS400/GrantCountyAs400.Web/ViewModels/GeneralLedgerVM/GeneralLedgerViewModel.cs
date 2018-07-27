@@ -19,5 +19,14 @@ namespace GrantCountyAs400.Web.ViewModels.GeneralLedgerVM
 
         public string Status { get; set; }
 
+        public string Fund { get; set; }
+
+        public string Department { get; set; }
+
+        public string Program { get; set; }
+
+        public string Project { get; set; }
+
+
     }
 }

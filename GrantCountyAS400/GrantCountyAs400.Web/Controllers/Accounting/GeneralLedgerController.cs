@@ -42,16 +42,16 @@ namespace GrantCountyAs400.Web.Controllers.Accounting
         }
 
         [HttpGet]
-        [Route("{id}/{fiscalYear}")]
-        public IActionResult Details(string id,int fiscalYear,int pageNumber=1)
+        [Route("{fund}/{department}/{program}/{project}/{baseId}/{fiscalYear}/{pageNumber}")]
+        public IActionResult Details(string fund,string department,string program,string project,string baseId,int fiscalYear,int pageNumber=1)
         {
-            ViewBag.baseId = id;
+            ViewBag.baseId = baseId;
             var results = new List<GeneralLedgerDetailsViewModel>();
             int resultCount;
             var pagingInfo = new PagingInfo() { PageNumber = pageNumber };
             
             var queryResults = _generalLedgerRepository
-                                .GetAll(fiscalYear, id.ToString(),
+                                .GetAllDetails(fund, department,program,project,baseId,fiscalYear,
                                 out resultCount, pageNumber, AppSettings.PageSize);
 
             pagingInfo.Total = resultCount;
@@ -59,12 +59,12 @@ namespace GrantCountyAs400.Web.Controllers.Accounting
         }
 
         [HttpGet]
-        [Route("{month}/{fiscalYear}/{fund}/{department}/{program}/{project}/{pageNumber}")]
-        public IActionResult MonthDetails(int month, int fiscalYear, string fund, string department, string program, string project,int pageNumber=1)
+        [Route("MonthDetails/{month}/{fiscalYear}/{fund}/{department}/{program}/{project}/{baseId}/{pageNumber}")]
+        public IActionResult MonthDetails(int month, int fiscalYear, string fund, string department, string program, string project,string baseId,int pageNumber=1)
         {
             int resultCount;
             var pagingInfo = new PagingInfo() { PageNumber = pageNumber };
-            var results = _generalLedgerRepository.GetMonthDetails(month, fiscalYear, fund, department, program, project, out resultCount);
+            var results = _generalLedgerRepository.GetMonthDetails(month, fiscalYear, fund, department, program, project,baseId, out resultCount);
             return View(results.ToMappedPagedList<GeneralLedgerMonthDetail, GeneralLedgerMonthDetailsViewModel>(pagingInfo));
         }
     }

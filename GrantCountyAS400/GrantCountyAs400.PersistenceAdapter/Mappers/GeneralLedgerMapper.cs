@@ -9,14 +9,18 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers
     internal static class GeneralLedgerMapper
     {
         internal static GeneralLedger Map(AcctGeneralLedger generalLedger, AccountChartOfAccountsView acctChartOfAccountsView)
-            => new GeneralLedger($"{generalLedger.Department}-{generalLedger.Fund}-{generalLedger.Program}-{generalLedger.Project}-{generalLedger.Base}", acctChartOfAccountsView.AcctDescription,
-                generalLedger.RecordType == "D" ? "Detail" : "Summary", !string.IsNullOrWhiteSpace
+            => new GeneralLedger($"{generalLedger.Fund}-" +
+                $"{generalLedger.Department.Trim().Substring(0,3) + "-" + generalLedger.Department.Trim().Substring((generalLedger.Department.Trim().Length/2),generalLedger.Department.Trim().Length/2)}" +
+                $"-{generalLedger.Program}-{generalLedger.Project}.{generalLedger.Base.Substring(0,2)}", 
+                acctChartOfAccountsView.AcctDescription,generalLedger.RecordType == "D" ? "Detail" : "Summary", !string.IsNullOrWhiteSpace
                 (generalLedger.Base) && generalLedger.Base.StartsWith('1') ? "Asset" : generalLedger.Base.StartsWith('2')
-                ? "Liability" : generalLedger.Base.StartsWith('3') ? "Revenue" : "Expense", generalLedger.RecordStatus,generalLedger.Base);
+                ? "Liability" : generalLedger.Base.StartsWith('3') ? "Revenue" : "Expense", 
+                generalLedger.RecordStatus,generalLedger.Base,generalLedger.Fund,generalLedger.Department,generalLedger.Program,
+                generalLedger.Project,generalLedger.FiscalYear);
 
         internal static GeneralLedgerDetailItem Map(AcctGlperiodAmounts pa) =>
                                                                                 new GeneralLedgerDetailItem(pa.Month, pa.Year,
-                                                                                pa.Budget, pa.Encumbrance, pa.PendingEncumbrance, pa.Action,pa.Fund,pa.Department,pa.Program,pa.Project);
+                                                                                pa.Budget, pa.Encumbrance, pa.PendingEncumbrance, pa.Action,pa.Fund,pa.Department,pa.Program,pa.Project,pa.Base);
 
         internal static GeneralLedgerMonthDetail Map(AcctGltransactions glt) => new GeneralLedgerMonthDetail(glt.Jenumber, glt.Line,
                                                                                 (int)glt.Month, (int)glt.Year, glt.TransactionDate,
@@ -25,6 +29,6 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers
                                                                                 glt.Source, glt.Notation1, glt.Kind.Trim().ToUpper() == "B" ? "Beg" :
                                                                                 glt.Kind.Trim().ToUpper() == "E" ? "Enc" :
                                                                                 glt.Kind.Trim().ToUpper() == "G" ? "Actv" : "",
-                                                                                glt.Amount);
+                                                                                glt.Amount,glt.Base);
     }
 }

@@ -55,15 +55,14 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
 
         }
 
-        public GeneralLedgerDetail GetAll(int fiscalYear, string accountNumber, out int resultCount, int pageNumber = 1, int pageSize = 50)
+        public GeneralLedgerDetail GetAllDetails(string fund,string department,string program,string project,string @base, int fiscalYear, out int resultCount, int pageNumber = 1, int pageSize = 50)
         {
             GeneralLedgerDetail results = null;
-            var query = (from accChartOfAccountView
-                        in _context.AccountChartOfAccountsView
-                        join pa
+            var query = (from pa
                         in _context.AcctGlperiodAmounts
-                        on accChartOfAccountView.AccountNumberFixed equals pa.Base
-                        where pa.FiscalYear == fiscalYear && pa.Base == accountNumber
+                        where pa.FiscalYear == fiscalYear && pa.Base == @base &&  pa.Fund == fund && pa.Department == department
+                        && pa.Program == program && pa.Project == project 
+                        orderby pa.Year
                         orderby pa.Month
                         select GeneralLedgerMapper.Map(pa)).Distinct();
             if (pageNumber > 0)
@@ -82,11 +81,13 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
 
         }
 
-        public IEnumerable<GeneralLedgerMonthDetail> GetMonthDetails(int month, int fiscalYear, string fund, string department, string program, string project, out int resultCount, int pageNumber = 1, int pageSize = 50)
+        public IEnumerable<GeneralLedgerMonthDetail> GetMonthDetails(int month, int fiscalYear, string fund, string department, string program, string project,string @base, out int resultCount, int pageNumber = 1, int pageSize = 50)
         {
             List<GeneralLedgerMonthDetail> results = new List<GeneralLedgerMonthDetail>();
-            var query = _context.AcctGltransactions.Where(t => t.FiscalYear == fiscalYear && t.Fund == fund &&
-                                                             t.Department == department && t.Program == program);
+            var query = _context.AcctGltransactions.Where(t => t.FiscalYear == fiscalYear && t.Fund == fund && t.Month == month && 
+                                                               t.Year == fiscalYear && t.Department == department && t.Project == project &&
+                                                               t.Program == program && t.Base == @base)
+                                                             .OrderBy(t=>t.Year).ThenBy(t=>month).ThenBy(t=>t.Jenumber);
             if (pageNumber > 0)
             {
                 resultCount = query.Count();

@@ -10,6 +10,8 @@ namespace GrantCountyAs400.Domain.Accounting
 
         public decimal? Line { get; private set; }
 
+        public string Base { get; private set; }
+
         public int Month { get; private set; }
 
         public int Year { get; private set; }
@@ -26,7 +28,7 @@ namespace GrantCountyAs400.Domain.Accounting
 
         public decimal? Amount { get;private set; }
 
-        public GeneralLedgerMonthDetail(decimal? jENumber, decimal? line, int month, int year, DateTime? transactionDate, string status, string source, string notation1, string kind, decimal? amount)
+        public GeneralLedgerMonthDetail(decimal? jENumber, decimal? line, int month, int year, DateTime? transactionDate, string status, string source, string notation1, string kind, decimal? amount,string @base)
         {
             JENumber = jENumber;
             Line = line;
@@ -38,6 +40,7 @@ namespace GrantCountyAs400.Domain.Accounting
             Notation1 = notation1;
             Kind = kind;
             Amount = amount;
+            Base = @base;
         }
     }
 }
