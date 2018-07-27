@@ -31,11 +31,11 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
 
             if (!string.IsNullOrWhiteSpace(firstName))
             {
-                query = query.Where(t => t.Name.SplitName(',', NameEnum.FirstName).Contains(firstName));
+                query = query.Where(t => t.Name.ToLower().SplitName(',', NameEnum.FirstName).Contains(firstName.ToLower()));
             }
             if (!string.IsNullOrWhiteSpace(lastName))
             {
-                query = query.Where(t => t.Name.SplitName(',', NameEnum.LastName).Contains(lastName));
+                query = query.Where(t => t.Name.ToLower().SplitName(',', NameEnum.LastName).Contains(lastName.ToLower()));
             }
             if (ssn > 0)
             {

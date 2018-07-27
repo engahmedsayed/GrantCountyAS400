@@ -24,9 +24,9 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                         join nameAddress in _context.AsmtmasterNameAddress on homepark.ContactNameCode equals nameAddress.NameCode
                         into homeparkDetails
                         from nameAddressRecord in homeparkDetails.DefaultIfEmpty()
-                        where (string.IsNullOrWhiteSpace(parkCode) || homepark.MhparkCode.Trim() == parkCode.Trim())
-                        && (string.IsNullOrWhiteSpace(parkName) || homepark.Name.Trim().Contains(parkName.Trim()))
-                        && (string.IsNullOrWhiteSpace(contactName) || nameAddressRecord.Name.Trim().Contains(contactName.Trim()))
+                        where (string.IsNullOrWhiteSpace(parkCode) || homepark.MhparkCode.ToLower().Trim() == parkCode.ToLower().Trim())
+                        && (string.IsNullOrWhiteSpace(parkName) || homepark.Name.ToLower().Trim().Contains(parkName.ToLower().Trim()))
+                        && (string.IsNullOrWhiteSpace(contactName) || nameAddressRecord.Name.ToLower().Trim().Contains(contactName.ToLower().Trim()))
                         select ManufacturedHomeParkMapper.Map(homepark, nameAddressRecord);
 
             if (pageNumber > 0)

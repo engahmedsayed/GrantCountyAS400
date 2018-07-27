@@ -68,15 +68,19 @@ namespace GrantCountyAs400.Web.ViewModels.AccountingVM
         public decimal Type { get; set; }
 
         [Display(Name = "Positions Filled")]
+        [DisplayFormat(DataFormatString = "{0:n0}")]
         public decimal EmpFilled { get; set; }
 
         [Display(Name = "Retirement - Lock")]
+        [DisplayFormat(DataFormatString = "{0:n0}")]
         public decimal RetirementLock { get; set; }
 
         [Display(Name = "Retirement - Plan")]
+        [DisplayFormat(DataFormatString = "{0:n0}")]
         public decimal RetirementCode { get; set; }
 
         [Display(Name = "Retirement - Account Number")]
+        [DisplayFormat(DataFormatString = "{0:n0}")]
         public decimal RetirementNumber { get; set; }
 
         [Display(Name = "Service Date")]
