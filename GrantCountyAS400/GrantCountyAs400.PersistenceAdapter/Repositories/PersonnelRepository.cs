@@ -91,7 +91,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                      Contract = EmployeeMapper.Map(employee),
                                      JobCode = (jobCode == null) ? null : JobCodeMapper.Map(jobCode)
                                  }
-                                ).FirstOrDefault();
+                                ).SingleOrDefault();
 
             if (detailsRecord != null)
             {
