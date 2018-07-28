@@ -1702,7 +1702,6 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.SubsidiaryParcelCode)
-                    .HasColumnName("Subsidiary ParcelCode")
                     .HasMaxLength(1)
                     .IsUnicode(false);
 
