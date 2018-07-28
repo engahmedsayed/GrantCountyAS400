@@ -6,5 +6,8 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.LegalDescription
     {
         [Display(Name = "Parcel")]
         public decimal ParcelNumber { get; set; }
+
+        [Display(Name = "Name")]
+        public string Name { get; set; }
     }
 }

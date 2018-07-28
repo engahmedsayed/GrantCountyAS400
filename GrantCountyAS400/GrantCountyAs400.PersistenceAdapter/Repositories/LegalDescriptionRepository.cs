@@ -16,14 +16,20 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             _context = dbContext;
         }
 
-        public IEnumerable<LegalDescription> GetAll(decimal parcelNumber, out int resultCount, int pageNumber = 1, int pageSize = 50)
+        public IEnumerable<LegalDescription> GetAll(decimal parcelNumber, string name, out int resultCount, int pageNumber = 1, int pageSize = 50)
         {
             List<LegalDescription> results = new List<LegalDescription>();
-            IQueryable<AsmtfullLegalDescription> query = _context.AsmtfullLegalDescription;
-            if (parcelNumber > 0)
-            {
-                query = query.Where(t => t.ParcelNumber == parcelNumber);
-            }
+
+            var query = from legal in _context.AsmtfullLegalDescription
+                        join valueMaster in _context.ASMTValueMasterNameView on legal.ParcelNumber equals valueMaster.ParcelNumber
+                        where ((parcelNumber <= 0) || legal.ParcelNumber == parcelNumber)
+                         && (string.IsNullOrWhiteSpace(name) ||
+                         (
+                            (valueMaster.TaxpayerName.ToLower().Contains(name.Trim().ToLower())) ||
+                            (valueMaster.TitleOwnerName.ToLower().Contains(name.Trim().ToLower())) ||
+                            (valueMaster.ContractHolderName.ToLower().Contains(name.Trim().ToLower()))
+                         ))
+                        select legal;
 
             if (pageNumber > 0)
             {
