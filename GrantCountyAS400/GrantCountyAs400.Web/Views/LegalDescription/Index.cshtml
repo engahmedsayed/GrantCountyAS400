@@ -43,6 +43,8 @@
 <nav aria-label="navigation">
     @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
     pageNumber = pageNumber,
+    parcelnumber = filterViewModel.ParcelNumber,
+    name = filterViewModel.Name
 }))
 </nav>
 
@@ -76,5 +78,7 @@
 <nav aria-label="navigation">
     @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
     pageNumber = pageNumber,
+    parcelnumber = filterViewModel.ParcelNumber,
+    name = filterViewModel.Name
 }))
 </nav>
