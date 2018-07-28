@@ -35,6 +35,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
         public virtual DbSet<AsmtrealPropertyAssessedValueMaster> AsmtrealPropertyAssessedValueMaster { get; set; }
 
         public virtual DbSet<AccountChartOfAccountsView> AccountChartOfAccountsView { get; set; }
+        public virtual DbSet<ASMTValueMasterNameView> ASMTValueMasterNameView { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
