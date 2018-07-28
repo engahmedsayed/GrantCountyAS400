@@ -1,0 +1,55 @@
+﻿@model IEnumerable<PlatCondoViewModel>
+@using GrantCountyAs400.Web.ViewModels.Assessment.PlatCondo
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@{
+    ViewData["Title"] = "Plats and Condos - Index";
+}
+
+<h2>Plats and Condos</h2>
+
+<nav aria-label="navigation">
+    @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
+    pageNumber = pageNumber,
+}))
+</nav>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PlatCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlatCodeType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlatNameDesc)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">
+                        @Html.DisplayFor(modelItem => item.PlatCode)
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlatCodeType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlatNameDesc)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<nav aria-label="navigation">
+    @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
+    pageNumber = pageNumber,
+}))
+</nav>

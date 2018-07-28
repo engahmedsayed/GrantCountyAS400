@@ -25,7 +25,6 @@ namespace GrantCountyAs400.Web
             // Add framework services.
             services.Configure<IISOptions>(options =>
             {
-
             });
             services.AddMvc();
             services.AddDbContext<GrantCountyDbContext>(options =>
@@ -37,6 +36,7 @@ namespace GrantCountyAs400.Web
             services.AddScoped<IDeductionRepository, DeductionRepository>();
             services.AddScoped<ILegalDescriptionRepository, LegalDescriptionRepository>();
             services.AddScoped<IManufacturedHomeParkRepository, ManufacturedHomeParkRepository>();
+            services.AddScoped<IPlatCondoRepository, PlatCondoRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
