@@ -4,13 +4,54 @@
 @using X.PagedList;
 @{
     ViewData["Title"] = "Plats and Condos - Index";
+    var filterViewModel = ViewBag.FilterViewModel as PlatCondoFilterViewModel;
 }
 
 <h2>Plats and Condos</h2>
 
+<p>
+    @using (Html.BeginForm("Index", "PlatCondo", FormMethod.Get))
+    {
+        <div class="form-horizontal">
+            <hr />
+            <div class="form-group">
+                <label asp-for="@filterViewModel.CodeType" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <select asp-items="ViewBag.PlatCodeTypes" asp-for="@filterViewModel.CodeType" class="form-control" name="codetype">
+                        <option value="">--Please Select--</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@filterViewModel.Code" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input type="text" asp-for="@filterViewModel.Code" name="code" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@filterViewModel.Name" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input type="text" asp-for="@filterViewModel.Name" name="name" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <div class="form-group pull-right">
+                        <input type="submit" value="Filter" class="btn btn-success" />
+                        <input type="reset" value="Clear" class="btn btn-default" id="btnReset" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</p>
 <nav aria-label="navigation">
     @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
     pageNumber = pageNumber,
+    codetype = filterViewModel.CodeType,
+    code= filterViewModel.Code,
+    name = filterViewModel.Name
 }))
 </nav>
 
@@ -51,5 +92,8 @@
 <nav aria-label="navigation">
     @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
     pageNumber = pageNumber,
+    codetype = filterViewModel.CodeType,
+    code = filterViewModel.Code,
+    name = filterViewModel.Name
 }))
 </nav>
