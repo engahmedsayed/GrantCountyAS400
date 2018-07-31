@@ -12,5 +12,14 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.LegalDescription
 
         [Display(Name = "Description")]
         public string Descrtiption { get; set; }
+
+        [Display(Name = "Tax Payer")]
+        public string TaxPayerName { get; set; }
+
+        [Display(Name = "Title Owner")]
+        public string TitleOwnerName { get; set; }
+
+        [Display(Name = "Contract Holder")]
+        public string ContractHolderName { get; set; }
     }
 }

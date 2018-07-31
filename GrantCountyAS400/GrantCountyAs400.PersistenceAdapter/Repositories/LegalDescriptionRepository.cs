@@ -16,20 +16,18 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             _context = dbContext;
         }
 
-        public IEnumerable<LegalDescription> GetAll(decimal parcelNumber, string name, out int resultCount, int pageNumber = 1, int pageSize = 50)
+        public IEnumerable<LegalDescription> GetAll(decimal parcelNumber, string taxpayer, string owner, string contractHolder,
+                                                    out int resultCount, int pageNumber = 1, int pageSize = 50)
         {
             List<LegalDescription> results = new List<LegalDescription>();
 
             var query = from legal in _context.AsmtfullLegalDescription
                         join valueMaster in _context.ASMTValueMasterNameView on legal.ParcelNumber equals valueMaster.ParcelNumber
                         where ((parcelNumber <= 0) || legal.ParcelNumber == parcelNumber)
-                         && (string.IsNullOrWhiteSpace(name) ||
-                         (
-                            (valueMaster.TaxpayerName.ToLower().Contains(name.Trim().ToLower())) ||
-                            (valueMaster.TitleOwnerName.ToLower().Contains(name.Trim().ToLower())) ||
-                            (valueMaster.ContractHolderName.ToLower().Contains(name.Trim().ToLower()))
-                         ))
-                        select legal;
+                        && (string.IsNullOrEmpty(taxpayer) || valueMaster.TaxpayerName.ToLower().Contains(taxpayer.Trim().ToLower()))
+                        && (string.IsNullOrEmpty(owner) || valueMaster.TitleOwnerName.ToLower().Contains(owner.Trim().ToLower()))
+                        && (string.IsNullOrEmpty(contractHolder) || valueMaster.ContractHolderName.ToLower().Contains(contractHolder.Trim().ToLower()))
+                        select LegalDescriptionMapper.Map(legal, valueMaster);
 
             if (pageNumber > 0)
             {
@@ -37,13 +35,11 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                 results = query.Skip((pageNumber - 1) * pageSize)
                                .Take(pageSize)
                                .OrderBy(t => t.ParcelNumber)
-                               .Select(LegalDescriptionMapper.Map)
                                .ToList();
             }
             else
             {
                 results = query.OrderBy(t => t.ParcelNumber)
-                               .Select(LegalDescriptionMapper.Map)
                                .ToList();
                 resultCount = results.Count();
             }

@@ -5,8 +5,9 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Assessment
 {
     internal static class LegalDescriptionMapper
     {
-        internal static LegalDescription Map(AsmtfullLegalDescription record) =>
-            new LegalDescription(record.Id, record.ParcelNumber.Value, record.Descrtiption);
+        internal static LegalDescription Map(AsmtfullLegalDescription record, ASMTValueMasterNameView namesRecord) =>
+            new LegalDescription(record.Id, record.ParcelNumber.Value, record.Descrtiption, namesRecord.TaxpayerName?.Trim(),
+                namesRecord.TitleOwnerName?.Trim(), namesRecord.ContractHolderName?.Trim());
 
         internal static LegalDescriptionDetails Map(AsmtfullLegalDescription legalRecord, AsmtrealPropertyAssessedValueMaster masterRecord) =>
             new LegalDescriptionDetails(legalRecord.Id, legalRecord.ParcelNumber.Value, legalRecord.Descrtiption,

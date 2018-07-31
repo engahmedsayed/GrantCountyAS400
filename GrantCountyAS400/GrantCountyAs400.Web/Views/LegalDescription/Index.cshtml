@@ -22,9 +22,21 @@
                 </div>
             </div>
             <div class="form-group">
-                <label asp-for="@filterViewModel.Name" class="control-label col-md-2"></label>
+                <label asp-for="@filterViewModel.TaxPayer" class="control-label col-md-2"></label>
                 <div class="col-md-10">
-                    <input type="text" asp-for="@filterViewModel.Name" name="name" class="form-control" />
+                    <input type="text" asp-for="@filterViewModel.TaxPayer" name="taxpayer" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@filterViewModel.Owner" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input type="text" asp-for="@filterViewModel.Owner" name="owner" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@filterViewModel.ContractHolder" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input type="text" asp-for="@filterViewModel.ContractHolder" name="contractholder" class="form-control" />
                 </div>
             </div>
 
@@ -44,7 +56,9 @@
     @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
     pageNumber = pageNumber,
     parcelnumber = filterViewModel.ParcelNumber,
-    name = filterViewModel.Name
+    taxpayer = filterViewModel.TaxPayer,
+    owner = filterViewModel.Owner,
+    contractholder = filterViewModel.ContractHolder
 }))
 </nav>
 
@@ -56,6 +70,15 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Descrtiption)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaxPayerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TitleOwnerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContractHolderName)
             </th>
         </tr>
     </thead>
@@ -71,6 +94,15 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Descrtiption)
                 </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaxPayerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TitleOwnerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContractHolderName)
+                </td>
             </tr>
         }
     </tbody>
@@ -79,6 +111,8 @@
     @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
     pageNumber = pageNumber,
     parcelnumber = filterViewModel.ParcelNumber,
-    name = filterViewModel.Name
+    taxpayer = filterViewModel.TaxPayer,
+    owner = filterViewModel.Owner,
+    contractholder = filterViewModel.ContractHolder
 }))
 </nav>
