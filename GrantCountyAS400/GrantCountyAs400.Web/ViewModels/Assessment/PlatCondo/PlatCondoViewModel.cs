@@ -21,21 +21,27 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.PlatCondo
         public DateTime? PlatDate { get; set; }
 
         [Display(Name = "Township")]
+        [DisplayFormat(DataFormatString = "{0:n0}")]
         public decimal Township { get; set; }
 
         [Display(Name = "Range")]
+        [DisplayFormat(DataFormatString = "{0:n0}")]
         public decimal Range { get; set; }
 
         [Display(Name = "Section")]
+        [DisplayFormat(DataFormatString = "{0:n0}")]
         public decimal Section { get; set; }
 
         [Display(Name = "Book")]
+        [DisplayFormat(DataFormatString = "{0:n0}")]
         public decimal Volume { get; set; }
 
         [Display(Name = "Page")]
+        [DisplayFormat(DataFormatString = "{0:n0}")]
         public decimal Page { get; set; }
 
         [Display(Name = "Field Book")]
+        [DisplayFormat(DataFormatString = "{0:n0}")]
         public decimal FieldBook { get; set; }
 
         [Display(Name = "Reval Code")]
