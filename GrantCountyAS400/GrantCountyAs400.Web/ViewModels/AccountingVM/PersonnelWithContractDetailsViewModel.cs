@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace GrantCountyAs400.Web.ViewModels.AccountingVM
 {
@@ -57,8 +58,8 @@ namespace GrantCountyAs400.Web.ViewModels.AccountingVM
         [Display(Name = "P")]
         public string CountDisplay => Count == 1 ? "P" : string.Empty;
 
-        [Display(Name = "Table/Range/Step")]
-        public string TableRangeStepDisplay => $"{Table}/Range/{Step}";
+        [Display(Name = "Table/Grade/Step")]
+        public string TableGradeStepDisplay => IsAllNullOrWhiteSpace(Table, Grade, Step) ? "" : $"{Table}/{Grade}/{Step}";
 
         [Display(Name = "Longevity")]
         public decimal EmpLongevityAmount { get; set; }
@@ -106,5 +107,8 @@ namespace GrantCountyAs400.Web.ViewModels.AccountingVM
         public List<DeductionViewModel> Deductions { get; set; }
 
         public List<YtdHistoryViewModel> YtdHistories { get; set; }
+
+        private bool IsAllNullOrWhiteSpace(params string[] items)
+            => items.All(item => string.IsNullOrWhiteSpace(item));
     }
 }
