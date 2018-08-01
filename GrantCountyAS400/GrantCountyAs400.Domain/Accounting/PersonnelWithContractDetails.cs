@@ -68,7 +68,7 @@ namespace GrantCountyAs400.Domain.Accounting
             TerminationType = terminationType;
             MeritStatus = meritStatus;
             EmpEeofunction = empEeofunction;
-            JobTitle = JobTitle;
+            JobTitle = jobTitle;
             Deductions = deductions;
             YtdHistories = ytdHistories;
         }

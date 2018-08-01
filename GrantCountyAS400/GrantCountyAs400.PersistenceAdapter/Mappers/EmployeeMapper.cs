@@ -20,7 +20,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers
                 employee.HireDate, employee.TerminationDate, employee.Count, employee.PayCode, employee.Rate, employee.Table, employee.Grade,
                 employee.Step, employee.JobCode.Trim(), employee.EmpLongevityAmount, employee.Type, employee.EmpFilled, employee.RetirementLock,
                 employee.RetirementCode, employee.ServiceDate, employee.AnniversaryDate, employee.RetirementNumber, employee.TerminationType,
-                employee.MeritStatus, employee.EmpEeofunction, jobCode?.Title, deductions, ytdHistories);
+                employee.MeritStatus, employee.EmpEeofunction, jobCode?.Title.Trim(), deductions, ytdHistories);
 
         private static PayCode Map(string payCode)
         {
