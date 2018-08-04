@@ -31,6 +31,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
         public virtual DbSet<AsmtfullLegalDescription> AsmtfullLegalDescription { get; set; }
         public virtual DbSet<AsmtmasterNameAddress> AsmtmasterNameAddress { get; set; }
         public virtual DbSet<AsmtmobileHomeParks> AsmtmobileHomeParks { get; set; }
+        public virtual DbSet<AsmtparentChildRelationshipsChanged> AsmtparentChildRelationshipsChanged { get; set; }
+        public virtual DbSet<AsmtparentChildRelationshipsNew> AsmtparentChildRelationshipsNew { get; set; }
         public virtual DbSet<AsmtplatCondoMaster> AsmtplatCondoMaster { get; set; }
         public virtual DbSet<AsmtrealPropertyAssessedValueMaster> AsmtrealPropertyAssessedValueMaster { get; set; }
 
@@ -1427,6 +1429,67 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                 entity.Property(e => e.TelephoneNumber)
                     .HasMaxLength(10)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<AsmtparentChildRelationshipsChanged>(entity =>
+            {
+                entity.ToTable("ASMTParentChildRelationshipsChanged");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.AssociatedParcelTax)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ChildParcel).HasColumnType("numeric(16, 0)");
+
+                entity.Property(e => e.EffectiveDate).HasColumnType("date");
+
+                entity.Property(e => e.LegalDocumentType)
+                    .HasMaxLength(4)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ParentParcel).HasColumnType("numeric(16, 0)");
+
+                entity.Property(e => e.RecordCode)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ReferenceNumber)
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SegCombDate).HasColumnType("date");
+            });
+
+            modelBuilder.Entity<AsmtparentChildRelationshipsNew>(entity =>
+            {
+                entity.ToTable("ASMTParentChildRelationshipsNew");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.FromParcel).HasColumnType("numeric(16, 0)");
+
+                entity.Property(e => e.LegalDocumentType)
+                    .HasMaxLength(4)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecordCode)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ReferenceNumber)
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RelationshipParcel)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SegCombDate).HasColumnType("date");
+
+                entity.Property(e => e.ToParcel).HasColumnType("numeric(16, 0)");
             });
 
             modelBuilder.Entity<AsmtplatCondoMaster>(entity =>
