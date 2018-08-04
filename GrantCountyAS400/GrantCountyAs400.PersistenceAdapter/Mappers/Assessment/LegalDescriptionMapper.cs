@@ -11,7 +11,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Assessment
 
         internal static LegalDescriptionDetails Map(AsmtfullLegalDescription legalRecord, AsmtrealPropertyAssessedValueMaster masterRecord) =>
             new LegalDescriptionDetails(legalRecord.Id, legalRecord.ParcelNumber.Value, legalRecord.Descrtiption,
-                masterRecord.Description1, masterRecord.Description2, masterRecord.Description3, masterRecord.Description4,
-                masterRecord.Description5, masterRecord.TaxStatus, masterRecord.ChangeId, masterRecord.ChangeDate.Value);
+                masterRecord.Description1.Trim(), masterRecord.Description2.Trim(), masterRecord.Description3.Trim(), masterRecord.Description4.Trim(),
+                masterRecord.Description5.Trim(), masterRecord.TaxStatus, masterRecord.ChangeId, masterRecord.ChangeDate.Value);
     }
 }
