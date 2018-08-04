@@ -74,7 +74,8 @@
                 @Html.DisplayFor(modelItem => formattedDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TransactionDate)
+                @{ var formattedMonth = item.TransactionDate.HasValue ? item.TransactionDate.Value.ToString("dd/MM/yyyy") : "";}
+                @Html.DisplayFor(modelItem => formattedMonth)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Status)
