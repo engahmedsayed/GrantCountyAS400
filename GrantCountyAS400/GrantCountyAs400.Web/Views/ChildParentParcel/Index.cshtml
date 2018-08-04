@@ -1,0 +1,99 @@
+﻿@model IEnumerable<ChildParentParcelViewModel>
+@using GrantCountyAs400.Web.ViewModels.Assessment.ChildParentParcel
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@{
+    ViewData["Title"] = "Child Parent Parcels - Index";
+    var filterViewModel = ViewBag.FilterViewModel as ChildParentParcelFilterViewModel;
+}
+<h2>Child Parent Parcels</h2>
+
+<p>
+    @using (Html.BeginForm("Index", "ChildParentParcel", FormMethod.Get))
+    {
+        <div class="form-horizontal">
+            <hr />
+            <div class="form-group">
+                <label asp-for="@filterViewModel.ParcelNumber" class="control-label col-md-2"></label>
+
+                <div class="col-md-10">
+                    <input type="number" asp-for="@filterViewModel.ParcelNumber" name="parcelnumber" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <div class="form-group pull-right">
+                        <input type="submit" value="Filter" class="btn btn-success" />
+                        <input type="reset" value="Clear" class="btn btn-default" id="btnReset" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</p>
+<nav aria-label="navigation">
+    @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
+    pageNumber = pageNumber,
+    parcelnumber = filterViewModel.ParcelNumber,
+}))
+</nav>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ParentParcel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChildParcel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SegCombDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EffectiveDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReferenceNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LegalDocumentType)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">
+                        @Html.DisplayFor(modelItem => item.ParentParcel)
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ChildParcel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SegCombDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EffectiveDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReferenceNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LegalDocumentType)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<nav aria-label="navigation">
+    @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
+    pageNumber = pageNumber,
+    parcelnumber = filterViewModel.ParcelNumber,
+}))
+</nav>
