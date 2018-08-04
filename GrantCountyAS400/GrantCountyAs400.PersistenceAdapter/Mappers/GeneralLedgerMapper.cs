@@ -12,7 +12,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers
             => new GeneralLedger($"{generalLedger.Fund}-" +
                 $"{generalLedger.Department.Trim().Substring(0,3) + "-" + generalLedger.Department.Trim().Substring((generalLedger.Department.Trim().Length/2),generalLedger.Department.Trim().Length/2)}" +
                 $"-{generalLedger.Program}-{GetProjectAndBaseFormatted(generalLedger.Project,generalLedger.Base)}", 
-                acctChartOfAccountsView.AcctDescription,generalLedger.RecordType == "D" ? "Detail" : "Summary", !string.IsNullOrWhiteSpace
+                acctChartOfAccountsView?.AcctDescription,generalLedger.RecordType == "D" ? "Detail" : "Summary", !string.IsNullOrWhiteSpace
                 (generalLedger.Base) && generalLedger.Base.StartsWith('1') ? "Asset" : generalLedger.Base.StartsWith('2')
                 ? "Liability" : generalLedger.Base.StartsWith('3') ? "Revenue" : "Expense", 
                 generalLedger.RecordStatus,generalLedger.Base,generalLedger.Fund,generalLedger.Department,generalLedger.Program,

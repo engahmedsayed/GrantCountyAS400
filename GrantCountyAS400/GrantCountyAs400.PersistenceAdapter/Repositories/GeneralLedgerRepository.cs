@@ -29,29 +29,30 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                             key1 = accountGeneralLedger.Project.Trim() + "." + accountGeneralLedger.Base.Trim().Substring(0, 2),
                             key2 = accountGeneralLedger.FiscalYear.Value }
                         equals new { key1 = accChartOfAccountView.AcctNumber.Trim(), key2 = accChartOfAccountView.FiscalYear }
+                        into joinResult from accountChartOfAccountsResult in joinResult.DefaultIfEmpty()
                         where (accountGeneralLedger.Fund == fund || string.IsNullOrWhiteSpace(fund)) 
                         && (accountGeneralLedger.Department == department || string.IsNullOrWhiteSpace(department))
                         && (accountGeneralLedger.Program == program || string.IsNullOrWhiteSpace(program))
                         &&(accountGeneralLedger.Project == project || string.IsNullOrWhiteSpace(project))
                         &&(accountGeneralLedger.Base == @base || string.IsNullOrWhiteSpace(@base))
-                        && accChartOfAccountView.AcctCategory == "BASEELEM"
-                        && accChartOfAccountView.FiscalYear == fiscalYear 
+                        //&& accountChartOfAccountsResult!=null? accountChartOfAccountsResult.AcctCategory == "BASEELEM":1==1
+                        //&& accountChartOfAccountsResult!=null? accountChartOfAccountsResult.FiscalYear == fiscalYear  : 1==1
                         //&& (string.Concat(accountGeneralLedger.Base.Trim(), "0")) ==
                         //    string.Concat(accChartOfAccount.AcctNumber.Replace(".", "").Trim(), "0")
                         orderby accountGeneralLedger.Id
-                        select new { accountGeneralLedger, accChartOfAccountView };
+                        select new { accountGeneralLedger, accountChartOfAccountsResult };
 
             if (pageNumber > 0)
             {
                 resultCount = query.Count();
                 results = query.Skip((pageNumber - 1) * pageSize)
                                       .Take(pageSize)
-                                      .Select(t => GeneralLedgerMapper.Map(t.accountGeneralLedger, t.accChartOfAccountView))
+                                      .Select(t => GeneralLedgerMapper.Map(t.accountGeneralLedger, t.accountChartOfAccountsResult))
                                       .ToList();
             }
             else
             {
-                results = query.Select(t=> GeneralLedgerMapper.Map(t.accountGeneralLedger, t.accChartOfAccountView)).ToList();
+                results = query.Select(t=> GeneralLedgerMapper.Map(t.accountGeneralLedger, t.accountChartOfAccountsResult)).ToList();
                 resultCount = results.Count();
             }
             return results;
