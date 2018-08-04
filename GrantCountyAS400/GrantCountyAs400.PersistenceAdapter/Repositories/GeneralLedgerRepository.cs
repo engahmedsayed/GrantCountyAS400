@@ -35,6 +35,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                         && (accountGeneralLedger.Program == program || string.IsNullOrWhiteSpace(program))
                         &&(accountGeneralLedger.Project == project || string.IsNullOrWhiteSpace(project))
                         &&(accountGeneralLedger.Base == @base || string.IsNullOrWhiteSpace(@base))
+                        &&(accountGeneralLedger.FiscalYear == fiscalYear)
                         //&& accountChartOfAccountsResult!=null? accountChartOfAccountsResult.AcctCategory == "BASEELEM":1==1
                         //&& accountChartOfAccountsResult!=null? accountChartOfAccountsResult.FiscalYear == fiscalYear  : 1==1
                         //&& (string.Concat(accountGeneralLedger.Base.Trim(), "0")) ==
