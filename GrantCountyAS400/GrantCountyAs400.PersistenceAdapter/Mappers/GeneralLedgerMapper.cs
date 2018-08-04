@@ -11,7 +11,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers
         internal static GeneralLedger Map(AcctGeneralLedger generalLedger, AccountChartOfAccountsView acctChartOfAccountsView)
             => new GeneralLedger($"{generalLedger.Fund}-" +
                 $"{generalLedger.Department.Trim().Substring(0,3) + "-" + generalLedger.Department.Trim().Substring((generalLedger.Department.Trim().Length/2),generalLedger.Department.Trim().Length/2)}" +
-                $"-{generalLedger.Program}-{generalLedger.Project}.{generalLedger.Base.Substring(0,2)}", 
+                $"-{generalLedger.Program}-{GetProjectAndBaseFormatted(generalLedger.Project,generalLedger.Base)}", 
                 acctChartOfAccountsView.AcctDescription,generalLedger.RecordType == "D" ? "Detail" : "Summary", !string.IsNullOrWhiteSpace
                 (generalLedger.Base) && generalLedger.Base.StartsWith('1') ? "Asset" : generalLedger.Base.StartsWith('2')
                 ? "Liability" : generalLedger.Base.StartsWith('3') ? "Revenue" : "Expense", 
@@ -30,5 +30,14 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers
                                                                                 glt.Kind.Trim().ToUpper() == "E" ? "Enc" :
                                                                                 glt.Kind.Trim().ToUpper() == "G" ? "Actv" : "",
                                                                                 glt.Amount,glt.Base);
+
+        private static string GetProjectAndBaseFormatted(string project,string @base)
+        {
+            if(project.StartsWith("3") || project.StartsWith("5"))
+            {
+                return project + "." + @base.Substring(0, 2) + "." + @base.Substring(2, 2) + "." + @base.Substring(4, 2);
+            }
+            return project + "." + @base.Substring(0, 2);
+        }
     }
 }
