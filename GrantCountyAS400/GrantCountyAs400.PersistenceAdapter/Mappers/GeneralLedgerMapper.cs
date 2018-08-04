@@ -8,7 +8,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers
 {
     internal static class GeneralLedgerMapper
     {
-        internal static GeneralLedger Map(AcctGeneralLedger generalLedger, AccountChartOfAccountsView acctChartOfAccountsView)
+        internal static GeneralLedger Map(AcctGeneralLedger generalLedger, AcctChartOfAccounts acctChartOfAccountsView)
             => new GeneralLedger($"{generalLedger.Fund}-" +
                 $"{generalLedger.Department.Trim().Substring(0,3) + "-" + generalLedger.Department.Trim().Substring((generalLedger.Department.Trim().Length/2),generalLedger.Department.Trim().Length/2)}" +
                 $"-{generalLedger.Program}-{GetProjectAndBaseFormatted(generalLedger.Project,generalLedger.Base)}", 

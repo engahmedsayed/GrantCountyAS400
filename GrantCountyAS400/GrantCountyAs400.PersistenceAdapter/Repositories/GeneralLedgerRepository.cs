@@ -24,8 +24,11 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             var query = from accountGeneralLedger
                         in _context.AcctGeneralLedger
                         join accChartOfAccountView
-                        in _context.AccountChartOfAccountsView
-                        on accountGeneralLedger.Base.Trim() equals accChartOfAccountView.AccountNumberFixed
+                        in _context.AcctChartOfAccounts
+                        on new {
+                            key1 = accountGeneralLedger.Project.Trim() + "." + accountGeneralLedger.Base.Trim().Substring(0, 2),
+                            key2 = accountGeneralLedger.FiscalYear.Value }
+                        equals new { key1 = accChartOfAccountView.AcctNumber.Trim(), key2 = accChartOfAccountView.FiscalYear }
                         where (accountGeneralLedger.Fund == fund || string.IsNullOrWhiteSpace(fund)) 
                         && (accountGeneralLedger.Department == department || string.IsNullOrWhiteSpace(department))
                         && (accountGeneralLedger.Program == program || string.IsNullOrWhiteSpace(program))
