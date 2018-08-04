@@ -2,6 +2,7 @@
 using GrantCountyAs400.Domain.Accounting;
 using GrantCountyAs400.Domain.Assessment;
 using GrantCountyAs400.Web.ViewModels.AccountingVM;
+using GrantCountyAs400.Web.ViewModels.Assessment.ChildParentParcel;
 using GrantCountyAs400.Web.ViewModels.Assessment.HomePark;
 using GrantCountyAs400.Web.ViewModels.Assessment.LegalDescription;
 using GrantCountyAs400.Web.ViewModels.Assessment.PlatCondo;
@@ -42,6 +43,9 @@ namespace GrantCountyAs400.Web
                 cfg.CreateMap<ManufacturedHomeParkDetails, ManufacturedHomeParkDetailsViewModel>();
 
                 cfg.CreateMap<PlatCondo, PlatCondoViewModel>();
+
+                cfg.CreateMap<ChildParentParcel, ChildParentParcelViewModel>();
+                cfg.CreateMap<ChildParentParcelDetails, ChildParentParcelDetailsViewModel>();
 
                 #endregion Assessment Module
             });
