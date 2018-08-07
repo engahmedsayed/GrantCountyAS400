@@ -20,6 +20,20 @@
                     <input type="number" asp-for="@filterViewModel.ParcelNumber" name="parcelnumber" class="form-control" />
                 </div>
             </div>
+            <div class="form-group">
+                <label asp-for="@filterViewModel.EffectiveDate" class="control-label col-md-2"></label>
+
+                <div class="col-md-10">
+                    @Html.EditorFor(model => filterViewModel.EffectiveDate, null, "effectivedate", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@filterViewModel.LegalDocumentType" class="control-label col-md-2"></label>
+
+                <div class="col-md-10">
+                    <input type="text" asp-for="@filterViewModel.LegalDocumentType" name="legaldocumenttype" class="form-control" />
+                </div>
+            </div>
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
@@ -36,6 +50,8 @@
     @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
     pageNumber = pageNumber,
     parcelnumber = filterViewModel.ParcelNumber,
+    effectivedate=filterViewModel.EffectiveDate,
+    legaldocumenttype=filterViewModel.LegalDocumentType
 }))
 </nav>
 
@@ -95,5 +111,22 @@
     @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
     pageNumber = pageNumber,
     parcelnumber = filterViewModel.ParcelNumber,
+    effectivedate = filterViewModel.EffectiveDate,
+    legaldocumenttype = filterViewModel.LegalDocumentType
 }))
 </nav>
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $(function () {
+            $('.date-datepicker').datetimepicker({
+                format: 'MM/DD/YYYY',
+                showTodayButton: true,
+                ignoreReadonly: true,
+                showClear: true,
+                useCurrent: false,
+            });
+        });
+    </script>
+}

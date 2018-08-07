@@ -1,0 +1,23 @@
+﻿@model DateTime?
+
+@{
+    var fieldName = ViewData.TemplateInfo.HtmlFieldPrefix;
+    if (ViewData.ContainsKey("fieldName"))
+    {
+        fieldName = ViewData["fieldName"].ToString();
+    }
+    if (fieldName.Contains("."))
+    {
+        foreach (var part in fieldName.Split('.'))
+        {
+            fieldName = fieldName.Replace(part, part.ToLower());
+        }
+    }
+
+    var initialValue = Model.HasValue ? Model.Value.ToString("MM/dd/yyyy") : "";
+}
+
+<div class="input-group date">
+    @Html.TextBoxFor(model => model, new { @class = "form-control date-datepicker", Name = fieldName, @Value = @initialValue, @readonly = "readonly" })
+    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+</div>

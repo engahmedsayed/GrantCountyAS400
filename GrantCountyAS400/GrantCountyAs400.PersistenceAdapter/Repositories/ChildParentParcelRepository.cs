@@ -2,6 +2,7 @@
 using GrantCountyAs400.Domain.Assessment.Repository;
 using GrantCountyAs400.PersistenceAdapter.Mappers.Assessment;
 using GrantCountyAs400.PersistenceAdapter.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,12 +17,15 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             _context = dbContext;
         }
 
-        public IEnumerable<ChildParentParcel> GetAll(decimal parcelNumber, out int resultCount, int pageNumber = 1, int pageSize = 50)
+        public IEnumerable<ChildParentParcel> GetAll(decimal parcelNumber, DateTime? effectiveDate, string legalDocumentType,
+                                                     out int resultCount, int pageNumber = 1, int pageSize = 50)
         {
             List<ChildParentParcel> results = new List<ChildParentParcel>();
 
             var query = from childParent in _context.AsmtparentChildRelationshipsChanged
                         where ((parcelNumber <= 0) || (childParent.ParentParcel == parcelNumber || childParent.ChildParcel == parcelNumber))
+                        && ((effectiveDate == null || effectiveDate.Value == null) || (childParent.EffectiveDate == effectiveDate))
+                        && ((string.IsNullOrWhiteSpace(legalDocumentType)) || (childParent.LegalDocumentType.Trim().ToLower() == legalDocumentType.ToLower()))
                         select ChildParentParcelMapper.Map(childParent);
 
             if (pageNumber > 0)
