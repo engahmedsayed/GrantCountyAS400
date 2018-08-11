@@ -1,4 +1,5 @@
 ﻿using GrantCountyAs400.Domain.Accounting;
+using GrantCountyAs400.Web.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,9 +14,10 @@ namespace GrantCountyAs400.Web.ViewModels.AccountingVM
         [Display(Name = "Name")]
         public string Name { get; set; }
 
-        [Display(Name = "SSN")]
-        [DisplayFormat(DataFormatString = "{0:###-##-####}")]
         public decimal SSNumber { get; set; }
+
+        [Display(Name = "SSN")]
+        public string SSNumberDisplay => this.SSNumber.MaskSSN();
 
         [Display(Name = "Employee #")]
         [DisplayFormat(DataFormatString = "{0:00000}")]

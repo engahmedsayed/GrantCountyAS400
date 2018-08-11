@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using GrantCountyAs400.Web.Extensions;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
@@ -11,8 +12,6 @@ namespace GrantCountyAs400.Web.ViewModels.AccountingVM
         [Display(Name = "Name")]
         public string Name { get; set; }
 
-        [Display(Name = "SSN")]
-        [DisplayFormat(DataFormatString = "{0:###-##-####}")]
         public decimal SSNumber { get; set; }
 
         [Display(Name = "Employee #")]
@@ -21,6 +20,9 @@ namespace GrantCountyAs400.Web.ViewModels.AccountingVM
 
         [Display(Name = "P")]
         public string HasContracts { get { return Contracts != null && Contracts.Any() ? "P" : string.Empty; } }
+
+        [Display(Name = "SSN")]
+        public string SSNumberDisplay => this.SSNumber.MaskSSN();
 
         public IEnumerable<ContractViewModel> Contracts { get; set; }
     }
