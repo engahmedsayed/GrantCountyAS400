@@ -30,7 +30,7 @@ namespace GrantCountyAs400.Web.Controllers.Assessment
 
             pagingInfo.Total = resultCount;
             ViewBag.FilterViewModel = filter;
-            return View(results.ToMappedPagedList<LegalDescription, LegalDescriptionViewModel>(pagingInfo));
+            return View(results.ToMappedPagedList<RealPropertyWithLegalDescriptions, RealPropertyWithLegalDescriptionsViewModel>(pagingInfo));
         }
 
         [HttpGet]

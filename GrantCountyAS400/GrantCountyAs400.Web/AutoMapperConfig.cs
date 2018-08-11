@@ -38,6 +38,7 @@ namespace GrantCountyAs400.Web
 
                 cfg.CreateMap<LegalDescription, LegalDescriptionViewModel>();
                 cfg.CreateMap<LegalDescriptionDetails, LegalDescriptionDetailsViewModel>();
+                cfg.CreateMap<RealPropertyWithLegalDescriptions, RealPropertyWithLegalDescriptionsViewModel>();
 
                 cfg.CreateMap<ManufacturedHomePark, ManufacturedHomeParkViewModel>();
                 cfg.CreateMap<ManufacturedHomeParkDetails, ManufacturedHomeParkDetailsViewModel>();

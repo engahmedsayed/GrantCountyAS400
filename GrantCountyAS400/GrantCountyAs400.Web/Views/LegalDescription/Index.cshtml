@@ -1,4 +1,4 @@
-﻿@model IEnumerable<LegalDescriptionViewModel>
+﻿@model IEnumerable<RealPropertyWithLegalDescriptionsViewModel>
 @using GrantCountyAs400.Web.ViewModels.Assessment.LegalDescription
 @using X.PagedList.Mvc.Core;
 @using X.PagedList;
@@ -65,11 +65,11 @@
 <table class="table">
     <thead>
         <tr>
+            <th>
+                #
+            </th>
             <th class="col-xs-2 col-md-1">
                 @Html.DisplayNameFor(model => model.ParcelNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descrtiption)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.TaxPayerName)
@@ -87,12 +87,13 @@
         {
             <tr>
                 <td>
-                    <a asp-action="Details" asp-route-id="@item.Id">
-                        @Html.DisplayFor(modelItem => item.ParcelNumber)
+                    <a class="toggle-row-details" data-toggle="collapse" data-target="#@item.ParcelNumber" aria-expanded="false" aria-controls="@item.ParcelNumber">
+                        <i class="glyphicon glyphicon-chevron-right pull-right"></i>
+                        <i class="glyphicon glyphicon-chevron-down pull-right"></i>
                     </a>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Descrtiption)
+                    @Html.DisplayFor(modelItem => item.ParcelNumber)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TaxPayerName)
@@ -102,6 +103,37 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ContractHolderName)
+                </td>
+            </tr>
+            <tr class="row-details">
+                <td colspan="100">
+                    <div class="collapse" id="@item.ParcelNumber">
+                        <table class="table table-hover">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(modelItem => item.LegalDescrtiptions.FirstOrDefault().Id)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(modelItem => item.LegalDescrtiptions.FirstOrDefault().Descrtiption)
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var legalItem in item.LegalDescrtiptions)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a asp-action="Details" asp-route-id="@legalItem.Id">@legalItem.Id</a>
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => legalItem.Descrtiption)
+                                        </td>
+                                    </tr>
+                                }
+                            <tbody>
+                        </table>
+                    </div>
                 </td>
             </tr>
         }
