@@ -71,3 +71,26 @@ body {
     padding-bottom: 20px;
     background-color: #f4f6f8;
 }
+
+/********************************Table with nested records***********************************/
+
+tr.row-details td, tr.row-details th {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+tr.row-details td {
+    border: none !important;
+}
+
+a.toggle-row-details {
+    display: inline-block;
+}
+
+    a.toggle-row-details[aria-expanded=true] .glyphicon-chevron-right {
+        display: none;
+    }
+
+    a.toggle-row-details[aria-expanded=false] .glyphicon-chevron-down {
+        display: none;
+    }
