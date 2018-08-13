@@ -38,6 +38,7 @@ namespace GrantCountyAs400.Web
             services.AddScoped<IManufacturedHomeParkRepository, ManufacturedHomeParkRepository>();
             services.AddScoped<IPlatCondoRepository, PlatCondoRepository>();
             services.AddScoped<IChildParentParcelRepository, ChildParentParcelRepository>();
+            services.AddScoped<IAssociatedPersonRepository, AssociatedPersonRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

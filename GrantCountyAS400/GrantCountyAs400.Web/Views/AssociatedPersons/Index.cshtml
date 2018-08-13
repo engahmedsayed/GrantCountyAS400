@@ -1,0 +1,185 @@
+﻿@model AssociatedPersonViewModel
+@using GrantCountyAs400.Web.ViewModels.Assessment.AssociatedPerson
+
+
+
+@{
+    ViewData["Title"] = "Associated Person - Index";
+    var filterViewModel = ViewBag.FilterViewModel as AssociatedPersonFilterViewModel;
+}
+<h2>Child Parent Parcels</h2>
+
+<p>
+    @using (Html.BeginForm("Index", "AssociatedPersons", FormMethod.Get))
+    {
+        <div class="form-horizontal">
+            <hr />
+            <div class="form-group">
+                <label asp-for="@filterViewModel.ParcelNumber" class="control-label col-md-2"></label>
+
+                <div class="col-md-10">
+                    <input type="number" asp-for="@filterViewModel.ParcelNumber" name="parcelnumber" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@filterViewModel.NameCode" class="control-label col-md-2"></label>
+
+                <div class="col-md-10">
+                    <input type="text" asp-for="@filterViewModel.NameCode" name="namecode" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <div class="form-group pull-right">
+                        <input type="submit" value="Filter" class="btn btn-success" />
+                        <input type="reset" value="Clear" class="btn btn-default" id="btnReset" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</p>
+
+<div class="entity-details">
+    <div class="entity-info clearfix">
+        <div class="col-xs-6">
+            <table class="table col-xs-6">
+                <tbody>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.ParcelNumber) </strong></td>
+                        <td class="text-right"><span> @Html.DisplayFor(model => model.ParcelNumber) </span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.TaxPayer) </strong></td>
+                        <td class="text-right"><span> @Html.DisplayFor(model => model.TaxPayer) </span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.Description) </strong></td>
+                        <td class="text-right"><span> @Html.DisplayFor(model => model.Description) </span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.SecondDescription) </strong></td>
+                        <td class="text-right">
+                            <span> @Html.DisplayFor(model => model.SecondDescription) </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.ThirdDescription) </strong></td>
+                        <td class="text-right">
+                            <span> @Html.DisplayFor(model => model.ThirdDescription) </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.FourthDescrition) </strong></td>
+                        <td class="text-right">
+                            <span> @Html.DisplayFor(model => model.FourthDescrition) </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.FourthDescrition) </strong></td>
+                        <td class="text-right">
+                            <span> @Html.DisplayFor(model => model.FourthDescrition) </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.FifthDescription) </strong></td>
+                        <td class="text-right">
+                            <span> @Html.DisplayFor(model => model.FifthDescription) </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.LineDate) </strong></td>
+                        <td class="text-right">
+                            <span> @Html.DisplayFor(model => model.LineDate) </span>
+                        </td>
+                        <td><strong>@Html.DisplayNameFor(model => model.AffidavitNumber) </strong></td>
+                        <td class="text-right">
+                            <span> @Html.DisplayFor(model => model.AffidavitNumber) </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xs-6">
+            <table class="table col-xs-6">
+                <tbody>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.Owner) </strong></td>
+                        <td class="text-right"><span> @Html.DisplayFor(model => model.Owner) </span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.LandUse) </strong></td>
+                        <td class="text-right"><span> @Html.DisplayFor(model => model.LandUse) </span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.ZoneCodeDescr) </strong></td>
+                        <td class="text-right"><span> @Html.DisplayFor(model => model.ZoneCodeDescr) </span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.TaxCodeDesc) </strong></td>
+                        <td class="text-right"><span> @Html.DisplayFor(model => model.TaxCodeDesc) </span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.FirePatrolAcres) </strong></td>
+                        <td class="text-right"><span> @Html.DisplayFor(model => model.FirePatrolAcres) </span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.TotalAcres) </strong></td>
+                        <td class="text-right"><span> @Html.DisplayFor(model => model.TotalAcres) </span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.FMImprovedLandValue) </strong></td>
+                        <td class="text-right"><span> @Html.DisplayFor(model => model.FMImprovedLandValue) </span></td>
+                        <td><strong>@Html.DisplayNameFor(model => model.BuildingValue) </strong></td>
+                        <td class="text-right"><span> @Html.DisplayFor(model => model.BuildingValue) </span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.AffidavitTaxYear) </strong></td>
+                        <td class="text-right"><span> @Html.DisplayFor(model => model.AffidavitTaxYear) </span></td>
+                        <td><strong>@Html.DisplayNameFor(model => model.BuildingValue) </strong></td>
+                        <td class="text-right"><span> @Html.DisplayFor(model => model.BuildingValue) </span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LineNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AsmtrealPropertyAssociatedPersonsNameCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AsmtmasterNameAddressNameCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comment)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <a asp-action="Details" asp-route-nameCode="@filterViewModel.NameCode" asp-route-parcelNumber="@filterViewModel.ParcelNumber">
+                    @Html.DisplayFor(modelItem => modelItem.LineNumber)
+                </a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.AsmtrealPropertyAssociatedPersonsNameCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.AsmtmasterNameAddressNameCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.Comment)
+            </td>
+        </tr>
+    </tbody>
+</table>
+
