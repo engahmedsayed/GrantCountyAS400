@@ -4,10 +4,10 @@
 
 
 @{
-    ViewData["Title"] = "Associated Person - Details";
+    ViewData["Title"] = "Associated person item detail - Detail";
     var filterViewModel = ViewBag.FilterViewModel as AssociatedPersonFilterViewModel;
 }
-<h2>Details</h2>
+<h2>Associated person item detail </h2>
 
 
 <div class="entity-details">
@@ -115,39 +115,36 @@
     </div>
 </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.LineValues[0].AsmtrealPropertyAssociatedPersonsNameCode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LineValues[0].AsmtmasterNameAddressNameCode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LineValues[0].Comment)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.LineValues)
-        {
-            <tr>
 
-                <td>
-                    <a asp-action="ItemDetail" asp-controller="AssociatedPersons" asp-route-nameCode="@item.AsmtmasterNameAddressNameCode" asp-route-parcelNumber="@Model.ParcelNumber" asp-area="">
-                        @Html.DisplayFor(modelItem => item.AsmtrealPropertyAssociatedPersonsNameCode)
-                    </a>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AsmtmasterNameAddressNameCode)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Comment)
-                </td>
+    <div class="col-xs-6">
+        <table class="table col-xs-6">
+            <tbody>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.NameCode) </strong></td>
+                    <td class="text-right"><span> @Html.DisplayFor(model => model.NameCode) </span></td>
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.Name) </strong></td>
+                    <td class="text-right"><span> @Html.DisplayFor(model => model.Name) </span></td>
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.AddressLine1) </strong></td>
+                    <td class="text-right"><span> @Html.DisplayFor(model => model.AddressLine1) </span></td>
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.LocalAddress) </strong></td>
+                    <td class="text-right"><span> @Html.DisplayFor(model => model.LocalAddress) </span></td>
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.ChangeId) </strong></td>
+                    <td class="text-right"><span> @Html.DisplayFor(model => model.ChangeId) </span></td>
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.ChangeDate) </strong></td>
+                    <td class="text-right"><span> @Html.DisplayFor(model => model.ChangeDate) </span></td>
+                </tr>
 
-            </tr>
-        }
-    </tbody>
-</table>
+            </tbody>
+        </table>
+    </div>
 

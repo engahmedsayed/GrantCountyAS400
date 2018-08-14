@@ -69,9 +69,7 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.AssociatedPerson
 
         [Display(Name ="As-Tx Yr")]
         public decimal? AffidavitTaxYear { get; set; }
-
-        [Display(Name="Line#")]
-        public int LineNumber { get; set; }
+        public List<LineValueViewModel> LineValues { get; set; }
 
         [Display(Name ="Name #")]
         public string NameCode { get; set; }
@@ -79,14 +77,6 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.AssociatedPerson
         [Display(Name="Name")]
         public string Name { get; set; }
 
-        [Display(Name="Comment")]
-        public string Comment { get; set; }
-
-        [Display(Name="Name #")]
-        public string AsmtrealPropertyAssociatedPersonsNameCode { get; set; }
-
-        [Display(Name="Name")]
-        public string AsmtmasterNameAddressNameCode { get; set; }
 
 
         public string AddressLine1 { get; set; }

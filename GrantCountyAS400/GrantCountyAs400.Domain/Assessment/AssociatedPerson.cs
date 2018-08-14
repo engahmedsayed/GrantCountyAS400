@@ -45,12 +45,6 @@ namespace GrantCountyAs400.Domain.Assessment
 
         public decimal? AffidavitTaxYear { get; }
 
-        public string AsmtrealPropertyAssociatedPersonsNameCode { get;}
-
-        public string AsmtmasterNameAddressNameCode { get;}
-
-        public string Comment { get;}
-
         public string AddressLine1 { get; }
 
         public string City { get; }
@@ -64,7 +58,7 @@ namespace GrantCountyAs400.Domain.Assessment
 
         public DateTime? ChangeDate { get; }
 
-
+        public List<LineValue> LineValues { get; }
 
 
         public AssociatedPerson(int id, decimal? parcelNumber, string taxPayer, string owner
@@ -72,8 +66,7 @@ namespace GrantCountyAs400.Domain.Assessment
                                 ,string fourthDescription,string fifthDescription,DateTime? lineDate,decimal? affidaviteNumber
                                 ,string zoneCodeDesc,string taxCodeDesc,decimal? firePatrolAcres,decimal?unImprovedLandAcres
                                 ,decimal? improvedLandAcres,decimal? fMImprovedLandValue,decimal? buildingValue
-                                ,decimal? affidavitTaxYear,string asmtrealPropertyAssociatedPersonsNameCode
-                                ,string asmtmasterNameAddressNameCode,string comment, string addressLine1
+                                ,decimal? affidavitTaxYear,List<LineValue> lineValues, string addressLine1
                                 ,string city,string state,string zip,string changeId,DateTime? changeDate)
         {
             Id = id;
@@ -96,9 +89,7 @@ namespace GrantCountyAs400.Domain.Assessment
             FMImprovedLandValue = fMImprovedLandValue;
             BuildingValue = buildingValue;
             AffidavitTaxYear = affidaviteNumber;
-            AsmtrealPropertyAssociatedPersonsNameCode = asmtrealPropertyAssociatedPersonsNameCode;
-            AsmtmasterNameAddressNameCode = asmtmasterNameAddressNameCode;
-            Comment = comment;
+            LineValues = lineValues;
             City = city;
             State = state;
             Zip = zip;
@@ -107,4 +98,6 @@ namespace GrantCountyAs400.Domain.Assessment
             ChangeDate = changeDate;
         }
     }
+
+   
 }

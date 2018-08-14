@@ -50,6 +50,8 @@ namespace GrantCountyAs400.Web
                 cfg.CreateMap<ChildParentParcelDetails, ChildParentParcelDetailsViewModel>();
 
                 cfg.CreateMap<AssociatedPerson, AssociatedPersonViewModel>();
+                cfg.CreateMap<AssociatedPersonMain, AssociatedPersonMainViewModel>();
+                cfg.CreateMap<LineValue, LineValueViewModel>();
 
                 #endregion Assessment Module
             });
