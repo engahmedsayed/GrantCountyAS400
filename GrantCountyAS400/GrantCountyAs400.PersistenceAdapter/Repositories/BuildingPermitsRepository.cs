@@ -42,5 +42,10 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             return results;
 
         }
+
+        public BuildingPermits GetParcelBuildingPermits(decimal parcelNumber, string ownerCode)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

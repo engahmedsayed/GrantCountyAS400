@@ -31,5 +31,18 @@ namespace GrantCountyAs400.Web.Controllers.Assessment
             }
             return View();
         }
+
+        [HttpGet]
+        [Route("Details/{parcelNumber}/{nameCode?}")]
+        public IActionResult Details(decimal parcelNumber, string ownerCode)
+        {
+            var entity = _buildingPermitsRepository.GetParcelBuildingPermits(parcelNumber, ownerCode);
+            if (entity == null)
+                return NotFound();
+
+            //var viewmodel = AutoMapper.Mapper.Map<AssociatedPersonViewModel>(entity);
+            //ViewBag.FilterViewModel = new AssociatedPersonFilterViewModel() { ParcelNumber = parcelNumber, NameCode = ownerCode };
+            return View();
+        }
     }
 }

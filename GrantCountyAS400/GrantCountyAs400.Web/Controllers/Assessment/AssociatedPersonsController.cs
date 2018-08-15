@@ -38,19 +38,6 @@ namespace GrantCountyAs400.Web.Controllers.Assessment
             return View();
         }
 
-        //[HttpGet]
-        //public IActionResult Details(AssociatedPersonFilterViewModel filter)
-        //{
-        //    var result = _associatedPersonRepository.GetAssociatedPerson(filter.ParcelNumber, filter.NameCode);
-        //    ViewBag.FilterViewModel = filter;
-        //    if (result != null)
-        //    {
-        //        var outputResult = AutoMapper.Mapper.Map<AssociatedPersonViewModel>(result);
-        //        return View(outputResult);
-        //    }
-        //    return View(new AssociatedPersonViewModel());
-        //}
-
         [HttpGet]
         [Route("ItemDetail/{nameCode}/{parcelNumber}")]
         public IActionResult ItemDetail(string nameCode, decimal parcelNumber)

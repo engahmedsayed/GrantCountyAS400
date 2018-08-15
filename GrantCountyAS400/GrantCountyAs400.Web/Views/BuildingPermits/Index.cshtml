@@ -34,7 +34,7 @@
         {
             <tr>
                 <td>
-                    <a asp-action="Details" asp-route-parcelNumber="@item.ParcelNumber">
+                    <a asp-action="Details" asp-route-parcelNumber="@item.ParcelNumber" asp-route-ownerCode="@item.TitleOwnerCode">
                         @Html.DisplayFor(modelItem => item.ParcelNumber)
                     </a>
                 </td>
