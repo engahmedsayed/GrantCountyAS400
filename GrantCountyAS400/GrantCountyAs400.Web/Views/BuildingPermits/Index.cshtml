@@ -1,0 +1,59 @@
+﻿@model IEnumerable<BuildingPermitsMainViewModel>
+@using GrantCountyAs400.Web.ViewModels.Assessment.BuildingPermits
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+
+@{
+    ViewData["Title"] = "Building Permits- Index";
+}
+
+<h2>Building Permits -Index</h2>
+
+<nav aria-label="navigation">
+    @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
+    pageNumber = pageNumber
+}))
+</nav>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ParcelNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TitleOwnerCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OwnerName)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-route-parcelNumber="@item.ParcelNumber">
+                        @Html.DisplayFor(modelItem => item.ParcelNumber)
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TitleOwnerCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OwnerName)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<nav aria-label="navigation">
+    @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
+    pageNumber = pageNumber
+}))
+</nav>
+
+
+

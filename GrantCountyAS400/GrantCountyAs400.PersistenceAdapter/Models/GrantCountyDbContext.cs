@@ -33,6 +33,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
         public virtual DbSet<AsmtmasterNameAddress> AsmtmasterNameAddress { get; set; }
         public virtual DbSet<AsmtmobileHomeParks> AsmtmobileHomeParks { get; set; }
         public virtual DbSet<AsmtparentChildRelationshipsChanged> AsmtparentChildRelationshipsChanged { get; set; }
+        public virtual DbSet<AsmtpermitMaster> AsmtpermitMaster { get; set; }
         public virtual DbSet<AsmtplatCondoMaster> AsmtplatCondoMaster { get; set; }
         public virtual DbSet<AsmtrealPropertyAssessedValueMaster> AsmtrealPropertyAssessedValueMaster { get; set; }
         public virtual DbSet<AsmtrealPropertyAssociatedPersons> AsmtrealPropertyAssociatedPersons { get; set; }
@@ -1497,6 +1498,78 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.SegCombDate).HasColumnType("date");
+            });
+
+            modelBuilder.Entity<AsmtpermitMaster>(entity =>
+            {
+                entity.ToTable("ASMTPermitMaster");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.ChangeDate).HasColumnType("date");
+
+                entity.Property(e => e.CheckedBy)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CheckedYearMonth).HasColumnType("numeric(6, 0)");
+
+                entity.Property(e => e.Comments)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DateEntered).HasColumnType("date");
+
+                entity.Property(e => e.EnteredBy)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EntryProgram)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EstimatedValue).HasColumnType("decimal(11, 2)");
+
+                entity.Property(e => e.JurisdictionCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NewOrDemo)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ParcelNumber).HasColumnType("numeric(16, 0)");
+
+                entity.Property(e => e.PercentComplete).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.PermitAddendum).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.PermitCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PermitIssuedDate).HasColumnType("date");
+
+                entity.Property(e => e.PermitNumber).HasColumnType("numeric(5, 0)");
+
+                entity.Property(e => e.PermitNumberString)
+                    .HasMaxLength(12)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PermitStatus)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PermitYear).HasColumnType("numeric(4, 0)");
+
+                entity.Property(e => e.RecordStatus)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserId)
+                    .HasColumnName("UserID")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<AsmtplatCondoMaster>(entity =>

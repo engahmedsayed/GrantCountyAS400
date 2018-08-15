@@ -3,6 +3,7 @@ using GrantCountyAs400.Domain.Accounting;
 using GrantCountyAs400.Domain.Assessment;
 using GrantCountyAs400.Web.ViewModels.AccountingVM;
 using GrantCountyAs400.Web.ViewModels.Assessment.AssociatedPerson;
+using GrantCountyAs400.Web.ViewModels.Assessment.BuildingPermits;
 using GrantCountyAs400.Web.ViewModels.Assessment.ChildParentParcel;
 using GrantCountyAs400.Web.ViewModels.Assessment.HomePark;
 using GrantCountyAs400.Web.ViewModels.Assessment.LegalDescription;
@@ -52,6 +53,8 @@ namespace GrantCountyAs400.Web
                 cfg.CreateMap<AssociatedPerson, AssociatedPersonViewModel>();
                 cfg.CreateMap<AssociatedPersonMain, AssociatedPersonMainViewModel>();
                 cfg.CreateMap<LineValue, LineValueViewModel>();
+
+                cfg.CreateMap<BuildingPermitsMain, BuildingPermitsMainViewModel>();
 
                 #endregion Assessment Module
             });
