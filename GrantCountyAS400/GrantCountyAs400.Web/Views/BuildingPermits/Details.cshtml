@@ -1,4 +1,5 @@
-﻿
+﻿@model BuildingPermitsViewModel
+@using GrantCountyAs400.Web.ViewModels.Assessment.BuildingPermits
 @{
     ViewData["Title"] = "Building Permits- Details";
 }
@@ -6,4 +7,135 @@
 <h2>Details</h2>
 
 
+<div class="entity-details">
+    <div class="entity-info clearfix">
+        <div class="col-xs-6">
+            <table class="table col-xs-6">
+                <tbody>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.ParcelNumber) </strong></td>
+                        <td class="text-right"><span> @Html.DisplayFor(model => model.ParcelNumber) </span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.TaxPayer) </strong></td>
+                        <td class="text-right"><span> @Html.DisplayFor(model => model.TaxPayer) </span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.FirstDescription) </strong></td>
+                        <td class="text-right"><span> @Html.DisplayFor(model => model.FirstDescription) </span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.SecondDescription) </strong></td>
+                        <td class="text-right">
+                            <span> @Html.DisplayFor(model => model.SecondDescription) </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.ThirdDescription) </strong></td>
+                        <td class="text-right">
+                            <span> @Html.DisplayFor(model => model.ThirdDescription) </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.FourthDescription) </strong></td>
+                        <td class="text-right">
+                            <span> @Html.DisplayFor(model => model.FourthDescription) </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xs-6">
+            <table class="table col-xs-6">
+                <tbody>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.Owner) </strong></td>
+                        <td class="text-right"><span> @Html.DisplayFor(model => model.Owner) </span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.LandUse) </strong></td>
+                        <td class="text-right"><span> @Html.DisplayFor(model => model.LandUse) </span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.TotalAcre) </strong></td>
+                        <td class="text-right"><span> @Html.DisplayFor(model => model.TotalAcre) </span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.LandAv) </strong></td>
+                        <td class="text-right"><span> @Html.DisplayFor(model => model.LandAv) </span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.BuildingValue) </strong></td>
+                        <td class="text-right"><span> @Html.DisplayFor(model => model.BuildingValue) </span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LineValues[0].PermitNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LineValues[0].PermitAddenDum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LineValues[0].PermitIssueDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LineValues[0].JurisdictionCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LineValues[0].PercentComplete)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LineValues[0].EstimatedValue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LineValues[0].NewOrDemo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LineValues[0].Comment)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.LineValues)
+        {
+        <tr>
+
+            <td>
+
+                @Html.DisplayFor(modelItem => item.PermitNumber)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PermitAddenDum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PermitIssueDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JurisdictionCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PercentComplete)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstimatedValue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NewOrDemo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comment)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
 

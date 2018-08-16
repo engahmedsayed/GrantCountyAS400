@@ -45,7 +45,46 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
 
         public BuildingPermits GetParcelBuildingPermits(decimal parcelNumber, string ownerCode)
         {
-            throw new NotImplementedException();
+            var parcelNumberWithTaxPayerCodeQuery = (from RPAV in _context.AsmtrealPropertyAssessedValueMaster
+                        join NNAME in _context.AsmtmasterNameAddress
+                        on RPAV.TaxpayerCode equals NNAME.NameCode
+                        where RPAV.ParcelNumber == parcelNumber && RPAV.TaxpayerCode == ownerCode
+                        select new { RPAV, NNAME }).FirstOrDefault();
+
+            var parcelNumberWithTitleOwnerCodeQuery = (from RPAV in _context.AsmtrealPropertyAssessedValueMaster
+                                                       join NNAME in _context.AsmtmasterNameAddress
+                                                       on RPAV.TitleOwnerCode equals NNAME.NameCode
+                                                       where RPAV.ParcelNumber == parcelNumber && RPAV.TaxpayerCode == ownerCode
+                                                       select new { RPAV, NNAME }).FirstOrDefault();
+
+            var parcelNumberWithLandUseCodeQuery = (from RPAV in _context.AsmtrealPropertyAssessedValueMaster
+                                                    join LU in _context.AsmtlandUseCodes
+                                                    on RPAV.LandUseCode equals LU.LandUseCode
+                                                    where RPAV.ParcelNumber == parcelNumber && RPAV.TaxpayerCode == ownerCode
+                                                    select new { RPAV, LU }).FirstOrDefault();
+
+            var lineValuesQuery = (from RPAV in _context.AsmtrealPropertyAssessedValueMaster
+                                   join PM in _context.AsmtpermitMaster
+                                   on RPAV.ParcelNumber equals PM.ParcelNumber
+                                   where RPAV.ParcelNumber == parcelNumber && RPAV.TaxpayerCode == ownerCode
+                                   select PM );
+            List<BuildingPermitsLineValue> lineValues = new List<BuildingPermitsLineValue>();
+            foreach (var item in lineValuesQuery)
+            {
+                lineValues.Add(new BuildingPermitsLineValue(item.PermitNumber, item.PermitAddendum, item.PermitIssuedDate
+                                                           , item.JurisdictionCode, item.PercentComplete, item.EstimatedValue
+                                                           , item.NewOrDemo, item.Comments));
+            }
+
+            BuildingPermits result = new BuildingPermits(parcelNumberWithTaxPayerCodeQuery.RPAV?.ParcelNumber, parcelNumberWithTaxPayerCodeQuery.NNAME?.Name
+                                                         , parcelNumberWithTitleOwnerCodeQuery.NNAME?.Name, parcelNumberWithTaxPayerCodeQuery.RPAV?.Description1
+                                                         , parcelNumberWithLandUseCodeQuery.LU?.UseCodeDesc, parcelNumberWithTaxPayerCodeQuery.RPAV?.Description2
+                                                         , parcelNumberWithTaxPayerCodeQuery.RPAV?.UnimprovedLandAcres + parcelNumberWithTaxPayerCodeQuery.RPAV?.ImprovedLandAcers
+                                                         , parcelNumberWithTaxPayerCodeQuery.RPAV?.Description3, parcelNumberWithTaxPayerCodeQuery.RPAV?.ImprovedLandValue
+                                                         , parcelNumberWithTaxPayerCodeQuery.RPAV?.Description4, parcelNumberWithTaxPayerCodeQuery.RPAV?.BuildingValue
+                                                         , lineValues);
+
+            return result;
         }
     }
 }

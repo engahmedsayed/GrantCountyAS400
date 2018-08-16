@@ -52,9 +52,9 @@ namespace GrantCountyAs400.Domain.Assessment
 
     public class BuildingPermitsLineValue
     {
-        public int PermitNumber { get; }
+        public decimal? PermitNumber { get; }
 
-        public int PermitAddenDum { get; }
+        public decimal? PermitAddenDum { get; }
 
         public DateTime? PermitIssueDate { get;}
 
@@ -66,9 +66,9 @@ namespace GrantCountyAs400.Domain.Assessment
 
         public string NewOrDemo { get;}
 
-        public string Comment { get; set; }
+        public string Comment { get; }
 
-        public BuildingPermitsLineValue(int permitNumber, int permitAddenDum, DateTime? permitIssueDate, string jurisdictionCode
+        public BuildingPermitsLineValue(decimal? permitNumber, decimal? permitAddenDum, DateTime? permitIssueDate, string jurisdictionCode
                                         , decimal? percentComplete, decimal? estimatedValue, string newOrDemo, string comment)
         {
             PermitNumber = permitNumber;

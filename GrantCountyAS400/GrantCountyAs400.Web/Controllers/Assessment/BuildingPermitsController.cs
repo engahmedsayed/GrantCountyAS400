@@ -33,7 +33,7 @@ namespace GrantCountyAs400.Web.Controllers.Assessment
         }
 
         [HttpGet]
-        [Route("Details/{parcelNumber}/{nameCode?}")]
+        [Route("Details/{parcelNumber}/{ownerCode?}")]
         public IActionResult Details(decimal parcelNumber, string ownerCode)
         {
             var entity = _buildingPermitsRepository.GetParcelBuildingPermits(parcelNumber, ownerCode);
@@ -42,7 +42,37 @@ namespace GrantCountyAs400.Web.Controllers.Assessment
 
             //var viewmodel = AutoMapper.Mapper.Map<AssociatedPersonViewModel>(entity);
             //ViewBag.FilterViewModel = new AssociatedPersonFilterViewModel() { ParcelNumber = parcelNumber, NameCode = ownerCode };
-            return View();
+            BuildingPermitsViewModel result = new BuildingPermitsViewModel()
+            {
+                BuildingValue = entity.BuildingValue,
+                FirstDescription = entity.FirstDescription,
+                FourthDescription = entity.FourthDescription,
+                LandAv = entity.LandAv, 
+                LandUse  = entity.LandUse,
+                Owner = entity.Owner,
+                ParcelNumber = entity.ParcelNumber,
+                SecondDescription = entity.SecondDescription,
+                TaxPayer = entity.TaxPayer,
+                ThirdDescription = entity.ThirdDescription,
+                TotalAcre = entity.TotalAcre
+            };
+            List<BuildingPermitsLineValueViewModel> lineValues = new List<BuildingPermitsLineValueViewModel>();
+            foreach (var item in entity.LineValues)
+            {
+                lineValues.Add(new BuildingPermitsLineValueViewModel
+                {
+                    Comment = item.Comment,
+                    EstimatedValue = item.EstimatedValue,
+                    JurisdictionCode = item.JurisdictionCode,
+                    NewOrDemo = item.NewOrDemo,
+                    PercentComplete = item.PercentComplete,
+                    PermitAddenDum = item.PermitAddenDum,
+                    PermitIssueDate = item.PermitIssueDate,
+                    PermitNumber = item.PermitNumber
+                });
+            }
+            result.LineValues = lineValues;
+            return View(result);
         }
     }
 }
