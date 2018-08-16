@@ -10,9 +10,10 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
         public decimal? ParcelNumber { get; set; }
         public string TaxpayerCode { get; set; }
         public string TitleOwnerCode { get; set; }
-        public string ContractHolder { get; set; }
+        public string ContractHolderCode { get; set; }
         public string TaxpayerName { get; set; }
         public string TitleOwnerName { get; set; }
         public string ContractHolderName { get; set; }
+        public decimal? TaxCodeArea { get; set; }
     }
 }
