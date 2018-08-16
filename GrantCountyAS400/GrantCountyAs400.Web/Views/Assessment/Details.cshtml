@@ -1,0 +1,235 @@
+﻿@model GrantCountyAs400.Web.ViewModels.Assessment.AssessmentModel.AssessmentDetailsViewModel
+
+@{
+    ViewData["Title"] = Model.ParcelNumber + " - Details";
+}
+
+<div>
+    <h2>@Html.DisplayFor(model => model.ParcelNumber)</h2>
+
+    <div class="entity-details">
+        <div class="entity-info clearfix">
+            <div class="col-xs-6">
+                <table class="table col-xs-6">
+                    <tbody>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.ParcelNumber) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.ParcelNumber) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.TaxPayerDisplay) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.TaxPayerDisplay) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.TitleOwnerDisplay) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.TitleOwnerDisplay) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.ContractHolderDisplay) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.ContractHolderDisplay) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.PlatCodeDisplay) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.PlatCodeDisplay) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Description</strong></td>
+                            <td class="text-right">
+                                <span> @Html.DisplayFor(model => model.Description1) </span><br />
+                                <span> @Html.DisplayFor(model => model.Description2) </span><br />
+                                <span> @Html.DisplayFor(model => model.Description3) </span><br />
+                                <span> @Html.DisplayFor(model => model.Description4) </span><br />
+                                <span> @Html.DisplayFor(model => model.Description5) </span><br />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.TaxCodeDisplay) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.TaxCodeDisplay) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.ZoneCodeDisplay) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.ZoneCodeDisplay) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.RevalutionPhase) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.RevalutionPhase) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.NewConstructionBuildingAv) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.NewConstructionBuildingAv) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.MobileHomeValue) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.MobileHomeValue) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.SubsidiaryParcelCode) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.SubsidiaryParcelCode) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.UndividedInterestPercent) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.UndividedInterestPercent) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.RegTaxable) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.RegTaxable) </span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-6">
+                <table class="table col-xs-6">
+                    <tbody>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.TaxYear) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.TaxYear) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.NameChangeDate) </strong></td>
+                            <td class="text-right">
+                                <span> @Html.DisplayFor(model => model.NameChangeDate)</span>
+                                @if (!string.IsNullOrWhiteSpace(Model.NameChangeId))
+                                {
+                                    <strong>&nbsp;&nbsp;By&nbsp;</strong>
+                                    <span> @Html.DisplayFor(model => model.NameChangeId) </span>
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.NameChangeReason) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.NameChangeReason) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.LoanNumber) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.LoanNumber) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.BlockNumber) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.BlockNumber) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.LotNumber) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.LotNumber) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.UnitNumber) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.UnitNumber) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.DockNumber) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.DockNumber) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.ChangeDate) </strong></td>
+                            <td class="text-right">
+                                <span> @Html.DisplayFor(model => model.ChangeDate) </span>
+                                @if (!string.IsNullOrWhiteSpace(Model.NameChangeId))
+                                {
+                                    <strong>&nbsp;&nbsp;By&nbsp;</strong>
+                                    <span> @Html.DisplayFor(model => model.ChangeId) </span>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(Model.ChangeReasonCode))
+                                {
+                                    <strong>&nbsp;&nbsp;Code&nbsp;</strong>
+                                    <span> @Html.DisplayFor(model => model.ChangeReasonCode) </span>
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.LandUseDisplay) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.LandUseDisplay) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.TaxStatus) </strong></td>
+                            <td class="text-right">
+                                <span> @Html.DisplayFor(model => model.TaxStatus) </span>
+                                <span> @Html.DisplayFor(model => model.TaxStatusDisplay) </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.SeniorCitizenCode) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.SeniorCitizenCode) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.AssocMhparcel) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.AssocMhparcel) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.AffidavitTaxYearDisplay) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.AffidavitTaxYearDisplay) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.OpenspaceApplicationNum) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.OpenspaceApplicationNum) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.OpenSpaceAgreementNum) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.OpenSpaceAgreementNum) </span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div>
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Land</th>
+                    <th>Improved</th>
+                    <th>UnImproved</th>
+                    <th>Timber</th>
+                    <th>Total Land</th>
+                    <th>Improvement</th>
+                    <th>Total AV</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Acres</strong></td>
+                    <td>@Html.DisplayFor(model => model.ImprovedLandAcers)</td>
+                    <td>@Html.DisplayFor(model => model.UnimprovedLandAcres)</td>
+                    <td>@Html.DisplayFor(model => model.TimberAcers)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>Taxable</strong></td>
+                    <td>@Html.DisplayFor(model => model.ImprovedLandValue)</td>
+                    <td>@Html.DisplayFor(model => model.UnimprovedLandValue)</td>
+                    <td>@Html.DisplayFor(model => model.TimberlandValue)</td>
+                    <td>@Html.DisplayFor(model => model.TotalLand)</td>
+                    <td>@Html.DisplayFor(model => model.BuildingValue)</td>
+                    <td>@Html.DisplayFor(model => model.RegTaxable)</td>
+                <tr>
+                    <td><strong>Market</strong></td>
+                    <td>@Html.DisplayFor(model => model.FmimprovedLandValue)</td>
+                    <td>@Html.DisplayFor(model => model.FmunimprovedLandValue)</td>
+                    <td>@Html.DisplayFor(model => model.FmtimberValue)</td>
+                    <td>@Html.DisplayFor(model => model.TotalFmLand)</td>
+                    <td>@Html.DisplayFor(model => model.FmbuildingValue)</td>
+                    <td>@Html.DisplayFor(model => model.TotalFm)</td>
+                </tr>
+                </tr>
+                @*<tr>
+                        <td class="upper-case bold">Improvements</td>
+                        <td>@Html.DisplayFor(model => model.AcctImprMrktValTotl)</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="upper-case bold">&nbsp;&nbsp;Sub Total</td>
+                        <td>@(Model.MobHomeMrktVal + Model.AcctImprMrktValTotl)</td>
+                        <td>@(Model.MaximumAssessedValue - Model.TotalExceptions)</td>
+                        <td></td>
+                        <td></td>
+                    </tr>*@
+            </tbody>
+        </table>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

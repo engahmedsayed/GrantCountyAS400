@@ -39,6 +39,7 @@ namespace GrantCountyAs400.Web
             services.AddScoped<IPlatCondoRepository, PlatCondoRepository>();
             services.AddScoped<IChildParentParcelRepository, ChildParentParcelRepository>();
             services.AddScoped<IAssociatedPersonRepository, AssociatedPersonRepository>();
+            services.AddScoped<IAssessmentRepository, AssessmentRepository>();
             services.AddScoped<IBuildingPermitsRepository, BuildingPermitsRepository>();
         }
 

@@ -1,0 +1,139 @@
+﻿@model IEnumerable<AssessmentViewModel>
+@using GrantCountyAs400.Web.ViewModels.Assessment.AssessmentModel
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@{
+    ViewData["Title"] = "Assessment - Index";
+    var filterViewModel = ViewBag.FilterViewModel as AssessmentFilterViewModel;
+}
+
+<h2>Assessment</h2>
+
+<p>
+    @using (Html.BeginForm("Index", "Assessment", FormMethod.Get))
+    {
+        <div class="form-horizontal">
+            <hr />
+            <div class="form-group">
+                <label asp-for="@filterViewModel.ParcelNumber" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input type="number" asp-for="@filterViewModel.ParcelNumber" name="parcelnumber" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@filterViewModel.TaxPayer" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input type="text" asp-for="@filterViewModel.TaxPayer" name="taxpayer" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@filterViewModel.Owner" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input type="text" asp-for="@filterViewModel.Owner" name="owner" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@filterViewModel.ContractHolder" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input type="text" asp-for="@filterViewModel.ContractHolder" name="contractholder" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@filterViewModel.TaxCodeArea" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input type="number" asp-for="@filterViewModel.TaxCodeArea" name="taxcodearea" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@filterViewModel.TaxCodeDesc" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input type="text" asp-for="@filterViewModel.TaxCodeDesc" name="taxcodedesc" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <div class="form-group pull-right">
+                        <input type="submit" value="Filter" class="btn btn-success" />
+                        <input type="reset" value="Clear" class="btn btn-default" id="btnReset" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</p>
+
+<nav aria-label="navigation">
+    @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
+    pageNumber = pageNumber,
+    parcelnumber = filterViewModel.ParcelNumber,
+    taxpayer = filterViewModel.TaxPayer,
+    owner = filterViewModel.Owner,
+    contractholder = filterViewModel.ContractHolder,
+    taxcodearea= filterViewModel.TaxCodeArea,
+    taxcodedesc = filterViewModel.TaxCodeDesc
+}))
+</nav>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="col-xs-2 col-md-1">
+                @Html.DisplayNameFor(model => model.ParcelNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaxPayerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TitleOwnerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContractHolderName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaxCodeArea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaxCodeDesc)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">
+                        @Html.DisplayFor(modelItem => item.ParcelNumber)
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaxPayerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TitleOwnerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContractHolderName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaxCodeArea)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaxCodeDesc)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<nav aria-label="navigation">
+    @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
+    pageNumber = pageNumber,
+    parcelnumber = filterViewModel.ParcelNumber,
+    taxpayer = filterViewModel.TaxPayer,
+    owner = filterViewModel.Owner,
+    contractholder = filterViewModel.ContractHolder,
+    taxcodearea = filterViewModel.TaxCodeArea,
+    taxcodedesc = filterViewModel.TaxCodeDesc
+}))
+</nav>
