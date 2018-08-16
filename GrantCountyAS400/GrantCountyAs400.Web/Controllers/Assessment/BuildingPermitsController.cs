@@ -71,7 +71,7 @@ namespace GrantCountyAs400.Web.Controllers.Assessment
                     PermitNumber = item.PermitNumber
                 });
             }
-            result.LineValues = lineValues;
+            result.LineValues = lineValues.OrderByDescending(t=>t.PermitIssueDate).ToList();
             return View(result);
         }
     }
