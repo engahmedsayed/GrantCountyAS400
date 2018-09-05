@@ -15,11 +15,10 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.RealProperty
         public string TitleOwnerCode { get; set; }
         public string TitleOwnerName { get; set; }
         public string ContractHolderCode { get; set; }
-        public string ContractHolderName { get; }
+        public string ContractHolderName { get; set; }
 
         [Display(Name = "Tax Year")]
-        [DisplayFormat(DataFormatString = "{0:n0}")]
-        public decimal TaxYear { get; set; }
+        public int TaxYear { get; set; }
 
         [Display(Name = "Date of Name Change")]
         [DataType(DataType.Date)]
@@ -53,8 +52,8 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.RealProperty
         public string Description3 { get; set; }
         public string Description4 { get; set; }
         public string Description5 { get; set; }
-        public decimal TaxCodeArea { get; }
-        public string TaxCodeDesc { get; }
+        public decimal TaxCodeArea { get; set; }
+        public string TaxCodeDesc { get; set; }
         public decimal LandUseCode { get; set; }
 
         [DataType(DataType.Date)]
@@ -86,7 +85,7 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.RealProperty
         public decimal FmtimberValue { get; set; }
 
         [Display(Name = "New Construction")]
-        public decimal NewConstructionBuildingAv { get; }
+        public decimal NewConstructionBuildingAv { get; set; }
 
         [Display(Name = "Assoc Mhparcel")]
         public decimal AssocMhparcel { get; set; }
@@ -106,7 +105,7 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.RealProperty
         [Display(Name = "Mobile Home Value")]
         public decimal MobileHomeValue { get; set; }
 
-        [Display(Name = "Senior Citizend Code")]
+        [Display(Name = "Senior Citizen Code")]
         public string SeniorCitizenCode { get; set; }
 
         [Display(Name = "SubsidiaryParcelCode")]
