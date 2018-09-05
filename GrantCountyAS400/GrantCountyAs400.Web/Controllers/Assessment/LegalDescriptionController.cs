@@ -32,17 +32,5 @@ namespace GrantCountyAs400.Web.Controllers.Assessment
             ViewBag.FilterViewModel = filter;
             return View(results.ToMappedPagedList<RealPropertyWithLegalDescriptions, RealPropertyWithLegalDescriptionsViewModel>(pagingInfo));
         }
-
-        [HttpGet]
-        [Route("{id:int}")]
-        public IActionResult Details(int id)
-        {
-            var entity = _legalDescriptionRepository.Details(id);
-            if (entity == null)
-                return NotFound();
-
-            var viewmodel = AutoMapper.Mapper.Map<LegalDescriptionDetailsViewModel>(entity);
-            return View(viewmodel);
-        }
     }
 }

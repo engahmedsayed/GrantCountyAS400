@@ -112,9 +112,6 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th>
-                                        @Html.DisplayNameFor(modelItem => item.LegalDescrtiptions.FirstOrDefault().Id)
-                                    </th>
-                                    <th>
                                         @Html.DisplayNameFor(modelItem => item.LegalDescrtiptions.FirstOrDefault().Descrtiption)
                                     </th>
                                 </tr>
@@ -123,9 +120,6 @@
                                 @foreach (var legalItem in item.LegalDescrtiptions)
                                 {
                                     <tr>
-                                        <td>
-                                            <a asp-action="Details" asp-route-id="@legalItem.Id">@legalItem.Id</a>
-                                        </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => legalItem.Descrtiption)
                                         </td>

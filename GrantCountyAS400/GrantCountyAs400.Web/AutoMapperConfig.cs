@@ -40,7 +40,7 @@ namespace GrantCountyAs400.Web
                 #region Assessment Module
 
                 cfg.CreateMap<LegalDescription, LegalDescriptionViewModel>();
-                cfg.CreateMap<LegalDescriptionDetails, LegalDescriptionDetailsViewModel>();
+
                 cfg.CreateMap<RealPropertyWithLegalDescriptions, RealPropertyWithLegalDescriptionsViewModel>();
 
                 cfg.CreateMap<ManufacturedHomePark, ManufacturedHomeParkViewModel>();
