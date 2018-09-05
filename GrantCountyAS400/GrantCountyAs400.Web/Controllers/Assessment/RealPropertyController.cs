@@ -1,25 +1,25 @@
-﻿using GrantCountyAs400.Domain.Assessment.Repository;
+﻿using GrantCountyAs400.Domain.Assessment;
+using GrantCountyAs400.Domain.Assessment.Repository;
 using GrantCountyAs400.Web.Extensions;
 using GrantCountyAs400.Web.ViewModels;
-using GrantCountyAs400.Web.ViewModels.Assessment.AssessmentModel;
+using GrantCountyAs400.Web.ViewModels.Assessment.RealProperty;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-using AssessmentModel = GrantCountyAs400.Domain.Assessment.Assessment;
 
 namespace GrantCountyAs400.Web.Controllers.Assessment
 {
-    [Route("assessment")]
-    public class AssessmentController : Controller
+    [Route("realproperty")]
+    public class RealPropertyController : Controller
     {
-        private readonly IAssessmentRepository _assessmentRepository;
+        private readonly IRealPropertyRepository _assessmentRepository;
 
-        public AssessmentController(IAssessmentRepository assessmentRepository)
+        public RealPropertyController(IRealPropertyRepository assessmentRepository)
         {
             _assessmentRepository = assessmentRepository;
         }
 
         [HttpGet]
-        public IActionResult Index(AssessmentFilterViewModel filter, int pageNumber = 1)
+        public IActionResult Index(RealPropertyFilterViewModel filter, int pageNumber = 1)
         {
             int resultCount;
             var pagingInfo = new PagingInfo() { PageNumber = pageNumber };
@@ -30,7 +30,7 @@ namespace GrantCountyAs400.Web.Controllers.Assessment
 
             pagingInfo.Total = resultCount;
             ViewBag.FilterViewModel = filter;
-            return View(results.ToMappedPagedList<AssessmentModel, AssessmentViewModel>(pagingInfo));
+            return View(results.ToMappedPagedList<RealProperty, RealPropertyViewModel>(pagingInfo));
         }
 
         [HttpGet]
@@ -41,7 +41,7 @@ namespace GrantCountyAs400.Web.Controllers.Assessment
             if (entity == null)
                 return NotFound();
 
-            var viewmodel = AutoMapper.Mapper.Map<AssessmentDetailsViewModel>(entity);
+            var viewmodel = AutoMapper.Mapper.Map<RealPropertyDetailsViewModel>(entity);
             return View(viewmodel);
         }
     }

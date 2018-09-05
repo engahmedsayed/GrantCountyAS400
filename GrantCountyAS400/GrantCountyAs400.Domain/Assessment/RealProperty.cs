@@ -1,6 +1,6 @@
 ﻿namespace GrantCountyAs400.Domain.Assessment
 {
-    public class Assessment
+    public class RealProperty
     {
         public int Id { get; set; }
         public decimal ParcelNumber { get; }
@@ -10,7 +10,7 @@
         public decimal TaxCodeArea { get; }
         public string TaxCodeDesc { get; }
 
-        public Assessment(int id, decimal parcelNumber, string taxPayerName, string titleOwnerName, string contractHolderName, decimal taxCodeArea,
+        public RealProperty(int id, decimal parcelNumber, string taxPayerName, string titleOwnerName, string contractHolderName, decimal taxCodeArea,
             string taxCodeDesc)
         {
             Id = id;

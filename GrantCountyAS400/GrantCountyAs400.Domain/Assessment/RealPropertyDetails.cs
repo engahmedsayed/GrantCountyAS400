@@ -2,7 +2,7 @@
 
 namespace GrantCountyAs400.Domain.Assessment
 {
-    public class AssessmentDetails
+    public class RealPropertyDetails
     {
         public decimal ParcelNumber { get; }
         public string TaxPayerCode { get; }
@@ -60,7 +60,7 @@ namespace GrantCountyAs400.Domain.Assessment
         public string SeniorCitizenCode { get; }
         public string SubsidiaryParcelCode { get; }
 
-        public AssessmentDetails(decimal parcelNumber, string taxPayerCode, string taxPayerName, string titleOwnerCode, string titleOwnerName,
+        public RealPropertyDetails(decimal parcelNumber, string taxPayerCode, string taxPayerName, string titleOwnerCode, string titleOwnerName,
             string contractHolderCode, string contractHolderName, decimal taxYear, DateTime? nameChangeDate, string nameChangeId, string nameChangeReason,
             string loanNumber, string platCode, string platCodeType, string blockNumber, string lotNumber, string unitNumber, string dockNumber,
             string description1, string description2, string description3, string description4, string description5, decimal taxCodeArea,

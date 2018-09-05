@@ -2,9 +2,9 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace GrantCountyAs400.Web.ViewModels.Assessment.AssessmentModel
+namespace GrantCountyAs400.Web.ViewModels.Assessment.RealProperty
 {
-    public class AssessmentDetailsViewModel
+    public class RealPropertyDetailsViewModel
     {
         [Display(Name = "Parcel")]
         [DisplayFormat(DataFormatString = "{0:00 0000 000}")]

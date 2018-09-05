@@ -1,16 +1,16 @@
-﻿@model IEnumerable<AssessmentViewModel>
-@using GrantCountyAs400.Web.ViewModels.Assessment.AssessmentModel
+﻿@model IEnumerable<RealPropertyViewModel>
+@using GrantCountyAs400.Web.ViewModels.Assessment.RealProperty
 @using X.PagedList.Mvc.Core;
 @using X.PagedList;
 @{
-    ViewData["Title"] = "Assessment - Index";
-    var filterViewModel = ViewBag.FilterViewModel as AssessmentFilterViewModel;
+    ViewData["Title"] = "Real Property - Index";
+    var filterViewModel = ViewBag.FilterViewModel as RealPropertyFilterViewModel;
 }
 
-<h2>Assessment</h2>
+<h2>Real Property</h2>
 
 <p>
-    @using (Html.BeginForm("Index", "Assessment", FormMethod.Get))
+    @using (Html.BeginForm("Index", "RealProperty", FormMethod.Get))
     {
         <div class="form-horizontal">
             <hr />

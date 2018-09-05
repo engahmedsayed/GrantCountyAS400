@@ -7,19 +7,19 @@ using System.Linq;
 
 namespace GrantCountyAs400.PersistenceAdapter.Repositories
 {
-    public class AssessmentRepository : IAssessmentRepository
+    public class RealPropertyRepository : IRealPropertyRepository
     {
         private readonly GrantCountyDbContext _context;
 
-        public AssessmentRepository(GrantCountyDbContext dbContext)
+        public RealPropertyRepository(GrantCountyDbContext dbContext)
         {
             _context = dbContext;
         }
 
-        public IEnumerable<Assessment> GetAll(decimal parcelNumber, string taxpayer, string owner, string contractHolder, decimal taxcodeArea,
+        public IEnumerable<RealProperty> GetAll(decimal parcelNumber, string taxpayer, string owner, string contractHolder, decimal taxcodeArea,
                                               string taxcodeDesc, out int resultCount, int pageNumber = 1, int pageSize = 50)
         {
-            List<Assessment> results = new List<Assessment>();
+            List<RealProperty> results = new List<RealProperty>();
 
             var query = (from valueMaster in _context.ASMTValueMasterNameView
                          join codeArea in _context.AsmttaxCodeArea on valueMaster.TaxCodeArea equals codeArea.TaxCodeArea
@@ -30,7 +30,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          && (string.IsNullOrEmpty(owner) || valueMaster.TitleOwnerName.ToLower().Contains(owner.Trim().ToLower()))
                          && (string.IsNullOrEmpty(contractHolder) || valueMaster.ContractHolderName.ToLower().Contains(contractHolder.Trim().ToLower()))
                          orderby valueMaster.TaxpayerName
-                         select AssessmentMapper.Map(valueMaster, codeArea));
+                         select RealPropertyMapper.Map(valueMaster, codeArea));
 
             if (pageNumber > 0)
             {
@@ -50,7 +50,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             return results;
         }
 
-        public AssessmentDetails Details(int id)
+        public RealPropertyDetails Details(int id)
         {
             var assessmentDetails = (from namesRecord in _context.ASMTValueMasterNameView
                                      join codeArea in _context.AsmttaxCodeArea on namesRecord.TaxCodeArea equals codeArea.TaxCodeArea
@@ -67,7 +67,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                 var citizenHistory = _context.AsmtseniorCitizenHistory.SingleOrDefault(t => t.ParcelNumber == assessmentDetails.valueMasterRecord.ParcelNumber &&
                                                                                             t.TaxYear == 2010);
 
-                return AssessmentMapper.Map(assessmentDetails.namesRecord,
+                return RealPropertyMapper.Map(assessmentDetails.namesRecord,
                                             assessmentDetails.codeArea,
                                             assessmentDetails.valueMasterRecord,
                                             landUseCode,

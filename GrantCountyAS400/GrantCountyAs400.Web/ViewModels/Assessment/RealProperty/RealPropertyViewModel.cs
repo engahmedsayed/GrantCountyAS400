@@ -1,22 +1,26 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GrantCountyAs400.Web.ViewModels.Assessment.AssessmentModel
+namespace GrantCountyAs400.Web.ViewModels.Assessment.RealProperty
 {
-    public class AssessmentFilterViewModel
+    public class RealPropertyViewModel
     {
+        public int Id { get; set; }
+
         [Display(Name = "Parcel")]
+        [DisplayFormat(DataFormatString = "{0:00 0000 000}")]
         public decimal ParcelNumber { get; set; }
 
         [Display(Name = "Tax Payer")]
-        public string TaxPayer { get; set; }
+        public string TaxPayerName { get; set; }
 
         [Display(Name = "Title Owner")]
-        public string Owner { get; set; }
+        public string TitleOwnerName { get; set; }
 
         [Display(Name = "Contract Holder")]
-        public string ContractHolder { get; set; }
+        public string ContractHolderName { get; set; }
 
         [Display(Name = "Tax Code Area")]
+        [DisplayFormat(DataFormatString = "{0:n0}")]
         public decimal TaxCodeArea { get; set; }
 
         [Display(Name = "Tax Code Description")]

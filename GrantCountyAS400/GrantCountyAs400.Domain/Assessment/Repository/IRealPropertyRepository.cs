@@ -2,11 +2,11 @@
 
 namespace GrantCountyAs400.Domain.Assessment.Repository
 {
-    public interface IAssessmentRepository
+    public interface IRealPropertyRepository
     {
-        IEnumerable<Assessment> GetAll(decimal parcelNumber, string taxpayer, string owner, string contractHolder, decimal taxcodeArea,
+        IEnumerable<RealProperty> GetAll(decimal parcelNumber, string taxpayer, string owner, string contractHolder, decimal taxcodeArea,
                                        string taxcodeDesc, out int resultCount, int pageNumber = 1, int pageSize = 50);
 
-        AssessmentDetails Details(int id);
+        RealPropertyDetails Details(int id);
     }
 }
