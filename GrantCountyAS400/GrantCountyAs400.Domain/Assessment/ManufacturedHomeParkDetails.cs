@@ -20,8 +20,8 @@
         public string Description5 { get; }
 
         public ManufacturedHomeParkDetails(string mhparkCode, string name, string addressLine1, string addressLine2, string contactNameCode,
-            string contactName, string telephoneNumber, decimal parcelNumber, string filter, decimal spaceNumber, string description1,
-            string description2, string description3, string description4, string description5)
+            string contactName, string telephoneNumber, decimal parcelNumber, string filter, decimal spaceNumber, string qualCode,
+            string description1, string description2, string description3, string description4, string description5)
         {
             MhparkCode = mhparkCode;
             Name = name;
@@ -33,6 +33,7 @@
             ParcelNumber = parcelNumber;
             Filler01 = filter;
             SpaceNumber = spaceNumber;
+            QualCode = qualCode;
             Description1 = description1;
             Description2 = description2;
             Description3 = description3;

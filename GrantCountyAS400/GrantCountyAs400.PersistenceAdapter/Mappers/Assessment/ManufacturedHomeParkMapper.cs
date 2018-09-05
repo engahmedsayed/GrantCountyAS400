@@ -13,7 +13,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Assessment
                                                         AsmtrealPropertyAssessedValueMaster masterRecord) =>
             new ManufacturedHomeParkDetails(homepark.MhparkCode, homepark.Name.Trim(), homepark.AddressLine1.Trim(), homepark.AddressLine2.Trim(),
                 homepark.ContactNameCode, nameAddress?.Name.Trim(), homepark.TelephoneNumber, homepark.ParcelNumber.Value, homepark.Filler01,
-                homepark.SpaceNumber.Value, masterRecord?.Description1, masterRecord?.Description2, masterRecord?.Description3, 
+                homepark.SpaceNumber.Value, homepark.QualCode.Trim(), masterRecord?.Description1, masterRecord?.Description2, masterRecord?.Description3,
                 masterRecord?.Description4, masterRecord?.Description5);
     }
 }
