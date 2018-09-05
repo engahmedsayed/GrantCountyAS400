@@ -44,12 +44,6 @@
                     <input type="number" asp-for="@filterViewModel.TaxCodeArea" name="taxcodearea" class="form-control" />
                 </div>
             </div>
-            <div class="form-group">
-                <label asp-for="@filterViewModel.TaxCodeDesc" class="control-label col-md-2"></label>
-                <div class="col-md-10">
-                    <input type="text" asp-for="@filterViewModel.TaxCodeDesc" name="taxcodedesc" class="form-control" />
-                </div>
-            </div>
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
@@ -70,8 +64,7 @@
     taxpayer = filterViewModel.TaxPayer,
     owner = filterViewModel.Owner,
     contractholder = filterViewModel.ContractHolder,
-    taxcodearea= filterViewModel.TaxCodeArea,
-    taxcodedesc = filterViewModel.TaxCodeDesc
+    taxcodearea= filterViewModel.TaxCodeArea
 }))
 </nav>
 <table class="table">
@@ -133,7 +126,6 @@
     taxpayer = filterViewModel.TaxPayer,
     owner = filterViewModel.Owner,
     contractholder = filterViewModel.ContractHolder,
-    taxcodearea = filterViewModel.TaxCodeArea,
-    taxcodedesc = filterViewModel.TaxCodeDesc
+    taxcodearea = filterViewModel.TaxCodeArea
 }))
 </nav>

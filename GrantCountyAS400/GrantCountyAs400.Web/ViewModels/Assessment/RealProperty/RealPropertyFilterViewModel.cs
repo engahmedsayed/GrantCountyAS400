@@ -18,8 +18,5 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.RealProperty
 
         [Display(Name = "Tax Code Area")]
         public decimal TaxCodeArea { get; set; }
-
-        [Display(Name = "Tax Code Description")]
-        public string TaxCodeDesc { get; set; }
     }
 }

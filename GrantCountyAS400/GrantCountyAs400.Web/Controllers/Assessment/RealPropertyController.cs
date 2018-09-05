@@ -25,7 +25,7 @@ namespace GrantCountyAs400.Web.Controllers.Assessment
             var pagingInfo = new PagingInfo() { PageNumber = pageNumber };
 
             var results = _assessmentRepository.GetAll(filter.ParcelNumber, filter.TaxPayer, filter.Owner, filter.ContractHolder, filter.TaxCodeArea,
-                                                       filter.TaxCodeDesc, out resultCount, pageNumber, AppSettings.PageSize)
+                                                       out resultCount, pageNumber, AppSettings.PageSize)
                                                        .ToList();
 
             pagingInfo.Total = resultCount;

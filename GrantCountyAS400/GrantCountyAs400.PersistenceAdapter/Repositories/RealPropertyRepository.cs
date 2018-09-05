@@ -17,7 +17,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
         }
 
         public IEnumerable<RealProperty> GetAll(decimal parcelNumber, string taxpayer, string owner, string contractHolder, decimal taxcodeArea,
-                                              string taxcodeDesc, out int resultCount, int pageNumber = 1, int pageSize = 50)
+                                                out int resultCount, int pageNumber = 1, int pageSize = 50)
         {
             List<RealProperty> results = new List<RealProperty>();
 
@@ -25,7 +25,6 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          join codeArea in _context.AsmttaxCodeArea on valueMaster.TaxCodeArea equals codeArea.TaxCodeArea
                          where ((parcelNumber <= 0) || valueMaster.ParcelNumber == parcelNumber)
                          && ((taxcodeArea <= 0) || codeArea.TaxCodeArea == taxcodeArea)
-                         && (string.IsNullOrEmpty(taxcodeDesc) || codeArea.TaxCodeDesc.ToLower().Contains(taxcodeDesc.Trim().ToLower()))
                          && (string.IsNullOrEmpty(taxpayer) || valueMaster.TaxpayerName.ToLower().Contains(taxpayer.Trim().ToLower()))
                          && (string.IsNullOrEmpty(owner) || valueMaster.TitleOwnerName.ToLower().Contains(owner.Trim().ToLower()))
                          && (string.IsNullOrEmpty(contractHolder) || valueMaster.ContractHolderName.ToLower().Contains(contractHolder.Trim().ToLower()))
