@@ -92,6 +92,8 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.AssociatedPerson
 
         public DateTime? ChangeDate { get; set; }
 
+        public string Comments { get; set; }
+
     }
 
 }

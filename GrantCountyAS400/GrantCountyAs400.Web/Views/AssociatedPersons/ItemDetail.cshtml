@@ -25,35 +25,15 @@
                     </tr>
                     <tr>
                         <td><strong>@Html.DisplayNameFor(model => model.Description) </strong></td>
-                        <td class="text-right"><span> @Html.DisplayFor(model => model.Description) </span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>@Html.DisplayNameFor(model => model.SecondDescription) </strong></td>
                         <td class="text-right">
+                            <span> @Html.DisplayFor(model => model.Description) </span>
+                            <br />
                             <span> @Html.DisplayFor(model => model.SecondDescription) </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>@Html.DisplayNameFor(model => model.ThirdDescription) </strong></td>
-                        <td class="text-right">
+                            <br />
                             <span> @Html.DisplayFor(model => model.ThirdDescription) </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>@Html.DisplayNameFor(model => model.FourthDescrition) </strong></td>
-                        <td class="text-right">
+                            <br />
                             <span> @Html.DisplayFor(model => model.FourthDescrition) </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>@Html.DisplayNameFor(model => model.FourthDescrition) </strong></td>
-                        <td class="text-right">
-                            <span> @Html.DisplayFor(model => model.FourthDescrition) </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>@Html.DisplayNameFor(model => model.FifthDescription) </strong></td>
-                        <td class="text-right">
+                            <br />
                             <span> @Html.DisplayFor(model => model.FifthDescription) </span>
                         </td>
                     </tr>
@@ -132,8 +112,12 @@
                     <td class="text-right"><span> @Html.DisplayFor(model => model.AddressLine1) </span></td>
                 </tr>
                 <tr>
-                    <td><strong>@Html.DisplayNameFor(model => model.LocalAddress) </strong></td>
+                    <td></td>
                     <td class="text-right"><span> @Html.DisplayFor(model => model.LocalAddress) </span></td>
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.Comments) </strong></td>
+                    <td class="text-right"><span> @Html.DisplayFor(model => model.Comments) </span></td>
                 </tr>
                 <tr>
                     <td><strong>@Html.DisplayNameFor(model => model.ChangeId) </strong></td>

@@ -60,6 +60,11 @@ namespace GrantCountyAs400.Domain.Assessment
 
         public List<LineValue> LineValues { get; }
 
+        public string NameCode { get; }
+        public string Name { get;}
+
+        public string Comments { get;}
+
 
         public AssociatedPerson(int id, decimal? parcelNumber, string taxPayer, string owner
                                 , string description, string landUse, string secondDescription,string thirdDescription
@@ -67,7 +72,8 @@ namespace GrantCountyAs400.Domain.Assessment
                                 ,string zoneCodeDesc,string taxCodeDesc,decimal? firePatrolAcres,decimal?unImprovedLandAcres
                                 ,decimal? improvedLandAcres,decimal? fMImprovedLandValue,decimal? buildingValue
                                 ,decimal? affidavitTaxYear,List<LineValue> lineValues, string addressLine1
-                                ,string city,string state,string zip,string changeId,DateTime? changeDate)
+                                ,string city,string state,string zip,string changeId,DateTime? changeDate
+                                ,string nameCode,string name,string comments)
         {
             Id = id;
             ParcelNumber = parcelNumber;
@@ -96,6 +102,9 @@ namespace GrantCountyAs400.Domain.Assessment
             AddressLine1 = addressLine1;
             ChangeId = changeId;
             ChangeDate = changeDate;
+            NameCode = nameCode;
+            Name = name;
+            Comments = comments;
         }
     }
 

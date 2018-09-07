@@ -43,7 +43,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                 ,rpmas?.LienDate,rpmas?.AffidavitNumber,rpzon?.ZoneCodeDesc,aptxc?.TaxCodeDesc,rpmas?.FirePatrolAcres
                 ,rpmas?.UnimprovedLandAcres,rpmas?.ImprovedLandAcers,rpmas?.FmimprovedLandValue,rpmas?.BuildingValue
                 ,rpmas?.AffidavitTaxYear,lineValues.ToList()
-                , nnamejoinedRpasc?.AddressLine1, nnamejoinedRpasc?.City, nnamejoinedRpasc?.State, nnamejoinedRpasc?.Zip,rpasc?.ChangeId,rpasc?.ChangeDate);
+                , nnamejoinedRpasc?.AddressLine1, nnamejoinedRpasc?.City, nnamejoinedRpasc?.State 
+                ,nnamejoinedRpasc?.Zip,rpasc?.ChangeId,rpasc?.ChangeDate,rpasc.NameCode,nnamejoinedRpasc.Name,rpasc.Comment);
                 return result;
             }
             
