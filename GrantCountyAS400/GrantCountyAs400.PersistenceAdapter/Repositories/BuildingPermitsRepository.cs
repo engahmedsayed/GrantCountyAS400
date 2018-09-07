@@ -16,12 +16,13 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
         {
             _context = dbContext;
         }
-        public List<BuildingPermitsMain> GetBuldingPermitsMain(out int resultCount, int pageNumber = 1, int pageSize = 50)
+        public List<BuildingPermitsMain> GetBuldingPermitsMain(decimal? parcelNumber,out int resultCount, int pageNumber = 1, int pageSize = 50)
         {
             List<BuildingPermitsMain> results = new List<BuildingPermitsMain>();
             var query = from RPAV in _context.AsmtrealPropertyAssessedValueMaster
                         join NNAME in _context.AsmtmasterNameAddress
                         on RPAV.TaxpayerCode equals NNAME.NameCode
+                        where ((parcelNumber == null) || (parcelNumber == 0) || (RPAV.ParcelNumber == parcelNumber))
                         select BuildingPermitsMapper.Map(RPAV, NNAME);
 
             if (pageNumber > 0)

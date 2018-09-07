@@ -19,14 +19,16 @@ namespace GrantCountyAs400.Web.Controllers.Assessment
         {
             _buildingPermitsRepository = buildingPermitsRepository;
         }
-        public IActionResult Index(int pageNumber = 1)
+        public IActionResult Index(BuildingPermitsFilterViewModel filter, int pageNumber = 1)
         {
             int resultCount;
             var pagingInfo = new PagingInfo() { PageNumber = pageNumber };
-            var results = _buildingPermitsRepository.GetBuldingPermitsMain(out resultCount, pageNumber).ToList();
+            var results = _buildingPermitsRepository.GetBuldingPermitsMain(filter.ParcelNumber,out resultCount, pageNumber).ToList();
+            ViewBag.FilterViewModel = filter;
             if (results != null)
             {
                 pagingInfo.Total = resultCount;
+                results = results.OrderBy(t => t.ParcelNumber).ToList();
                 return View(results.ToMappedPagedList<BuildingPermitsMain, BuildingPermitsMainViewModel>(pagingInfo));
             }
             return View();
