@@ -35,6 +35,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                              where ((parcelNumber == null) || (parcelNumber == 0) || (RPASC.ParcelNumber == parcelNumber))
                                 && ((nameCode == null) || (RPASC.NameCode == nameCode))
                              select AssociatedPersonMapper.Map(RPASC,NNAME);
+            lineValues = lineValues?.OrderBy(t => t.AsmtmasterNameAddressNameCode);
             if (rpasc != null )
             {
                 var result = new AssociatedPerson(rpasc.Id, rpasc?.ParcelNumber, taxPayerNName?.Name, ownerNName?.Name, rpmas?.Description1,

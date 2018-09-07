@@ -58,7 +58,6 @@ namespace GrantCountyAs400.Web.Controllers.Assessment
             var entity = _associatedPersonRepository.GetAssociatedPerson(parcelNumber,nameCode);
             if (entity == null)
                 return NotFound();
-
             var viewmodel = AutoMapper.Mapper.Map<AssociatedPersonViewModel>(entity);
             ViewBag.FilterViewModel = new AssociatedPersonFilterViewModel() { ParcelNumber = parcelNumber, NameCode = nameCode };
             return View(viewmodel);
