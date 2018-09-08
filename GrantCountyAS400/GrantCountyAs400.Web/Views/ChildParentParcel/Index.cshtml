@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ChildParentParcelViewModel>
+﻿@model IEnumerable<ParentParcelViewModel>
 @using GrantCountyAs400.Web.ViewModels.Assessment.ChildParentParcel
 @using X.PagedList.Mvc.Core;
 @using X.PagedList;
@@ -59,22 +59,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ParentParcel)
+                #
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ChildParcel)
+                @Html.DisplayNameFor(model => model.ParcelNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SegCombDate)
+                @Html.DisplayNameFor(model => model.TaxPayerName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EffectiveDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReferenceNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LegalDocumentType)
+                @Html.DisplayNameFor(model => model.TitleOwnerName)
             </th>
         </tr>
     </thead>
@@ -83,24 +77,70 @@
         {
             <tr>
                 <td>
-                    <a asp-action="Details" asp-route-id="@item.Id">
-                        @Html.DisplayFor(modelItem => item.ParentParcel)
+                    <a class="toggle-row-details" data-toggle="collapse" data-target="#@item.ParcelNumber" aria-expanded="false" aria-controls="@item.ParcelNumber">
+                        <i class="glyphicon glyphicon-chevron-right pull-right"></i>
+                        <i class="glyphicon glyphicon-chevron-down pull-right"></i>
                     </a>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ChildParcel)
+                    @Html.DisplayFor(modelItem => item.ParcelNumber)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.SegCombDate)
+                    @Html.DisplayFor(modelItem => item.TaxPayerName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.EffectiveDate)
+                    @Html.DisplayFor(modelItem => item.TitleOwnerName)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ReferenceNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LegalDocumentType)
+            </tr>
+            <tr class="row-details">
+                <td colspan="100">
+                    <div class="collapse" id="@item.ParcelNumber">
+                        <table class="table table-hover">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(modelItem => item.Children.FirstOrDefault().ParcelNumber)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(modelItem => item.Children.FirstOrDefault().EffectiveDate)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(modelItem => item.Children.FirstOrDefault().SegCombDate)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(modelItem => item.Children.FirstOrDefault().ReferenceNumber)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(modelItem => item.Children.FirstOrDefault().LegalDocumentType)
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var childParcel in item.Children)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a asp-action="Details" asp-route-id="@childParcel.Id">
+                                                @Html.DisplayFor(modelItem => childParcel.ParcelNumber)
+                                            </a>
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => childParcel.EffectiveDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => childParcel.SegCombDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => childParcel.ReferenceNumber)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => childParcel.LegalDocumentType)
+                                        </td>
+                                    </tr>
+                                }
+                            <tbody>
+                        </table>
+                    </div>
                 </td>
             </tr>
         }

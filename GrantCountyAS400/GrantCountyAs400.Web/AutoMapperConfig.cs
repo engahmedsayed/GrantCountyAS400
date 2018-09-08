@@ -48,8 +48,8 @@ namespace GrantCountyAs400.Web
 
                 cfg.CreateMap<PlatCondo, PlatCondoViewModel>();
 
-                cfg.CreateMap<ChildParentParcel, ChildParentParcelViewModel>();
-                cfg.CreateMap<ChildParentParcelDetails, ChildParentParcelDetailsViewModel>();
+                cfg.CreateMap<ParentParcel, ParentParcelViewModel>();
+                cfg.CreateMap<ChildParcelDetails, ChildParentParcelDetailsViewModel>();
 
                 cfg.CreateMap<AssociatedPerson, AssociatedPersonViewModel>();
                 cfg.CreateMap<AssociatedPersonMain, AssociatedPersonMainViewModel>();

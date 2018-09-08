@@ -1,5 +1,6 @@
 ﻿using GrantCountyAs400.Web.Utils;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace GrantCountyAs400.Web.ViewModels.Assessment.ChildParentParcel
@@ -15,15 +16,17 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.ChildParentParcel
         [DisplayFormat(DataFormatString = "{0:00 0000 000}")]
         public decimal ParentParcel { get; set; }
 
-        [Display(Name = "Child Parcel")]
+        [Display(Name = "Parcel Number")]
         [DisplayFormat(DataFormatString = "{0:00 0000 000}")]
         public decimal ChildParcel { get; set; }
 
         [Display(Name = "Seg Comb Date")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         [DataType(DataType.Date)]
         public DateTime? SegCombDate { get; set; }
 
         [Display(Name = "Effective Date")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         [DataType(DataType.Date)]
         public DateTime? EffectiveDate { get; set; }
 
@@ -48,6 +51,22 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.ChildParentParcel
         public string Description4 { get; set; }
         public string Description5 { get; set; }
 
+        public IEnumerable<ChildParcelViewModel> Children { get; set; }
+
         public string TaxStatusDisplay => TaxStatusFactory.TaxStatusCodeToDescription(TaxStatus);
+
+        public List<string> Descriptions
+        {
+            get
+            {
+                List<string> result = new List<string>();
+                if (!string.IsNullOrEmpty(Description1)) result.Add(Description1);
+                if (!string.IsNullOrEmpty(Description2)) result.Add(Description2);
+                if (!string.IsNullOrEmpty(Description3)) result.Add(Description3);
+                if (!string.IsNullOrEmpty(Description4)) result.Add(Description4);
+                if (!string.IsNullOrEmpty(Description5)) result.Add(Description5);
+                return result;
+            }
+        }
     }
 }

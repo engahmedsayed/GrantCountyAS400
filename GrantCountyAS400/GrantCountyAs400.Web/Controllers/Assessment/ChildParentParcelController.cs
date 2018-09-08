@@ -29,7 +29,7 @@ namespace GrantCountyAs400.Web.Controllers.Assessment
 
             pagingInfo.Total = resultCount;
             ViewBag.FilterViewModel = filter;
-            return View(results.ToMappedPagedList<ChildParentParcel, ChildParentParcelViewModel>(pagingInfo));
+            return View(results.ToMappedPagedList<ParentParcel, ParentParcelViewModel>(pagingInfo));
         }
 
         [HttpGet]
