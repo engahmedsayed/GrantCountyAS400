@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GrantCountyAs400.Domain.Assessment
 {
-    public class ChildParentParcelDetails
+    public class ChildParcelDetails
     {
         public int Id { get; }
         public string RecordCode { get; }
@@ -21,10 +22,11 @@ namespace GrantCountyAs400.Domain.Assessment
         public string Description3 { get; }
         public string Description4 { get; }
         public string Description5 { get; }
+        public IEnumerable<ChildParcel> Children { get; }
 
-        public ChildParentParcelDetails(int id, string recordCode, decimal parentParcel, decimal childParcel, DateTime? segCombDate, DateTime? effectiveDate,
+        public ChildParcelDetails(int id, string recordCode, decimal parentParcel, decimal childParcel, DateTime? segCombDate, DateTime? effectiveDate,
             string legalDocumentType, string referenceNumber, string taxPayerName, string titleOwnerName, string taxStatus, string description1,
-            string description2, string description3, string description4, string description5)
+            string description2, string description3, string description4, string description5, IEnumerable<ChildParcel> children)
         {
             Id = id;
             ParentParcel = parentParcel;
@@ -42,6 +44,7 @@ namespace GrantCountyAs400.Domain.Assessment
             Description3 = description3;
             Description4 = description4;
             Description5 = description5;
+            Children = children;
         }
     }
 }

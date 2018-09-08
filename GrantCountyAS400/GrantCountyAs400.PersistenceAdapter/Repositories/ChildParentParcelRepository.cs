@@ -17,45 +17,70 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             _context = dbContext;
         }
 
-        public IEnumerable<ChildParentParcel> GetAll(decimal parcelNumber, DateTime? effectiveDate, string legalDocumentType,
-                                                     out int resultCount, int pageNumber = 1, int pageSize = 50)
+        public IEnumerable<ParentParcel> GetAll(decimal parcelNumber, DateTime? effectiveDate, string legalDocumentType,
+                                                out int resultCount, int pageNumber = 1, int pageSize = 50)
         {
-            List<ChildParentParcel> results = new List<ChildParentParcel>();
+            List<ParentParcel> results = new List<ParentParcel>();
 
-            var query = from childParent in _context.AsmtparentChildRelationshipsChanged
-                        where ((parcelNumber <= 0) || (childParent.ParentParcel == parcelNumber || childParent.ChildParcel == parcelNumber))
-                        && ((effectiveDate == null || effectiveDate.Value == null) || (childParent.EffectiveDate == effectiveDate))
-                        && ((string.IsNullOrWhiteSpace(legalDocumentType)) || (childParent.LegalDocumentType.Trim().ToLower() == legalDocumentType.ToLower()))
-                        select ChildParentParcelMapper.Map(childParent);
+            List<ParentParcel> parentRecords = new List<ParentParcel>();
+            var query = (from parent in _context.AsmtparentChildRelationshipsChanged
+                         join masterRecord in _context.AsmtrealPropertyAssessedValueMaster on parent.ParentParcel equals masterRecord.ParcelNumber
+                         join names in _context.ASMTValueMasterNameView on parent.ParentParcel equals names.ParcelNumber
+                         where ((parcelNumber <= 0) || (parent.ParentParcel == parcelNumber || parent.ChildParcel == parcelNumber))
+                            && ((effectiveDate == null || effectiveDate.Value == null) || (parent.EffectiveDate == effectiveDate))
+                            && ((string.IsNullOrWhiteSpace(legalDocumentType)) || (parent.LegalDocumentType.Trim().ToLower() == legalDocumentType.ToLower()))
+                         group parent by new { parent.ParentParcel, names.TaxpayerName, names.TitleOwnerName } into parentGroup
+                         orderby parentGroup.Key.TaxpayerName
+                         select parentGroup.Key)
+                         .Distinct()
+                         .Select(t => new ParentParcel(t.ParentParcel.Value, t.TaxpayerName, t.TitleOwnerName));
 
             if (pageNumber > 0)
             {
                 resultCount = query.Count();
-                results = query.Skip((pageNumber - 1) * pageSize)
-                               .Take(pageSize)
-                               .OrderBy(t => t.ParentParcel)
-                               .ToList();
+                parentRecords = query.Skip((pageNumber - 1) * pageSize)
+                                     .Take(pageSize)
+                                     .ToList();
             }
             else
             {
-                results = query.OrderBy(t => t.ParentParcel)
-                               .ToList();
-                resultCount = results.Count();
+                parentRecords = query.ToList();
+                resultCount = parentRecords.Count();
+            }
+
+            var listOfRetrievedParentParcels = parentRecords.Select(parent => parent.ParcelNumber).ToList();
+
+            var childRecords = _context.AsmtparentChildRelationshipsChanged
+                                       .Where(child => listOfRetrievedParentParcels.Contains(child.ParentParcel.Value))
+                                       .Select(ChildParentParcelMapper.Map)
+                                       .ToList();
+
+            foreach (var parent in parentRecords)
+            {
+                results.Add(new ParentParcel(
+                    parent.ParcelNumber, parent.TaxPayerName, parent.TitleOwnerName,
+                    childRecords.Where(child => child.ParentParcelNumber == parent.ParcelNumber)
+                ));
             }
 
             return results;
         }
 
-        public ChildParentParcelDetails Details(int id)
+        public ChildParcelDetails Details(int id)
         {
-            var result = (from childParent in _context.AsmtparentChildRelationshipsChanged
-                          join masterRecord in _context.AsmtrealPropertyAssessedValueMaster on childParent.ParentParcel equals masterRecord.ParcelNumber
-                          join names in _context.ASMTValueMasterNameView on childParent.ParentParcel equals names.ParcelNumber
-                          where childParent.Id == id
-                          select ChildParentParcelMapper.Map(childParent, names, masterRecord)
-                          ).SingleOrDefault();
+            var query = (from child in _context.AsmtparentChildRelationshipsChanged
+                         join masterRecord in _context.AsmtrealPropertyAssessedValueMaster on child.ChildParcel equals masterRecord.ParcelNumber
+                         join names in _context.ASMTValueMasterNameView on child.ChildParcel equals names.ParcelNumber
+                         where child.Id == id
+                         select new { ChildParcel = child, ValueMasterNames = names, ValueMasterRecord = masterRecord }
+                         ).SingleOrDefault();
 
-            return result;
+            if (query != null)
+            {
+                var children = _context.AsmtparentChildRelationshipsChanged.Where(t => t.ParentParcel == query.ChildParcel.ChildParcel);
+                return ChildParentParcelMapper.Map(query.ChildParcel, query.ValueMasterNames, query.ValueMasterRecord, children);
+            }
+            return null;
         }
     }
 }

@@ -1,25 +1,46 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GrantCountyAs400.Domain.Assessment
 {
-    public class ChildParentParcel
+    public class ParentParcel
+    {
+        public decimal ParcelNumber { get; }
+        public string TaxPayerName { get; }
+        public string TitleOwnerName { get; }
+        public IEnumerable<ChildParcel> Children { get; }
+
+        public ParentParcel(decimal parentParcel, string taxPayerName, string titleOwnerName)
+        {
+            ParcelNumber = parentParcel;
+            TaxPayerName = taxPayerName;
+            TitleOwnerName = titleOwnerName;
+        }
+
+        public ParentParcel(decimal parentParcel, string taxPayerName, string titleOwnerName, IEnumerable<ChildParcel> children)
+            : this(parentParcel, taxPayerName, titleOwnerName)
+        {
+            Children = children;
+        }
+    }
+
+    public class ChildParcel
     {
         public int Id { get; }
+        public decimal ParentParcelNumber { get; }
+        public decimal ParcelNumber { get; }
         public string RecordCode { get; }
-        public decimal ParentParcel { get; }
-        public decimal ChildParcel { get; }
         public DateTime? SegCombDate { get; }
         public DateTime? EffectiveDate { get; }
-        public string AssociatedParcelTax { get; }
         public string ReferenceNumber { get; }
         public string LegalDocumentType { get; }
 
-        public ChildParentParcel(int id, string recordCode, decimal parentParcel, decimal childParcel, DateTime? segCombDate, DateTime? effectiveDate,
-            string legalDocumentType, string referenceNumber)
+        public ChildParcel(int id, decimal parentParcel, decimal childParcel, string recordCode, DateTime? segCombDate, DateTime? effectiveDate,
+            string referenceNumber, string legalDocumentType)
         {
             Id = id;
-            ParentParcel = parentParcel;
-            ChildParcel = childParcel;
+            ParentParcelNumber = parentParcel;
+            ParcelNumber = childParcel;
             LegalDocumentType = legalDocumentType;
             SegCombDate = segCombDate;
             EffectiveDate = effectiveDate;
