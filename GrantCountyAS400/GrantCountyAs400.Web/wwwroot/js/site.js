@@ -4,7 +4,7 @@ $(function () { // onDomReady
     $('form input:reset').click(function () {
         $(this).parents('form:first')
             .find(':radio, :checkbox').removeAttr('checked').end()
-            .find('textarea, :text, :input[type="number"], select').val('')
+            .find('textarea, :text, :input[type="number"], select').val('');
 
         return false;
     });
