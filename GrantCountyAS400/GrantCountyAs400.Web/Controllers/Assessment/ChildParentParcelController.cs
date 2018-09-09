@@ -24,7 +24,7 @@ namespace GrantCountyAs400.Web.Controllers.Assessment
             int resultCount;
             var pagingInfo = new PagingInfo() { PageNumber = pageNumber };
 
-            var results = _childParentParcelRepository.GetAll(filter.ParcelNumber, filter.EffectiveDate, filter.LegalDocumentType, out resultCount, pageNumber, AppSettings.PageSize)
+            var results = _childParentParcelRepository.GetAll(filter.ParcelNumber, out resultCount, pageNumber, AppSettings.PageSize)
                                                       .ToList();
 
             pagingInfo.Total = resultCount;

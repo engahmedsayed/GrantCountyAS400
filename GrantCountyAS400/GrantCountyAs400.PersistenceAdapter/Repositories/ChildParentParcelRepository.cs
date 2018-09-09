@@ -2,7 +2,6 @@
 using GrantCountyAs400.Domain.Assessment.Repository;
 using GrantCountyAs400.PersistenceAdapter.Mappers.Assessment;
 using GrantCountyAs400.PersistenceAdapter.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,8 +16,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             _context = dbContext;
         }
 
-        public IEnumerable<ParentParcel> GetAll(decimal parcelNumber, DateTime? effectiveDate, string legalDocumentType,
-                                                out int resultCount, int pageNumber = 1, int pageSize = 50)
+        public IEnumerable<ParentParcel> GetAll(decimal parcelNumber, out int resultCount, int pageNumber = 1, int pageSize = 50)
         {
             List<ParentParcel> results = new List<ParentParcel>();
 
@@ -27,8 +25,6 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          join masterRecord in _context.AsmtrealPropertyAssessedValueMaster on parent.ParentParcel equals masterRecord.ParcelNumber
                          join names in _context.ASMTValueMasterNameView on parent.ParentParcel equals names.ParcelNumber
                          where ((parcelNumber <= 0) || (parent.ParentParcel == parcelNumber || parent.ChildParcel == parcelNumber))
-                            && ((effectiveDate == null || effectiveDate.Value == null) || (parent.EffectiveDate == effectiveDate))
-                            && ((string.IsNullOrWhiteSpace(legalDocumentType)) || (parent.LegalDocumentType.Trim().ToLower() == legalDocumentType.ToLower()))
                          group parent by new { parent.ParentParcel, names.TaxpayerName, names.TitleOwnerName } into parentGroup
                          orderby parentGroup.Key.TaxpayerName
                          select parentGroup.Key)
