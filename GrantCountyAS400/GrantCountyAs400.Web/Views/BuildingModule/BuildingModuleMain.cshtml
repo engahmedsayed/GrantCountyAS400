@@ -1,0 +1,73 @@
+﻿@model IEnumerable<GrantCountyAs400.Web.ViewModels.BuildingVM.BuildingMainModuleViewModel>
+@using X.PagedList.Mvc.Core;
+@using GrantCountyAs400.Web.ViewModels.BuildingVM
+@using X.PagedList;
+
+@{
+    ViewData["Title"] = "Building Module Main";
+}
+
+<h2>Building Module Main</h2>
+
+@*<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ApplicationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ApplicationNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().AddendumNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().PermitCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().PermitStatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a class="toggle-row-details" data-toggle="collapse" data-target="#@item.AccountNumber" aria-expanded="false" aria-controls="@item.AccountNumber">
+                        <i class="glyphicon glyphicon-chevron-right pull-right"></i>
+                        <i class="glyphicon glyphicon-chevron-down pull-right"></i>
+                    </a>
+                </td>
+                <td>
+                    @{var selectedFiscalYear = filterViewModel.FiscalYear != 0 ? filterViewModel.FiscalYear : 2008;}
+                    <a asp-action="Details" asp-controller="GeneralLedger" asp-route-fund="@item.Fund" asp-route-department="@item.Department" asp-route-program="@item.Program" asp-route-project="@item.Project" asp-route-baseId="@item.Base" asp-route-fiscalYear="@selectedFiscalYear" asp-route-pageNumber="1">@item.AccountNumber</a>
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kind)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<nav aria-label="navigation">
+    @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
+    pageNumber = pageNumber,
+    fiscalYear = filterViewModel.FiscalYear,
+    department = filterViewModel.Department,
+    fund = filterViewModel.Fund
+}))
+</nav>*@
+
+

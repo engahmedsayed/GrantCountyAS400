@@ -1,0 +1,107 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace GrantCountyAs400.PersistenceAdapter.Models
+{
+    public partial class BldgpermitApplicationMaster
+    {
+        public int Id { get; set; }
+        public string RecordStatus { get; set; }
+        public string JurisdictionCode { get; set; }
+        public string DepartmentCode { get; set; }
+        public decimal? ApplicationYear { get; set; }
+        public decimal? ApplicationNumber { get; set; }
+        public decimal? AddendumNumber { get; set; }
+        public string ProcessedForJurisdiction { get; set; }
+        public DateTime? ApplicationDate { get; set; }
+        public string ApplicationUserId { get; set; }
+        public string ApplicantBusinessName { get; set; }
+        public string ApplicantLastName { get; set; }
+        public string ApplicantFirstName { get; set; }
+        public string AddressLine1 { get; set; }
+        public string AddressLine2 { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string ZipCode { get; set; }
+        public decimal? PhoneNumber { get; set; }
+        public decimal? PreliminaryParcelNumber { get; set; }
+        public decimal? AssessorParcelNumber { get; set; }
+        public string AdditionalInformation { get; set; }
+        public string ParkInformation { get; set; }
+        public string SiteAddress { get; set; }
+        public string ContractLicenseNumber { get; set; }
+        public string ArchitectFirmNumber { get; set; }
+        public string EngineerFirmNumber { get; set; }
+        public string ApplicantProjectDescription { get; set; }
+        public string ProjectInformation { get; set; }
+        public string ResultOfEnforcementAction { get; set; }
+        public string EnforcementDescription { get; set; }
+        public string PlotPlanReceived { get; set; }
+        public string OnlyStructureOnParcel { get; set; }
+        public string OnlyResidenceOnParcel { get; set; }
+        public string BuildingApprovalRequired { get; set; }
+        public DateTime? BuildingApprovalDate { get; set; }
+        public string BuildingApprovalUser { get; set; }
+        public string FireMarshalApprovalRequired { get; set; }
+        public DateTime? FireMarshalApprovalDate { get; set; }
+        public string FireMarshalApprovalUser { get; set; }
+        public string PlanningApprovalRequired { get; set; }
+        public DateTime? PlanningApprovalDate { get; set; }
+        public string PlanningApprovalUser { get; set; }
+        public string HealthApprovalRequired { get; set; }
+        public DateTime? HealthApprovalRequiredDate { get; set; }
+        public string HealthApprovalRequiredUser { get; set; }
+        public string AssessorApprovalRequired { get; set; }
+        public DateTime? AssessorApprovalDate { get; set; }
+        public string AssessorApprovalUser { get; set; }
+        public string PublicWroksApprovalRequired { get; set; }
+        public DateTime? PublicWroksApprovalDate { get; set; }
+        public string PublicWroksApprovalUser { get; set; }
+        public string CityJurisdictionApprovalRequired { get; set; }
+        public DateTime? CityJurisdictionApprovalDate { get; set; }
+        public string CityJurisdictionApprovalUser { get; set; }
+        public string ArchitectApprovalRequired { get; set; }
+        public DateTime? ArchitectApprovalDate { get; set; }
+        public string ArchitectApprovalUser { get; set; }
+        public string FireApprovalRequired { get; set; }
+        public DateTime? FireApprovalRequiredDate { get; set; }
+        public string FireApprovalRequiredUser { get; set; }
+        public string LIapprovalRequired { get; set; }
+        public DateTime? LIapprovalRequiredDate { get; set; }
+        public string LIapprovalRequiredUser { get; set; }
+        public string CityUtilityApprovalRequired { get; set; }
+        public DateTime? CityUtilityApprovalDate { get; set; }
+        public string CityUtilityApprovalUser { get; set; }
+        public string OwnerApprovalRequired { get; set; }
+        public DateTime? OwnerApprovalRequiredDate { get; set; }
+        public string OwnerApprovalRequiredUser { get; set; }
+        public string OtherSpecialApprovalRequired { get; set; }
+        public DateTime? OtherSpecialApprovalRequiredDate { get; set; }
+        public string OtherSpecialApprovalRequiredUser { get; set; }
+        public string OtherSpecialApprovalDescription { get; set; }
+        public string ApplicationAccepted { get; set; }
+        public DateTime? ApplicationAcceptedDate { get; set; }
+        public string ApplicationAcceptedUserId { get; set; }
+        public string PermitCode { get; set; }
+        public decimal? AssignedValue { get; set; }
+        public decimal? AssignedFee { get; set; }
+        public decimal? DepositAmount { get; set; }
+        public decimal? StateClassCode { get; set; }
+        public string ClassCodeExtension { get; set; }
+        public string PermitStatus { get; set; }
+        public decimal? PermitYear { get; set; }
+        public decimal? PermitNumber { get; set; }
+        public DateTime? PermitIssuedDate { get; set; }
+        public string PermitIssuedUserId { get; set; }
+        public DateTime? ProjectedExpireDate { get; set; }
+        public DateTime? ActualExpireDate { get; set; }
+        public decimal? ActualExpireTime { get; set; }
+        public string ExpiredByUser { get; set; }
+        public DateTime? VoidDate { get; set; }
+        public decimal? VoidTime { get; set; }
+        public string VoidedByUser { get; set; }
+        public DateTime? FinalDate { get; set; }
+        public decimal? FinalTime { get; set; }
+        public string FinaledByUser { get; set; }
+    }
+}

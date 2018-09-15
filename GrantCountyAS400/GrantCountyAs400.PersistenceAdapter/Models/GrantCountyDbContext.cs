@@ -42,10 +42,30 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
         public virtual DbSet<AsmtrealPropertyAssessedValueMaster> AsmtrealPropertyAssessedValueMaster { get; set; }
         public virtual DbSet<AsmtrealPropertyAssociatedPersons> AsmtrealPropertyAssociatedPersons { get; set; }
         public virtual DbSet<AsmtseniorCitizenHistory> AsmtseniorCitizenHistory { get; set; }
-        public virtual DbSet<AsmtsenirCitizenExemptionRate> AsmtsenirCitizenExemptionRate { get; set; }
         public virtual DbSet<AsmttaxCodeArea> AsmttaxCodeArea { get; set; }
         public virtual DbSet<AsmtzoneDescriptions> AsmtzoneDescriptions { get; set; }
         public virtual DbSet<ASMTValueMasterNameView> ASMTValueMasterNameView { get; set; }
+        public virtual DbSet<BldgapplcationReceiptDetail> BldgapplcationReceiptDetail { get; set; }
+        public virtual DbSet<BldgapplcationReceiptHeader> BldgapplcationReceiptHeader { get; set; }
+        public virtual DbSet<BldgapplicationConditions> BldgapplicationConditions { get; set; }
+        public virtual DbSet<BldgapplicationFees> BldgapplicationFees { get; set; }
+        public virtual DbSet<BldgapplicationInspections> BldgapplicationInspections { get; set; }
+        public virtual DbSet<BldgapplicationNotes> BldgapplicationNotes { get; set; }
+        public virtual DbSet<BldgapplicationValues> BldgapplicationValues { get; set; }
+        public virtual DbSet<Bldgcontractors> Bldgcontractors { get; set; }
+        public virtual DbSet<BldgdemolitionPermitDetail> BldgdemolitionPermitDetail { get; set; }
+        public virtual DbSet<Bldgdepartments> Bldgdepartments { get; set; }
+        public virtual DbSet<BldgfeeDistributionCategories> BldgfeeDistributionCategories { get; set; }
+        public virtual DbSet<BldgfireDistrictCodes> BldgfireDistrictCodes { get; set; }
+        public virtual DbSet<BldggradingExcavatingPermitDetail> BldggradingExcavatingPermitDetail { get; set; }
+        public virtual DbSet<Bldgjurisdictions> Bldgjurisdictions { get; set; }
+        public virtual DbSet<BldgmechanicalPermitDetail> BldgmechanicalPermitDetail { get; set; }
+        public virtual DbSet<BldgotherPermitDetail> BldgotherPermitDetail { get; set; }
+        public virtual DbSet<BldgpermitApplicationMaster> BldgpermitApplicationMaster { get; set; }
+        public virtual DbSet<BldgpermitCodes> BldgpermitCodes { get; set; }
+        public virtual DbSet<BldgpermitsConditionsUserAuthority> BldgpermitsConditionsUserAuthority { get; set; }
+        public virtual DbSet<BldgplanningApproval> BldgplanningApproval { get; set; }
+        public virtual DbSet<BldgstateClassifications> BldgstateClassifications { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -2157,46 +2177,6 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                 entity.Property(e => e.TotalMarketValue).HasColumnType("decimal(9, 0)");
             });
 
-            modelBuilder.Entity<AsmtsenirCitizenExemptionRate>(entity =>
-            {
-                entity.ToTable("ASMTSenirCitizenExemptionRate");
-
-                entity.Property(e => e.Id).HasColumnName("ID");
-
-                entity.Property(e => e.Description)
-                    .HasMaxLength(25)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ExcLevyExemptPercent).HasColumnType("numeric(3, 0)");
-
-                entity.Property(e => e.MaximumIncome).HasColumnType("decimal(9, 0)");
-
-                entity.Property(e => e.RecordCode)
-                    .IsRequired()
-                    .HasMaxLength(1)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.RegLevyExemptPercent).HasColumnType("numeric(3, 0)");
-
-                entity.Property(e => e.RegLevyMaxExemptAv)
-                    .HasColumnName("RegLevyMaxExemptAV")
-                    .HasColumnType("decimal(9, 0)");
-
-                entity.Property(e => e.RegLevyMinExemptAv)
-                    .HasColumnName("RegLevyMinExemptAV")
-                    .HasColumnType("decimal(9, 0)");
-
-                entity.Property(e => e.SeniorCitizenCode)
-                    .HasMaxLength(1)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ShortDescription)
-                    .HasMaxLength(15)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.TaxYear).HasColumnType("numeric(4, 0)");
-            });
-
             modelBuilder.Entity<AsmttaxCodeArea>(entity =>
             {
                 entity.ToTable("ASMTTaxCodeArea");
@@ -2262,6 +2242,1515 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                 entity.Property(e => e.ZoneMinimums)
                     .HasMaxLength(12)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<BldgapplcationReceiptDetail>(entity =>
+            {
+                entity.ToTable("BLDGApplcationReceiptDetail");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.AddendumNumber).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.Amount).HasColumnType("numeric(9, 2)");
+
+                entity.Property(e => e.ApplicationNumber).HasColumnType("numeric(5, 0)");
+
+                entity.Property(e => e.ApplicationYear).HasColumnType("numeric(4, 0)");
+
+                entity.Property(e => e.ChangeDate).HasColumnType("date");
+
+                entity.Property(e => e.ChangeTime).HasColumnType("numeric(6, 0)");
+
+                entity.Property(e => e.DepartmentCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FeeDistributionCategory).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.JurisdictionCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ReceiptNumber).HasColumnType("numeric(10, 0)");
+
+                entity.Property(e => e.RecordStatus)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserId)
+                    .HasColumnName("UserID")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<BldgapplcationReceiptHeader>(entity =>
+            {
+                entity.ToTable("BLDGApplcationReceiptHeader");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.AddendumNumber).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.ApplicationNumber).HasColumnType("numeric(5, 0)");
+
+                entity.Property(e => e.ApplicationYear).HasColumnType("numeric(4, 0)");
+
+                entity.Property(e => e.CashAmount).HasColumnType("numeric(9, 2)");
+
+                entity.Property(e => e.ChangeAmount).HasColumnType("numeric(9, 2)");
+
+                entity.Property(e => e.ChangeDate).HasColumnType("date");
+
+                entity.Property(e => e.ChangeTime).HasColumnType("numeric(6, 0)");
+
+                entity.Property(e => e.CheckAmount).HasColumnType("numeric(9, 2)");
+
+                entity.Property(e => e.DepartmentCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.JurisdictionCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.OtherAmount).HasColumnType("numeric(9, 2)");
+
+                entity.Property(e => e.PaidByCheckNumber)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ReceiptComment)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ReceiptDate).HasColumnType("date");
+
+                entity.Property(e => e.ReceiptName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ReceiptNumber).HasColumnType("numeric(10, 0)");
+
+                entity.Property(e => e.ReceiptType)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecordStatus)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserId)
+                    .HasColumnName("UserID")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<BldgapplicationConditions>(entity =>
+            {
+                entity.ToTable("BLDGApplicationConditions");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.AddendumNumber).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.ApplicationNumber).HasColumnType("numeric(5, 0)");
+
+                entity.Property(e => e.ApplicationYear).HasColumnType("numeric(4, 0)");
+
+                entity.Property(e => e.ConditionDepartmentCode)
+                    .HasColumnName("ConditionDepartment Code")
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ConditionLine1)
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ConditionLine2)
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ConditionLine3)
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ConditionLine4)
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ConditionLine5)
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ConditionLine6)
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ConditionSequence).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.DateRemoved).HasColumnType("date");
+
+                entity.Property(e => e.DepartmentCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EnteredByUser)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EntryDate).HasColumnType("date");
+
+                entity.Property(e => e.JurisdictionCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ReasonRemoved)
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecordStatus)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RemoveAuthorizedBy)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RemoveAuthorizedDate).HasColumnType("date");
+
+                entity.Property(e => e.RemovedByUser)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<BldgapplicationFees>(entity =>
+            {
+                entity.ToTable("BLDGApplicationFees");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.AddendumNumber).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.ApplicationNumber).HasColumnType("numeric(5, 0)");
+
+                entity.Property(e => e.ApplicationYear).HasColumnType("numeric(4, 0)");
+
+                entity.Property(e => e.BaseFee).HasColumnType("numeric(8, 2)");
+
+                entity.Property(e => e.ChargeByValue)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DepartmentCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ExtendedAmount).HasColumnType("numeric(8, 2)");
+
+                entity.Property(e => e.FeeCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FeeDescription)
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FeeDistributionCategory).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.FeeIncrement).HasColumnType("numeric(8, 2)");
+
+                entity.Property(e => e.JurisdictionCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.MinMaxFlag)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NumberOfUnits).HasColumnType("numeric(10, 2)");
+
+                entity.Property(e => e.RecordStatus)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SequenceNumber).HasColumnType("numeric(5, 0)");
+
+                entity.Property(e => e.UnitCharge).HasColumnType("numeric(7, 2)");
+            });
+
+            modelBuilder.Entity<BldgapplicationInspections>(entity =>
+            {
+                entity.ToTable("BLDGApplicationInspections");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.AddendumNumber).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.ApplicationNumber).HasColumnType("numeric(5, 0)");
+
+                entity.Property(e => e.ApplicationYear).HasColumnType("numeric(4, 0)");
+
+                entity.Property(e => e.DateInspectionEntered).HasColumnType("date");
+
+                entity.Property(e => e.DateRemoved).HasColumnType("date");
+
+                entity.Property(e => e.DepartmentCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EnteredByUser)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EntryDate).HasColumnType("date");
+
+                entity.Property(e => e.InspectedBy)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.InspectionDate).HasColumnType("date");
+
+                entity.Property(e => e.InspectionDepartmentCode)
+                    .HasColumnName("InspectionDepartment Code")
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.InspectionEnteredByUser)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.InspectionLine1)
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.InspectionLine2)
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.InspectionLine3)
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.InspectionLine4)
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.InspectionLine5)
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.InspectionLine6)
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.JurisdictionCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ReasonRemoved)
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecordStatus)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RemoveAuthorizedBy)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RemoveAuthorizedDate).HasColumnType("date");
+
+                entity.Property(e => e.RemovedByUser)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SequenceNumber).HasColumnType("numeric(3, 0)");
+            });
+
+            modelBuilder.Entity<BldgapplicationNotes>(entity =>
+            {
+                entity.ToTable("BLDGApplicationNotes");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.AddendumNumber).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.ApplicationNumber).HasColumnType("numeric(5, 0)");
+
+                entity.Property(e => e.ApplicationYear).HasColumnType("numeric(4, 0)");
+
+                entity.Property(e => e.ChangeDate).HasColumnType("date");
+
+                entity.Property(e => e.DepartmentCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.JurisdictionCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Note)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecordStatus)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SequenceNumber).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.UserId)
+                    .HasColumnName("UserID")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<BldgapplicationValues>(entity =>
+            {
+                entity.ToTable("BLDGApplicationValues");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.AddendumNumber).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.ApplicationNumber).HasColumnType("numeric(5, 0)");
+
+                entity.Property(e => e.ApplicationYear).HasColumnType("numeric(4, 0)");
+
+                entity.Property(e => e.ComponentDescription)
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ConstructionTypeDescription)
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ConstructionTypeShortDescription)
+                    .HasMaxLength(8)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Cost).HasColumnType("numeric(5, 2)");
+
+                entity.Property(e => e.DepartmentCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ExtendedValue).HasColumnType("numeric(11, 2)");
+
+                entity.Property(e => e.JurisdictionCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NumberOfOccupants).HasColumnType("numeric(5, 0)");
+
+                entity.Property(e => e.OccupantType)
+                    .HasMaxLength(4)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecordStatus)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SectionDescription)
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SequenceNumber).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.SquareFeet).HasColumnType("numeric(7, 0)");
+
+                entity.Property(e => e.TableNumberSectLineSeq).HasColumnType("numeric(6, 0)");
+            });
+
+            modelBuilder.Entity<Bldgcontractors>(entity =>
+            {
+                entity.ToTable("BLDGContractors");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.AddressLine2)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.City)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ContactName)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ContractLicenseNumber)
+                    .HasMaxLength(12)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ContractorBusinessName)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ContractorSearchName)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DateLastChanged).HasColumnType("date");
+
+                entity.Property(e => e.FaxNumber).HasColumnType("numeric(10, 0)");
+
+                entity.Property(e => e.InternetAddress)
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.MailingAddress)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PhoneExtensionNumber).HasColumnType("numeric(5, 0)");
+
+                entity.Property(e => e.PhoneNumber).HasColumnType("numeric(10, 0)");
+
+                entity.Property(e => e.PhoneNumber2).HasColumnType("numeric(10, 0)");
+
+                entity.Property(e => e.RecordStatus)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.State)
+                    .HasMaxLength(2)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserId)
+                    .HasColumnName("UserID")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ZipCode)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<BldgdemolitionPermitDetail>(entity =>
+            {
+                entity.ToTable("BLDGDemolitionPermitDetail");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.AddendumNumber).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.ApplicationNumber).HasColumnType("numeric(5, 0)");
+
+                entity.Property(e => e.ApplicationYear).HasColumnType("numeric(4, 0)");
+
+                entity.Property(e => e.BldgDeptApprovalBy)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.BldgDeptApprovedChangeDate).HasColumnType("date");
+
+                entity.Property(e => e.BldgDeptApprovedUserId)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.BldgDeptDateApproved).HasColumnType("date");
+
+                entity.Property(e => e.BldgDeptSetback).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.BuildingDescription)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DateProvided).HasColumnType("date");
+
+                entity.Property(e => e.DepartmentCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Dimensions)
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FireDistrictCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FireMarshalApprovalBy)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FireMarshalApprovedChangeDate).HasColumnType("date");
+
+                entity.Property(e => e.FireMarshalApprovedUserId)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FireMarshalDateApproved).HasColumnType("date");
+
+                entity.Property(e => e.FireMarshalSetback).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.JurisdictionCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.OfficeProjectDescription)
+                    .HasMaxLength(75)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecordStatus)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RequiredHandoutsProvided)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SquareFeet).HasColumnType("numeric(7, 0)");
+
+                entity.Property(e => e.ToWhomProvided)
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Bldgdepartments>(entity =>
+            {
+                entity.ToTable("BLDGDepartments");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.ChangeDate).HasColumnType("date");
+
+                entity.Property(e => e.DepartmentCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LongDepartmentName)
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecordStatus)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ShortDepartmentName)
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserId)
+                    .HasColumnName("UserID")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<BldgfeeDistributionCategories>(entity =>
+            {
+                entity.ToTable("BLDGFeeDistributionCategories");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.ChangeDate).HasColumnType("date");
+
+                entity.Property(e => e.FeeDistributionCategory).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.FeeDistributionDescription)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.JurisdictionCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecordStatus)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ReportDisplayDescription)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<BldgfireDistrictCodes>(entity =>
+            {
+                entity.ToTable("BLDGFireDistrictCodes");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.ChangeDate).HasColumnType("date");
+
+                entity.Property(e => e.FireDistrictCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LongFireDistrictName)
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecordStatus)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ShortFireDistrictName)
+                    .HasMaxLength(12)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserId)
+                    .HasColumnName("UserID")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<BldggradingExcavatingPermitDetail>(entity =>
+            {
+                entity.ToTable("BLDGGradingExcavatingPermitDetail");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.AddendumNumber).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.AdditionalFireFlowRequired)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AmountOfFireFlowRequired)
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ApplicationNumber).HasColumnType("numeric(5, 0)");
+
+                entity.Property(e => e.ApplicationYear).HasColumnType("numeric(4, 0)");
+
+                entity.Property(e => e.BldgDeptApprovedBy)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.BldgDeptApprovedChangeDate).HasColumnType("date");
+
+                entity.Property(e => e.BldgDeptApprovedUserId)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.BldgDeptDateApproved).HasColumnType("date");
+
+                entity.Property(e => e.BldgDeptSetback).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.CubicYardsOfFill).HasColumnType("numeric(10, 2)");
+
+                entity.Property(e => e.DepartmentCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DustAndTrackControlReceived)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DustAndTrackReceivedDate).HasColumnType("date");
+
+                entity.Property(e => e.EngineeringReceived)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EngineeringReceivedDate).HasColumnType("date");
+
+                entity.Property(e => e.FireDistrictCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FireFlowAlreadyProvided)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FireMarshalApprovedBy)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FireMarshalApprovedChangeDate).HasColumnType("date");
+
+                entity.Property(e => e.FireMarshalApprovedUserId)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FireMarshalDateApproved).HasColumnType("date");
+
+                entity.Property(e => e.FireMarshalSetback).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.JurisdictionCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.OfficeProjectDescription)
+                    .HasMaxLength(75)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PercentOfSlope).HasColumnType("numeric(5, 0)");
+
+                entity.Property(e => e.RecordStatus)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SoilErosionControlRequired)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Bldgjurisdictions>(entity =>
+            {
+                entity.ToTable("BLDGJurisdictions");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.ChangeDate).HasColumnType("date");
+
+                entity.Property(e => e.DepartmentCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LongDepartmentName)
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecordStatus)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ShortDepartmentName)
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserId)
+                    .HasColumnName("UserID")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<BldgmechanicalPermitDetail>(entity =>
+            {
+                entity.ToTable("BLDGMechanicalPermitDetail");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.AddendumNumber).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.ApplicationNumber).HasColumnType("numeric(5, 0)");
+
+                entity.Property(e => e.ApplicationYear).HasColumnType("numeric(4, 0)");
+
+                entity.Property(e => e.BldgDeptApprovedBy)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.BldgDeptApprovedChangeDate).HasColumnType("date");
+
+                entity.Property(e => e.BldgDeptApprovedUserId)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.BldgDeptDateApproved).HasColumnType("date");
+
+                entity.Property(e => e.BldgDeptSetback).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.DepartmentCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FireDistrictCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FireMarshalApprovedBy)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FireMarshalApprovedChangeDate).HasColumnType("date");
+
+                entity.Property(e => e.FireMarshalApprovedUserId)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FireMarshalDateApproved).HasColumnType("date");
+
+                entity.Property(e => e.FireMarshalSetback).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.JurisdictionCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nrecreceived)
+                    .HasColumnName("NRECReceived")
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.OfficeProjectDescription)
+                    .HasMaxLength(75)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecordStatus)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<BldgotherPermitDetail>(entity =>
+            {
+                entity.ToTable("BLDGOtherPermitDetail");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.AddendumNumber).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.AdditionalFireFlowRequired)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AdditionalInformationDescription)
+                    .HasMaxLength(75)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AmountOffireFlowRequired)
+                    .HasColumnName("AmountOFFireFlowRequired")
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ApplicationNumber).HasColumnType("numeric(5, 0)");
+
+                entity.Property(e => e.ApplicationYear).HasColumnType("numeric(4, 0)");
+
+                entity.Property(e => e.BldgDeptApprovedBy)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.BldgDeptApprovedChangeDate).HasColumnType("date");
+
+                entity.Property(e => e.BldgDeptApprovedUserId)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.BldgDeptDateApproved).HasColumnType("date");
+
+                entity.Property(e => e.BldgDeptSetback).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.DepartmentCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FireDistrictCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FireFlowAlreadyProvided)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FireMarshalApprovedBy)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FireMarshalApprovedChangeDate).HasColumnType("date");
+
+                entity.Property(e => e.FireMarshalApprovedUserId)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FireMarshalDateApproved).HasColumnType("date");
+
+                entity.Property(e => e.FireMarshalSetback).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.JurisdictionCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.OfficeProjectDescription)
+                    .HasMaxLength(75)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecordStatus)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<BldgpermitApplicationMaster>(entity =>
+            {
+                entity.ToTable("BLDGPermitApplicationMaster");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.ActualExpireDate).HasColumnType("date");
+
+                entity.Property(e => e.ActualExpireTime).HasColumnType("numeric(6, 0)");
+
+                entity.Property(e => e.AddendumNumber).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.AdditionalInformation)
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AddressLine1)
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AddressLine2)
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ApplicantBusinessName)
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ApplicantFirstName)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ApplicantLastName)
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ApplicantProjectDescription)
+                    .HasMaxLength(75)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ApplicationAccepted)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ApplicationAcceptedDate).HasColumnType("date");
+
+                entity.Property(e => e.ApplicationAcceptedUserId)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ApplicationDate).HasColumnType("date");
+
+                entity.Property(e => e.ApplicationNumber).HasColumnType("numeric(5, 0)");
+
+                entity.Property(e => e.ApplicationUserId)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ApplicationYear).HasColumnType("numeric(4, 0)");
+
+                entity.Property(e => e.ArchitectApprovalDate).HasColumnType("date");
+
+                entity.Property(e => e.ArchitectApprovalRequired)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ArchitectApprovalUser)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ArchitectFirmNumber)
+                    .HasMaxLength(8)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AssessorApprovalDate).HasColumnType("date");
+
+                entity.Property(e => e.AssessorApprovalRequired)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AssessorApprovalUser)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AssessorParcelNumber).HasColumnType("numeric(16, 0)");
+
+                entity.Property(e => e.AssignedFee).HasColumnType("decimal(9, 2)");
+
+                entity.Property(e => e.AssignedValue).HasColumnType("decimal(11, 2)");
+
+                entity.Property(e => e.BuildingApprovalDate).HasColumnType("date");
+
+                entity.Property(e => e.BuildingApprovalRequired)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.BuildingApprovalUser)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.City)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CityJurisdictionApprovalDate).HasColumnType("date");
+
+                entity.Property(e => e.CityJurisdictionApprovalRequired)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CityJurisdictionApprovalUser)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CityUtilityApprovalDate).HasColumnType("date");
+
+                entity.Property(e => e.CityUtilityApprovalRequired)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CityUtilityApprovalUser)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ClassCodeExtension)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ContractLicenseNumber)
+                    .HasMaxLength(12)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DepartmentCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DepositAmount).HasColumnType("decimal(9, 2)");
+
+                entity.Property(e => e.EnforcementDescription)
+                    .HasMaxLength(75)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EngineerFirmNumber)
+                    .HasMaxLength(8)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ExpiredByUser)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FinalDate).HasColumnType("date");
+
+                entity.Property(e => e.FinalTime).HasColumnType("numeric(6, 0)");
+
+                entity.Property(e => e.FinaledByUser)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FireApprovalRequired)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FireApprovalRequiredDate).HasColumnType("date");
+
+                entity.Property(e => e.FireApprovalRequiredUser)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FireMarshalApprovalDate).HasColumnType("date");
+
+                entity.Property(e => e.FireMarshalApprovalRequired)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FireMarshalApprovalUser)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.HealthApprovalRequired)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.HealthApprovalRequiredDate).HasColumnType("date");
+
+                entity.Property(e => e.HealthApprovalRequiredUser)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.JurisdictionCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LIapprovalRequired)
+                    .HasColumnName("L&IApprovalRequired")
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LIapprovalRequiredDate)
+                    .HasColumnName("L&IApprovalRequiredDate")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.LIapprovalRequiredUser)
+                    .HasColumnName("L&IApprovalRequiredUser")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.OnlyResidenceOnParcel)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.OnlyStructureOnParcel)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.OtherSpecialApprovalDescription)
+                    .HasColumnName("OtherSpecialApproval Description")
+                    .HasMaxLength(75)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.OtherSpecialApprovalRequired)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.OtherSpecialApprovalRequiredDate).HasColumnType("date");
+
+                entity.Property(e => e.OtherSpecialApprovalRequiredUser)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.OwnerApprovalRequired)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.OwnerApprovalRequiredDate).HasColumnType("date");
+
+                entity.Property(e => e.OwnerApprovalRequiredUser)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ParkInformation)
+                    .HasMaxLength(60)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PermitCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PermitIssuedDate).HasColumnType("date");
+
+                entity.Property(e => e.PermitIssuedUserId)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PermitNumber).HasColumnType("numeric(5, 0)");
+
+                entity.Property(e => e.PermitStatus)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PermitYear).HasColumnType("numeric(4, 0)");
+
+                entity.Property(e => e.PhoneNumber).HasColumnType("numeric(10, 0)");
+
+                entity.Property(e => e.PlanningApprovalDate).HasColumnType("date");
+
+                entity.Property(e => e.PlanningApprovalRequired)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PlanningApprovalUser)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PlotPlanReceived)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PreliminaryParcelNumber).HasColumnType("numeric(16, 0)");
+
+                entity.Property(e => e.ProcessedForJurisdiction)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ProjectInformation)
+                    .HasMaxLength(75)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ProjectedExpireDate).HasColumnType("date");
+
+                entity.Property(e => e.PublicWroksApprovalDate).HasColumnType("date");
+
+                entity.Property(e => e.PublicWroksApprovalRequired)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PublicWroksApprovalUser)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecordStatus)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ResultOfEnforcementAction)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SiteAddress)
+                    .HasMaxLength(75)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.State)
+                    .HasMaxLength(2)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StateClassCode).HasColumnType("numeric(4, 0)");
+
+                entity.Property(e => e.VoidDate).HasColumnType("date");
+
+                entity.Property(e => e.VoidTime).HasColumnType("numeric(6, 0)");
+
+                entity.Property(e => e.VoidedByUser)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ZipCode)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<BldgpermitCodes>(entity =>
+            {
+                entity.ToTable("BLDGPermitCodes");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.ChangeDate).HasColumnType("date");
+
+                entity.Property(e => e.PermitCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PermitDescription)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PermitSearchCode)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecordStatus)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ShortPermitName)
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserId)
+                    .HasColumnName("UserID")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<BldgpermitsConditionsUserAuthority>(entity =>
+            {
+                entity.ToTable("BLDGPermitsConditionsUserAuthority");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.AssignAssessorParcel)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AuthorityToAddChangeApps)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AuthorityToAddConditions)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AuthorityToAddFees)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AuthorityToAddInspection)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AuthorityToAddPermitDetail)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AuthorityToAddValuations)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AuthorityToApproveApps)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AuthorityToChangeAppsStatus)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AuthorityToChangePrmtStatus)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AuthorityToIssuePermit)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AuthorityToIssueReceipt)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AuthorityToRemoveConditions)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AuthorityToRemoveInspection)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AuthorityToUpdateNotes)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ChangeDate).HasColumnType("date");
+
+                entity.Property(e => e.ChangeUserId)
+                    .HasColumnName("ChangeUserID")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.HomeDepartment)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.JurisdictionCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PermitDepartment)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecordStatus)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RepresentAssessors)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RepresentBuildingDepartment)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RepresentCityDepartment)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RepresentFireDepartment)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RepresentHealthDepartment)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RepresentPlanningDepartment)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RepresentPublicWorksDepartment)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserJob)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserName)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ValidUserId)
+                    .HasColumnName("ValidUserID")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<BldgplanningApproval>(entity =>
+            {
+                entity.ToTable("BLDGPlanningApproval");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.AddendumNumber).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.ApplicationNumber).HasColumnType("numeric(5, 0)");
+
+                entity.Property(e => e.ApplicationYear).HasColumnType("numeric(4, 0)");
+
+                entity.Property(e => e.ApprovedBy)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.BackPropertySetback).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.ChangeDate).HasColumnType("date");
+
+                entity.Property(e => e.Comments)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DepartmentCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FloodZone)
+                    .HasMaxLength(4)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FloodZoneMapNumber)
+                    .HasMaxLength(6)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FrontPropertySetback).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.JurisdictionCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LUpermitRequired)
+                    .HasColumnName("L/UPermitRequired")
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecordStatus)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SideFlankingSetback).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.SidePropertySetback).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.UserId)
+                    .HasColumnName("UserID")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ZoneCode)
+                    .HasMaxLength(6)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<BldgstateClassifications>(entity =>
+            {
+                entity.ToTable("BLDGStateClassifications");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.ChangeDate).HasColumnType("date");
+
+                entity.Property(e => e.ClassCodeExtension)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ClassificationDescription)
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecordStatus)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StateClassCode).HasColumnType("numeric(4, 0)");
             });
         }
     }
