@@ -8,7 +8,7 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 {
     public class BuildingMainModuleFilterViewModel
     {
-        [Display(Name ="Jurs")]
+        [Display(Name ="Juris")]
         public string JurisdictionCode { get; set; }
 
         [Display(Name ="Dept")]

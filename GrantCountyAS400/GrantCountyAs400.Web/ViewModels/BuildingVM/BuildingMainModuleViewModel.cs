@@ -8,8 +8,11 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 {
     public class BuildingMainModuleViewModel
     {
+        [Display(Name ="Date")]
         public DateTime? ApplicationDate { get;  set; }
+        [Display(Name ="#")]
         public decimal? ApplicationNumber { get;   set; }
+        [Display(Name ="#")]
         public decimal? AddendumNumber { get;   set; }
         [Display(Name ="Type")]
         public string PermitCode { get;   set; }
@@ -17,6 +20,7 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         public string PermitStatus { get;   set; }
         [Display(Name ="Year")]
         public decimal? ApplicationYear { get;   set; }
+        [Display(Name = "Permit #")]
         public decimal? PermitNumber { get;   set; }
         [Display(Name ="Application Name")]
         public string ApplicationName { get;   set; }
