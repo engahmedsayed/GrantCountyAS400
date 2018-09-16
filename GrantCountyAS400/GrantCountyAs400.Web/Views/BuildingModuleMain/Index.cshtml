@@ -1,0 +1,201 @@
+﻿@model IEnumerable<GrantCountyAs400.Web.ViewModels.BuildingVM.BuildingMainModuleViewModel>
+@using X.PagedList.Mvc.Core;
+@using GrantCountyAs400.Web.ViewModels.BuildingVM
+@using X.PagedList;
+
+@{
+    ViewData["Title"] = "Building Module Main";
+    var filterViewModel = ViewBag.FilterViewModel as BuildingMainModuleFilterViewModel;
+}
+
+<h2>Building Module Main</h2>
+
+<p>
+    @using (Html.BeginForm("Index", "BuildingModuleMain", FormMethod.Get))
+    {
+        <div class="form-horizontal">
+            <hr />
+            <div class="row" data-search-type="fundAndProgram">
+                <div class="form-group">
+                    @Html.LabelFor(model => filterViewModel.JurisdictionCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => filterViewModel.JurisdictionCode, null, "jurisdictionCode", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    @Html.LabelFor(model => filterViewModel.DepartmentCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => filterViewModel.DepartmentCode, null, "departmentCode", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            </div>
+            <div class="row" data-search-type="departmentAndProject">
+                <div class="form-group">
+                    @Html.LabelFor(model => filterViewModel.ApplicationYear, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => filterViewModel.ApplicationYear, null, "applicationYear", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    @Html.LabelFor(model => filterViewModel.ApplicationNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => filterViewModel.ApplicationNumber, null, "applicationNumber", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <div class="form-group pull-right">
+                        <input type="submit" value="Filter" class="btn btn-success" />
+                        <input type="reset" value="Clear" class="btn btn-default" id="btnReset" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ApplicationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ApplicationNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().AddendumNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().PermitCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().PermitStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ApplicationYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().PermitNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ApplicationName)
+            </th>
+            <th>
+                @Html.DisplayName("Bld")
+            </th>
+            <th>
+                @Html.DisplayName("FM")
+            </th>
+            <th>
+                @Html.DisplayName("Plan")
+            </th>
+            <th>
+                @Html.DisplayName("Hlth")
+            </th>
+            <th>
+                @Html.DisplayName("Assr")
+            </th>
+            <th>
+                @Html.DisplayName("P-work")
+            </th>
+            <th>
+                @Html.DisplayName("City-J")
+            </th>
+            <th>
+                @Html.DisplayName("City-U")
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @{ var formattedDateTime = item.ApplicationDate.HasValue ? item.ApplicationDate.Value.ToString("MM/dd/yyyy") : "";}
+                    @Html.DisplayFor(modelItem => formattedDateTime)
+                </td>
+                <td>
+                    @{ var formattedApplicaionNumber = item.ApplicationNumber.HasValue ? item.ApplicationNumber.ToString() : "";}
+                    @Html.DisplayFor(modelItem => formattedApplicaionNumber)
+                </td>
+                <td>
+                    @{ var formattedAddendumNumber = item.AddendumNumber.HasValue ? item.AddendumNumber.Value.ToString() : "";}
+                    @Html.DisplayFor(modelItem => formattedAddendumNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PermitCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PermitStatus)
+                </td>
+                <td>
+                    @{ var formattedApplicationYear = item.ApplicationYear.HasValue ? int.Parse(item.ApplicationYear.Value.ToString()).ToString() : "";}
+                    @Html.DisplayFor(modelItem => formattedApplicationYear)
+                </td>
+                <td>
+                    @{ var formattedPermitNumber = item.PermitNumber.HasValue ? item.PermitNumber.Value.ToString() : "";}
+                    @Html.DisplayFor(modelItem => formattedPermitNumber)
+                </td>
+                <td>
+                    @{ var formattedApplicationName = item.ApplicationName.Trim() == "," ? "" : item.ApplicationName;}
+                    @Html.DisplayFor(modelItem => formattedApplicationName)
+                </td>
+                <td>
+                    @{ var bld = item.BuildingApprovalRequired + item.BuildingApprovalDate;}
+                    @Html.DisplayFor(modelItem => bld)
+                </td>
+                <td>
+                    @{ var fm = item.FireMarchalRequired + item.FireMarshalDate;}
+                    @Html.DisplayFor(modelItem => fm)
+                </td>
+                <td>
+                    @{ var plan = item.PlanningApprovalRequired + item.PlanningApprovalDate;}
+                    @Html.DisplayFor(modelItem => bld)
+                </td>
+                <td>
+                    @{ var health = item.HealthApprovalRequired + item.HealthApprovalDate;}
+                    @Html.DisplayFor(modelItem => health)
+                </td>
+                <td>
+                    @{ var assr = item.AssessorApprovalRequired + item.AssessorApprovalDate;}
+                    @Html.DisplayFor(modelItem => assr)
+                </td>
+                <td>
+                    @{ var pwork = item.PublicWorkApprovalRequired + item.PublicWorkApprovalDate;}
+                    @Html.DisplayFor(modelItem => pwork)
+                </td>
+                <td>
+                    @{ var cityJ = item.CityJurisdictionApprovalRequired + item.CityJurisdictionApprovalDate;}
+                    @Html.DisplayFor(modelItem => cityJ)
+                </td>
+                <td>
+                    @{ var cityU = item.CityUtilityApprovalRequired + item.CityUtilityApprovalDate;}
+                    @Html.DisplayFor(modelItem => cityU)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+<nav aria-label="navigation">
+    @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
+    pageNumber = pageNumber,
+    jurisdictionCode = filterViewModel.JurisdictionCode,
+    departmentCode = filterViewModel.DepartmentCode,
+    applicationYear = filterViewModel.ApplicationYear,
+    applicationNumber = filterViewModel.ApplicationNumber
+}))
+</nav>
+
+
+@section Scripts{
+
+    <script>
+        $(function () {
+            $('#btnReset').click(function () {
+                $('input[type="text"]', 'div.row[data-search-type]').val('');
+                $('input[type="number"]', 'div.row[data-search-type]').val('');
+            });
+        });
+    </script>
+
+}

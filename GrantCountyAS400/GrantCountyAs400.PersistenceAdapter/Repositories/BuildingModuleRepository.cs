@@ -17,10 +17,16 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
         {
             _context = dbContext;
         }
-        public List<BuildingModuleMain> GetBuildingModuleMain(out int resultCount, int pageNumber = 1, int pageSize = 50)
+        public List<BuildingModuleMain> GetBuildingModuleMain(decimal? applicationNumber, int? applicationYear,
+                                                              string departmentCode, string jurisdictionCode, out int resultCount,
+                                                              int pageNumber = 1, int pageSize = 50)
         {
             List<BuildingModuleMain> results = new List<BuildingModuleMain>();
             var query = from appm in _context.BldgpermitApplicationMaster
+                        where (appm.ApplicationNumber == applicationNumber || applicationNumber == null)
+                        &&    (appm.ApplicationYear == applicationYear || applicationYear == null)
+                        &&    (appm.DepartmentCode == departmentCode || string.IsNullOrWhiteSpace(departmentCode))
+                        &&    (appm.JurisdictionCode == jurisdictionCode || string.IsNullOrWhiteSpace(jurisdictionCode))
                         select BuildingModuleMapper.Map(appm);
             if (pageNumber > 0)
             {

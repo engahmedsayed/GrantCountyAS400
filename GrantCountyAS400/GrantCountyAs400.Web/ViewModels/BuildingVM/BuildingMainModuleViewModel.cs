@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,10 +11,14 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         public DateTime? ApplicationDate { get;  set; }
         public decimal? ApplicationNumber { get;   set; }
         public decimal? AddendumNumber { get;   set; }
+        [Display(Name ="Type")]
         public string PermitCode { get;   set; }
+        [Display(Name ="Status")]
         public string PermitStatus { get;   set; }
+        [Display(Name ="Year")]
         public decimal? ApplicationYear { get;   set; }
         public decimal? PermitNumber { get;   set; }
+        [Display(Name ="Application Name")]
         public string ApplicationName { get;   set; }
         public string BuildingApprovalRequired { get;   set; }
         public string BuildingApprovalDate { get;   set; }

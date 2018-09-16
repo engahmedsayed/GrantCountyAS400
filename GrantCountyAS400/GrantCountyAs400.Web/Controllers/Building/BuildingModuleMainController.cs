@@ -21,13 +21,14 @@ namespace GrantCountyAs400.Web.Controllers.Building
         }
 
         [HttpGet]
-        public IActionResult Index(int pageNumber = 1)
+        public IActionResult Index(int pageNumber = 1, BuildingMainModuleFilterViewModel filter = default(BuildingMainModuleFilterViewModel))
         {
             int resultCount;
             var pagingInfo = new PagingInfo() { PageNumber = pageNumber };
 
-            var results = _buildingModuleRepository.GetBuildingModuleMain(out resultCount, pageNumber, AppSettings.PageSize).ToList();
+            var results = _buildingModuleRepository.GetBuildingModuleMain(filter.ApplicationNumber,filter.ApplicationYear,filter.DepartmentCode,filter.JurisdictionCode,out resultCount, pageNumber, AppSettings.PageSize).ToList();
             pagingInfo.Total = resultCount;
+            ViewBag.FilterViewModel = filter;
             return View(results.ToMappedPagedList<BuildingModuleMain, BuildingMainModuleViewModel>(pagingInfo));
         }
     }
