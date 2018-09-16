@@ -1,0 +1,187 @@
+﻿@model RealPropertyLegalDocumentViewModel
+@using GrantCountyAs400.Web.ViewModels.Assessment.LegalDocument
+
+@{
+    ViewData["Title"] = "Real Property Legal Document And Sales - Index";
+    LegalDocumentFilterViewModel filterViewModel = ViewBag.FilterViewModel as LegalDocumentFilterViewModel;
+    bool displayResults = ViewBag.DisplayResults;
+    bool emptyResults = ViewBag.EmptyResults;
+}
+
+<h2>Real Property Legal Document And Sales</h2>
+
+<p>
+    @using (Html.BeginForm("Index", "LegalDocument", FormMethod.Get))
+    {
+        <div class="form-horizontal">
+            <hr />
+            <div class="form-group">
+                <label asp-for="@filterViewModel.ParcelNumber" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input type="number" asp-for="@filterViewModel.ParcelNumber" name="parcelnumber" class="form-control" />
+                    @Html.ValidationMessageFor(model => filterViewModel.ParcelNumber, "", new { @class = "text-danger", data_valmsg_for = "parcelnumber" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <div class="form-group pull-right">
+                        <input type="submit" value="Filter" class="btn btn-success" />
+                        <input type="reset" value="Clear" class="btn btn-default" id="btnReset" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</p>
+<div>
+    @if (displayResults)
+    {
+        <div class="entity-details row">
+            @if (!emptyResults)
+            {
+                <div class="entity-info clearfix">
+                    <div class="col-xs-6">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td><strong>@Html.DisplayNameFor(model => model.ParcelNumber) </strong></td>
+                                    <td class="text-right"><span> @Html.DisplayFor(model => model.ParcelNumber) </span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>@Html.DisplayNameFor(model => model.TaxPayerDisplay) </strong></td>
+                                    <td class="text-right"><span> @Html.DisplayFor(model => model.TaxPayerDisplay) </span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>@Html.DisplayNameFor(model => model.TitleOwnerDisplay) </strong></td>
+                                    <td class="text-right"><span> @Html.DisplayFor(model => model.TitleOwnerDisplay) </span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>@Html.DisplayNameFor(model => model.ContractHolderDisplay) </strong></td>
+                                    <td class="text-right"><span> @Html.DisplayFor(model => model.ContractHolderDisplay) </span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>@Html.DisplayNameFor(model => model.TaxCodeDisplay) </strong></td>
+                                    <td class="text-right"><span> @Html.DisplayFor(model => model.TaxCodeDisplay) </span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-xs-6">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td><strong>@Html.DisplayNameFor(model => model.LandUseDisplay) </strong></td>
+                                    <td class="text-right"><span> @Html.DisplayFor(model => model.LandUseDisplay) </span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>@Html.DisplayNameFor(model => model.AssessedValue) </strong></td>
+                                    <td class="text-right"><span> @Html.DisplayFor(model => model.AssessedValue) </span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>@Html.DisplayNameFor(model => model.TaxYear) </strong></td>
+                                    <td class="text-right"><span> @Html.DisplayFor(model => model.TaxYear) </span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>@Html.DisplayNameFor(model => model.LoanNumber) </strong></td>
+                                    <td class="text-right"><span> @Html.DisplayFor(model => model.LoanNumber) </span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>@Html.DisplayNameFor(model => model.BuildingValue) </strong></td>
+                                    <td class="text-right"><span> @Html.DisplayFor(model => model.BuildingValue) </span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>@Html.DisplayNameFor(model => model.AssessedValue) </strong></td>
+                                    <td class="text-right"><span> @Html.DisplayFor(model => model.AssessedValue) </span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <p>
+                    <hr />
+                </p>
+                <div id="related-info">
+                    <div class="col-md-12">
+                        <h3>Legal Documents</h3>
+                        @if (Model.LegalDocuments.Any())
+                        {
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>
+                                            @Html.DisplayNameFor(modelItem => Model.LegalDocuments.FirstOrDefault().LegalInstrumentDate)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(modelItem => Model.LegalDocuments.FirstOrDefault().LegalDocumentType)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(modelItem => Model.LegalDocuments.FirstOrDefault().PreviousOwnerSeller)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(modelItem => Model.LegalDocuments.FirstOrDefault().Volume)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(modelItem => Model.LegalDocuments.FirstOrDefault().Page)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(modelItem => Model.LegalDocuments.FirstOrDefault().AffidavitDisplay)
+                                        </th>
+                                        @*<th>
+                                                @Html.DisplayNameFor(modelItem => Model.LegalDocuments.FirstOrDefault().Page)
+                                            </th>*@
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var legalDocument in Model.LegalDocuments)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <a asp-action="Details" asp-route-id="@legalDocument.Id">Details</a>
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => legalDocument.LegalInstrumentDate)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => legalDocument.LegalDocumentType)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => legalDocument.PreviousOwnerSeller)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => legalDocument.Volume)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => legalDocument.Page)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => legalDocument.AffidavitDisplay)
+                                            </td>
+                                        </tr>
+                                    }
+                                <tbody>
+                            </table>
+                        }
+                        else
+                        {
+                            <p class="empty-results">
+                                <span class="label label-info label-small">No legal documents found for parcel @Model.ParcelNumber</span>
+                            </p>
+                        }
+                    </div>
+                </div>
+            }
+            else
+            {
+                <p class="empty-results">
+                    <h4><span class="label label-info">Parcel @filterViewModel.ParcelNumber doesn't exist.</span></h4>
+                </p>
+            }
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

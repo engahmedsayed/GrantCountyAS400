@@ -25,4 +25,9 @@
     <Folder Include="wwwroot\dist\" />
     <Folder Include="wwwroot\js\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Update="Views\LegalDocument\Details.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
 </Project>
