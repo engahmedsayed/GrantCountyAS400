@@ -1,0 +1,186 @@
+﻿@model GrantCountyAs400.Web.ViewModels.Assessment.LegalDocument.LegalDocumentDetailsViewModel
+
+@{
+    ViewData["Title"] = Model.ParcelNumber + " - Details";
+}
+
+<div>
+    <h2>@Html.DisplayFor(model => model.ParcelNumber)</h2>
+
+    <div class="entity-details">
+        <div class="entity-info clearfix">
+            <div class="col-xs-6">
+                <table class="table col-xs-6">
+                    <tbody>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.ParcelNumber) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.ParcelNumber) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.TaxPayerDisplay) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.TaxPayerDisplay) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.TitleOwnerDisplay) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.TitleOwnerDisplay) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.ContractHolderDisplay) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.ContractHolderDisplay) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.TaxCodeDisplay) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.TaxCodeDisplay) </span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-6">
+                <table class="table col-xs-6">
+                    <tbody>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.LandUseDisplay) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.LandUseDisplay) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.AssessedValue) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.AssessedValue) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.TaxYear) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.TaxYear) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.LoanNumber) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.LoanNumber) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.BuildingValue) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.BuildingValue) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.TotalValue) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.TotalValue) </span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-xs-6">
+                <table class="table col-xs-6">
+                    <tbody>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.LegalInstrumentDate) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.LegalInstrumentDate) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.SaleDate) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.SaleDate) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.AffidavitDisplay) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.AffidavitDisplay) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.LegalDocumentType) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.LegalDocumentType) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.AuditorFileNumber) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.AuditorFileNumber) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.PreviousOwnerSeller) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.PreviousOwnerSeller) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.LegalDocumentComment) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.LegalDocumentComment) </span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-6">
+                <table class="table col-xs-6">
+                    <tbody>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.ChangeId) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.ChangeId) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.ChangeDate) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.ChangeDate) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.AssocateParcelNumber) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.AssocateParcelNumber) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.InstrumentTypeDescription) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.InstrumentTypeDescription) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.VolumePageDisplay) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.VolumePageDisplay) </span></td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.ProbateNumber) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.ProbateNumber) </span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-xs-6">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.RPsalesAmount) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.RPsalesAmount) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.PPsalesAmount) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.PPsalesAmount) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.NetRPSale) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.NetRPSale) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.MultipleParcelSale) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.MultipleParcelSale) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.SaleRejectionCode) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.SaleRejectionCode) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.RejectionReasonCodeComment) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.RejectionReasonCodeComment) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.TaxDataComment) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.TaxDataComment) </span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-6">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.PersPropParcel) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.PersPropParcel) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.IncorporatedArea) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.IncorporatedArea) </span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <a asp-action="Index">Back to List</a>
+</div>
