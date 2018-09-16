@@ -23,13 +23,13 @@ namespace GrantCountyAs400.Web.Controllers.Assessment
                 var legalDocument = _legalDocumentRepository.GetByParcelNumber(filter.ParcelNumber);
                 viewmodel = AutoMapper.Mapper.Map<RealPropertyLegalDocumentViewModel>(legalDocument);
                 ViewBag.DisplayResults = true;
-                ViewBag.EmptyResults = (viewmodel == null);
             }
             else
             {
                 ViewBag.DisplayResults = false;
             }
 
+            ViewBag.EmptyResults = (viewmodel == null);
             ViewBag.FilterViewModel = filter;
             return View(viewmodel);
         }
