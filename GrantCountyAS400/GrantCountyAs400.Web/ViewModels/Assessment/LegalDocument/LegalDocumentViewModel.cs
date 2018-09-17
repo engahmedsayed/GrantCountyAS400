@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -24,6 +24,10 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.LegalDocument
         [DisplayFormat(DataFormatString = "{0:##,#}")]
         public decimal BuildingValue { get; set; }
 
+        [Display(Name = "Total AV")]
+        [DisplayFormat(DataFormatString = "{0:##,#}")]
+        public decimal ImprovedLandValue { get; set; }
+
         public decimal LandUseCode { get; set; }
         public decimal TaxCodeArea { get; set; }
         public string TaxCodeDesc { get; set; }
@@ -35,9 +39,6 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.LegalDocument
 
         [Display(Name = "Tax Year")]
         public int TaxYear { get; set; }
-
-        public decimal RPsalesAmount { get; set; }
-        public decimal PPsalesAmount { get; set; }
 
         public IEnumerable<LegalDocumentViewModel> LegalDocuments { get; set; }
 

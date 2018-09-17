@@ -14,20 +14,21 @@ namespace GrantCountyAs400.Domain.Assessment
         public string ContractHolderName { get; }
         public string LoanNumber { get; }
         public decimal BuildingValue { get; }
+        public decimal ImprovedLandValue { get; }
         public decimal LandUseCode { get; }
+        public decimal TaxYear { get; }
         public decimal TaxCodeArea { get; }
         public string TaxCodeDesc { get; }
         public string UseCodeShortDesc { get; }
         public decimal AssessedValue { get; }
-        public decimal TaxYear { get; }
         public decimal RPsalesAmount { get; }
         public decimal PPsalesAmount { get; }
 
         public IEnumerable<LegalDocument> LegalDocuments { get; }
 
         public RealPropertyLegalDocument(decimal parcelNumber, string taxPayerCode, string taxPayerName, string titleOwnerCode, string titleOwnerName,
-            string contractHolderCode, string contractHolderName, string loanNumber, decimal buildingValue, decimal landUseCode, decimal taxCodeArea,
-            string taxCodeDesc, string useCodeShortDesc, decimal assessedValue, decimal taxYear, decimal rpSalesAmount, decimal ppSalesAmount,
+            string contractHolderCode, string contractHolderName, string loanNumber, decimal improvedLandValue, decimal buildingValue, decimal landUseCode, decimal taxYear,
+            decimal taxCodeArea, string taxCodeDesc, string useCodeShortDesc, decimal assessedValue, decimal rpSalesAmount, decimal ppSalesAmount,
             IEnumerable<LegalDocument> legalDocuments)
         {
             ParcelNumber = parcelNumber;
@@ -39,11 +40,12 @@ namespace GrantCountyAs400.Domain.Assessment
             ContractHolderName = contractHolderName;
             LoanNumber = loanNumber;
             BuildingValue = buildingValue;
+            ImprovedLandValue = improvedLandValue;
             LandUseCode = landUseCode;
+            TaxYear = taxYear;
             TaxCodeArea = taxCodeArea;
             TaxCodeDesc = taxCodeDesc;
             AssessedValue = assessedValue;
-            TaxYear = taxYear;
             RPsalesAmount = rpSalesAmount;
             PPsalesAmount = ppSalesAmount;
 

@@ -24,11 +24,12 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                 join landUseCode in _context.AsmtlandUseCodes on valueMasterRecord.LandUseCode equals landUseCode.LandUseCode
                                 join exciseTaxData in _context.AsmtsalesAndExciseTaxData on valueMasterRecord.ParcelNumber equals exciseTaxData.ParcelNumber
                                 where namesRecord.ParcelNumber == parcelNumber
+                                && exciseTaxData.RecordCode != "*"
                                 select new { namesRecord, codeArea, valueMasterRecord, landUseCode, exciseTaxData }).FirstOrDefault();
 
             if (realproperty != null)
             {
-                var legalDocs = _context.AsmtlegalDocuments.Where(t => t.ParcelNumber.Value == parcelNumber)
+                var legalDocs = _context.AsmtlegalDocuments.Where(t => t.ParcelNumber.Value == parcelNumber && t.RecordCode != "*")
                                                            .OrderBy(t => t.LegalInstrumentDate)
                                                            .ToList();
                 return LegalDocumentMapper.Map(realproperty.valueMasterRecord,
@@ -50,8 +51,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          join codeArea in _context.AsmttaxCodeArea on namesRecord.TaxCodeArea equals codeArea.TaxCodeArea
                          join landUseCode in _context.AsmtlandUseCodes on valueMasterRecord.LandUseCode equals landUseCode.LandUseCode
                          join exciseTaxData in _context.AsmtsalesAndExciseTaxData
-                         on new { legalDocument.ParcelNumber, legalDocument.AffidavitNumber, legalDocument.AffidavitNumberExtension }
-                         equals new { exciseTaxData.ParcelNumber, exciseTaxData.AffidavitNumber, exciseTaxData.AffidavitNumberExtension }
+                         on new { legalDocument.ParcelNumber, legalDocument.AffidavitNumber, legalDocument.AffidavitNumberExtension, legalDocument.LegalDocumentType }
+                         equals new { exciseTaxData.ParcelNumber, exciseTaxData.AffidavitNumber, exciseTaxData.AffidavitNumberExtension, exciseTaxData.LegalDocumentType }
                          join instrument in _context.AsmtinstrumentType on legalDocument.LegalDocumentType equals instrument.InstrumentCode
                          join rejection in _context.AsmtsalesRejectionReasonCodes on exciseTaxData.SaleRejectionCode equals rejection.SaleRejectionCode
                          where legalDocument.Id == legalDocumentId

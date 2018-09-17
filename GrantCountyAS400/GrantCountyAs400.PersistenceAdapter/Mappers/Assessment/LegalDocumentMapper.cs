@@ -20,9 +20,9 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Assessment
                                                       List<AsmtlegalDocuments> legalDocuments) =>
             new RealPropertyLegalDocument(valueMaster.ParcelNumber.Value, namesRecord.TaxpayerCode, namesRecord.TaxpayerName?.Trim(), namesRecord.TitleOwnerCode,
                 namesRecord.TitleOwnerName?.Trim(), namesRecord.ContractHolderCode, namesRecord.ContractHolderName?.Trim(), valueMaster.LoanNumber,
-                valueMaster.BuildingValue.Value, valueMaster.LandUseCode.Value, codeArea.TaxCodeArea.Value, codeArea.TaxCodeDesc.Trim(), landUserCode?.UseCodeShortDesc,
-                exciseTaxData.AssessedValue.Value, exciseTaxData.TaxYear.Value, exciseTaxData.RPsalesAmount.Value, exciseTaxData.PPsalesAmount.Value,
-                legalDocuments.Select(Map));
+                valueMaster.BuildingValue.Value, valueMaster.ImprovedLandValue.Value, valueMaster.LandUseCode.Value, valueMaster.TaxYear.Value, codeArea.TaxCodeArea.Value,
+                codeArea.TaxCodeDesc.Trim(), landUserCode?.UseCodeShortDesc, exciseTaxData.AssessedValue.Value,
+                exciseTaxData.RPsalesAmount.Value, exciseTaxData.PPsalesAmount.Value, legalDocuments.Select(Map));
 
         internal static LegalDocumentDetails Map(AsmtrealPropertyAssessedValueMaster valueMaster,
                                                       ASMTValueMasterNameView namesRecord,
