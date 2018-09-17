@@ -20,16 +20,12 @@ namespace GrantCountyAs400.Domain.Assessment
         public decimal TaxCodeArea { get; }
         public string TaxCodeDesc { get; }
         public string UseCodeShortDesc { get; }
-        public decimal AssessedValue { get; }
-        public decimal RPsalesAmount { get; }
-        public decimal PPsalesAmount { get; }
 
         public IEnumerable<LegalDocument> LegalDocuments { get; }
 
         public RealPropertyLegalDocument(decimal parcelNumber, string taxPayerCode, string taxPayerName, string titleOwnerCode, string titleOwnerName,
             string contractHolderCode, string contractHolderName, string loanNumber, decimal improvedLandValue, decimal buildingValue, decimal landUseCode, decimal taxYear,
-            decimal taxCodeArea, string taxCodeDesc, string useCodeShortDesc, decimal assessedValue, decimal rpSalesAmount, decimal ppSalesAmount,
-            IEnumerable<LegalDocument> legalDocuments)
+            decimal taxCodeArea, string taxCodeDesc, string useCodeShortDesc, IEnumerable<LegalDocument> legalDocuments)
         {
             ParcelNumber = parcelNumber;
             TaxPayerCode = taxPayerCode;
@@ -45,9 +41,6 @@ namespace GrantCountyAs400.Domain.Assessment
             TaxYear = taxYear;
             TaxCodeArea = taxCodeArea;
             TaxCodeDesc = taxCodeDesc;
-            AssessedValue = assessedValue;
-            RPsalesAmount = rpSalesAmount;
-            PPsalesAmount = ppSalesAmount;
 
             LegalDocuments = legalDocuments;
         }
@@ -64,9 +57,11 @@ namespace GrantCountyAs400.Domain.Assessment
         public decimal Page { get; }
         public decimal AffidavitNumber { get; }
         public string AffidavitNumberExtension { get; }
+        public decimal RPsalesAmount { get; }
+        public decimal PPsalesAmount { get; }
 
         public LegalDocument(int id, decimal parcelNumber, DateTime? legalInstrumentDate, string legalDocumentType, string previousOwnerSeller, decimal volume,
-            decimal page, decimal affidavitNumber, string affidavitNumberExtension)
+            decimal page, decimal affidavitNumber, string affidavitNumberExtension, decimal rpSalesAmount, decimal ppSalesAmount)
         {
             Id = id;
             ParcelNumber = parcelNumber;
@@ -77,6 +72,8 @@ namespace GrantCountyAs400.Domain.Assessment
             Page = page;
             AffidavitNumber = affidavitNumber;
             AffidavitNumberExtension = affidavitNumberExtension;
+            RPsalesAmount = rpSalesAmount;
+            PPsalesAmount = ppSalesAmount;
         }
     }
 }

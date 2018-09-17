@@ -75,8 +75,8 @@
                                     <td class="text-right"><span> @Html.DisplayFor(model => model.LandUseDisplay) </span></td>
                                 </tr>
                                 <tr>
-                                    <td><strong>@Html.DisplayNameFor(model => model.AssessedValue) </strong></td>
-                                    <td class="text-right"><span> @Html.DisplayFor(model => model.AssessedValue) </span></td>
+                                    <td><strong>@Html.DisplayNameFor(model => model.ImprovedLandValue) </strong></td>
+                                    <td class="text-right"><span> @Html.DisplayFor(model => model.ImprovedLandValue) </span></td>
                                 </tr>
                                 <tr>
                                     <td><strong>@Html.DisplayNameFor(model => model.TaxYear) </strong></td>
@@ -91,8 +91,8 @@
                                     <td class="text-right"><span> @Html.DisplayFor(model => model.BuildingValue) </span></td>
                                 </tr>
                                 <tr>
-                                    <td><strong>@Html.DisplayNameFor(model => model.ImprovedLandValue) </strong></td>
-                                    <td class="text-right"><span> @Html.DisplayFor(model => model.ImprovedLandValue) </span></td>
+                                    <td><strong>@Html.DisplayNameFor(model => model.TotalLandValue) </strong></td>
+                                    <td class="text-right"><span> @Html.DisplayFor(model => model.TotalLandValue) </span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -128,9 +128,9 @@
                                         <th>
                                             @Html.DisplayNameFor(modelItem => Model.LegalDocuments.FirstOrDefault().AffidavitDisplay)
                                         </th>
-                                        @*<th>
-                                                @Html.DisplayNameFor(modelItem => Model.LegalDocuments.FirstOrDefault().Page)
-                                            </th>*@
+                                        <th>
+                                            @Html.DisplayNameFor(modelItem => Model.LegalDocuments.FirstOrDefault().RPsalesAmount)
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -157,6 +157,9 @@
                                             </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => legalDocument.AffidavitDisplay)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => legalDocument.RPsalesAmount)
                                             </td>
                                         </tr>
                                     }

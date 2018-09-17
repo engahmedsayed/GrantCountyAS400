@@ -24,7 +24,7 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.LegalDocument
         [DisplayFormat(DataFormatString = "{0:##,#}")]
         public decimal BuildingValue { get; set; }
 
-        [Display(Name = "Total AV")]
+        [Display(Name = "Land AV")]
         [DisplayFormat(DataFormatString = "{0:##,#}")]
         public decimal ImprovedLandValue { get; set; }
 
@@ -32,10 +32,6 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.LegalDocument
         public decimal TaxCodeArea { get; set; }
         public string TaxCodeDesc { get; set; }
         public string UseCodeShortDesc { get; set; }
-
-        [Display(Name = "Land AV")]
-        [DisplayFormat(DataFormatString = "{0:##,#}")]
-        public decimal AssessedValue { get; set; }
 
         [Display(Name = "Tax Year")]
         public int TaxYear { get; set; }
@@ -56,6 +52,10 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.LegalDocument
 
         [Display(Name = "Land Use(code - desciption)")]
         public string LandUseDisplay => $"{LandUseCode} - {UseCodeShortDesc}";
+
+        [Display(Name = "Total AV")]
+        [DisplayFormat(DataFormatString = "{0:##,#}")]
+        public decimal TotalLandValue => BuildingValue + ImprovedLandValue;
     }
 
     public class LegalDocumentViewModel
@@ -78,12 +78,21 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.LegalDocument
         public decimal AffidavitNumber { get; set; }
         public string AffidavitNumberExtension { get; set; }
 
+        [Display(Name = "Sale Amount")]
+        public decimal RPsalesAmount { get; set; }
+
+        [Display(Name = "P/P Sale Amount")]
+        public decimal PPsalesAmount { get; set; }
+
         [Display(Name = "Exc #")]
         public string AffidavitDisplay => (string.IsNullOrWhiteSpace(GetAffidavitDisplay()) || string.IsNullOrWhiteSpace(AffidavitNumberExtension))
                                           ? "" : GetAffidavitDisplay() + AffidavitNumberExtension;
 
         private string GetAffidavitDisplay()
         {
+            if (AffidavitNumber == 0)
+                return "";
+
             var affidavitNumberString = AffidavitNumber.ToString();
             var withoutFirstTwoLetters = affidavitNumberString.Substring(2);
             var result = withoutFirstTwoLetters.Substring(0, 2) + "-" + withoutFirstTwoLetters.Substring(2);

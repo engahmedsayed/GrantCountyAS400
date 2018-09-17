@@ -22,21 +22,22 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                 join valueMasterRecord in _context.AsmtrealPropertyAssessedValueMaster on namesRecord.Id equals valueMasterRecord.Id
                                 join codeArea in _context.AsmttaxCodeArea on namesRecord.TaxCodeArea equals codeArea.TaxCodeArea
                                 join landUseCode in _context.AsmtlandUseCodes on valueMasterRecord.LandUseCode equals landUseCode.LandUseCode
-                                join exciseTaxData in _context.AsmtsalesAndExciseTaxData on valueMasterRecord.ParcelNumber equals exciseTaxData.ParcelNumber
                                 where namesRecord.ParcelNumber == parcelNumber
-                                && exciseTaxData.RecordCode != "*"
-                                select new { namesRecord, codeArea, valueMasterRecord, landUseCode, exciseTaxData }).FirstOrDefault();
+                                select new { namesRecord, codeArea, valueMasterRecord, landUseCode }).SingleOrDefault();
 
             if (realproperty != null)
             {
-                var legalDocs = _context.AsmtlegalDocuments.Where(t => t.ParcelNumber.Value == parcelNumber && t.RecordCode != "*")
-                                                           .OrderBy(t => t.LegalInstrumentDate)
-                                                           .ToList();
+                var legalDocs = (from legalDocument in _context.AsmtlegalDocuments
+                                 join exciseTaxData in _context.AsmtsalesAndExciseTaxData
+                                 on new { legalDocument.ParcelNumber, legalDocument.AffidavitNumber, legalDocument.AffidavitNumberExtension, legalDocument.LegalDocumentType }
+                                 equals new { exciseTaxData.ParcelNumber, exciseTaxData.AffidavitNumber, exciseTaxData.AffidavitNumberExtension, exciseTaxData.LegalDocumentType }
+                                 where legalDocument.ParcelNumber == parcelNumber
+                                 orderby legalDocument.LegalInstrumentDate
+                                 select LegalDocumentMapper.Map(legalDocument, exciseTaxData)).ToList();
                 return LegalDocumentMapper.Map(realproperty.valueMasterRecord,
                                                realproperty.namesRecord,
                                                realproperty.codeArea,
                                                realproperty.landUseCode,
-                                               realproperty.exciseTaxData,
                                                legalDocs);
             }
 

@@ -25,6 +25,9 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.LegalDocument
         public decimal BuildingValue { get; set; }
 
         public decimal UnimprovedLandValue { get; set; }
+
+        [Display(Name = "Land AV")]
+        [DisplayFormat(DataFormatString = "{0:##,#}")]
         public decimal ImprovedLandValue { get; set; }
 
         [Display(Name = "Instrument Date")]
@@ -129,13 +132,17 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.LegalDocument
         public string VolumePageDisplay => $"{Volume} - {Page}";
 
         [Display(Name = "Total AV")]
-        public decimal TotalValue => BuildingValue + ImprovedLandValue + UnimprovedLandValue;
+        [DisplayFormat(DataFormatString = "{0:##,#}")]
+        public decimal TotalLandValue => BuildingValue + ImprovedLandValue;
 
         [Display(Name = "Net R/P Sale")]
         public decimal NetRPSale => RPsalesAmount;
 
         private string GetAffidavitDisplay()
         {
+            if (AffidavitNumber == 0)
+                return "";
+
             var affidavitNumberString = AffidavitNumber.ToString();
             var withoutFirstTwoLetters = affidavitNumberString.Substring(2);
             var result = withoutFirstTwoLetters.Substring(0, 2) + "-" + withoutFirstTwoLetters.Substring(2);

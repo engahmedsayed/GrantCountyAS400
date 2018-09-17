@@ -1,28 +1,25 @@
 ﻿using GrantCountyAs400.Domain.Assessment;
 using GrantCountyAs400.PersistenceAdapter.Models;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace GrantCountyAs400.PersistenceAdapter.Mappers.Assessment
 {
     internal static class LegalDocumentMapper
     {
-        internal static LegalDocument Map(AsmtlegalDocuments legalDocument) =>
+        internal static LegalDocument Map(AsmtlegalDocuments legalDocument, AsmtsalesAndExciseTaxData exciseTaxData) =>
             new LegalDocument(legalDocument.Id, legalDocument.ParcelNumber.Value, legalDocument.LegalInstrumentDate, legalDocument.LegalDocumentType,
                 legalDocument.PreviousOwnerSeller, legalDocument.Volume.Value, legalDocument.Page.Value, legalDocument.AffidavitNumber.Value,
-                legalDocument.AffidavitNumberExtension);
+                legalDocument.AffidavitNumberExtension, exciseTaxData.RPsalesAmount.Value, exciseTaxData.PPsalesAmount.Value);
 
         internal static RealPropertyLegalDocument Map(AsmtrealPropertyAssessedValueMaster valueMaster,
                                                       ASMTValueMasterNameView namesRecord,
                                                       AsmttaxCodeArea codeArea,
                                                       AsmtlandUseCodes landUserCode,
-                                                      AsmtsalesAndExciseTaxData exciseTaxData,
-                                                      List<AsmtlegalDocuments> legalDocuments) =>
+                                                      List<LegalDocument> legalDocuments) =>
             new RealPropertyLegalDocument(valueMaster.ParcelNumber.Value, namesRecord.TaxpayerCode, namesRecord.TaxpayerName?.Trim(), namesRecord.TitleOwnerCode,
                 namesRecord.TitleOwnerName?.Trim(), namesRecord.ContractHolderCode, namesRecord.ContractHolderName?.Trim(), valueMaster.LoanNumber,
                 valueMaster.BuildingValue.Value, valueMaster.ImprovedLandValue.Value, valueMaster.LandUseCode.Value, valueMaster.TaxYear.Value, codeArea.TaxCodeArea.Value,
-                codeArea.TaxCodeDesc.Trim(), landUserCode?.UseCodeShortDesc, exciseTaxData.AssessedValue.Value,
-                exciseTaxData.RPsalesAmount.Value, exciseTaxData.PPsalesAmount.Value, legalDocuments.Select(Map));
+                codeArea.TaxCodeDesc.Trim(), landUserCode?.UseCodeShortDesc, legalDocuments);
 
         internal static LegalDocumentDetails Map(AsmtrealPropertyAssessedValueMaster valueMaster,
                                                       ASMTValueMasterNameView namesRecord,
