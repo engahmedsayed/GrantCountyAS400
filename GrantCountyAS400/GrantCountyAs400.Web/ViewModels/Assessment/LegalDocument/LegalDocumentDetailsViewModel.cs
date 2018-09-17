@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace GrantCountyAs400.Web.ViewModels.Assessment.LegalDocument
@@ -122,7 +122,8 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.LegalDocument
         public string LandUseDisplay => $"{LandUseCode} - {UseCodeShortDesc}";
 
         [Display(Name = "Affidavit #")]
-        public string AffidavitDisplay => $"{AffidavitNumberExtension} - {AffidavitNumber}";
+        public string AffidavitDisplay => (string.IsNullOrWhiteSpace(GetAffidavitDisplay()) || string.IsNullOrWhiteSpace(AffidavitNumberExtension))
+                                          ? "" : GetAffidavitDisplay() + AffidavitNumberExtension;
 
         [Display(Name = "Volume - Page")]
         public string VolumePageDisplay => $"{Volume} - {Page}";
@@ -132,5 +133,14 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.LegalDocument
 
         [Display(Name = "Net R/P Sale")]
         public decimal NetRPSale => RPsalesAmount;
+
+        private string GetAffidavitDisplay()
+        {
+            var affidavitNumberString = AffidavitNumber.ToString();
+            var withoutFirstTwoLetters = affidavitNumberString.Substring(2);
+            var result = withoutFirstTwoLetters.Substring(0, 2) + "-" + withoutFirstTwoLetters.Substring(2);
+
+            return result.EndsWith("00000") ? string.Empty : result;
+        }
     }
 }
