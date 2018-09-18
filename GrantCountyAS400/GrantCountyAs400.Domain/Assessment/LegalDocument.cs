@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace GrantCountyAs400.Domain.Assessment
@@ -41,6 +41,7 @@ namespace GrantCountyAs400.Domain.Assessment
             TaxYear = taxYear;
             TaxCodeArea = taxCodeArea;
             TaxCodeDesc = taxCodeDesc;
+            UseCodeShortDesc = useCodeShortDesc;
 
             LegalDocuments = legalDocuments;
         }
