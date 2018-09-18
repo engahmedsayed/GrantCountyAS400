@@ -2,32 +2,31 @@
 using GrantCountyAs400.Domain.Building.Repository;
 using GrantCountyAs400.PersistenceAdapter.Mappers.Building;
 using GrantCountyAs400.PersistenceAdapter.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace GrantCountyAs400.PersistenceAdapter.Repositories
 {
-    public class BuildingModuleRepository : IBuildingModuleRepository
+    public class BuildingPermitSystemRepository : IBuildingPermitSystemRepository
     {
         private readonly GrantCountyDbContext _context;
 
-        public BuildingModuleRepository(GrantCountyDbContext dbContext)
+        public BuildingPermitSystemRepository(GrantCountyDbContext dbContext)
         {
             _context = dbContext;
         }
-        public List<BuildingModuleMain> GetBuildingModuleMain(decimal? applicationNumber, int? applicationYear,
+
+        public List<BuildingPermitSystem> GetAll(decimal? applicationNumber, int? applicationYear,
                                                               string departmentCode, string jurisdictionCode, out int resultCount,
                                                               int pageNumber = 1, int pageSize = 50)
         {
-            List<BuildingModuleMain> results = new List<BuildingModuleMain>();
+            List<BuildingPermitSystem> results = new List<BuildingPermitSystem>();
             var query = from appm in _context.BldgpermitApplicationMaster
                         where (appm.ApplicationNumber == applicationNumber || applicationNumber == null)
-                        &&    (appm.ApplicationYear == applicationYear || applicationYear == null)
-                        &&    (appm.DepartmentCode == departmentCode || string.IsNullOrWhiteSpace(departmentCode))
-                        &&    (appm.JurisdictionCode == jurisdictionCode || string.IsNullOrWhiteSpace(jurisdictionCode))
-                        select BuildingModuleMapper.Map(appm);
+                        && (appm.ApplicationYear == applicationYear || applicationYear == null)
+                        && (appm.DepartmentCode == departmentCode || string.IsNullOrWhiteSpace(departmentCode))
+                        && (appm.JurisdictionCode == jurisdictionCode || string.IsNullOrWhiteSpace(jurisdictionCode))
+                        select BuildingPermitSystemMapper.Map(appm);
             if (pageNumber > 0)
             {
                 resultCount = query.Count();
@@ -44,9 +43,6 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             }
 
             return results;
-
-
-
         }
     }
 }

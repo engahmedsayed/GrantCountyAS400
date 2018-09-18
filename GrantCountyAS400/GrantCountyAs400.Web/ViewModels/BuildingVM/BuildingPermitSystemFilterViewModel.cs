@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 {
-    public class BuildingMainModuleFilterViewModel
+    public class BuildingPermitSystemFilterViewModel
     {
         [Display(Name ="Juris")]
         public string JurisdictionCode { get; set; }

@@ -1,17 +1,17 @@
-﻿@model IEnumerable<GrantCountyAs400.Web.ViewModels.BuildingVM.BuildingMainModuleViewModel>
+﻿@model IEnumerable<GrantCountyAs400.Web.ViewModels.BuildingVM.BuildingPermitSystemViewModel>
 @using X.PagedList.Mvc.Core;
 @using GrantCountyAs400.Web.ViewModels.BuildingVM
 @using X.PagedList;
 
 @{
     ViewData["Title"] = "Building Permits System";
-    var filterViewModel = ViewBag.FilterViewModel as BuildingMainModuleFilterViewModel;
+    var filterViewModel = ViewBag.FilterViewModel as BuildingPermitSystemFilterViewModel;
 }
 
 <h2>Building Permits System</h2>
 
 <p>
-    @using (Html.BeginForm("Index", "BuildingModuleMain", FormMethod.Get))
+    @using (Html.BeginForm("Index", "BuildingPermitSystem", FormMethod.Get))
     {
         <div class="form-horizontal">
             <hr />

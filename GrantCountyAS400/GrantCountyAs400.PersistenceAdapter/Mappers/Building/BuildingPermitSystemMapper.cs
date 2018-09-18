@@ -1,15 +1,12 @@
-﻿using GrantCountyAs400.Domain.Building;
+using GrantCountyAs400.Domain.Building;
 using GrantCountyAs400.PersistenceAdapter.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
 {
-    internal static class BuildingModuleMapper
+    internal static class BuildingPermitSystemMapper
     {
-        internal static BuildingModuleMain Map(BldgpermitApplicationMaster appm) =>
-            new BuildingModuleMain(appm.ApplicationDate, appm.ApplicationNumber, appm.AddendumNumber, appm.PermitCode,
+        internal static BuildingPermitSystem Map(BldgpermitApplicationMaster appm) =>
+            new BuildingPermitSystem(appm.ApplicationDate, appm.ApplicationNumber, appm.AddendumNumber, appm.PermitCode,
                                   !string.IsNullOrWhiteSpace(appm.PermitStatus) && appm.PermitStatus.ToUpper() == "A" ? "Applica" :
                                   !string.IsNullOrWhiteSpace(appm.PermitStatus) && appm.PermitStatus.ToUpper() == "D" ? "VoidApp" :
                                   !string.IsNullOrWhiteSpace(appm.PermitStatus) && appm.PermitStatus.ToUpper() == "E" ? "ExpApp" :

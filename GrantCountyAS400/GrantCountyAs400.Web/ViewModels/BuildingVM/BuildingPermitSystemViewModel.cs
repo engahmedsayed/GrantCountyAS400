@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 {
-    public class BuildingMainModuleViewModel
+    public class BuildingPermitSystemViewModel
     {
         [Display(Name ="Date")]
         public DateTime? ApplicationDate { get;  set; }

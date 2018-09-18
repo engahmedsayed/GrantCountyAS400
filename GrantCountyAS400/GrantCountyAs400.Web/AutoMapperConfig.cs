@@ -70,7 +70,7 @@ namespace GrantCountyAs400.Web
                 #endregion Assessment Module
 
                 #region BuildingModule
-                cfg.CreateMap<BuildingModuleMain, BuildingMainModuleViewModel>();
+                cfg.CreateMap<BuildingPermitSystem, BuildingPermitSystemViewModel>();
 
                 #endregion
             });
