@@ -34,11 +34,11 @@ namespace GrantCountyAs400.Web.Controllers.Building
         [Route("{id}")]
         public IActionResult Details(int id)
         {
-            BuildingPermitSystemDetail entity = _buildingModuleRepository.Details(id);
+            var entity = _buildingModuleRepository.Details(id);
             if (entity == null)
                 return NotFound();
 
-            var viewmodel = AutoMapper.Mapper.Map<BuildingDetailsViewModel>(entity);
+            var viewmodel = AutoMapper.Mapper.Map<BuildingPermitSystemDetailsViewModel>(entity);
             return View(viewmodel);
         }
     }

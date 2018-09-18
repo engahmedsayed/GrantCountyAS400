@@ -16,24 +16,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             _context = dbContext;
         }
 
-        public BuildingPermitSystemDetail Details(int id)
-        {
-            var query = (from appm in _context.BldgpermitApplicationMaster
-                         where appm.Id == id
-                         select appm).FirstOrDefault();
-            BuildingPermitSystemDetail result = new BuildingPermitSystemDetail(query.JurisdictionCode, query.DepartmentCode,
-                                                                               query.ApplicationYear, query.AddendumNumber,
-                                                                               query.PermitStatus, query.ApplicantLastName + "," + query.ApplicantFirstName,
-                                                                               query.ContractLicenseNumber, query.ApplicantProjectDescription,
-                                                                               query.AdditionalInformation, query.ResultOfEnforcementAction,
-                                                                               query.EnforcementDescription, query.PlotPlanReceived,
-                                                                               query.OnlyStructureOnParcel, query.OnlyResidenceOnParcel);
-            return result;
-        }
-
-        public List<BuildingPermitSystem> GetAll(decimal? applicationNumber, int? applicationYear,
-                                                              string departmentCode, string jurisdictionCode, out int resultCount,
-                                                              int pageNumber = 1, int pageSize = 50)
+        public List<BuildingPermitSystem> GetAll(decimal? applicationNumber, int? applicationYear, string departmentCode, string jurisdictionCode,
+                                                 out int resultCount, int pageNumber = 1, int pageSize = 50)
         {
             List<BuildingPermitSystem> results = new List<BuildingPermitSystem>();
             var query = from appm in _context.BldgpermitApplicationMaster
@@ -58,6 +42,29 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             }
 
             return results;
+        }
+
+        public BuildingPermitSystemDetails Details(int id)
+        {
+            var query = (from bldgpermit in _context.BldgpermitApplicationMaster
+                         join situs in _context.AsmtsitusAddress on bldgpermit.AssessorParcelNumber equals situs.ParcelNumber
+                         join juri in _context.Bldgjurisdictions on bldgpermit.JurisdictionCode equals juri.DepartmentCode
+                         join processedJuri in _context.Bldgjurisdictions on bldgpermit.ProcessedForJurisdiction equals processedJuri.DepartmentCode
+                         join dept in _context.Bldgdepartments on bldgpermit.DepartmentCode equals dept.DepartmentCode
+                         join perm in _context.BldgpermitCodes on bldgpermit.PermitCode equals perm.PermitCode
+                         join preliminaryNames in _context.ASMTValueMasterNameView on bldgpermit.PreliminaryParcelNumber equals preliminaryNames.ParcelNumber
+                         join assessorNames in _context.ASMTValueMasterNameView on bldgpermit.PreliminaryParcelNumber equals assessorNames.ParcelNumber
+                         where bldgpermit.Id == id
+                         select BuildingPermitSystemMapper.Map(bldgpermit,
+                                                               preliminaryNames,
+                                                               assessorNames,
+                                                               juri,
+                                                               processedJuri,
+                                                               dept,
+                                                               perm,
+                                                               situs)).SingleOrDefault();
+
+            return query;
         }
     }
 }
