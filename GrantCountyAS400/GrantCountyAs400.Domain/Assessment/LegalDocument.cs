@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace GrantCountyAs400.Domain.Assessment
@@ -58,11 +58,11 @@ namespace GrantCountyAs400.Domain.Assessment
         public decimal Page { get; }
         public decimal AffidavitNumber { get; }
         public string AffidavitNumberExtension { get; }
-        public decimal RPsalesAmount { get; }
-        public decimal PPsalesAmount { get; }
+        public decimal? RPsalesAmount { get; }
+        public decimal? PPsalesAmount { get; }
 
         public LegalDocument(int id, decimal parcelNumber, DateTime? legalInstrumentDate, string legalDocumentType, string previousOwnerSeller, decimal volume,
-            decimal page, decimal affidavitNumber, string affidavitNumberExtension, decimal rpSalesAmount, decimal ppSalesAmount)
+            decimal page, decimal affidavitNumber, string affidavitNumberExtension, decimal? rpSalesAmount, decimal? ppSalesAmount)
         {
             Id = id;
             ParcelNumber = parcelNumber;

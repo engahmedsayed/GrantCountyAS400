@@ -67,33 +67,33 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.LegalDocument
         public decimal ProbateNumber { get; set; }
 
         [Display(Name = "Gross Sale Amount")]
-        public decimal RPsalesAmount { get; set; }
+        public decimal? RPsalesAmount { get; set; }
 
         [Display(Name = "P/P Sale Amount")]
-        public decimal PPsalesAmount { get; set; }
+        public decimal? PPsalesAmount { get; set; }
 
         [Display(Name = "Multiple Sale")]
         public string MultipleParcelSale { get; set; }
 
         [Display(Name = "Rejection Code")]
         [DisplayFormat(DataFormatString = "{0:n0}")]
-        public decimal SaleRejectionCode { get; set; }
+        public decimal? SaleRejectionCode { get; set; }
 
         [Display(Name = "Reason / Comment")]
         public string TaxDataComment { get; set; }
 
         [Display(Name = "P/P Parcel")]
-        public decimal PersPropParcel { get; set; }
+        public decimal? PersPropParcel { get; set; }
 
         [Display(Name = "Incorporated Area?")]
         public string IncorporatedArea { get; set; }
 
         [Display(Name = "Land AV")]
         [DisplayFormat(DataFormatString = "{0:##,#}")]
-        public decimal AssessedValue { get; set; }
+        public decimal? AssessedValue { get; set; }
 
         [Display(Name = "Tax Year")]
-        public int TaxYear { get; set; }
+        public int? TaxYear { get; set; }
 
         [Display(Name = "Affidavit Date")]
         [DataType(DataType.Date)]
@@ -136,7 +136,7 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.LegalDocument
         public decimal TotalLandValue => BuildingValue + ImprovedLandValue;
 
         [Display(Name = "Net R/P Sale")]
-        public decimal NetRPSale => RPsalesAmount;
+        public decimal? NetRPSale => RPsalesAmount;
 
         private string GetAffidavitDisplay()
         {

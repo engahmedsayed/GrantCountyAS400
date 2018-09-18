@@ -79,10 +79,10 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.LegalDocument
         public string AffidavitNumberExtension { get; set; }
 
         [Display(Name = "Sale Amount")]
-        public decimal RPsalesAmount { get; set; }
+        public decimal? RPsalesAmount { get; set; }
 
         [Display(Name = "P/P Sale Amount")]
-        public decimal PPsalesAmount { get; set; }
+        public decimal? PPsalesAmount { get; set; }
 
         [Display(Name = "Exc #")]
         public string AffidavitDisplay => (string.IsNullOrWhiteSpace(GetAffidavitDisplay()) || string.IsNullOrWhiteSpace(AffidavitNumberExtension))

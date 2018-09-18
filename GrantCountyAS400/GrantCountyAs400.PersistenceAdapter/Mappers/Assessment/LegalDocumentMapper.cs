@@ -9,7 +9,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Assessment
         internal static LegalDocument Map(AsmtlegalDocuments legalDocument, AsmtsalesAndExciseTaxData exciseTaxData) =>
             new LegalDocument(legalDocument.Id, legalDocument.ParcelNumber.Value, legalDocument.LegalInstrumentDate, legalDocument.LegalDocumentType,
                 legalDocument.PreviousOwnerSeller, legalDocument.Volume.Value, legalDocument.Page.Value, legalDocument.AffidavitNumber.Value,
-                legalDocument.AffidavitNumberExtension, exciseTaxData.RPsalesAmount.Value, exciseTaxData.PPsalesAmount.Value);
+                legalDocument.AffidavitNumberExtension, exciseTaxData?.RPsalesAmount, exciseTaxData?.PPsalesAmount);
 
         internal static RealPropertyLegalDocument Map(AsmtrealPropertyAssessedValueMaster valueMaster,
                                                       ASMTValueMasterNameView namesRecord,
@@ -36,13 +36,9 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Assessment
                 legalDocument.LegalInstrumentDate, legalDocument.LegalDocumentType,
                 legalDocument.PreviousOwnerSeller, legalDocument.Volume.Value, legalDocument.Page.Value, legalDocument.AffidavitNumber.Value,
                 legalDocument.AffidavitNumberExtension, legalDocument.AuditorFileNumber.Value, legalDocument.Comment, legalDocument.ChangeId, legalDocument.ChangeDate.Value,
-                legalDocument.AssocateParcelNumber.Value, legalDocument.ProbateNumber.Value,
-
-                exciseTaxData.RPsalesAmount.Value, exciseTaxData.PPsalesAmount.Value, exciseTaxData.MultipleParcelSale, exciseTaxData.SaleRejectionCode.Value,
-                exciseTaxData.Comment, exciseTaxData.PersPropParcel.Value, exciseTaxData.IncorporatedArea, exciseTaxData.AssessedValue.Value, exciseTaxData.TaxYear.Value,
-                exciseTaxData.SaleDate,
-
-                codeArea.TaxCodeArea.Value, codeArea.TaxCodeDesc.Trim(), landUserCode?.UseCodeShortDesc,
-                instrumentType.InstrumentTypeDescription, rejectionReasonCode.Comment);
+                legalDocument.AssocateParcelNumber.Value, legalDocument.ProbateNumber.Value, exciseTaxData?.RPsalesAmount, exciseTaxData?.PPsalesAmount,
+                exciseTaxData?.MultipleParcelSale, exciseTaxData?.SaleRejectionCode, exciseTaxData?.Comment, exciseTaxData?.PersPropParcel, exciseTaxData?.IncorporatedArea,
+                exciseTaxData?.AssessedValue, exciseTaxData?.TaxYear, exciseTaxData?.SaleDate, codeArea.TaxCodeArea.Value, codeArea.TaxCodeDesc.Trim(),
+                landUserCode?.UseCodeShortDesc, instrumentType?.InstrumentTypeDescription, rejectionReasonCode?.Comment);
     }
 }

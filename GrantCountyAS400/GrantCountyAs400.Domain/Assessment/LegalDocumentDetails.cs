@@ -31,15 +31,15 @@ namespace GrantCountyAs400.Domain.Assessment
         public decimal AssocateParcelNumber { get; }
         public decimal ProbateNumber { get; }
 
-        public decimal RPsalesAmount { get; }
-        public decimal PPsalesAmount { get; }
+        public decimal? RPsalesAmount { get; }
+        public decimal? PPsalesAmount { get; }
         public string MultipleParcelSale { get; }
-        public decimal SaleRejectionCode { get; }
+        public decimal? SaleRejectionCode { get; }
         public string TaxDataComment { get; }
-        public decimal PersPropParcel { get; }
+        public decimal? PersPropParcel { get; }
         public string IncorporatedArea { get; }
-        public decimal AssessedValue { get; }
-        public decimal TaxYear { get; }
+        public decimal? AssessedValue { get; }
+        public decimal? TaxYear { get; }
         public DateTime? SaleDate { get; }
 
         public string UseCodeShortDesc { get; }
@@ -54,9 +54,9 @@ namespace GrantCountyAs400.Domain.Assessment
         public LegalDocumentDetails(decimal parcelNumber, string taxPayerCode, string taxPayerName, string titleOwnerCode, string titleOwnerName, string contractHolderCode,
             string contractHolderName, string loanNumber, decimal buildingValue, decimal landUseCode, decimal unimprovedLandValue, decimal improvedLandValue,
             DateTime? legalInstrumentDate, string legalDocumentType, string previousOwnerSeller, decimal volume, decimal page, decimal affidavitNumber, string affidavitNumberExtension,
-            decimal auditorFileNumber, string legalDocumentComment, string changeId, DateTime changeDate, decimal assocateParcelNumber, decimal probateNumber, decimal rpSalesAmount,
-            decimal ppSalesAmount, string multipleParcelSale, decimal saleRejectionCode, string taxDataComment, decimal persPropParcel, string incorporatedArea, decimal assessedValue,
-            decimal taxYear, DateTime? saleDate, decimal taxCodeArea, string taxCodeDesc, string useCodeShortDesc, string instrumentTypeDescription, string rejectionReasonCodeComment)
+            decimal auditorFileNumber, string legalDocumentComment, string changeId, DateTime changeDate, decimal assocateParcelNumber, decimal probateNumber, decimal? rpSalesAmount,
+            decimal? ppSalesAmount, string multipleParcelSale, decimal? saleRejectionCode, string taxDataComment, decimal? persPropParcel, string incorporatedArea, decimal? assessedValue,
+            decimal? taxYear, DateTime? saleDate, decimal taxCodeArea, string taxCodeDesc, string useCodeShortDesc, string instrumentTypeDescription, string rejectionReasonCodeComment)
         {
             ParcelNumber = parcelNumber;
             TaxPayerCode = taxPayerCode;
