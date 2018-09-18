@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -46,6 +46,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
         public virtual DbSet<AsmtsalesAndExciseTaxData> AsmtsalesAndExciseTaxData { get; set; }
         public virtual DbSet<AsmtsalesRejectionReasonCodes> AsmtsalesRejectionReasonCodes { get; set; }
         public virtual DbSet<AsmtseniorCitizenHistory> AsmtseniorCitizenHistory { get; set; }
+        public virtual DbSet<AsmtsenirCitizenExemptionRate> AsmtsenirCitizenExemptionRate { get; set; }
+        public virtual DbSet<AsmtsitusAddress> AsmtsitusAddress { get; set; }
         public virtual DbSet<AsmttaxCodeArea> AsmttaxCodeArea { get; set; }
         public virtual DbSet<AsmtzoneDescriptions> AsmtzoneDescriptions { get; set; }
         public virtual DbSet<ASMTValueMasterNameView> ASMTValueMasterNameView { get; set; }
@@ -70,7 +72,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
         public virtual DbSet<BldgpermitsConditionsUserAuthority> BldgpermitsConditionsUserAuthority { get; set; }
         public virtual DbSet<BldgplanningApproval> BldgplanningApproval { get; set; }
         public virtual DbSet<BldgstateClassifications> BldgstateClassifications { get; set; }
-
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AcctApWarrant>(entity =>
@@ -3018,6 +3020,149 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
 
                 entity.Property(e => e.ToWhomProvided)
                     .HasMaxLength(45)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<AsmtsenirCitizenExemptionRate>(entity =>
+            {
+                entity.ToTable("ASMTSenirCitizenExemptionRate");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ExcLevyExemptPercent).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.MaximumIncome).HasColumnType("decimal(9, 0)");
+
+                entity.Property(e => e.RecordCode)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RegLevyExemptPercent).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.RegLevyMaxExemptAv)
+                    .HasColumnName("RegLevyMaxExemptAV")
+                    .HasColumnType("decimal(9, 0)");
+
+                entity.Property(e => e.RegLevyMinExemptAv)
+                    .HasColumnName("RegLevyMinExemptAV")
+                    .HasColumnType("decimal(9, 0)");
+
+                entity.Property(e => e.SeniorCitizenCode)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ShortDescription)
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TaxYear).HasColumnType("numeric(4, 0)");
+            });
+
+            modelBuilder.Entity<AsmtsitusAddress>(entity =>
+            {
+                entity.ToTable("ASMTSitusAddress");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Filler01)
+                    .HasMaxLength(4)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.HouseNumber).HasColumnType("numeric(8, 0)");
+
+                entity.Property(e => e.HouseNumberExtension)
+                    .HasMaxLength(8)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LocationCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ParcelNumber).HasColumnType("numeric(16, 0)");
+
+                entity.Property(e => e.RecordCode)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StreetDirectionQuadrant)
+                    .HasMaxLength(2)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StreetName)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<AsmttaxCodeArea>(entity =>
+            {
+                entity.ToTable("ASMTTaxCodeArea");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.ExciseAreaCode)
+                    .HasMaxLength(4)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Filler)
+                    .HasMaxLength(68)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecordCode)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RevaluationPhase)
+                    .HasColumnName("Revaluation Phase")
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TaxCodeArea).HasColumnType("numeric(4, 0)");
+
+                entity.Property(e => e.TaxCodeDesc)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TaxDistirct)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<AsmtzoneDescriptions>(entity =>
+            {
+                entity.ToTable("ASMTZoneDescriptions");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Filler)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecordCode)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ZoneCode)
+                    .HasMaxLength(6)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ZoneCodeDesc)
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ZoneCodeShortDesc)
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ZoneMinimums)
+                    .HasMaxLength(12)
                     .IsUnicode(false);
             });
 

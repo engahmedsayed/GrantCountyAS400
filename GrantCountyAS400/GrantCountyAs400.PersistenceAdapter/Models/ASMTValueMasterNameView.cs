@@ -15,5 +15,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
         public string TitleOwnerName { get; set; }
         public string ContractHolderName { get; set; }
         public decimal? TaxCodeArea { get; set; }
+        public string Description1 { get; set; }
+        public string Description2 { get; set; }
     }
 }
