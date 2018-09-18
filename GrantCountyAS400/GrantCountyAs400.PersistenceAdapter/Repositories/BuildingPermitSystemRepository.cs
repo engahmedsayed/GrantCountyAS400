@@ -16,6 +16,21 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             _context = dbContext;
         }
 
+        public BuildingPermitSystemDetail Details(int id)
+        {
+            var query = (from appm in _context.BldgpermitApplicationMaster
+                         where appm.Id == id
+                         select appm).FirstOrDefault();
+            BuildingPermitSystemDetail result = new BuildingPermitSystemDetail(query.JurisdictionCode, query.DepartmentCode,
+                                                                               query.ApplicationYear, query.AddendumNumber,
+                                                                               query.PermitStatus, query.ApplicantLastName + "," + query.ApplicantFirstName,
+                                                                               query.ContractLicenseNumber, query.ApplicantProjectDescription,
+                                                                               query.AdditionalInformation, query.ResultOfEnforcementAction,
+                                                                               query.EnforcementDescription, query.PlotPlanReceived,
+                                                                               query.OnlyStructureOnParcel, query.OnlyResidenceOnParcel);
+            return result;
+        }
+
         public List<BuildingPermitSystem> GetAll(decimal? applicationNumber, int? applicationYear,
                                                               string departmentCode, string jurisdictionCode, out int resultCount,
                                                               int pageNumber = 1, int pageSize = 50)

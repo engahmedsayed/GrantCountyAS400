@@ -29,5 +29,17 @@ namespace GrantCountyAs400.Web.Controllers.Building
             ViewBag.FilterViewModel = filter;
             return View(results.ToMappedPagedList<BuildingPermitSystem, BuildingPermitSystemViewModel>(pagingInfo));
         }
+
+        [HttpGet]
+        [Route("{id}")]
+        public IActionResult Details(int id)
+        {
+            BuildingPermitSystemDetail entity = _buildingModuleRepository.Details(id);
+            if (entity == null)
+                return NotFound();
+
+            var viewmodel = AutoMapper.Mapper.Map<BuildingDetailsViewModel>(entity);
+            return View(viewmodel);
+        }
     }
 }

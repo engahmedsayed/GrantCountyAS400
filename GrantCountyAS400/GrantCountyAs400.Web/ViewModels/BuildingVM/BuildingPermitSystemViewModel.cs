@@ -8,6 +8,7 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 {
     public class BuildingPermitSystemViewModel
     {
+        public int ID { get; set; }
         [Display(Name ="Date")]
         public DateTime? ApplicationDate { get;  set; }
         [Display(Name ="#")]

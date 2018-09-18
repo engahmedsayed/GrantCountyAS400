@@ -1,0 +1,79 @@
+﻿@model GrantCountyAs400.Web.ViewModels.BuildingVM.BuildingDetailsViewModel
+@{
+    ViewData["Title"] = "Building Permit Application";
+}
+
+<h2>Building Permit Application</h2>
+
+<div>
+    <div class="entity-details">
+        <div class="entity-info clearfix">
+            <div class="col-xs-6">
+                <table class="table col-xs-6">
+                    <tbody>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.JurisdictionCode) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.JurisdictionCode) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.DepartmentCode) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.DepartmentCode) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.ApplicationYear) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.ApplicationYear) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.AddendumNumber) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.AddendumNumber) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.PermitStatus) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.PermitStatus) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.ApplicationName) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.ApplicationName) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.ContractLicenseNumber) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.ContractLicenseNumber) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.ApplicantProjectDescription) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.ApplicantProjectDescription) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.AdditionalInformation) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.AdditionalInformation) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.ResultOfEnforcementAction) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.ResultOfEnforcementAction) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.EnforcementDescription) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.EnforcementDescription) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.PlotPlanReceived) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.PlotPlanReceived) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.OnlyStructureOnParcel) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.OnlyStructureOnParcel) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.OnlyResidenceOnParcel) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.OnlyResidenceOnParcel) </span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <p>
+            <hr />
+        </p>
+    </div>
+</div>
+

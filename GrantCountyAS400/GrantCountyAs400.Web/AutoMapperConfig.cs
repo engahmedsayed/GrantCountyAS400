@@ -71,6 +71,8 @@ namespace GrantCountyAs400.Web
 
                 #region BuildingModule
                 cfg.CreateMap<BuildingPermitSystem, BuildingPermitSystemViewModel>();
+                cfg.CreateMap<BuildingPermitSystemDetail, BuildingDetailsViewModel>();
+
 
                 #endregion
             });

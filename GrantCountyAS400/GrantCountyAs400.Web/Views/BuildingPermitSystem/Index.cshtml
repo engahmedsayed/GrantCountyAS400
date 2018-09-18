@@ -55,6 +55,9 @@
     <thead>
         <tr>
             <th>
+                @Html.Display("#")
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.FirstOrDefault().ApplicationDate)
             </th>
             <th>
@@ -109,6 +112,9 @@
         @foreach (var item in Model)
         {
             <tr>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a>
+                </td>
                 <td>
                     @{ var formattedDateTime = item.ApplicationDate.HasValue ? item.ApplicationDate.Value.ToString("MM/dd/yyyy") : "";}
                     @Html.DisplayFor(modelItem => formattedDateTime)
