@@ -1,3 +1,4 @@
+using System;
 using GrantCountyAs400.Domain.Building;
 using GrantCountyAs400.PersistenceAdapter.Models;
 
@@ -38,7 +39,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                                                         Bldgjurisdictions processedJuri,
                                                         Bldgdepartments dept,
                                                         BldgpermitCodes perm,
-                                                        AsmtsitusAddress situs) =>
+                                                        AsmtsitusAddress situs, BldgmobileHomeDealersInstallersArchitects mdia, BldgmobileHomeDealersInstallersArchitects mdiaBusinessEngineer, Bldgcontractors bldgContractor) =>
             new BuildingPermitSystemDetails(bldgpermit.JurisdictionCode, bldgpermit.DepartmentCode, bldgpermit.ApplicationYear.Value, bldgpermit.ApplicationNumber.Value,
                 bldgpermit.AddendumNumber.Value, bldgpermit.PermitStatus, bldgpermit.PermitCode, bldgpermit.ProcessedForJurisdiction, bldgpermit.ApplicationDate.Value,
                 bldgpermit.ApplicationUserId, bldgpermit.ApplicantBusinessName, bldgpermit.ApplicantLastName, bldgpermit.ApplicantFirstName, bldgpermit.AddressLine1,
@@ -48,7 +49,9 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                 bldgpermit.OnlyStructureOnParcel, bldgpermit.OnlyResidenceOnParcel,
 
                 perm.PermitDescription, juri.ShortDepartmentName, dept.ShortDepartmentName, processedJuri.ShortDepartmentName,
-                Map(preliminaryValueMaster), Map(assessorValueMaster), Map(situs));
+                Map(preliminaryValueMaster), Map(assessorValueMaster), Map(situs),bldgContractor.ContractorBusinessName,
+                bldgpermit.ArchitectFirmNumber,mdia?.BusinessName,bldgpermit.EngineerFirmNumber,mdiaBusinessEngineer?.BusinessName);
+
 
         private static BuildingValueMasterNameInfo Map(ASMTValueMasterNameView valueMaster) =>
             new BuildingValueMasterNameInfo(valueMaster.TitleOwnerName, valueMaster.Description1.Trim(), valueMaster.Description2.Trim());

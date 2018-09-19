@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -66,13 +66,26 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
         public virtual DbSet<BldggradingExcavatingPermitDetail> BldggradingExcavatingPermitDetail { get; set; }
         public virtual DbSet<Bldgjurisdictions> Bldgjurisdictions { get; set; }
         public virtual DbSet<BldgmechanicalPermitDetail> BldgmechanicalPermitDetail { get; set; }
+        public virtual DbSet<BldgmobileHomeDealersInstallersArchitects> BldgmobileHomeDealersInstallersArchitects { get; set; }
         public virtual DbSet<BldgotherPermitDetail> BldgotherPermitDetail { get; set; }
         public virtual DbSet<BldgpermitApplicationMaster> BldgpermitApplicationMaster { get; set; }
         public virtual DbSet<BldgpermitCodes> BldgpermitCodes { get; set; }
         public virtual DbSet<BldgpermitsConditionsUserAuthority> BldgpermitsConditionsUserAuthority { get; set; }
         public virtual DbSet<BldgplanningApproval> BldgplanningApproval { get; set; }
         public virtual DbSet<BldgstateClassifications> BldgstateClassifications { get; set; }
-        
+
+        // Unable to generate entity type for table 'dbo.ASMTParentChildRelationshipsNew'. Please see the warning messages.
+        // Unable to generate entity type for table 'dbo.ASMTSitusAddress'. Please see the warning messages.
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=GrantAS400;Integrated Security=True");
+            }
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AcctApWarrant>(entity =>
@@ -1763,7 +1776,6 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
 
                 entity.Property(e => e.ToParcel).HasColumnType("numeric(16, 0)");
             });
-
             modelBuilder.Entity<AsmtpermitMaster>(entity =>
             {
                 entity.ToTable("ASMTPermitMaster");
@@ -2386,6 +2398,46 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                 entity.Property(e => e.TotalFrozenValueTaxYear).HasColumnType("decimal(9, 0)");
 
                 entity.Property(e => e.TotalMarketValue).HasColumnType("decimal(9, 0)");
+            });
+
+            modelBuilder.Entity<AsmtsenirCitizenExemptionRate>(entity =>
+            {
+                entity.ToTable("ASMTSenirCitizenExemptionRate");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ExcLevyExemptPercent).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.MaximumIncome).HasColumnType("decimal(9, 0)");
+
+                entity.Property(e => e.RecordCode)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RegLevyExemptPercent).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.RegLevyMaxExemptAv)
+                    .HasColumnName("RegLevyMaxExemptAV")
+                    .HasColumnType("decimal(9, 0)");
+
+                entity.Property(e => e.RegLevyMinExemptAv)
+                    .HasColumnName("RegLevyMinExemptAV")
+                    .HasColumnType("decimal(9, 0)");
+
+                entity.Property(e => e.SeniorCitizenCode)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ShortDescription)
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TaxYear).HasColumnType("numeric(4, 0)");
             });
 
             modelBuilder.Entity<AsmttaxCodeArea>(entity =>
@@ -3442,6 +3494,106 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
 
                 entity.Property(e => e.RecordStatus)
                     .HasMaxLength(1)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<BldgmobileHomeDealersInstallersArchitects>(entity =>
+            {
+                entity.ToTable("BLDGMobileHomeDealersInstallersArchitects");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.AddressLine1)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AddressLine2)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Architects)
+                    .HasMaxLength(2)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.BusinessCode)
+                    .HasMaxLength(8)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.BusinessName)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.BusinessSearchName)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CertifiedInstaller)
+                    .HasMaxLength(2)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.City)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ContactName)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DateLastChanged).HasColumnType("date");
+
+                entity.Property(e => e.Engineers)
+                    .HasMaxLength(2)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FaxNumber).HasColumnType("numeric(10, 0)");
+
+                entity.Property(e => e.InternetAddress)
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LicenseExpireDate).HasColumnType("date");
+
+                entity.Property(e => e.LicenseNumber)
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.MobileHomeDealer)
+                    .HasMaxLength(2)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.OtherCode1)
+                    .HasMaxLength(2)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.OtherCode2)
+                    .HasMaxLength(2)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.OtherCode3)
+                    .HasMaxLength(2)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PhoneExtensionNumber).HasColumnType("numeric(5, 0)");
+
+                entity.Property(e => e.PhoneNumber).HasColumnType("numeric(10, 0)");
+
+                entity.Property(e => e.PhoneNumber2).HasColumnType("numeric(10, 0)");
+
+                entity.Property(e => e.RecordStatus)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.State)
+                    .HasMaxLength(2)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserId)
+                    .HasColumnName("UserID")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ZipCode)
+                    .HasMaxLength(10)
                     .IsUnicode(false);
             });
 

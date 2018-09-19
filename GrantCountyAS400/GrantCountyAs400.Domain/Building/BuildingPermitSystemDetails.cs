@@ -46,6 +46,15 @@ namespace GrantCountyAs400.Domain.Building
         public BuildingValueMasterNameInfo AssessorValueMasterName { get; }
         public BuildingSitusAddressInfo SitusAddress { get; }
 
+        public string ContractorBusinessName { get; }
+
+        public string ArchitectFirmNumber { get; }
+
+        public string ArchitectBusinessName { get; }
+
+        public string EngineerBusinessName { get; }
+        public string EngineerFirmNumber { get; }
+
         public BuildingPermitSystemDetails(string jurisdictionCode, string departmentCode, decimal applicationYear, decimal applicationNumber, decimal addendumNumber,
             string permitStatus, string permitCode, string processedForJurisdiction, DateTime applicationDate, string applicationUserId, string applicantBusinessName,
             string applicantLastName, string applicantFirstName, string addressLine1, string addressLine2, string city, string state, string zipCode, decimal phoneNumber,
@@ -54,7 +63,9 @@ namespace GrantCountyAs400.Domain.Building
             string onlyStructureOnParcel, string onlyResidenceOnParcel,
 
             string permitDescription, string jurisidictionShortDepartmentName, string departmentShortDepartmentName, string processedForJurisdictionShortDepartmentName,
-            BuildingValueMasterNameInfo preliminaryValueMasterName, BuildingValueMasterNameInfo asessorValueMasterName, BuildingSitusAddressInfo situsAddress
+            BuildingValueMasterNameInfo preliminaryValueMasterName, BuildingValueMasterNameInfo asessorValueMasterName,
+            BuildingSitusAddressInfo situsAddress,string contractorBusinessName,string architectFirmNumber,string architectBusinessName,
+            string engineerFirmNumber, string engineerBusinessName
             )
         {
             JurisdictionCode = jurisdictionCode;
@@ -96,6 +107,11 @@ namespace GrantCountyAs400.Domain.Building
             PreliminaryValueMasterName = preliminaryValueMasterName;
             AssessorValueMasterName = asessorValueMasterName;
             SitusAddress = situsAddress;
+
+            ContractorBusinessName = contractorBusinessName;
+            ArchitectFirmNumber = architectFirmNumber;
+            ArchitectBusinessName = architectBusinessName;
+            EngineerBusinessName = engineerBusinessName;
         }
     }
 

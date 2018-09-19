@@ -46,6 +46,18 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         public string ApplicationName { get; set; }
         [Display(Name = "Gen. Contractor")]
         public string ContractLicenseNumber { get; set; }
+
+        [Display(Name ="Owner")]
+        public string ContractorBusinessName { get; set; }
+
+        public string ArchitectFirmNumber { get; set; }
+
+        public string ArchitectBusinessName { get; set; }
+
+        public string EngineerFirmNumber { get; set; }
+
+        public string EngineerBusinessName { get; set; }
+
         [Display(Name = "Application Project Description")]
         public string ApplicantProjectDescription { get; set; }
         [Display(Name = "Result Of Enforcement Action?")]

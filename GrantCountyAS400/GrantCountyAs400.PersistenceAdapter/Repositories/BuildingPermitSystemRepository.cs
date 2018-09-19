@@ -54,6 +54,13 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          join perm in _context.BldgpermitCodes on bldgpermit.PermitCode equals perm.PermitCode
                          join preliminaryNames in _context.ASMTValueMasterNameView on bldgpermit.PreliminaryParcelNumber equals preliminaryNames.ParcelNumber
                          join assessorNames in _context.ASMTValueMasterNameView on bldgpermit.PreliminaryParcelNumber equals assessorNames.ParcelNumber
+                         join bldgContractor in _context.Bldgcontractors on bldgpermit.ContractLicenseNumber equals bldgContractor.ContractLicenseNumber
+                         join mdia in _context.BldgmobileHomeDealersInstallersArchitects on bldgpermit.ArchitectFirmNumber equals mdia.BusinessCode
+                         into mdiaArchitectJoin
+                         from mdiaArchitectData in mdiaArchitectJoin.DefaultIfEmpty()
+                         join mdiaBusinessEngineer in _context.BldgmobileHomeDealersInstallersArchitects on bldgpermit.EngineerFirmNumber equals mdiaBusinessEngineer.BusinessCode
+                         into mdiaEngineerJoin
+                         from mdiaEngineerData in mdiaEngineerJoin.DefaultIfEmpty()
                          where bldgpermit.Id == id
                          select BuildingPermitSystemMapper.Map(bldgpermit,
                                                                preliminaryNames,
@@ -62,7 +69,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                                                processedJuri,
                                                                dept,
                                                                perm,
-                                                               situs)).SingleOrDefault();
+                                                               situs, mdiaArchitectData, mdiaEngineerData, bldgContractor)).SingleOrDefault();
 
             return query;
         }
