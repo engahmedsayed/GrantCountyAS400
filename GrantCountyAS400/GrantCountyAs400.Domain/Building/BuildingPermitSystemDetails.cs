@@ -43,7 +43,7 @@ namespace GrantCountyAs400.Domain.Building
 
         public string ApplicantName => $"{ApplicantLastName}, {ApplicantFirstName}";
         public BuildingValueMasterNameInfo PreliminaryValueMasterName { get; }
-        public BuildingValueMasterNameInfo AsessorValueMasterName { get; }
+        public BuildingValueMasterNameInfo AssessorValueMasterName { get; }
         public BuildingSitusAddressInfo SitusAddress { get; }
 
         public BuildingPermitSystemDetails(string jurisdictionCode, string departmentCode, decimal applicationYear, decimal applicationNumber, decimal addendumNumber,
@@ -94,7 +94,7 @@ namespace GrantCountyAs400.Domain.Building
             ProcessedForJurisdictionShortDepartmentName = processedForJurisdictionShortDepartmentName;
 
             PreliminaryValueMasterName = preliminaryValueMasterName;
-            AsessorValueMasterName = asessorValueMasterName;
+            AssessorValueMasterName = asessorValueMasterName;
             SitusAddress = situsAddress;
         }
     }

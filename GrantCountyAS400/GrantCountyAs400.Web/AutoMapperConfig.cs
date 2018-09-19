@@ -73,6 +73,8 @@ namespace GrantCountyAs400.Web
 
                 cfg.CreateMap<BuildingPermitSystem, BuildingPermitSystemViewModel>();
                 cfg.CreateMap<BuildingPermitSystemDetails, BuildingPermitSystemDetailsViewModel>();
+                cfg.CreateMap<BuildingValueMasterNameInfo, BuildingValueMasterNameInfoViewModel>();
+                cfg.CreateMap<BuildingSitusAddressInfo, BuildingSitusAddressInfoViewModel>();
 
                 #endregion BuildingModule
             });
