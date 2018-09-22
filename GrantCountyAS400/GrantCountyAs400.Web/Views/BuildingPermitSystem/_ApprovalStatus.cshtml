@@ -1,0 +1,95 @@
+﻿@model GrantCountyAs400.Web.ViewModels.BuildingVM.BuildingPermitSystemApprovalStatusViewModel
+<table class="table table-hover table-bordered text-center">
+    <thead class="upper-case">
+        <tr>
+            <th class="text-center"></th>
+            <th class="text-center">Approval Req? (Y/n)</th>
+            <th class="text-center">Received</th>
+            <th class="text-center">By User</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>@Html.DisplayNameFor(model => model.Planning) </strong></td>
+            <td>@Html.DisplayFor(model => model.Planning.Required) </td>
+            <td>@Html.DisplayFor(model => model.Planning.Date) </td>
+            <td>@Html.DisplayFor(model => model.Planning.User) </td>
+        </tr>
+        <tr>
+            <td><strong>@Html.DisplayNameFor(model => model.Health) </strong></td>
+            <td>@Html.DisplayFor(model => model.Health.Required) </td>
+            <td>@Html.DisplayFor(model => model.Health.Date) </td>
+            <td>@Html.DisplayFor(model => model.Health.User) </td>
+        </tr>
+        <tr>
+            <td><strong>@Html.DisplayNameFor(model => model.Assessor) </strong></td>
+            <td>@Html.DisplayFor(model => model.Assessor.Required) </td>
+            <td>@Html.DisplayFor(model => model.Assessor.Date) </td>
+            <td>@Html.DisplayFor(model => model.Assessor.User) </td>
+        </tr>
+        <tr>
+            <td><strong>@Html.DisplayNameFor(model => model.PublicWroks) </strong></td>
+            <td>@Html.DisplayFor(model => model.PublicWroks.Required) </td>
+            <td>@Html.DisplayFor(model => model.PublicWroks.Date) </td>
+            <td>@Html.DisplayFor(model => model.PublicWroks.User) </td>
+        </tr>
+        <tr>
+            <td><strong>@Html.DisplayNameFor(model => model.CityJurisdiction) </strong></td>
+            <td>@Html.DisplayFor(model => model.CityJurisdiction.Required) </td>
+            <td>@Html.DisplayFor(model => model.CityJurisdiction.Date) </td>
+            <td>@Html.DisplayFor(model => model.CityJurisdiction.User) </td>
+        </tr>
+        <tr>
+            <td><strong>@Html.DisplayNameFor(model => model.Architect) </strong></td>
+            <td>@Html.DisplayFor(model => model.Architect.Required) </td>
+            <td>@Html.DisplayFor(model => model.Architect.Date) </td>
+            <td>@Html.DisplayFor(model => model.Architect.User) </td>
+        </tr>
+        <tr>
+            <td><strong>@Html.DisplayNameFor(model => model.Fire) </strong></td>
+            <td>@Html.DisplayFor(model => model.Fire.Required) </td>
+            <td>@Html.DisplayFor(model => model.Fire.Date) </td>
+            <td>@Html.DisplayFor(model => model.Fire.User) </td>
+        </tr>
+        <tr>
+            <td><strong>@Html.DisplayNameFor(model => model.LI) </strong></td>
+            <td>@Html.DisplayFor(model => model.LI.Required) </td>
+            <td>@Html.DisplayFor(model => model.LI.Date) </td>
+            <td>@Html.DisplayFor(model => model.LI.User) </td>
+        </tr>
+        <tr>
+            <td><strong>@Html.DisplayNameFor(model => model.CityUtility) </strong></td>
+            <td>@Html.DisplayFor(model => model.CityUtility.Required) </td>
+            <td>@Html.DisplayFor(model => model.CityUtility.Date) </td>
+            <td>@Html.DisplayFor(model => model.CityUtility.User) </td>
+        </tr>
+        <tr>
+            <td><strong>@Html.DisplayNameFor(model => model.Owner) </strong></td>
+            <td>@Html.DisplayFor(model => model.Owner.Required) </td>
+            <td>@Html.DisplayFor(model => model.Owner.Date) </td>
+            <td>@Html.DisplayFor(model => model.Owner.User) </td>
+        </tr>
+        <tr>
+            <td><strong>@Html.DisplayNameFor(model => model.OtherSpecial) </strong></td>
+            <td>@Html.DisplayFor(model => model.OtherSpecial.Required) </td>
+            <td>@Html.DisplayFor(model => model.OtherSpecial.Date) </td>
+            <td>@Html.DisplayFor(model => model.OtherSpecial.User) </td>
+        </tr>
+        @if (Model.OtherSpecial.Required == "Y")
+        {
+            <tr>
+                <td></td>
+                <td colspan="3">
+                    @Model.OtherSpecialDescription
+                </td>
+            </tr>
+        }
+        <tr></tr>
+        <tr>
+            <td><strong>@Html.DisplayNameFor(model => model.Application) </strong></td>
+            <td>@Html.DisplayFor(model => model.Application.Required) </td>
+            <td>@Html.DisplayFor(model => model.Application.Date) </td>
+            <td>@Html.DisplayFor(model => model.Application.User) </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,4 +1,3 @@
-using System;
 using GrantCountyAs400.Domain.Building;
 using GrantCountyAs400.PersistenceAdapter.Models;
 
@@ -39,7 +38,10 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                                                         Bldgjurisdictions processedJuri,
                                                         Bldgdepartments dept,
                                                         BldgpermitCodes perm,
-                                                        AsmtsitusAddress situs, BldgmobileHomeDealersInstallersArchitects mdia, BldgmobileHomeDealersInstallersArchitects mdiaBusinessEngineer, Bldgcontractors bldgContractor) =>
+                                                        AsmtsitusAddress situs,
+                                                        BldgmobileHomeDealersInstallersArchitects mdia,
+                                                        BldgmobileHomeDealersInstallersArchitects mdiaBusinessEngineer,
+                                                        Bldgcontractors bldgContractor) =>
             new BuildingPermitSystemDetails(bldgpermit.JurisdictionCode, bldgpermit.DepartmentCode, bldgpermit.ApplicationYear.Value, bldgpermit.ApplicationNumber.Value,
                 bldgpermit.AddendumNumber.Value, bldgpermit.PermitStatus, bldgpermit.PermitCode, bldgpermit.ProcessedForJurisdiction, bldgpermit.ApplicationDate.Value,
                 bldgpermit.ApplicationUserId, bldgpermit.ApplicantBusinessName, bldgpermit.ApplicantLastName, bldgpermit.ApplicantFirstName, bldgpermit.AddressLine1,
@@ -49,14 +51,30 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                 bldgpermit.OnlyStructureOnParcel, bldgpermit.OnlyResidenceOnParcel,
 
                 perm.PermitDescription, juri.ShortDepartmentName, dept.ShortDepartmentName, processedJuri.ShortDepartmentName,
-                Map(preliminaryValueMaster), Map(assessorValueMaster), Map(situs),bldgContractor.ContractorBusinessName,
-                bldgpermit.ArchitectFirmNumber,mdia?.BusinessName,bldgpermit.EngineerFirmNumber,mdiaBusinessEngineer?.BusinessName);
-
+                Map(preliminaryValueMaster), Map(assessorValueMaster), Map(situs), bldgContractor.ContractorBusinessName,
+                bldgpermit.ArchitectFirmNumber, mdia?.BusinessName, bldgpermit.EngineerFirmNumber, mdiaBusinessEngineer?.BusinessName,
+                MapToApprovalStatus(bldgpermit));
 
         private static BuildingValueMasterNameInfo Map(ASMTValueMasterNameView valueMaster) =>
             new BuildingValueMasterNameInfo(valueMaster.TitleOwnerName, valueMaster.Description1.Trim(), valueMaster.Description2.Trim());
 
         private static BuildingSitusAddressInfo Map(AsmtsitusAddress situs) =>
             new BuildingSitusAddressInfo(situs.HouseNumber.Value, situs.StreetDirectionQuadrant, situs.LocationCode);
+
+        private static BuildingPermitSystemApprovalStatusInfo MapToApprovalStatus(BldgpermitApplicationMaster bldgpermit) =>
+            new BuildingPermitSystemApprovalStatusInfo(
+                new ApprovalStatusInfo(bldgpermit.PlanningApprovalRequired, bldgpermit.PlanningApprovalDate, bldgpermit.PlanningApprovalUser),
+                new ApprovalStatusInfo(bldgpermit.HealthApprovalRequired, bldgpermit.HealthApprovalRequiredDate, bldgpermit.HealthApprovalRequiredUser),
+                new ApprovalStatusInfo(bldgpermit.AssessorApprovalRequired, bldgpermit.AssessorApprovalDate, bldgpermit.AssessorApprovalUser),
+                new ApprovalStatusInfo(bldgpermit.PublicWroksApprovalRequired, bldgpermit.PublicWroksApprovalDate, bldgpermit.PublicWroksApprovalUser),
+                new ApprovalStatusInfo(bldgpermit.CityJurisdictionApprovalRequired, bldgpermit.CityJurisdictionApprovalDate, bldgpermit.CityJurisdictionApprovalUser),
+                new ApprovalStatusInfo(bldgpermit.ArchitectApprovalRequired, bldgpermit.ArchitectApprovalDate, bldgpermit.ArchitectApprovalUser),
+                new ApprovalStatusInfo(bldgpermit.FireApprovalRequired, bldgpermit.FireApprovalRequiredDate, bldgpermit.FireApprovalRequiredUser),
+                new ApprovalStatusInfo(bldgpermit.LIapprovalRequired, bldgpermit.LIapprovalRequiredDate, bldgpermit.LIapprovalRequiredUser),
+                new ApprovalStatusInfo(bldgpermit.CityUtilityApprovalRequired, bldgpermit.CityUtilityApprovalDate, bldgpermit.CityUtilityApprovalUser),
+                new ApprovalStatusInfo(bldgpermit.OwnerApprovalRequired, bldgpermit.OwnerApprovalRequiredDate, bldgpermit.OwnerApprovalRequiredUser),
+                new ApprovalStatusInfo(bldgpermit.OtherSpecialApprovalRequired, bldgpermit.OtherSpecialApprovalRequiredDate, bldgpermit.OtherSpecialApprovalRequiredUser),
+                new ApprovalStatusInfo(bldgpermit.ApplicationAccepted, bldgpermit.ApplicationAcceptedDate, bldgpermit.ApplicationAcceptedUserId),
+                bldgpermit.OtherSpecialApprovalDescription );
     }
 }

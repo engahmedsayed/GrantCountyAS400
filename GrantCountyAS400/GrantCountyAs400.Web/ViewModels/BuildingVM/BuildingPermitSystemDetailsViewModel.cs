@@ -44,9 +44,10 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         public string ParkInformation { get; set; }
         
         public string PermitDescription { get; set; }
-        
+
         public string ProcessedForJurisdictionShortDepartmentName { get; set; }
         private BuildingPermitSystemDetailsHeaderViewModel _buildingPermitSystemDetailsHeaderViewModel;
+
         public BuildingPermitSystemDetailsHeaderViewModel BuildingPermitSystemDetailsHeaderViewModel
         {
             get { return _buildingPermitSystemDetailsHeaderViewModel; }
@@ -96,6 +97,7 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         public BuildingValueMasterNameInfoViewModel PreliminaryValueMasterName { get; set; }
         public BuildingValueMasterNameInfoViewModel AssessorValueMasterName { get; set; }
         public BuildingSitusAddressInfoViewModel SitusAddress { get; set; }
+        public BuildingPermitSystemApprovalStatusViewModel ApprovalStatus { get; set; }
     }
 
     public class BuildingValueMasterNameInfoViewModel
@@ -110,5 +112,56 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         public decimal HouseNumber { get; set; }
         public string StreetDirectionQuadrant { get; set; }
         public string LocationCode { get; set; }
+    }
+
+    public class BuildingPermitSystemApprovalStatusViewModel
+    {
+        [Display(Name = "Planning")]
+        public ApprovalStatusViewModel Planning { get; set; }
+
+        [Display(Name = "Health Dept")]
+        public ApprovalStatusViewModel Health { get; set; }
+
+        [Display(Name = "Assessor")]
+        public ApprovalStatusViewModel Assessor { get; set; }
+
+        [Display(Name = "Public Works")]
+        public ApprovalStatusViewModel PublicWroks { get; set; }
+
+        [Display(Name = "City Jurisdiction")]
+        public ApprovalStatusViewModel CityJurisdiction { get; set; }
+
+        [Display(Name = "Arch/Engin Stamp")]
+        public ApprovalStatusViewModel Architect { get; set; }
+
+        [Display(Name = "Fire Safety Insp")]
+        public ApprovalStatusViewModel Fire { get; set; }
+
+        [Display(Name = "Other L&I Permit")]
+        public ApprovalStatusViewModel LI { get; set; }
+
+        [Display(Name = "City Utility")]
+        public ApprovalStatusViewModel CityUtility { get; set; }
+
+        [Display(Name = "Property Owner")]
+        public ApprovalStatusViewModel Owner { get; set; }
+
+        [Display(Name = "Other Special")]
+        public ApprovalStatusViewModel OtherSpecial { get; set; }
+
+        public string OtherSpecialDescription { get; set; }
+
+        [Display(Name = "Application Accepted?")]
+        public ApprovalStatusViewModel Application { get; }
+    }
+
+    public class ApprovalStatusViewModel
+    {
+        public string Required { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime? Date { get; set; }
+
+        public string User { get; set; }
     }
 }

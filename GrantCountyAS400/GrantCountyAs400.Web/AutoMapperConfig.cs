@@ -97,6 +97,8 @@ namespace GrantCountyAs400.Web
                 .ForPath(destination => destination.BuildingPermitSystemDetailsSubPageTwoViewModel.ResultOfEnforcementAction, source => source.MapFrom(n => n.ResultOfEnforcementAction));
                 cfg.CreateMap<BuildingValueMasterNameInfo, BuildingValueMasterNameInfoViewModel>();
                 cfg.CreateMap<BuildingSitusAddressInfo, BuildingSitusAddressInfoViewModel>();
+                cfg.CreateMap<BuildingPermitSystemApprovalStatusInfo, BuildingPermitSystemApprovalStatusViewModel>();
+                cfg.CreateMap<ApprovalStatusInfo, ApprovalStatusViewModel>();
 
                 #endregion BuildingModule
             });

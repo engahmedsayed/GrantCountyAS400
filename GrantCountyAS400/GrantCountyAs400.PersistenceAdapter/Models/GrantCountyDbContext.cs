@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace GrantCountyAs400.PersistenceAdapter.Models
 {
@@ -73,18 +71,6 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
         public virtual DbSet<BldgpermitsConditionsUserAuthority> BldgpermitsConditionsUserAuthority { get; set; }
         public virtual DbSet<BldgplanningApproval> BldgplanningApproval { get; set; }
         public virtual DbSet<BldgstateClassifications> BldgstateClassifications { get; set; }
-
-        // Unable to generate entity type for table 'dbo.ASMTParentChildRelationshipsNew'. Please see the warning messages.
-        // Unable to generate entity type for table 'dbo.ASMTSitusAddress'. Please see the warning messages.
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=GrantAS400;Integrated Security=True");
-            }
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
