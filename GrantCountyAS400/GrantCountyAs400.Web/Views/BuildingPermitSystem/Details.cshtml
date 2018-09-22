@@ -103,7 +103,7 @@
                         <div class="panel-body">
                             <div class="col-xs-6">
                                 <table class="table">
-                                    <tbody>                                       
+                                    <tbody>
                                         <tr>
                                             <td><strong>@Html.DisplayNameFor(model => model.ContractorDisplay) </strong></td>
                                             <td class="text-right"><span> @Html.DisplayFor(model => model.ContractorDisplay) </span></td>
@@ -120,7 +120,7 @@
                                             <td><strong>@Html.DisplayNameFor(model => model.ApplicantProjectDescription) </strong></td>
                                             <td class="text-right"><span> @Html.DisplayFor(model => model.ApplicantProjectDescription) </span></td>
                                         </tr>
-                                       
+
                                     </tbody>
                                 </table>
                             </div>
@@ -146,8 +146,22 @@
                                     </tbody>
                                 </table>
                             </div>
-                            </div>
                         </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#approvalStatus">
+                                Approval Status
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="approvalStatus" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <partial name="_ApprovalStatus" for="@Model.ApprovalStatus" />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

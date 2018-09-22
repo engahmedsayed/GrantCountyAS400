@@ -26,6 +26,9 @@
     <Folder Include="wwwroot\js\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Update="Views\BuildingPermitSystem\_ApprovalStatus.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\LegalDocument\Details.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
