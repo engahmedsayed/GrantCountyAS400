@@ -9,16 +9,9 @@
     <div class="entity-details row">
         <div class="entity-info clearfix">
             <div class="col-xs-6">
+                @Html.Partial("_Header",Model.BuildingPermitSystemDetailsHeaderViewModel)
                 <table class="table col-xs-6">
                     <tbody>
-                        <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.JurisdictionDisplay) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.JurisdictionDisplay) </span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.ApplicationYearDisplay) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.ApplicationYearDisplay) </span></td>
-                        </tr>
                         <tr>
                             <td><strong>@Html.DisplayNameFor(model => model.PermitType) </strong></td>
                             <td class="text-right"><span> @Html.DisplayFor(model => model.PermitType) </span></td>
@@ -59,10 +52,7 @@
             <div class="col-xs-6">
                 <table class="table col-xs-6">
                     <tbody>
-                        <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.DepartmentDisplay) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.DepartmentDisplay) </span></td>
-                        </tr>
+                        
                         <tr>
                             <td><strong>@Html.DisplayNameFor(model => model.ApplicationDate) </strong></td>
                             <td class="text-right"><span> @Html.DisplayFor(model => model.ApplicationDate) </span></td>
@@ -71,14 +61,7 @@
                             <td><strong>@Html.DisplayNameFor(model => model.ApplicantBusinessName) </strong></td>
                             <td class="text-right"><span> @Html.DisplayFor(model => model.ApplicantBusinessName) </span></td>
                         </tr>
-                        <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.AddendumNumber) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.AddendumNumber) </span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.PermitStatusDisplay) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.PermitStatusDisplay) </span></td>
-                        </tr>
+                        
                         <tr>
                             <td><strong>@Html.DisplayNameFor(model => model.ApplicationUserId) </strong></td>
                             <td class="text-right"><span> @Html.DisplayFor(model => model.ApplicationUserId) </span></td>

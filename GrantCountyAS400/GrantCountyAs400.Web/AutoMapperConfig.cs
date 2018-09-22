@@ -72,7 +72,15 @@ namespace GrantCountyAs400.Web
                 #region BuildingModule
 
                 cfg.CreateMap<BuildingPermitSystem, BuildingPermitSystemViewModel>();
-                cfg.CreateMap<BuildingPermitSystemDetails, BuildingPermitSystemDetailsViewModel>();
+                cfg.CreateMap<BuildingPermitSystemDetails, BuildingPermitSystemDetailsViewModel>()
+                .ForPath(destination=>destination.BuildingPermitSystemDetailsHeaderViewModel.AddendumNumber,source=>source.MapFrom(n=>n.AddendumNumber))
+                .ForPath(destination=>destination.BuildingPermitSystemDetailsHeaderViewModel.ApplicationNumber,source=>source.MapFrom(n=>n.ApplicationNumber))
+                .ForPath(destination=>destination.BuildingPermitSystemDetailsHeaderViewModel.ApplicationYear,source=>source.MapFrom(n=>n.ApplicationYear))
+                .ForPath(destination=>destination.BuildingPermitSystemDetailsHeaderViewModel.DepartmentCode,source=>source.MapFrom(n=>n.DepartmentCode))
+                .ForPath(destination=>destination.BuildingPermitSystemDetailsHeaderViewModel.DepartmentShortDepartmentName,source=>source.MapFrom(n=>n.DepartmentShortDepartmentName))
+                .ForPath(destination=>destination.BuildingPermitSystemDetailsHeaderViewModel.JurisdictionCode,source=>source.MapFrom(n=>n.JurisdictionCode))
+                .ForPath(destination=>destination.BuildingPermitSystemDetailsHeaderViewModel.JurisidictionShortDepartmentName,source=>source.MapFrom(n=>n.JurisidictionShortDepartmentName))
+                .ForPath(destination=>destination.BuildingPermitSystemDetailsHeaderViewModel.PermitStatus,source=>source.MapFrom(n=>n.PermitStatus));
                 cfg.CreateMap<BuildingValueMasterNameInfo, BuildingValueMasterNameInfoViewModel>();
                 cfg.CreateMap<BuildingSitusAddressInfo, BuildingSitusAddressInfoViewModel>();
 

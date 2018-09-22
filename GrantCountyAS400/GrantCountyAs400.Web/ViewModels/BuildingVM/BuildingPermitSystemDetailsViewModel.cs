@@ -5,21 +5,15 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 {
     public class BuildingPermitSystemDetailsViewModel
     {
-        [Display(Name = "Jurisdiction")]
-        public string JurisdictionCode { get; set; }
+      
 
-        [Display(Name = "Department")]
-        public string DepartmentCode { get; set; }
+       
 
-        [Display(Name = "Application Yr/#")]
-        public decimal ApplicationYear { get; set; }
+   
 
-        public decimal ApplicationNumber { get; set; }
+        
 
-        [Display(Name = "Addendum #")]
-        public int AddendumNumber { get; set; }
-
-        public string PermitStatus { get; set; }
+       
         public string PermitCode { get; set; }
         public string ProcessedForJurisdiction { get; set; }
 
@@ -91,19 +85,18 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         public string OnlyResidenceOnParcel { get; set; }
 
         public string PermitDescription { get; set; }
-        public string JurisidictionShortDepartmentName { get; set; }
-        public string DepartmentShortDepartmentName { get; set; }
+        
         public string ProcessedForJurisdictionShortDepartmentName { get; set; }
-
-        // computed properties
-        [Display(Name = "Jurisdiction")]
-        public string JurisdictionDisplay => $"{JurisdictionCode} - {JurisidictionShortDepartmentName}";
-
-        [Display(Name = "Department")]
-        public string DepartmentDisplay => $"{DepartmentCode} - {DepartmentShortDepartmentName}";
-
-        [Display(Name = "Application(Year-Number)")]
-        public string ApplicationYearDisplay => $"{ApplicationYear} - {ApplicationNumber}";
+        private BuildingPermitSystemDetailsHeaderViewModel _buildingPermitSystemDetailsHeaderViewModel;
+        public BuildingPermitSystemDetailsHeaderViewModel BuildingPermitSystemDetailsHeaderViewModel
+        {
+            get { return _buildingPermitSystemDetailsHeaderViewModel; }
+            set
+            {
+                if (_buildingPermitSystemDetailsHeaderViewModel == null)
+                    _buildingPermitSystemDetailsHeaderViewModel = new BuildingPermitSystemDetailsHeaderViewModel();
+            }
+        }
 
         [Display(Name = "For Jurisdiction")]
         public string ForJurisdiction => $"{ProcessedForJurisdiction} - {ProcessedForJurisdictionShortDepartmentName}";
@@ -143,25 +136,7 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         [Display(Name = "Gen. Contractor")]
         public string ContractorDisplay => $"{ContractLicenseNumber} {ContractorBusinessName}";
 
-        [Display(Name = "Permit Status")]
-        public string PermitStatusDisplay
-        {
-            get
-            {
-                switch (PermitStatus)
-                {
-                    case "A": return "Applica";
-                    case "D": return "VoidApp";
-                    case "E": return "ExpApp";
-                    case "W": return "Working";
-                    case "V": return "VoidPer";
-                    case "U": return "ExpPer";
-                    case "F": return "Final";
-                    case "C": return "Closed";
-                    default: return "";
-                }
-            }
-        }
+   
 
         public BuildingValueMasterNameInfoViewModel PreliminaryValueMasterName { get; set; }
         public BuildingValueMasterNameInfoViewModel AssessorValueMasterName { get; set; }
