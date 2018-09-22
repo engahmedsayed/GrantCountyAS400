@@ -5,15 +5,6 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 {
     public class BuildingPermitSystemDetailsViewModel
     {
-      
-
-       
-
-   
-
-        
-
-       
         public string PermitCode { get; set; }
         public string ProcessedForJurisdiction { get; set; }
 
@@ -48,42 +39,10 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 
         public decimal AssessorParcelNumber { get; set; }
 
-        [Display(Name = "Additional Project Information")]
-        public string AdditionalInformation { get; set; }
 
         [Display(Name = "Park Info")]
         public string ParkInformation { get; set; }
-
-        [Display(Name = "Application Name")]
-        public string ApplicationName { get; set; }
-
-        public string ContractLicenseNumber { get; set; }
-
-        [Display(Name = "Owner")]
-        public string ContractorBusinessName { get; set; }
-
-        public string ArchitectFirmNumber { get; set; }
-        public string ArchitectBusinessName { get; set; }
-        public string EngineerFirmNumber { get; set; }
-        public string EngineerBusinessName { get; set; }
-
-        [Display(Name = "Application Project Description")]
-        public string ApplicantProjectDescription { get; set; }
-
-        [Display(Name = "Result Of Enforcement Action?")]
-        public string ResultOfEnforcementAction { get; set; }
-
-        public string EnforcementDescription { get; set; }
-
-        [Display(Name = "Plot Plan received")]
-        public string PlotPlanReceived { get; set; }
-
-        [Display(Name = "Only Structure On Parcel?")]
-        public string OnlyStructureOnParcel { get; set; }
-
-        [Display(Name = "Only Residence On Parcel?")]
-        public string OnlyResidenceOnParcel { get; set; }
-
+        
         public string PermitDescription { get; set; }
         
         public string ProcessedForJurisdictionShortDepartmentName { get; set; }
@@ -95,6 +54,17 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
             {
                 if (_buildingPermitSystemDetailsHeaderViewModel == null)
                     _buildingPermitSystemDetailsHeaderViewModel = new BuildingPermitSystemDetailsHeaderViewModel();
+            }
+        }
+
+        private BuildingPermitSystemDetailsSubPageTwoViewModel _buildingPermitSystemDetailsSubPageTwoViewModel;
+        public BuildingPermitSystemDetailsSubPageTwoViewModel BuildingPermitSystemDetailsSubPageTwoViewModel
+        {
+            get { return _buildingPermitSystemDetailsSubPageTwoViewModel; }
+            set
+            {
+                if (_buildingPermitSystemDetailsSubPageTwoViewModel == null)
+                    _buildingPermitSystemDetailsSubPageTwoViewModel = new BuildingPermitSystemDetailsSubPageTwoViewModel();
             }
         }
 
@@ -122,22 +92,7 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 
         [Display(Name = "Permit Type")]
         public string PermitType => $"{PermitCode} - {PermitDescription}";
-
-        [Display(Name = "Result of Enforcement Action?")]
-        public string EnforcementActionDisplay => (ResultOfEnforcementAction == "N")
-            ? $"{ResultOfEnforcementAction}" : $"{ResultOfEnforcementAction}" + $"{EnforcementDescription}";
-
-        [Display(Name = "Engineer")]
-        public string EngineerDisplay => $"{EngineerFirmNumber} {EngineerBusinessName}";
-
-        [Display(Name = "Architect")]
-        public string ArchitectDisplay => $"{ArchitectFirmNumber} {ArchitectBusinessName}";
-
-        [Display(Name = "Gen. Contractor")]
-        public string ContractorDisplay => $"{ContractLicenseNumber} {ContractorBusinessName}";
-
-   
-
+        
         public BuildingValueMasterNameInfoViewModel PreliminaryValueMasterName { get; set; }
         public BuildingValueMasterNameInfoViewModel AssessorValueMasterName { get; set; }
         public BuildingSitusAddressInfoViewModel SitusAddress { get; set; }

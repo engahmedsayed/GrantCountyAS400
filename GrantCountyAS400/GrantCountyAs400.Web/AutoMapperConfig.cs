@@ -73,14 +73,28 @@ namespace GrantCountyAs400.Web
 
                 cfg.CreateMap<BuildingPermitSystem, BuildingPermitSystemViewModel>();
                 cfg.CreateMap<BuildingPermitSystemDetails, BuildingPermitSystemDetailsViewModel>()
-                .ForPath(destination=>destination.BuildingPermitSystemDetailsHeaderViewModel.AddendumNumber,source=>source.MapFrom(n=>n.AddendumNumber))
-                .ForPath(destination=>destination.BuildingPermitSystemDetailsHeaderViewModel.ApplicationNumber,source=>source.MapFrom(n=>n.ApplicationNumber))
-                .ForPath(destination=>destination.BuildingPermitSystemDetailsHeaderViewModel.ApplicationYear,source=>source.MapFrom(n=>n.ApplicationYear))
-                .ForPath(destination=>destination.BuildingPermitSystemDetailsHeaderViewModel.DepartmentCode,source=>source.MapFrom(n=>n.DepartmentCode))
-                .ForPath(destination=>destination.BuildingPermitSystemDetailsHeaderViewModel.DepartmentShortDepartmentName,source=>source.MapFrom(n=>n.DepartmentShortDepartmentName))
-                .ForPath(destination=>destination.BuildingPermitSystemDetailsHeaderViewModel.JurisdictionCode,source=>source.MapFrom(n=>n.JurisdictionCode))
-                .ForPath(destination=>destination.BuildingPermitSystemDetailsHeaderViewModel.JurisidictionShortDepartmentName,source=>source.MapFrom(n=>n.JurisidictionShortDepartmentName))
-                .ForPath(destination=>destination.BuildingPermitSystemDetailsHeaderViewModel.PermitStatus,source=>source.MapFrom(n=>n.PermitStatus));
+                .ForPath(destination => destination.BuildingPermitSystemDetailsHeaderViewModel.AddendumNumber, source => source.MapFrom(n => n.AddendumNumber))
+                .ForPath(destination => destination.BuildingPermitSystemDetailsHeaderViewModel.ApplicationNumber, source => source.MapFrom(n => n.ApplicationNumber))
+                .ForPath(destination => destination.BuildingPermitSystemDetailsHeaderViewModel.ApplicationYear, source => source.MapFrom(n => n.ApplicationYear))
+                .ForPath(destination => destination.BuildingPermitSystemDetailsHeaderViewModel.DepartmentCode, source => source.MapFrom(n => n.DepartmentCode))
+                .ForPath(destination => destination.BuildingPermitSystemDetailsHeaderViewModel.DepartmentShortDepartmentName, source => source.MapFrom(n => n.DepartmentShortDepartmentName))
+                .ForPath(destination => destination.BuildingPermitSystemDetailsHeaderViewModel.JurisdictionCode, source => source.MapFrom(n => n.JurisdictionCode))
+                .ForPath(destination => destination.BuildingPermitSystemDetailsHeaderViewModel.JurisidictionShortDepartmentName, source => source.MapFrom(n => n.JurisidictionShortDepartmentName))
+                .ForPath(destination => destination.BuildingPermitSystemDetailsHeaderViewModel.PermitStatus, source => source.MapFrom(n => n.PermitStatus))
+                .ForPath(destination => destination.BuildingPermitSystemDetailsSubPageTwoViewModel.AdditionalInformation, source => source.MapFrom(n => n.AdditionalInformation))
+                .ForPath(destination => destination.BuildingPermitSystemDetailsSubPageTwoViewModel.ApplicantProjectDescription, source => source.MapFrom(n => n.ApplicantProjectDescription))
+                .ForPath(destination => destination.BuildingPermitSystemDetailsSubPageTwoViewModel.ApplicationName, source => source.MapFrom(n => n.ApplicationName))
+                .ForPath(destination => destination.BuildingPermitSystemDetailsSubPageTwoViewModel.ArchitectBusinessName, source => source.MapFrom(n => n.ArchitectBusinessName))
+                .ForPath(destination => destination.BuildingPermitSystemDetailsSubPageTwoViewModel.ArchitectFirmNumber, source => source.MapFrom(n => n.ArchitectFirmNumber))
+                .ForPath(destination => destination.BuildingPermitSystemDetailsSubPageTwoViewModel.ContractLicenseNumber, source => source.MapFrom(n => n.ContractLicenseNumber))
+                .ForPath(destination => destination.BuildingPermitSystemDetailsSubPageTwoViewModel.ContractorBusinessName, source => source.MapFrom(n => n.ContractorBusinessName))
+                .ForPath(destination => destination.BuildingPermitSystemDetailsSubPageTwoViewModel.EnforcementDescription, source => source.MapFrom(n => n.EnforcementDescription))
+                .ForPath(destination => destination.BuildingPermitSystemDetailsSubPageTwoViewModel.EngineerBusinessName, source => source.MapFrom(n => n.EngineerBusinessName))
+                .ForPath(destination => destination.BuildingPermitSystemDetailsSubPageTwoViewModel.EngineerFirmNumber, source => source.MapFrom(n => n.EngineerFirmNumber))
+                .ForPath(destination => destination.BuildingPermitSystemDetailsSubPageTwoViewModel.OnlyResidenceOnParcel, source => source.MapFrom(n => n.OnlyResidenceOnParcel))
+                .ForPath(destination => destination.BuildingPermitSystemDetailsSubPageTwoViewModel.OnlyStructureOnParcel, source => source.MapFrom(n => n.OnlyStructureOnParcel))
+                .ForPath(destination => destination.BuildingPermitSystemDetailsSubPageTwoViewModel.PlotPlanReceived, source => source.MapFrom(n => n.PlotPlanReceived))
+                .ForPath(destination => destination.BuildingPermitSystemDetailsSubPageTwoViewModel.ResultOfEnforcementAction, source => source.MapFrom(n => n.ResultOfEnforcementAction));
                 cfg.CreateMap<BuildingValueMasterNameInfo, BuildingValueMasterNameInfoViewModel>();
                 cfg.CreateMap<BuildingSitusAddressInfo, BuildingSitusAddressInfoViewModel>();
 

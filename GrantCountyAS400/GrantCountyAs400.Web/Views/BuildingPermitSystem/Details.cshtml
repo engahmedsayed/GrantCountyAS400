@@ -9,7 +9,7 @@
     <div class="entity-details row">
         <div class="entity-info clearfix">
             <div class="col-xs-6">
-                @Html.Partial("_Header",Model.BuildingPermitSystemDetailsHeaderViewModel)
+               @Html.Partial("_Header", Model.BuildingPermitSystemDetailsHeaderViewModel);
                 <table class="table col-xs-6">
                     <tbody>
                         <tr>
@@ -74,10 +74,10 @@
                             <td><strong>@Html.DisplayNameFor(model => model.AddressLine2) </strong></td>
                             <td class="text-right"><span> @Html.DisplayFor(model => model.AddressLine2) </span></td>
                         </tr>
-                        <tr>
+                        @*<tr>
                             <td><strong>@Html.DisplayNameFor(model => model.AdditionalInformation) </strong></td>
                             <td class="text-right"><span> @Html.DisplayFor(model => model.AdditionalInformation) </span></td>
-                        </tr>
+                        </tr>*@
                         <tr>
                             <td><strong>@Html.DisplayNameFor(model => model.ParkInformation) </strong></td>
                             <td class="text-right"><span> @Html.DisplayFor(model => model.ParkInformation) </span></td>
@@ -100,54 +100,8 @@
                         </h4>
                     </div>
                     <div id="applicantDetails" class="panel-collapse collapse in">
-                        <div class="panel-body">
-                            <div class="col-xs-6">
-                                <table class="table">
-                                    <tbody>                                       
-                                        <tr>
-                                            <td><strong>@Html.DisplayNameFor(model => model.ContractorDisplay) </strong></td>
-                                            <td class="text-right"><span> @Html.DisplayFor(model => model.ContractorDisplay) </span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>@Html.DisplayNameFor(model => model.ArchitectDisplay) </strong></td>
-                                            <td class="text-right"><span> @Html.DisplayFor(model => model.ArchitectDisplay) </span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>@Html.DisplayNameFor(model => model.EngineerDisplay) </strong></td>
-                                            <td class="text-right"><span> @Html.DisplayFor(model => model.EngineerDisplay) </span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>@Html.DisplayNameFor(model => model.ApplicantProjectDescription) </strong></td>
-                                            <td class="text-right"><span> @Html.DisplayFor(model => model.ApplicantProjectDescription) </span></td>
-                                        </tr>
-                                       
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col-xs-6">
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <td><strong>@Html.DisplayNameFor(model => model.EnforcementActionDisplay) </strong></td>
-                                            <td class="text-right"><span> @Html.DisplayFor(model => model.EnforcementActionDisplay) </span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>@Html.DisplayNameFor(model => model.PlotPlanReceived) </strong></td>
-                                            <td class="text-right"><span> @Html.DisplayFor(model => model.PlotPlanReceived) </span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>@Html.DisplayNameFor(model => model.OnlyStructureOnParcel) </strong></td>
-                                            <td class="text-right"><span> @Html.DisplayFor(model => model.OnlyStructureOnParcel) </span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>@Html.DisplayNameFor(model => model.OnlyResidenceOnParcel) </strong></td>
-                                            <td class="text-right"><span> @Html.DisplayFor(model => model.OnlyResidenceOnParcel) </span></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            </div>
-                        </div>
+                        @Html.Partial("_DetailsSubPageTwo", Model.BuildingPermitSystemDetailsSubPageTwoViewModel)
+                    </div>
                 </div>
             </div>
         </div>
