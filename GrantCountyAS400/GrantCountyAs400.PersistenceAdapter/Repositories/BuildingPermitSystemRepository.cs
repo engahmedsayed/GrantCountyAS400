@@ -69,7 +69,10 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                                                processedJuri,
                                                                dept,
                                                                perm,
-                                                               situs, mdiaArchitectData, mdiaEngineerData, bldgContractor)).SingleOrDefault();
+                                                               situs,
+                                                               mdiaArchitectData, 
+                                                               mdiaEngineerData, 
+                                                               bldgContractor)).SingleOrDefault();
 
             return query;
         }

@@ -49,7 +49,6 @@ namespace GrantCountyAs400.Domain.Building
         public string ContractorBusinessName { get; }
 
         public string ArchitectFirmNumber { get; }
-
         public string ArchitectBusinessName { get; }
 
         public string EngineerBusinessName { get; }
@@ -64,7 +63,7 @@ namespace GrantCountyAs400.Domain.Building
 
             string permitDescription, string jurisidictionShortDepartmentName, string departmentShortDepartmentName, string processedForJurisdictionShortDepartmentName,
             BuildingValueMasterNameInfo preliminaryValueMasterName, BuildingValueMasterNameInfo asessorValueMasterName,
-            BuildingSitusAddressInfo situsAddress,string contractorBusinessName,string architectFirmNumber,string architectBusinessName,
+            BuildingSitusAddressInfo situsAddress, string contractorBusinessName, string architectFirmNumber, string architectBusinessName,
             string engineerFirmNumber, string engineerBusinessName
             )
         {
