@@ -61,6 +61,11 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          join mdiaBusinessEngineer in _context.BldgmobileHomeDealersInstallersArchitects on bldgpermit.EngineerFirmNumber equals mdiaBusinessEngineer.BusinessCode
                          into mdiaEngineerJoin
                          from mdiaEngineerData in mdiaEngineerJoin.DefaultIfEmpty()
+                         join plap in _context.BldgplanningApproval on new{bldgpermit.ApplicationYear,bldgpermit.ApplicationNumber} equals new
+                         {
+                             plap.ApplicationYear,
+                             plap.ApplicationNumber
+                         }
                          where bldgpermit.Id == id
                          select BuildingPermitSystemMapper.Map(bldgpermit,
                                                                preliminaryNames,
@@ -72,7 +77,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                                                situs,
                                                                mdiaArchitectData, 
                                                                mdiaEngineerData, 
-                                                               bldgContractor)).SingleOrDefault();
+                                                               bldgContractor,plap)).SingleOrDefault();
 
             return query;
         }

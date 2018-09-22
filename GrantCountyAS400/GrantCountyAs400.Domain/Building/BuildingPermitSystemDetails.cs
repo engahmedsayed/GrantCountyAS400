@@ -35,12 +35,14 @@ namespace GrantCountyAs400.Domain.Building
         public BuildingSitusAddressInfo SitusAddress { get; }
         public BuildingPermitSystemApprovalStatusInfo ApprovalStatus { get; }
 
+        public PlanningApproval PlanningApproval { get; }
+
         public BuildingPermitSystemDetails(string applicantLastName, string applicantFirstName, string permitCode, string processedForJurisdiction, DateTime applicationDate,
             string applicationUserId, string applicantBusinessName, string addressLine1, string addressLine2, string city, string state, string zipCode, decimal phoneNumber,
             decimal preliminaryParcelNumber, decimal assessorParcelNumber, string additionalInformation, string parkInformation, string permitDescription,
             string processedForJurisdictionShortDepartmentName, BuildingPermitSystemBasicInfo basicInfo, BuildingPermitSystemApplicantDetails applicantDetails,
             BuildingValueMasterNameInfo preliminaryValueMasterName, BuildingValueMasterNameInfo asessorValueMasterName, BuildingSitusAddressInfo situsAddress,
-            BuildingPermitSystemApprovalStatusInfo approvalStatus)
+            BuildingPermitSystemApprovalStatusInfo approvalStatus,PlanningApproval planningApproval)
         {
             ApplicantLastName = applicantLastName;
             ApplicantFirstName = applicantFirstName;
@@ -70,6 +72,7 @@ namespace GrantCountyAs400.Domain.Building
             AssessorValueMasterName = asessorValueMasterName;
             SitusAddress = situsAddress;
             ApprovalStatus = approvalStatus;
+            PlanningApproval = planningApproval;
         }
     }
 
@@ -206,6 +209,53 @@ namespace GrantCountyAs400.Domain.Building
             Required = required;
             Date = date;
             User = user;
+        }
+    }
+
+    public class PlanningApproval
+    {
+        public string ApplicantProjectDescription{ get; }
+
+        public string ZoneCode { get; }
+
+        public decimal? FrontPropertySetback{ get; }
+
+        public decimal? SideFlankingSetback { get;}
+
+        public decimal? SidePropertySetback { get;}
+
+        public decimal? BackPropertySetback { get; }
+
+        public string FloodZone { get; }
+        public string FloodZoneMapNumber { get;}
+        public string LUPermitRequired { get;}
+
+        public string Comments { get; }
+
+        public string ApprovedBy { get;}
+
+        public string UserID { get; }
+
+        public DateTime? ChangeDate { get; }
+
+        public PlanningApproval(string applicantProjectDescription, string zoneCode, decimal? frontPropertySetback,
+                                decimal? sideFlankingSetback, decimal? sidePropertySetback, decimal? backPropertySetback,
+                                string floodZone, string floodZoneMapNumber, string lUPermitRequired, string comments,
+                                string approvedBy, string userID, DateTime? changeDate)
+        {
+            ApplicantProjectDescription = applicantProjectDescription;
+            ZoneCode = zoneCode;
+            FrontPropertySetback = frontPropertySetback;
+            SideFlankingSetback = sideFlankingSetback;
+            SidePropertySetback = sidePropertySetback;
+            BackPropertySetback = backPropertySetback;
+            FloodZone = floodZone;
+            FloodZoneMapNumber = floodZoneMapNumber;
+            LUPermitRequired = lUPermitRequired;
+            Comments = comments;
+            ApprovedBy = approvedBy;
+            UserID = userID;
+            ChangeDate = changeDate;
         }
     }
 }
