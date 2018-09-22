@@ -9,7 +9,7 @@
     <div class="entity-details row">
         <div class="entity-info clearfix">
             <div class="col-xs-6">
-                <partial name="_Header" for="@Model.BuildingPermitSystemDetailsHeaderViewModel" />
+                <partial name="_Header" for="@Model.BasicInfo" />
                 <table class="table col-xs-6">
                     <tbody>
                         <tr>
@@ -19,7 +19,7 @@
                         <tr>
                             <td><strong>@Html.DisplayNameFor(model => model.ForJurisdiction) </strong></td>
                             <td class="text-right"><span> @Html.DisplayFor(model => model.ForJurisdiction) </span></td>
-                        </tr>                       
+                        </tr>
                         <tr>
                             <td><strong>@Html.DisplayNameFor(model => model.ApplicantName) </strong></td>
                             <td class="text-right"><span> @Html.DisplayFor(model => model.ApplicantName) </span></td>
@@ -52,7 +52,7 @@
             <div class="col-xs-6">
                 <table class="table col-xs-6">
                     <tbody>
-                        
+
                         <tr>
                             <td><strong>@Html.DisplayNameFor(model => model.ApplicationDate) </strong></td>
                             <td class="text-right"><span> @Html.DisplayFor(model => model.ApplicationDate) </span></td>
@@ -61,7 +61,7 @@
                             <td><strong>@Html.DisplayNameFor(model => model.ApplicantBusinessName) </strong></td>
                             <td class="text-right"><span> @Html.DisplayFor(model => model.ApplicantBusinessName) </span></td>
                         </tr>
-                        
+
                         <tr>
                             <td><strong>@Html.DisplayNameFor(model => model.ApplicationUserId) </strong></td>
                             <td class="text-right"><span> @Html.DisplayFor(model => model.ApplicationUserId) </span></td>
@@ -74,10 +74,6 @@
                             <td><strong>@Html.DisplayNameFor(model => model.AddressLine2) </strong></td>
                             <td class="text-right"><span> @Html.DisplayFor(model => model.AddressLine2) </span></td>
                         </tr>
-                        @*<tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.AdditionalInformation) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.AdditionalInformation) </span></td>
-                        </tr>*@
                         <tr>
                             <td><strong>@Html.DisplayNameFor(model => model.ParkInformation) </strong></td>
                             <td class="text-right"><span> @Html.DisplayFor(model => model.ParkInformation) </span></td>
@@ -101,51 +97,7 @@
                     </div>
                     <div id="applicantDetails" class="panel-collapse collapse in">
                         <div class="panel-body">
-                            <div class="col-xs-6">
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <td><strong>@Html.DisplayNameFor(model => model.ContractorDisplay) </strong></td>
-                                            <td class="text-right"><span> @Html.DisplayFor(model => model.ContractorDisplay) </span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>@Html.DisplayNameFor(model => model.ArchitectDisplay) </strong></td>
-                                            <td class="text-right"><span> @Html.DisplayFor(model => model.ArchitectDisplay) </span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>@Html.DisplayNameFor(model => model.EngineerDisplay) </strong></td>
-                                            <td class="text-right"><span> @Html.DisplayFor(model => model.EngineerDisplay) </span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>@Html.DisplayNameFor(model => model.ApplicantProjectDescription) </strong></td>
-                                            <td class="text-right"><span> @Html.DisplayFor(model => model.ApplicantProjectDescription) </span></td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col-xs-6">
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <td><strong>@Html.DisplayNameFor(model => model.EnforcementActionDisplay) </strong></td>
-                                            <td class="text-right"><span> @Html.DisplayFor(model => model.EnforcementActionDisplay) </span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>@Html.DisplayNameFor(model => model.PlotPlanReceived) </strong></td>
-                                            <td class="text-right"><span> @Html.DisplayFor(model => model.PlotPlanReceived) </span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>@Html.DisplayNameFor(model => model.OnlyStructureOnParcel) </strong></td>
-                                            <td class="text-right"><span> @Html.DisplayFor(model => model.OnlyStructureOnParcel) </span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>@Html.DisplayNameFor(model => model.OnlyResidenceOnParcel) </strong></td>
-                                            <td class="text-right"><span> @Html.DisplayFor(model => model.OnlyResidenceOnParcel) </span></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <partial name="_ApplicantDetails" for="@Model.ApplicantDetails" />
                         </div>
                     </div>
                 </div>
@@ -161,8 +113,6 @@
                         <div class="panel-body">
                             <partial name="_ApprovalStatus" for="@Model.ApprovalStatus" />
                         </div>
-                    </div>
-                        @Html.Partial("_DetailsSubPageTwo", Model.BuildingPermitSystemDetailsSubPageTwoViewModel)
                     </div>
                 </div>
             </div>

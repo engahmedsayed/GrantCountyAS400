@@ -39,35 +39,12 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 
         public decimal AssessorParcelNumber { get; set; }
 
-
         [Display(Name = "Park Info")]
         public string ParkInformation { get; set; }
-        
+
         public string PermitDescription { get; set; }
 
         public string ProcessedForJurisdictionShortDepartmentName { get; set; }
-        private BuildingPermitSystemDetailsHeaderViewModel _buildingPermitSystemDetailsHeaderViewModel;
-
-        public BuildingPermitSystemDetailsHeaderViewModel BuildingPermitSystemDetailsHeaderViewModel
-        {
-            get { return _buildingPermitSystemDetailsHeaderViewModel; }
-            set
-            {
-                if (_buildingPermitSystemDetailsHeaderViewModel == null)
-                    _buildingPermitSystemDetailsHeaderViewModel = new BuildingPermitSystemDetailsHeaderViewModel();
-            }
-        }
-
-        private BuildingPermitSystemDetailsSubPageTwoViewModel _buildingPermitSystemDetailsSubPageTwoViewModel;
-        public BuildingPermitSystemDetailsSubPageTwoViewModel BuildingPermitSystemDetailsSubPageTwoViewModel
-        {
-            get { return _buildingPermitSystemDetailsSubPageTwoViewModel; }
-            set
-            {
-                if (_buildingPermitSystemDetailsSubPageTwoViewModel == null)
-                    _buildingPermitSystemDetailsSubPageTwoViewModel = new BuildingPermitSystemDetailsSubPageTwoViewModel();
-            }
-        }
 
         [Display(Name = "For Jurisdiction")]
         public string ForJurisdiction => $"{ProcessedForJurisdiction} - {ProcessedForJurisdictionShortDepartmentName}";
@@ -93,7 +70,9 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 
         [Display(Name = "Permit Type")]
         public string PermitType => $"{PermitCode} - {PermitDescription}";
-        
+
+        public BuildingPermitSystemBasicInfoViewModel BasicInfo { get; set; }
+        public BuildingPermitSystemApplicantDetailsViewModel ApplicantDetails { get; set; }
         public BuildingValueMasterNameInfoViewModel PreliminaryValueMasterName { get; set; }
         public BuildingValueMasterNameInfoViewModel AssessorValueMasterName { get; set; }
         public BuildingSitusAddressInfoViewModel SitusAddress { get; set; }

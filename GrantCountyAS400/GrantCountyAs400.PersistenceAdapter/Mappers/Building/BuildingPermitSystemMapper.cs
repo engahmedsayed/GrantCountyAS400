@@ -42,18 +42,27 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                                                         BldgmobileHomeDealersInstallersArchitects mdia,
                                                         BldgmobileHomeDealersInstallersArchitects mdiaBusinessEngineer,
                                                         Bldgcontractors bldgContractor) =>
-            new BuildingPermitSystemDetails(bldgpermit.JurisdictionCode, bldgpermit.DepartmentCode, bldgpermit.ApplicationYear.Value, bldgpermit.ApplicationNumber.Value,
-                bldgpermit.AddendumNumber.Value, bldgpermit.PermitStatus, bldgpermit.PermitCode, bldgpermit.ProcessedForJurisdiction, bldgpermit.ApplicationDate.Value,
-                bldgpermit.ApplicationUserId, bldgpermit.ApplicantBusinessName, bldgpermit.ApplicantLastName, bldgpermit.ApplicantFirstName, bldgpermit.AddressLine1,
-                bldgpermit.AddressLine2, bldgpermit.City, bldgpermit.State, bldgpermit.ZipCode, bldgpermit.PhoneNumber.Value, bldgpermit.PreliminaryParcelNumber.Value,
-                bldgpermit.AssessorParcelNumber.Value, bldgpermit.AdditionalInformation, bldgpermit.ParkInformation, bldgpermit.ContractLicenseNumber,
-                bldgpermit.ApplicantProjectDescription, bldgpermit.ResultOfEnforcementAction, bldgpermit.EnforcementDescription, bldgpermit.PlotPlanReceived,
-                bldgpermit.OnlyStructureOnParcel, bldgpermit.OnlyResidenceOnParcel,
+            new BuildingPermitSystemDetails(bldgpermit.ApplicantLastName, bldgpermit.ApplicantFirstName, bldgpermit.PermitCode, bldgpermit.ProcessedForJurisdiction,
+                bldgpermit.ApplicationDate.Value, bldgpermit.ApplicationUserId, bldgpermit.ApplicantBusinessName, bldgpermit.AddressLine1, bldgpermit.AddressLine2,
+                bldgpermit.City, bldgpermit.State, bldgpermit.ZipCode, bldgpermit.PhoneNumber.Value, bldgpermit.PreliminaryParcelNumber.Value,
+                bldgpermit.AssessorParcelNumber.Value, bldgpermit.AdditionalInformation, bldgpermit.ParkInformation, perm.PermitDescription, processedJuri.ShortDepartmentName,
+                MapToBasicInfo(bldgpermit, juri, dept), MapToApplicantDetails(bldgpermit, mdia, mdiaBusinessEngineer, bldgContractor), Map(preliminaryValueMaster),
+                Map(assessorValueMaster), Map(situs), MapToApprovalStatus(bldgpermit));
 
-                perm.PermitDescription, juri.ShortDepartmentName, dept.ShortDepartmentName, processedJuri.ShortDepartmentName,
-                Map(preliminaryValueMaster), Map(assessorValueMaster), Map(situs), bldgContractor.ContractorBusinessName,
-                bldgpermit.ArchitectFirmNumber, mdia?.BusinessName, bldgpermit.EngineerFirmNumber, mdiaBusinessEngineer?.BusinessName,
-                MapToApprovalStatus(bldgpermit));
+        private static BuildingPermitSystemBasicInfo MapToBasicInfo(BldgpermitApplicationMaster bldgpermit,
+                                                                    Bldgjurisdictions juri,
+                                                                    Bldgdepartments dept) =>
+            new BuildingPermitSystemBasicInfo(bldgpermit.JurisdictionCode, bldgpermit.DepartmentCode, bldgpermit.ApplicationYear.Value, bldgpermit.ApplicationNumber.Value,
+                bldgpermit.AddendumNumber.Value, bldgpermit.PermitStatus, juri.ShortDepartmentName, dept.ShortDepartmentName);
+
+        private static BuildingPermitSystemApplicantDetails MapToApplicantDetails(BldgpermitApplicationMaster bldgpermit,
+                                                                                  BldgmobileHomeDealersInstallersArchitects mdia,
+                                                                                  BldgmobileHomeDealersInstallersArchitects mdiaBusinessEngineer,
+                                                                                  Bldgcontractors bldgContractor) =>
+            new BuildingPermitSystemApplicantDetails(bldgpermit.ContractLicenseNumber,
+                bldgpermit.ApplicantProjectDescription, bldgpermit.ResultOfEnforcementAction, bldgpermit.EnforcementDescription, bldgpermit.PlotPlanReceived,
+                bldgpermit.OnlyStructureOnParcel, bldgpermit.OnlyResidenceOnParcel, bldgContractor.ContractorBusinessName,
+                bldgpermit.ArchitectFirmNumber, mdia?.BusinessName, bldgpermit.EngineerFirmNumber, mdiaBusinessEngineer?.BusinessName);
 
         private static BuildingValueMasterNameInfo Map(ASMTValueMasterNameView valueMaster) =>
             new BuildingValueMasterNameInfo(valueMaster.TitleOwnerName, valueMaster.Description1.Trim(), valueMaster.Description2.Trim());
@@ -75,6 +84,6 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                 new ApprovalStatusInfo(bldgpermit.OwnerApprovalRequired, bldgpermit.OwnerApprovalRequiredDate, bldgpermit.OwnerApprovalRequiredUser),
                 new ApprovalStatusInfo(bldgpermit.OtherSpecialApprovalRequired, bldgpermit.OtherSpecialApprovalRequiredDate, bldgpermit.OtherSpecialApprovalRequiredUser),
                 new ApprovalStatusInfo(bldgpermit.ApplicationAccepted, bldgpermit.ApplicationAcceptedDate, bldgpermit.ApplicationAcceptedUserId),
-                bldgpermit.OtherSpecialApprovalDescription );
+                bldgpermit.OtherSpecialApprovalDescription);
     }
 }

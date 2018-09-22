@@ -4,19 +4,14 @@ namespace GrantCountyAs400.Domain.Building
 {
     public class BuildingPermitSystemDetails
     {
-        public string JurisdictionCode { get; }
-        public string DepartmentCode { get; }
-        public decimal ApplicationYear { get; }
-        public decimal ApplicationNumber { get; }
-        public decimal AddendumNumber { get; }
-        public string PermitStatus { get; }
+        public string ApplicantLastName { get; }
+        public string ApplicantFirstName { get; }
         public string PermitCode { get; }
         public string ProcessedForJurisdiction { get; }
         public DateTime ApplicationDate { get; }
         public string ApplicationUserId { get; }
         public string ApplicantBusinessName { get; }
-        public string ApplicantLastName { get; }
-        public string ApplicantFirstName { get; }
+
         public string AddressLine1 { get; }
         public string AddressLine2 { get; }
         public string City { get; }
@@ -28,60 +23,33 @@ namespace GrantCountyAs400.Domain.Building
         public string AdditionalInformation { get; }
         public string ParkInformation { get; }
         public string ApplicationName { get; }
-        public string ContractLicenseNumber { get; }
-        public string ApplicantProjectDescription { get; }
-        public string ResultOfEnforcementAction { get; }
-        public string EnforcementDescription { get; }
-        public string PlotPlanReceived { get; }
-        public string OnlyStructureOnParcel { get; }
-        public string OnlyResidenceOnParcel { get; }
 
         public string PermitDescription { get; }
-        public string JurisidictionShortDepartmentName { get; }
-        public string DepartmentShortDepartmentName { get; }
+
         public string ProcessedForJurisdictionShortDepartmentName { get; }
 
-        public string ApplicantName => $"{ApplicantLastName}, {ApplicantFirstName}";
+        public BuildingPermitSystemBasicInfo BasicInfo { get; }
+        public BuildingPermitSystemApplicantDetails ApplicantDetails { get; }
         public BuildingValueMasterNameInfo PreliminaryValueMasterName { get; }
         public BuildingValueMasterNameInfo AssessorValueMasterName { get; }
         public BuildingSitusAddressInfo SitusAddress { get; }
         public BuildingPermitSystemApprovalStatusInfo ApprovalStatus { get; }
 
-        public string ContractorBusinessName { get; }
-
-        public string ArchitectFirmNumber { get; }
-        public string ArchitectBusinessName { get; }
-
-        public string EngineerBusinessName { get; }
-        public string EngineerFirmNumber { get; }
-
-        public BuildingPermitSystemDetails(string jurisdictionCode, string departmentCode, decimal applicationYear, decimal applicationNumber, decimal addendumNumber,
-            string permitStatus, string permitCode, string processedForJurisdiction, DateTime applicationDate, string applicationUserId, string applicantBusinessName,
-            string applicantLastName, string applicantFirstName, string addressLine1, string addressLine2, string city, string state, string zipCode, decimal phoneNumber,
-            decimal preliminaryParcelNumber, decimal assessorParcelNumber, string additionalInformation, string parkInformation,
-            string contractLicenseNumber, string applicantProjectDescription, string resultOfEnforcementAction, string enforcementDescription, string plotPlanReceived,
-            string onlyStructureOnParcel, string onlyResidenceOnParcel,
-
-            string permitDescription, string jurisidictionShortDepartmentName, string departmentShortDepartmentName, string processedForJurisdictionShortDepartmentName,
-            BuildingValueMasterNameInfo preliminaryValueMasterName, BuildingValueMasterNameInfo asessorValueMasterName,
-            BuildingSitusAddressInfo situsAddress, string contractorBusinessName, string architectFirmNumber, string architectBusinessName,
-            string engineerFirmNumber, string engineerBusinessName,
-            BuildingPermitSystemApprovalStatusInfo approvalStatus
-            )
+        public BuildingPermitSystemDetails(string applicantLastName, string applicantFirstName, string permitCode, string processedForJurisdiction, DateTime applicationDate,
+            string applicationUserId, string applicantBusinessName, string addressLine1, string addressLine2, string city, string state, string zipCode, decimal phoneNumber,
+            decimal preliminaryParcelNumber, decimal assessorParcelNumber, string additionalInformation, string parkInformation, string permitDescription,
+            string processedForJurisdictionShortDepartmentName, BuildingPermitSystemBasicInfo basicInfo, BuildingPermitSystemApplicantDetails applicantDetails,
+            BuildingValueMasterNameInfo preliminaryValueMasterName, BuildingValueMasterNameInfo asessorValueMasterName, BuildingSitusAddressInfo situsAddress,
+            BuildingPermitSystemApprovalStatusInfo approvalStatus)
         {
-            JurisdictionCode = jurisdictionCode;
-            DepartmentCode = departmentCode;
-            ApplicationYear = applicationYear;
-            ApplicationNumber = applicationNumber;
-            AddendumNumber = addendumNumber;
-            PermitStatus = permitStatus;
+            ApplicantLastName = applicantLastName;
+            ApplicantFirstName = applicantFirstName;
             PermitCode = permitCode;
             ProcessedForJurisdiction = processedForJurisdiction;
             ApplicationDate = applicationDate;
             ApplicationUserId = applicationUserId;
             ApplicantBusinessName = applicantBusinessName;
-            ApplicantLastName = applicantLastName;
-            ApplicantFirstName = applicantFirstName;
+
             AddressLine1 = addressLine1;
             AddressLine2 = addressLine2;
             City = city;
@@ -92,6 +60,63 @@ namespace GrantCountyAs400.Domain.Building
             AssessorParcelNumber = assessorParcelNumber;
             AdditionalInformation = additionalInformation;
             ParkInformation = parkInformation;
+
+            PermitDescription = permitDescription;
+            ProcessedForJurisdictionShortDepartmentName = processedForJurisdictionShortDepartmentName;
+
+            BasicInfo = basicInfo;
+            ApplicantDetails = applicantDetails;
+            PreliminaryValueMasterName = preliminaryValueMasterName;
+            AssessorValueMasterName = asessorValueMasterName;
+            SitusAddress = situsAddress;
+            ApprovalStatus = approvalStatus;
+        }
+    }
+
+    public class BuildingPermitSystemBasicInfo
+    {
+        public string JurisdictionCode { get; }
+        public string JurisidictionShortDepartmentName { get; }
+        public decimal ApplicationYear { get; }
+        public decimal ApplicationNumber { get; }
+        public string DepartmentCode { get; }
+        public string DepartmentShortDepartmentName { get; }
+        public decimal AddendumNumber { get; }
+        public string PermitStatus { get; }
+
+        public BuildingPermitSystemBasicInfo(string jurisdictionCode, string departmentCode, decimal applicationYear, decimal applicationNumber, decimal addendumNumber,
+            string permitStatus, string jurisidictionShortDepartmentName, string departmentShortDepartmentName)
+        {
+            JurisdictionCode = jurisdictionCode;
+            DepartmentCode = departmentCode;
+            ApplicationYear = applicationYear;
+            ApplicationNumber = applicationNumber;
+            AddendumNumber = addendumNumber;
+            PermitStatus = permitStatus;
+            JurisidictionShortDepartmentName = jurisidictionShortDepartmentName;
+            DepartmentShortDepartmentName = departmentShortDepartmentName;
+        }
+    }
+
+    public class BuildingPermitSystemApplicantDetails
+    {
+        public string ContractLicenseNumber { get; }
+        public string ContractorBusinessName { get; }
+        public string ApplicantProjectDescription { get; }
+        public string ResultOfEnforcementAction { get; }
+        public string EnforcementDescription { get; }
+        public string PlotPlanReceived { get; }
+        public string OnlyStructureOnParcel { get; }
+        public string OnlyResidenceOnParcel { get; }
+        public string ArchitectFirmNumber { get; }
+        public string ArchitectBusinessName { get; }
+        public string EngineerBusinessName { get; }
+        public string EngineerFirmNumber { get; }
+
+        public BuildingPermitSystemApplicantDetails(string contractLicenseNumber, string applicantProjectDescription, string resultOfEnforcementAction,
+            string enforcementDescription, string plotPlanReceived, string onlyStructureOnParcel, string onlyResidenceOnParcel, string contractorBusinessName,
+            string architectFirmNumber, string architectBusinessName, string engineerFirmNumber, string engineerBusinessName)
+        {
             ContractLicenseNumber = contractLicenseNumber;
             ApplicantProjectDescription = applicantProjectDescription;
             ResultOfEnforcementAction = resultOfEnforcementAction;
@@ -99,22 +124,10 @@ namespace GrantCountyAs400.Domain.Building
             PlotPlanReceived = plotPlanReceived;
             OnlyStructureOnParcel = onlyStructureOnParcel;
             OnlyResidenceOnParcel = onlyResidenceOnParcel;
-
-            PermitDescription = permitDescription;
-            JurisidictionShortDepartmentName = jurisidictionShortDepartmentName;
-            DepartmentShortDepartmentName = departmentShortDepartmentName;
-            ProcessedForJurisdictionShortDepartmentName = processedForJurisdictionShortDepartmentName;
-
-            PreliminaryValueMasterName = preliminaryValueMasterName;
-            AssessorValueMasterName = asessorValueMasterName;
-            SitusAddress = situsAddress;
-
             ContractorBusinessName = contractorBusinessName;
             ArchitectFirmNumber = architectFirmNumber;
             ArchitectBusinessName = architectBusinessName;
             EngineerBusinessName = engineerBusinessName;
-
-            ApprovalStatus = approvalStatus;
         }
     }
 
