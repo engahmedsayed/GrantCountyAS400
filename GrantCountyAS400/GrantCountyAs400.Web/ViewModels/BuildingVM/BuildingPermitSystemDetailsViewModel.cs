@@ -5,15 +5,6 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 {
     public class BuildingPermitSystemDetailsViewModel
     {
-      
-
-       
-
-   
-
-        
-
-       
         public string PermitCode { get; set; }
         public string ProcessedForJurisdiction { get; set; }
 
@@ -85,9 +76,10 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         public string OnlyResidenceOnParcel { get; set; }
 
         public string PermitDescription { get; set; }
-        
+
         public string ProcessedForJurisdictionShortDepartmentName { get; set; }
         private BuildingPermitSystemDetailsHeaderViewModel _buildingPermitSystemDetailsHeaderViewModel;
+
         public BuildingPermitSystemDetailsHeaderViewModel BuildingPermitSystemDetailsHeaderViewModel
         {
             get { return _buildingPermitSystemDetailsHeaderViewModel; }
@@ -135,8 +127,6 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 
         [Display(Name = "Gen. Contractor")]
         public string ContractorDisplay => $"{ContractLicenseNumber} {ContractorBusinessName}";
-
-   
 
         public BuildingValueMasterNameInfoViewModel PreliminaryValueMasterName { get; set; }
         public BuildingValueMasterNameInfoViewModel AssessorValueMasterName { get; set; }
