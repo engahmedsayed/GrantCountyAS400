@@ -6,7 +6,7 @@
 <h2>Building Permit Application</h2>
 
 <div>
-    <div class="entity-details">
+    <div class="entity-details row">
         <div class="entity-info clearfix">
             <div class="col-xs-6">
                 <table class="table col-xs-6">
@@ -26,15 +26,7 @@
                         <tr>
                             <td><strong>@Html.DisplayNameFor(model => model.ForJurisdiction) </strong></td>
                             <td class="text-right"><span> @Html.DisplayFor(model => model.ForJurisdiction) </span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.ApplicationDate) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.ApplicationDate) </span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.ApplicantBusinessName) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.ApplicantBusinessName) </span></td>
-                        </tr>
+                        </tr>                       
                         <tr>
                             <td><strong>@Html.DisplayNameFor(model => model.ApplicantName) </strong></td>
                             <td class="text-right"><span> @Html.DisplayFor(model => model.ApplicantName) </span></td>
@@ -72,6 +64,14 @@
                             <td class="text-right"><span> @Html.DisplayFor(model => model.DepartmentDisplay) </span></td>
                         </tr>
                         <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.ApplicationDate) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.ApplicationDate) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.ApplicantBusinessName) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.ApplicantBusinessName) </span></td>
+                        </tr>
+                        <tr>
                             <td><strong>@Html.DisplayNameFor(model => model.AddendumNumber) </strong></td>
                             <td class="text-right"><span> @Html.DisplayFor(model => model.AddendumNumber) </span></td>
                         </tr>
@@ -107,47 +107,65 @@
                 </table>
             </div>
             <div class="clearfix"></div>
-            <div class="col-xs-6">
-                <table class="table">
-                    <tbody>
-                        <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.ApplicantName) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.ApplicantName) </span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.ContractorDisplay) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.ContractorDisplay) </span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.ArchitectDisplay) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.ArchitectDisplay) </span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.EngineerDisplay) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.EngineerDisplay) </span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.ApplicantProjectDescription) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.ApplicantProjectDescription) </span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.EnforcementActionDisplay) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.EnforcementActionDisplay) </span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.PlotPlanReceived) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.PlotPlanReceived) </span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.OnlyStructureOnParcel) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.OnlyStructureOnParcel) </span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.OnlyResidenceOnParcel) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.OnlyResidenceOnParcel) </span></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="panel-group col-xs-12" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#applicantDetails">
+                                Applicant Details
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="applicantDetails" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <div class="col-xs-6">
+                                <table class="table">
+                                    <tbody>                                       
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.ContractorDisplay) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(model => model.ContractorDisplay) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.ArchitectDisplay) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(model => model.ArchitectDisplay) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.EngineerDisplay) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(model => model.EngineerDisplay) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.ApplicantProjectDescription) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(model => model.ApplicantProjectDescription) </span></td>
+                                        </tr>
+                                       
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-xs-6">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.EnforcementActionDisplay) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(model => model.EnforcementActionDisplay) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.PlotPlanReceived) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(model => model.PlotPlanReceived) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.OnlyStructureOnParcel) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(model => model.OnlyStructureOnParcel) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.OnlyResidenceOnParcel) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(model => model.OnlyResidenceOnParcel) </span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            </div>
+                        </div>
+                </div>
             </div>
         </div>
     </div>
