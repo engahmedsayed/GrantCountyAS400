@@ -45,6 +45,7 @@ namespace GrantCountyAs400.Domain.Building
         public BuildingValueMasterNameInfo PreliminaryValueMasterName { get; }
         public BuildingValueMasterNameInfo AssessorValueMasterName { get; }
         public BuildingSitusAddressInfo SitusAddress { get; }
+        public BuildingPermitSystemApprovalStatusInfo ApprovalStatus { get; }
 
         public string ContractorBusinessName { get; }
 
@@ -64,7 +65,8 @@ namespace GrantCountyAs400.Domain.Building
             string permitDescription, string jurisidictionShortDepartmentName, string departmentShortDepartmentName, string processedForJurisdictionShortDepartmentName,
             BuildingValueMasterNameInfo preliminaryValueMasterName, BuildingValueMasterNameInfo asessorValueMasterName,
             BuildingSitusAddressInfo situsAddress, string contractorBusinessName, string architectFirmNumber, string architectBusinessName,
-            string engineerFirmNumber, string engineerBusinessName
+            string engineerFirmNumber, string engineerBusinessName,
+            BuildingPermitSystemApprovalStatusInfo approvalStatus
             )
         {
             JurisdictionCode = jurisdictionCode;
@@ -111,6 +113,8 @@ namespace GrantCountyAs400.Domain.Building
             ArchitectFirmNumber = architectFirmNumber;
             ArchitectBusinessName = architectBusinessName;
             EngineerBusinessName = engineerBusinessName;
+
+            ApprovalStatus = approvalStatus;
         }
     }
 
@@ -130,15 +134,65 @@ namespace GrantCountyAs400.Domain.Building
 
     public class BuildingSitusAddressInfo
     {
-        public decimal HouseNumber { get; set; }
-        public string StreetDirectionQuadrant { get; set; }
-        public string LocationCode { get; set; }
+        public decimal HouseNumber { get; }
+        public string StreetDirectionQuadrant { get; }
+        public string LocationCode { get; }
 
         public BuildingSitusAddressInfo(decimal houseNumber, string streetDirectionQuadrant, string locationCode)
         {
             HouseNumber = houseNumber;
             StreetDirectionQuadrant = streetDirectionQuadrant;
             LocationCode = locationCode;
+        }
+    }
+
+    public class BuildingPermitSystemApprovalStatusInfo
+    {
+        public ApprovalStatusInfo Planning { get; }
+        public ApprovalStatusInfo Health { get; }
+        public ApprovalStatusInfo Assessor { get; }
+        public ApprovalStatusInfo PublicWroks { get; }
+        public ApprovalStatusInfo CityJurisdiction { get; }
+        public ApprovalStatusInfo Architect { get; }
+        public ApprovalStatusInfo Fire { get; }
+        public ApprovalStatusInfo LI { get; }
+        public ApprovalStatusInfo CityUtility { get; }
+        public ApprovalStatusInfo Owner { get; }
+        public ApprovalStatusInfo OtherSpecial { get; }
+        public string OtherSpecialDescription { get; }
+        public ApprovalStatusInfo Application { get; }
+
+        public BuildingPermitSystemApprovalStatusInfo(ApprovalStatusInfo planning, ApprovalStatusInfo health, ApprovalStatusInfo assessor, ApprovalStatusInfo publicWroks,
+            ApprovalStatusInfo cityJurisdiction, ApprovalStatusInfo architect, ApprovalStatusInfo fire, ApprovalStatusInfo li, ApprovalStatusInfo cityUtility, ApprovalStatusInfo owner,
+            ApprovalStatusInfo otherSpecial, ApprovalStatusInfo application, string otherSpecialDescription)
+        {
+            Planning = planning;
+            Health = health;
+            Assessor = assessor;
+            PublicWroks = publicWroks;
+            CityJurisdiction = cityJurisdiction;
+            Architect = architect;
+            Fire = fire;
+            LI = li;
+            CityUtility = CityUtility;
+            Owner = owner;
+            OtherSpecial = otherSpecial;
+            OtherSpecialDescription = otherSpecialDescription;
+            Application = application;
+        }
+    }
+
+    public class ApprovalStatusInfo
+    {
+        public string Required { get; }
+        public DateTime? Date { get; }
+        public string User { get; }
+
+        public ApprovalStatusInfo(string required, DateTime? date, string user)
+        {
+            Required = required;
+            Date = date;
+            User = user;
         }
     }
 }
