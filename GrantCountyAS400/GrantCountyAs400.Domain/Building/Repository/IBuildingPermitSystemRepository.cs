@@ -8,5 +8,7 @@ namespace GrantCountyAs400.Domain.Building.Repository
                                           out int resultCount, int pageNumber = 1, int pageSize = 50);
 
         BuildingPermitSystemDetails Details(int id);
+
+        DemolitionPermit GetDemolitionPermitByBuildingPermitSystemId(int id);
     }
 }

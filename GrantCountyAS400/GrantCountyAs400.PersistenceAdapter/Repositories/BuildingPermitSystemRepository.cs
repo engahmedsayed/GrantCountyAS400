@@ -61,7 +61,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          join mdiaBusinessEngineer in _context.BldgmobileHomeDealersInstallersArchitects on bldgpermit.EngineerFirmNumber equals mdiaBusinessEngineer.BusinessCode
                          into mdiaEngineerJoin
                          from mdiaEngineerData in mdiaEngineerJoin.DefaultIfEmpty()
-                         join plap in _context.BldgplanningApproval on new{bldgpermit.ApplicationYear,bldgpermit.ApplicationNumber} equals new
+                         join plap in _context.BldgplanningApproval on new { bldgpermit.ApplicationYear, bldgpermit.ApplicationNumber } equals new
                          {
                              plap.ApplicationYear,
                              plap.ApplicationNumber
@@ -75,11 +75,36 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                                                dept,
                                                                perm,
                                                                situs,
-                                                               mdiaArchitectData, 
-                                                               mdiaEngineerData, 
-                                                               bldgContractor,plap)).SingleOrDefault();
+                                                               mdiaArchitectData,
+                                                               mdiaEngineerData,
+                                                               bldgContractor, plap)).SingleOrDefault();
 
             return query;
+        }
+
+        public DemolitionPermit GetDemolitionPermitByBuildingPermitSystemId(int id)
+        {
+            var query = (from bldg in _context.BldgpermitApplicationMaster
+                         join permit in _context.BldgdemolitionPermitDetail
+                         on new { bldg.ApplicationYear, bldg.ApplicationNumber } equals new { permit.ApplicationYear, permit.ApplicationNumber }
+                         join bldgFire in _context.BldgfireDistrictCodes on permit.FireDistrictCode equals bldgFire.FireDistrictCode
+                         join bldgCondition in _context.BldgapplicationConditions
+                         on new { permit.ApplicationYear, permit.ApplicationNumber } equals new { bldgCondition.ApplicationYear, bldgCondition.ApplicationNumber }
+                         into bldgConditionJoin
+                         from bldgConditionRecord in bldgConditionJoin.DefaultIfEmpty()
+                         join bldgInspection in _context.BldgapplicationInspections
+                         on new { permit.ApplicationYear, permit.ApplicationNumber } equals new { bldgInspection.ApplicationYear, bldgInspection.ApplicationNumber }
+                         into bldgInspectionJoin
+                         from bldgInspectionRecord in bldgInspectionJoin.DefaultIfEmpty()
+                         where bldg.Id == id
+                         select new { bldg, permit, bldgFire, bldgConditionRecord, bldgInspectionRecord }).SingleOrDefault();
+
+            if (query != null)
+            {
+                return PermitDetailMapper.Map(query.bldg, query.permit, query.bldgFire, query.bldgConditionRecord, query.bldgInspectionRecord);
+            }
+
+            return null;
         }
     }
 }
