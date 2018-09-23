@@ -46,8 +46,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
 
         public BuildingPermitSystemDetails Details(int id)
         {
-            var query = (from bldgpermit in _context.BldgpermitApplicationMaster
-                         join situs in _context.AsmtsitusAddress on bldgpermit.AssessorParcelNumber equals situs.ParcelNumber
+            var query = (from bldgpermit in _context.BldgpermitApplicationMaster                         
                          join juri in _context.Bldgjurisdictions on bldgpermit.JurisdictionCode equals juri.DepartmentCode
                          join processedJuri in _context.Bldgjurisdictions on bldgpermit.ProcessedForJurisdiction equals processedJuri.DepartmentCode
                          join dept in _context.Bldgdepartments on bldgpermit.DepartmentCode equals dept.DepartmentCode
@@ -55,6 +54,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          join preliminaryNames in _context.ASMTValueMasterNameView on bldgpermit.PreliminaryParcelNumber equals preliminaryNames.ParcelNumber
                          join assessorNames in _context.ASMTValueMasterNameView on bldgpermit.PreliminaryParcelNumber equals assessorNames.ParcelNumber
                          join bldgContractor in _context.Bldgcontractors on bldgpermit.ContractLicenseNumber equals bldgContractor.ContractLicenseNumber
+                         join situs in _context.AsmtsitusAddress on bldgpermit.AssessorParcelNumber equals situs.ParcelNumber
+                         into situsJoin from situsData in situsJoin.DefaultIfEmpty()
                          join mdia in _context.BldgmobileHomeDealersInstallersArchitects on bldgpermit.ArchitectFirmNumber equals mdia.BusinessCode
                          into mdiaArchitectJoin
                          from mdiaArchitectData in mdiaArchitectJoin.DefaultIfEmpty()
@@ -74,7 +75,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                                                processedJuri,
                                                                dept,
                                                                perm,
-                                                               situs,
+                                                               situsData,
                                                                mdiaArchitectData,
                                                                mdiaEngineerData,
                                                                bldgContractor, plap)).SingleOrDefault();
