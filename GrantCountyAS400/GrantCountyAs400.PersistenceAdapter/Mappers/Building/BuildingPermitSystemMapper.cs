@@ -41,7 +41,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                                                         AsmtsitusAddress situs,
                                                         BldgmobileHomeDealersInstallersArchitects mdia,
                                                         BldgmobileHomeDealersInstallersArchitects mdiaBusinessEngineer,
-                                                        Bldgcontractors bldgContractor, BldgplanningApproval plap) =>
+                                                        Bldgcontractors bldgContractor,
+                                                        BldgplanningApproval plap) =>
             new BuildingPermitSystemDetails(bldgpermit.ApplicantLastName, bldgpermit.ApplicantFirstName, bldgpermit.PermitCode.Trim(), bldgpermit.ProcessedForJurisdiction,
                 bldgpermit.ApplicationDate.Value, bldgpermit.ApplicationUserId, bldgpermit.ApplicantBusinessName, bldgpermit.AddressLine1, bldgpermit.AddressLine2,
                 bldgpermit.City, bldgpermit.State, bldgpermit.ZipCode, bldgpermit.PhoneNumber.Value, bldgpermit.PreliminaryParcelNumber.Value,
@@ -88,8 +89,9 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                 new ApprovalStatusInfo(bldgpermit.ApplicationAccepted, bldgpermit.ApplicationAcceptedDate, bldgpermit.ApplicationAcceptedUserId),
                 bldgpermit.OtherSpecialApprovalDescription);
 
-        private static PlanningApproval MapToPlanningApproval(BldgplanningApproval plap, BldgpermitApplicationMaster appm)
-        =>
+        private static PlanningApproval MapToPlanningApproval(BldgplanningApproval plap, BldgpermitApplicationMaster appm) =>
+            (plap == null) ?
+            null :
             new PlanningApproval(appm.ApplicantProjectDescription, plap.ZoneCode, plap.FrontPropertySetback, plap.SideFlankingSetback,
                                  plap.SidePropertySetback, plap.BackPropertySetback, plap.FloodZone, plap.FloodZoneMapNumber,
                                  plap.LUpermitRequired, plap.Comments, plap.ApprovedBy, plap.UserId, plap.ChangeDate);
