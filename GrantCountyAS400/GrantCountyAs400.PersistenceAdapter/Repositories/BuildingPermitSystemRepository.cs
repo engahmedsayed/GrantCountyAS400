@@ -1,4 +1,4 @@
-using GrantCountyAs400.Domain.Building;
+﻿using GrantCountyAs400.Domain.Building;
 using GrantCountyAs400.Domain.Building.Repository;
 using GrantCountyAs400.PersistenceAdapter.Mappers.Building;
 using GrantCountyAs400.PersistenceAdapter.Models;
@@ -99,7 +99,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          into bldgInspectionJoin
                          from bldgInspectionRecord in bldgInspectionJoin.DefaultIfEmpty()
                          where bldg.Id == id
-                         select new { bldg, permit, bldgFire, bldgConditionRecord, bldgInspectionRecord }).SingleOrDefault();
+                         select new { bldg, permit, bldgFire, bldgConditionRecord, bldgInspectionRecord }).FirstOrDefault();
 
             if (query != null)
             {
