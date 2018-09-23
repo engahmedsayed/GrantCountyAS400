@@ -129,6 +129,20 @@
                         </div>
                     </div>
                 </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#permitDetails">
+                                Permit Details
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="permitDetails" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <partial name="@ViewBag.PermitDetailViewName" model="ViewBag.PermitDetailViewModel" />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
