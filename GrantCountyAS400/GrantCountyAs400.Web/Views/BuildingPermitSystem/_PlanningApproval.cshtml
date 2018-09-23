@@ -19,7 +19,43 @@
                 <td><strong>@Html.DisplayNameFor(model => model.SideFlankingSetback) </strong></td>
                 <td class="text-right"><span> @Html.DisplayFor(model => model.SideFlankingSetback) </span></td>
             </tr>
-
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.SidePropertySetback) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.SidePropertySetback) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.BackPropertySetback) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.BackPropertySetback) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.FloodZone) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.FloodZone) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.FloodZoneMapNumber) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.FloodZoneMapNumber) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.LUPermitRequired) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.LUPermitRequired) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.Comments) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.Comments) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.ApprovedBy) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.ApprovedBy) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.UserID) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.UserID) </span></td>
+            </tr>
+            <tr>
+                @{ var formmatedDate = Model.ChangeDate.HasValue ? Model.ChangeDate.Value.ToString("dd/MM/yyyy"):"";}
+                <td><strong>@Html.DisplayNameFor(model => model.ChangeDate) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => formmatedDate) </span></td>
+            </tr>
         </tbody>
     </table>
 </div>
