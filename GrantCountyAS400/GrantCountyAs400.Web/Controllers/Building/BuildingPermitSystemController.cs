@@ -56,7 +56,13 @@ namespace GrantCountyAs400.Web.Controllers.Building
                     permitDetailViewModel = AutoMapper.Mapper.Map<DemolitionPermitViewModel>(permitDetailEntity);
                     permitDetailViewName = "_DemolitionPermit";
                     break;
-
+                case "GRAD":
+                case "MECH":
+                case "FIREM":
+                case "MANH":
+                case "PLMB":
+                case "STRUT":
+                    break;
                 default:
                     throw new System.ArgumentOutOfRangeException(
                         nameof(permitCode),
