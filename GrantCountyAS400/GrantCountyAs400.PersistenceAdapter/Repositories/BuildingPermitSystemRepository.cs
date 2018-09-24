@@ -106,5 +106,20 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
 
             return null;
         }
+
+        public OtherPermitDetail GetOtherPermitDetailByBuildingPermitSystemId(int id)
+        {
+            var query = (from bldg in _context.BldgpermitApplicationMaster
+                         join othd in _context.BldgotherPermitDetail
+                         on new { bldg.ApplicationYear, bldg.ApplicationNumber } equals new { othd.ApplicationYear, othd.ApplicationNumber }
+                         join fdst in _context.BldgfireDistrictCodes
+                         on othd.FireDistrictCode equals fdst.FireDistrictCode
+                         select new { bldg, othd, fdst }).SingleOrDefault();
+            if(query != null)
+            {
+                return PermitDetailMapper.Map(query.othd, query.fdst);
+            }
+            return null;
+        }
     }
 }
