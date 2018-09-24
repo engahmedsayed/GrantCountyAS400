@@ -27,6 +27,12 @@
                 <td><strong>@Html.DisplayNameFor(model => model.BackPropertySetback) </strong></td>
                 <td class="text-right"><span> @Html.DisplayFor(model => model.BackPropertySetback) </span></td>
             </tr>
+        </tbody>
+    </table>
+</div>
+<div class="col-xs-6">
+    <table class="table">
+        <tbody>
             <tr>
                 <td><strong>@Html.DisplayNameFor(model => model.FloodZone) </strong></td>
                 <td class="text-right"><span> @Html.DisplayFor(model => model.FloodZone) </span></td>
@@ -52,9 +58,8 @@
                 <td class="text-right"><span> @Html.DisplayFor(model => model.UserID) </span></td>
             </tr>
             <tr>
-                @{ var formmatedDate = Model.ChangeDate.HasValue ? Model.ChangeDate.Value.ToString("dd/MM/yyyy"):"";}
                 <td><strong>@Html.DisplayNameFor(model => model.ChangeDate) </strong></td>
-                <td class="text-right"><span> @Html.DisplayFor(model => formmatedDate) </span></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.ChangeDate) </span></td>
             </tr>
         </tbody>
     </table>

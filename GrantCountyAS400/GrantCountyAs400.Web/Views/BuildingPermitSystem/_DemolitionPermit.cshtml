@@ -1,0 +1,98 @@
+﻿@model GrantCountyAs400.Web.ViewModels.BuildingVM.DemolitionPermitViewModel
+
+<div class="col-xs-6">
+    <table class="table">
+        <tbody>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.ApplicantProjectDescription) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.ApplicantProjectDescription) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.OfficeProjectDescription) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.OfficeProjectDescription) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.SquareFeet) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.SquareFeet) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.Dimensions) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.Dimensions) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.BuildingDescription) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.BuildingDescription) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.RequiredHandoutsProvided) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.RequiredHandoutsProvided) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.DateProvided) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.DateProvided) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.ToWhomProvided) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.ToWhomProvided) </span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="col-xs-6">
+    <table class="table">
+        <tbody>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.FireDistrictDisplay) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.FireDistrictDisplay) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.BldgDeptSetback) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.BldgDeptSetback) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.FireMarshalSetback) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.FireMarshalSetback) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.ConditionsExist) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.ConditionsExist) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.InspectionsExist) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.InspectionsExist) </span></td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Building Department Approval</strong><br />
+                    <strong>By</strong><br />
+                    <strong>Date Approved</strong><br />
+                    <strong>Change User</strong><br />
+                    <strong>Change Date</strong><br />
+                </td>
+                <td class="text-right">
+                    <br />
+                    <span> @Html.DisplayFor(model => model.BldgDept.ApprovalBy) </span><br />
+                    <span> @Html.DisplayFor(model => model.BldgDept.DateApproved) </span><br />
+                    <span> @Html.DisplayFor(model => model.BldgDept.ApprovedUserId) </span><br />
+                    <span> @Html.DisplayFor(model => model.BldgDept.ApprovedChangeDate) </span><br />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Fire Marshal Approval</strong><br />
+                    <strong>By</strong><br />
+                    <strong>Date Approved</strong><br />
+                    <strong>Change User</strong><br />
+                    <strong>Change Date</strong><br />
+                </td>
+                <td class="text-right">
+                    <br />
+                    <span> @Html.DisplayFor(model => model.FireMarshal.ApprovalBy) </span><br />
+                    <span> @Html.DisplayFor(model => model.FireMarshal.DateApproved) </span><br />
+                    <span> @Html.DisplayFor(model => model.FireMarshal.ApprovedUserId) </span><br />
+                    <span> @Html.DisplayFor(model => model.FireMarshal.ApprovedChangeDate) </span><br />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -47,7 +47,6 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
         public BuildingPermitSystemDetails Details(int id)
         {
             var query = (from bldgpermit in _context.BldgpermitApplicationMaster
-                         join situs in _context.AsmtsitusAddress on bldgpermit.AssessorParcelNumber equals situs.ParcelNumber
                          join juri in _context.Bldgjurisdictions on bldgpermit.JurisdictionCode equals juri.DepartmentCode
                          join processedJuri in _context.Bldgjurisdictions on bldgpermit.ProcessedForJurisdiction equals processedJuri.DepartmentCode
                          join dept in _context.Bldgdepartments on bldgpermit.DepartmentCode equals dept.DepartmentCode
@@ -55,17 +54,19 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          join preliminaryNames in _context.ASMTValueMasterNameView on bldgpermit.PreliminaryParcelNumber equals preliminaryNames.ParcelNumber
                          join assessorNames in _context.ASMTValueMasterNameView on bldgpermit.PreliminaryParcelNumber equals assessorNames.ParcelNumber
                          join bldgContractor in _context.Bldgcontractors on bldgpermit.ContractLicenseNumber equals bldgContractor.ContractLicenseNumber
+                         join situs in _context.AsmtsitusAddress on bldgpermit.AssessorParcelNumber equals situs.ParcelNumber
+                         into situsJoin
+                         from situsRecord in situsJoin.DefaultIfEmpty()
                          join mdia in _context.BldgmobileHomeDealersInstallersArchitects on bldgpermit.ArchitectFirmNumber equals mdia.BusinessCode
                          into mdiaArchitectJoin
-                         from mdiaArchitectData in mdiaArchitectJoin.DefaultIfEmpty()
+                         from mdiaArchitectRecord in mdiaArchitectJoin.DefaultIfEmpty()
                          join mdiaBusinessEngineer in _context.BldgmobileHomeDealersInstallersArchitects on bldgpermit.EngineerFirmNumber equals mdiaBusinessEngineer.BusinessCode
                          into mdiaEngineerJoin
-                         from mdiaEngineerData in mdiaEngineerJoin.DefaultIfEmpty()
-                         join plap in _context.BldgplanningApproval on new { bldgpermit.ApplicationYear, bldgpermit.ApplicationNumber } equals new
-                         {
-                             plap.ApplicationYear,
-                             plap.ApplicationNumber
-                         }
+                         from mdiaEngineerRecord in mdiaEngineerJoin.DefaultIfEmpty()
+                         join plap in _context.BldgplanningApproval
+                         on new { bldgpermit.ApplicationYear, bldgpermit.ApplicationNumber } equals new { plap.ApplicationYear, plap.ApplicationNumber }
+                         into plapJoin
+                         from plapRecord in plapJoin.DefaultIfEmpty()
                          where bldgpermit.Id == id
                          select BuildingPermitSystemMapper.Map(bldgpermit,
                                                                preliminaryNames,
@@ -74,10 +75,11 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                                                processedJuri,
                                                                dept,
                                                                perm,
-                                                               situs,
-                                                               mdiaArchitectData,
-                                                               mdiaEngineerData,
-                                                               bldgContractor, plap)).SingleOrDefault();
+                                                               situsRecord,
+                                                               mdiaArchitectRecord,
+                                                               mdiaEngineerRecord,
+                                                               bldgContractor,
+                                                               plapRecord)).SingleOrDefault();
 
             return query;
         }
@@ -97,7 +99,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          into bldgInspectionJoin
                          from bldgInspectionRecord in bldgInspectionJoin.DefaultIfEmpty()
                          where bldg.Id == id
-                         select new { bldg, permit, bldgFire, bldgConditionRecord, bldgInspectionRecord }).SingleOrDefault();
+                         select new { bldg, permit, bldgFire, bldgConditionRecord, bldgInspectionRecord }).FirstOrDefault();
 
             if (query != null)
             {

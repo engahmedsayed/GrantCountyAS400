@@ -39,7 +39,37 @@ namespace GrantCountyAs400.Web.Controllers.Building
                 return NotFound();
 
             var viewmodel = AutoMapper.Mapper.Map<BuildingPermitSystemDetailsViewModel>(entity);
+
+            // load permit details data.
+            (ViewBag.PermitDetailViewName, ViewBag.PermitDetailViewModel) = GetPermitDetail(id, entity.PermitCode);
             return View(viewmodel);
+        }
+
+        private (string viewName, dynamic permitDetail) GetPermitDetail(int id, string permitCode)
+        {
+            dynamic permitDetailViewModel = null;
+            string permitDetailViewName = string.Empty;
+            switch (permitCode)
+            {
+                case "DEMO":
+                    var permitDetailEntity = _buildingModuleRepository.GetDemolitionPermitByBuildingPermitSystemId(id);
+                    permitDetailViewModel = AutoMapper.Mapper.Map<DemolitionPermitViewModel>(permitDetailEntity);
+                    permitDetailViewName = "_DemolitionPermit";
+                    break;
+                case "GRAD":
+                case "MECH":
+                case "FIREM":
+                case "MANH":
+                case "PLMB":
+                case "STRUT":
+                    break;
+                default:
+                    throw new System.ArgumentOutOfRangeException(
+                        nameof(permitCode),
+                        permitCode,
+                        $"Couldn't find PermitCode: {permitCode} for Building Permit System with ID:{id}");
+            }
+            return (permitDetailViewName, permitDetailViewModel);
         }
     }
 }

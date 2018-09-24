@@ -8,9 +8,9 @@
 <div>
     <div class="entity-details row">
         <div class="entity-info clearfix">
+            <partial name="_Header" for="@Model.BasicInfo" />
             <div class="col-xs-6">
-                <partial name="_Header" for="@Model.BasicInfo" />
-                <table class="table col-xs-6">
+                <table class="table">
                     <tbody>
                         <tr>
                             <td><strong>@Html.DisplayNameFor(model => model.PermitType) </strong></td>
@@ -50,7 +50,7 @@
                 </table>
             </div>
             <div class="col-xs-6">
-                <table class="table col-xs-6">
+                <table class="table">
                     <tbody>
 
                         <tr>
@@ -129,6 +129,24 @@
                         </div>
                     </div>
                 </div>
+                @if (!string.IsNullOrWhiteSpace(ViewBag.PermitDetailViewName))
+                {
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#permitDetails">
+                                    Permit Details
+                                </a>
+                            </h4>
+                        </div>
+
+                        <div id="permitDetails" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <partial name="@ViewBag.PermitDetailViewName" model="ViewBag.PermitDetailViewModel" />
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     </div>

@@ -1,7 +1,7 @@
 ﻿@model GrantCountyAs400.Web.ViewModels.BuildingVM.BuildingPermitSystemBasicInfoViewModel
 
-<div>
-    <table class="table col-xs-6">
+<div class="col-xs-6">
+    <table class="table">
         <tbody>
             <tr>
                 <td><strong>@Html.DisplayNameFor(model => model.JurisdictionDisplay) </strong></td>
@@ -12,7 +12,9 @@
                 <td class="text-right"><span> @Html.DisplayFor(model => model.ApplicationYearDisplay) </span></td>
             </tr>
     </table>
-    <table class="table col-xs-6">
+</div>
+<div class="col-xs-6">
+    <table class="table">
         <tbody>
             <tr>
                 <td><strong>@Html.DisplayNameFor(model => model.DepartmentDisplay) </strong></td>
