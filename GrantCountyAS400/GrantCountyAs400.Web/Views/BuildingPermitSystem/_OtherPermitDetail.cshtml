@@ -1,0 +1,81 @@
+﻿@model GrantCountyAs400.Web.ViewModels.BuildingVM.OtherPermitDetailViewModel
+
+<div class="col-xs-6">
+    <table class="table">
+        <tbody>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.OfficeProjectDescription) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.OfficeProjectDescription) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.FireDistrictDisplay) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.FireDistrictDisplay) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.FireFlowAlreadyProvided) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.FireFlowAlreadyProvided) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.AdditionalFireFlowRequired) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.AdditionalFireFlowRequired) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.AmountOFFireFlowRequired) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.AmountOFFireFlowRequired) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.BldgDeptSetback) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.BldgDeptSetback) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.FireMarshalSetback) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.FireMarshalSetback) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.ConditionExistInApcnDisplay) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.ConditionExistInApcnDisplay) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.ConditionExistInApinDisplay) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.ConditionExistInApinDisplay) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.ExtendedValue) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.ExtendedValue) </span></td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Building Department Approval</strong><br />
+                    <strong>By</strong><br />
+                    <strong>Date Approved</strong><br />
+                    <strong>Change User</strong><br />
+                    <strong>Change Date</strong><br />
+                </td>
+                <td class="text-right">
+                    <br />
+                    <span> @Html.DisplayFor(model => model.BldgDept.ApprovalBy) </span><br />
+                    <span> @Html.DisplayFor(model => model.BldgDept.DateApproved) </span><br />
+                    <span> @Html.DisplayFor(model => model.BldgDept.ApprovedUserId) </span><br />
+                    <span> @Html.DisplayFor(model => model.BldgDept.ApprovedChangeDate) </span><br />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Fire Marshal Approval</strong><br />
+                    <strong>By</strong><br />
+                    <strong>Date Approved</strong><br />
+                    <strong>Change User</strong><br />
+                    <strong>Change Date</strong><br />
+                </td>
+                <td class="text-right">
+                    <br />
+                    <span> @Html.DisplayFor(model => model.FireMarshal.ApprovalBy) </span><br />
+                    <span> @Html.DisplayFor(model => model.FireMarshal.DateApproved) </span><br />
+                    <span> @Html.DisplayFor(model => model.FireMarshal.ApprovedUserId) </span><br />
+                    <span> @Html.DisplayFor(model => model.FireMarshal.ApprovedChangeDate) </span><br />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

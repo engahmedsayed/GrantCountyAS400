@@ -16,13 +16,15 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                 new PermitApprovedInfo(permit.BldgDeptApprovalBy, permit.BldgDeptDateApproved, permit.BldgDeptApprovedUserId, permit.BldgDeptApprovedChangeDate),
                 new PermitApprovedInfo(permit.FireMarshalApprovalBy, permit.FireMarshalDateApproved, permit.FireMarshalApprovedUserId, permit.FireMarshalApprovedChangeDate));
 
-        internal static OtherPermitDetail Map(BldgotherPermitDetail othd, BldgfireDistrictCodes fdst) =>
+        internal static OtherPermitDetail Map(BldgotherPermitDetail othd, BldgfireDistrictCodes fdst,
+                                              BldgapplicationConditions apcn, BldgapplicationInspections apin,
+                                              BldgapplicationValues appv) =>
             new OtherPermitDetail(othd.OfficeProjectDescription, othd.FireDistrictCode, fdst.LongFireDistrictName,
                                   othd.AdditionalFireFlowRequired, othd.AmountOffireFlowRequired, othd.BldgDeptSetback,
                                   othd.FireMarshalSetback, new PermitApprovedInfo(othd.BldgDeptApprovedBy, othd.BldgDeptDateApproved,
                                   othd.BldgDeptApprovedUserId, othd.BldgDeptApprovedChangeDate), new PermitApprovedInfo(
                                   othd.FireMarshalApprovedBy, othd.FireMarshalDateApproved, othd.FireMarshalApprovedUserId,
-                                  othd.FireMarshalApprovedChangeDate));
+                                  othd.FireMarshalApprovedChangeDate),apcn != null ?true:false,apin!=null?true:false,appv?.ExtendedValue);
 
      
     }

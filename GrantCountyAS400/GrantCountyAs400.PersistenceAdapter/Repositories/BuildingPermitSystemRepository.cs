@@ -112,14 +112,27 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
         public OtherPermitDetail GetOtherPermitDetailByBuildingPermitSystemId(int id)
         {
             var query = (from bldg in _context.BldgpermitApplicationMaster
+                         join apcn in _context.BldgapplicationConditions
+                         on new { bldg.ApplicationYear, bldg.ApplicationNumber } equals new { apcn.ApplicationYear, apcn.ApplicationNumber }
+                         into apcnConditionJoin
+                         from apcnConditionRecord in apcnConditionJoin.DefaultIfEmpty()
+                         join apin in _context.BldgapplicationInspections
+                         on new { bldg.ApplicationYear, bldg.ApplicationNumber } equals new { apin.ApplicationYear, apin.ApplicationNumber }
+                         into apinConditionJoin
+                         from apinConditionRecord in apinConditionJoin.DefaultIfEmpty()
+                         join appv in _context.BldgapplicationValues
+                         on new { bldg.ApplicationYear, bldg.ApplicationNumber } equals new { appv.ApplicationYear, appv.ApplicationNumber }
+                         into appvCondition
+                         from appvConditionRecord in appvCondition.DefaultIfEmpty()
                          join othd in _context.BldgotherPermitDetail
                          on new { bldg.ApplicationYear, bldg.ApplicationNumber } equals new { othd.ApplicationYear, othd.ApplicationNumber }
                          join fdst in _context.BldgfireDistrictCodes
                          on othd.FireDistrictCode equals fdst.FireDistrictCode
-                         select new { bldg, othd, fdst }).SingleOrDefault();
+                         where bldg.Id == id
+                         select new { bldg,apcnConditionRecord,apinConditionRecord,appvConditionRecord, othd, fdst }).FirstOrDefault();
             if(query != null)
             {
-                return PermitDetailMapper.Map(query.othd, query.fdst);
+                return PermitDetailMapper.Map(query.othd, query.fdst,query.apcnConditionRecord,query.apinConditionRecord,query.appvConditionRecord);
             }
             return null;
         }

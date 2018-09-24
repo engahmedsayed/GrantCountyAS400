@@ -19,14 +19,21 @@ namespace GrantCountyAs400.Domain.Building
 
         public decimal? FireMarshalSetback { get; }
 
-        public string LongFireDistrictName { get; set; }
+        public string LongFireDistrictName { get; }
 
         public PermitApprovedInfo BldgDept { get; }
         public PermitApprovedInfo FireMarshal { get; }
 
+        public bool IsConditionExistInApcn { get; }
+
+        public bool IsConditionExistInApin { get;}
+
+        public decimal? ExtendedValue { get; }
+
         public OtherPermitDetail(string officeProjectDescription, string fireDistrictCode, string fireFlowAlreadyProvided, 
                                  string additionalFireFlowRequired, string amountOFFireFlowRequired, decimal? bldgDeptSetback,
-                                 decimal? fireMarshalSetback,PermitApprovedInfo bldgDept, PermitApprovedInfo fireMarshal)
+                                 decimal? fireMarshalSetback,PermitApprovedInfo bldgDept, PermitApprovedInfo fireMarshal,
+                                 bool isConditionExistInApcn,bool isConditionExistInApin,decimal? extendedValue)
         {
             OfficeProjectDescription = officeProjectDescription;
             FireDistrictCode = fireDistrictCode;
@@ -37,6 +44,9 @@ namespace GrantCountyAs400.Domain.Building
             FireMarshalSetback = fireMarshalSetback;
             BldgDept = bldgDept;
             FireMarshal = fireMarshal;
+            IsConditionExistInApcn = isConditionExistInApcn;
+            IsConditionExistInApin = isConditionExistInApin;
+            ExtendedValue = extendedValue;
         }
     }
 }

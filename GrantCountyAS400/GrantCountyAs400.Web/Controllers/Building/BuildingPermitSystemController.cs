@@ -59,6 +59,10 @@ namespace GrantCountyAs400.Web.Controllers.Building
                 case "GRAD":
                 case "MECH":
                 case "FIREM":
+                    var otherPermitDetailEntity = _buildingModuleRepository.GetOtherPermitDetailByBuildingPermitSystemId(id);
+                    permitDetailViewModel = AutoMapper.Mapper.Map<OtherPermitDetailViewModel>(otherPermitDetailEntity);
+                    permitDetailViewName = "_OtherPermitDetail";
+                    break;
                 case "MANH":
                 case "PLMB":
                 case "STRUT":
