@@ -58,8 +58,8 @@ namespace GrantCountyAs400.Web.Controllers.Building
                     break;
                 case "GRAD":
                 case "MECH":
-                    var mechanicalPermitDetail = _buildingModuleRepository.GetMechanicalPermitDetailByBuildingPermitSystemId(id);
-                    permitDetailViewModel = AutoMapper.Mapper.Map<MechanicalPermitDetailViewModel>(mechanicalPermitDetail);
+                    var mechanicalPermitDetailEntity = _buildingModuleRepository.GetMechanicalPermitDetailByBuildingPermitSystemId(id);
+                    permitDetailViewModel = AutoMapper.Mapper.Map<MechanicalPermitDetailViewModel>(mechanicalPermitDetailEntity);
                     permitDetailViewName = "_MechanicalPermitDetail";
                     break;
                 case "FIREM":
@@ -70,6 +70,9 @@ namespace GrantCountyAs400.Web.Controllers.Building
                 case "MANH":
                 case "PLMB":
                 case "STRUT":
+                    var structurePermitDetailEntity = _buildingModuleRepository.GetStructurePermitDetailByBuildingPermitSystemId(id);
+                    permitDetailViewModel = AutoMapper.Mapper.Map<StructurePermitDetailViewModel>(structurePermitDetailEntity);
+                    permitDetailViewName = "_StructurePermitDetail";
                     break;
                 default:
                     throw new System.ArgumentOutOfRangeException(

@@ -161,5 +161,33 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             }
             return null;
         }
+        public StructurePermitDetail GetStructurePermitDetailByBuildingPermitSystemId(int id)
+        {
+            var query = (from bldg in _context.BldgpermitApplicationMaster
+                         join strd in _context.BldgstructureBuildingPermitDetail
+                         on new { bldg.ApplicationYear, bldg.ApplicationNumber } equals new { strd.ApplicationYear, strd.ApplicationNumber }
+                         join fdst in _context.BldgfireDistrictCodes
+                         on strd.FireDistrictCode equals fdst.FireDistrictCode
+                         join apcn in _context.BldgapplicationConditions
+                         on new { bldg.ApplicationYear, bldg.ApplicationNumber } equals new { apcn.ApplicationYear, apcn.ApplicationNumber }
+                         into apcnConditionJoin
+                         from apcnConditionRecord in apcnConditionJoin.DefaultIfEmpty()
+                         join apin in _context.BldgapplicationInspections
+                         on new { bldg.ApplicationYear, bldg.ApplicationNumber } equals new { apin.ApplicationYear, apin.ApplicationNumber }
+                         into apinConditionJoin
+                         from apinConditionRecord in apinConditionJoin.DefaultIfEmpty()
+                         join appv in _context.BldgapplicationValues
+                         on new { strd.ApplicationYear, strd.ApplicationNumber } equals new { appv.ApplicationYear, appv.ApplicationNumber }
+                         into appvCondition
+                         from appvConditionRecord in appvCondition.DefaultIfEmpty()
+                         where bldg.Id == id
+                         select new { bldg, apcnConditionRecord, apinConditionRecord, strd, fdst, appvConditionRecord }).FirstOrDefault();
+
+            if (query != null)
+            {
+                return PermitDetailMapper.Map(query.bldg, query.apcnConditionRecord, query.apinConditionRecord, query.strd, query.fdst, query.appvConditionRecord);
+            }
+            return null;
+        }
     }
 }

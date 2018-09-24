@@ -34,5 +34,23 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                                        apinConditionRecord==null, new PermitApprovedInfo(mecd.BldgDeptApprovedBy, mecd.BldgDeptDateApproved, mecd.BldgDeptApprovedUserId, mecd.BldgDeptApprovedChangeDate),
                                         new PermitApprovedInfo(mecd.FireMarshalApprovedBy, mecd.FireMarshalDateApproved, mecd.FireMarshalApprovedUserId, mecd.FireMarshalApprovedChangeDate));
 
+        internal static StructurePermitDetail Map(BldgpermitApplicationMaster bldg, BldgapplicationConditions apcnConditionRecord,
+                                                  BldgapplicationInspections apinConditionRecord,
+                                                  BldgstructureBuildingPermitDetail strd, BldgfireDistrictCodes fdst, BldgapplicationValues appv) =>
+            new StructurePermitDetail(strd.OfficeProjectDescription, strd.ResAgCommOther, strd.NumberOfBedrooms,
+                                      strd.NumberOfBathrooms, strd.NumberOfUnits, strd.Heated, strd.HeatSourceDescription,
+                                      strd.PrescriptiveReviewDone, strd.WattsunRunReviewDone, strd.Nrecreceived, strd.PlansAnalystReviewDone,
+                                      strd.PlansAnalystReviewDescription, strd.SprinklerSystemRequired, strd.SprinklerSystemDescription,
+                                      strd.AlarmSystemRequired, strd.AlarmSystemDescription, strd.SpecialInspectionRequired,
+                                      strd.SpecialInspectionDescription, strd.PermitIncludePlumbing, strd.PermitIncludeMechanical,
+                                      strd.FireDistrictCode, fdst.ShortFireDistrictName, strd.FireFlowAlreadyProvided, strd.AdditionalFireFlowRequired,
+                                      strd.AmountOfFireFlowRequired, strd.BldgDeptSetback, strd.FireMarshalSetback, apcnConditionRecord == null,
+                                       apinConditionRecord == null, appv?.ExtendedValue, new PermitApprovedInfo(strd.BldgDeptApprovedBy,
+                                                                                                                strd.BldgDepDateApproved,
+                                                                                                                strd.BldgDeptApprovedUserId,
+                                                                                                                strd.BldgDeptApprovedChangeDate),
+                                        new PermitApprovedInfo(strd.FireMarshalApprovedBy, strd.FireMarshalDateApproved, strd.FireMarshalApprovedUserId,
+                                                               strd.FireMarshalApprovedChangeDate));
+        
     }
 }
