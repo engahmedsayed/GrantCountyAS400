@@ -1,4 +1,5 @@
-﻿using GrantCountyAs400.Domain.Building;
+﻿using System;
+using GrantCountyAs400.Domain.Building;
 using GrantCountyAs400.PersistenceAdapter.Models;
 
 namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
@@ -25,7 +26,13 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                                   othd.BldgDeptApprovedUserId, othd.BldgDeptApprovedChangeDate), new PermitApprovedInfo(
                                   othd.FireMarshalApprovedBy, othd.FireMarshalDateApproved, othd.FireMarshalApprovedUserId,
                                   othd.FireMarshalApprovedChangeDate),apcn != null ?true:false,apin!=null?true:false,appv?.ExtendedValue);
+        internal static MechanicalPermitDetail Map(BldgpermitApplicationMaster bldg, BldgapplicationConditions apcnConditionRecord,
+                                   BldgapplicationInspections apinConditionRecord, BldgmechanicalPermitDetail mecd,
+                                   BldgfireDistrictCodes fdst)=>
+            new MechanicalPermitDetail(mecd.OfficeProjectDescription,mecd.Nrecreceived,mecd.FireDistrictCode,fdst?.LongFireDistrictName,
+                                       mecd.BldgDeptSetback,mecd.FireMarshalSetback,apcnConditionRecord == null,
+                                       apinConditionRecord==null, new PermitApprovedInfo(mecd.BldgDeptApprovedBy, mecd.BldgDeptDateApproved, mecd.BldgDeptApprovedUserId, mecd.BldgDeptApprovedChangeDate),
+                                        new PermitApprovedInfo(mecd.FireMarshalApprovedBy, mecd.FireMarshalDateApproved, mecd.FireMarshalApprovedUserId, mecd.FireMarshalApprovedChangeDate));
 
-     
     }
 }

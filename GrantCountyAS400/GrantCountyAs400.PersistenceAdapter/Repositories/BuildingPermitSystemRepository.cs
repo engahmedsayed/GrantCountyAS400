@@ -136,5 +136,30 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             }
             return null;
         }
+
+        public MechanicalPermitDetail GetMechanicalPermitDetailByBuildingPermitSystemId(int id)
+        {
+            var query = (from bldg in _context.BldgpermitApplicationMaster
+                         join mecd in _context.BldgmechanicalPermitDetail
+                         on new { bldg.ApplicationYear, bldg.ApplicationNumber } equals new { mecd.ApplicationYear, mecd.ApplicationNumber }
+                         join fdst in _context.BldgfireDistrictCodes
+                         on mecd.FireDistrictCode equals fdst.FireDistrictCode
+                         join apcn in _context.BldgapplicationConditions
+                         on new { bldg.ApplicationYear, bldg.ApplicationNumber } equals new { apcn.ApplicationYear, apcn.ApplicationNumber }
+                         into apcnConditionJoin
+                         from apcnConditionRecord in apcnConditionJoin.DefaultIfEmpty()
+                         join apin in _context.BldgapplicationInspections
+                         on new { bldg.ApplicationYear, bldg.ApplicationNumber } equals new { apin.ApplicationYear, apin.ApplicationNumber }
+                         into apinConditionJoin
+                         from apinConditionRecord in apinConditionJoin.DefaultIfEmpty()
+                         where bldg.Id == id
+                         select new { bldg, apcnConditionRecord, apinConditionRecord, mecd, fdst }).FirstOrDefault();
+
+            if(query != null)
+            {
+                return PermitDetailMapper.Map(query.bldg, query.apcnConditionRecord, query.apinConditionRecord, query.mecd, query.fdst);
+            }
+            return null;
+        }
     }
 }
