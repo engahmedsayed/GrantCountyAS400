@@ -57,6 +57,10 @@ namespace GrantCountyAs400.Web.Controllers.Building
                     permitDetailViewName = "_DemolitionPermit";
                     break;
                 case "GRAD":
+                    var gradingExcavationPermitDetailEntity = _buildingModuleRepository.GetGradingExcavationPermitDetail(id);
+                    permitDetailViewModel = AutoMapper.Mapper.Map<GradingExcavationPermitDetailViewModel>(gradingExcavationPermitDetailEntity);
+                    permitDetailViewName = "_GradingExcavationPermitDetail";
+                    break;
                 case "MECH":
                     var mechanicalPermitDetailEntity = _buildingModuleRepository.GetMechanicalPermitDetailByBuildingPermitSystemId(id);
                     permitDetailViewModel = AutoMapper.Mapper.Map<MechanicalPermitDetailViewModel>(mechanicalPermitDetailEntity);

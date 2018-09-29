@@ -86,6 +86,7 @@ namespace GrantCountyAs400.Web
                 cfg.CreateMap<OtherPermitDetail, OtherPermitDetailViewModel>();
                 cfg.CreateMap<MechanicalPermitDetail, MechanicalPermitDetailViewModel>();
                 cfg.CreateMap<StructurePermitDetail, StructurePermitDetailViewModel>();
+                cfg.CreateMap<GradingExcavationPermitDetail, GradingExcavationPermitDetailViewModel>(); 
                 #endregion BuildingModule
             });
         }
