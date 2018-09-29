@@ -65,6 +65,7 @@ namespace GrantCountyAs400.Web.Controllers.Building
                     permitDetailViewModel = AutoMapper.Mapper.Map<DemolitionPermitViewModel>(permitDetailEntity);
                     permitDetailViewName = "_DemolitionPermit";
                     break;
+
                 case "GRAD":
                     var gradingExcavationPermitDetailEntity = _buildingModuleRepository.GetGradingExcavationPermitDetail(id);
                     permitDetailViewModel = AutoMapper.Mapper.Map<GradingExcavationPermitDetailViewModel>(gradingExcavationPermitDetailEntity);
@@ -75,18 +76,26 @@ namespace GrantCountyAs400.Web.Controllers.Building
                     permitDetailViewModel = AutoMapper.Mapper.Map<MechanicalPermitDetailViewModel>(mechanicalPermitDetailEntity);
                     permitDetailViewName = "_MechanicalPermitDetail";
                     break;
+
                 case "FIREM":
                     var otherPermitDetailEntity = _buildingModuleRepository.GetOtherPermitDetailByBuildingPermitSystemId(id);
                     permitDetailViewModel = AutoMapper.Mapper.Map<OtherPermitDetailViewModel>(otherPermitDetailEntity);
                     permitDetailViewName = "_OtherPermitDetail";
                     break;
+
                 case "MANH":
+                    var manufactureModularPermitEntity = _buildingModuleRepository.GetManufactureModularPermitByBuildingPermitSystemId(id);
+                    permitDetailViewModel = AutoMapper.Mapper.Map<ManufactureModularPermitViewModel>(manufactureModularPermitEntity);
+                    permitDetailViewName = "_ManufactureModularPermit";
+                    break;
+
                 case "PLMB":
                 case "STRUT":
                     var structurePermitDetailEntity = _buildingModuleRepository.GetStructurePermitDetailByBuildingPermitSystemId(id);
                     permitDetailViewModel = AutoMapper.Mapper.Map<StructurePermitDetailViewModel>(structurePermitDetailEntity);
                     permitDetailViewName = "_StructurePermitDetail";
                     break;
+
                 default:
                     throw new System.ArgumentOutOfRangeException(
                         nameof(permitCode),

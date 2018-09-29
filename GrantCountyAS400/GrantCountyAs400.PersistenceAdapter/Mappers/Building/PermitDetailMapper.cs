@@ -1,5 +1,4 @@
-﻿using System;
-using GrantCountyAs400.Domain.Building;
+﻿using GrantCountyAs400.Domain.Building;
 using GrantCountyAs400.PersistenceAdapter.Models;
 
 namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
@@ -13,26 +12,26 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                                              BldgapplicationInspections bldgInspection) =>
             new DemolitionPermit(bldgpermit.ApplicantProjectDescription, permit.OfficeProjectDescription, permit.SquareFeet.Value, permit.Dimensions,
                 permit.BuildingDescription, permit.RequiredHandoutsProvided, permit.DateProvided, permit.ToWhomProvided, permit.FireDistrictCode, permit.BldgDeptSetback.Value,
-                permit.FireMarshalSetback.Value, bldgfire.LongFireDistrictName, (bldgCondition == null), (bldgInspection == null),
+                permit.FireMarshalSetback.Value, bldgfire.LongFireDistrictName, (bldgCondition != null), (bldgInspection != null),
                 new PermitApprovedInfo(permit.BldgDeptApprovalBy, permit.BldgDeptDateApproved, permit.BldgDeptApprovedUserId, permit.BldgDeptApprovedChangeDate),
                 new PermitApprovedInfo(permit.FireMarshalApprovalBy, permit.FireMarshalDateApproved, permit.FireMarshalApprovedUserId, permit.FireMarshalApprovedChangeDate));
 
         internal static OtherPermitDetail Map(BldgotherPermitDetail othd, BldgfireDistrictCodes fdst,
                                               BldgapplicationConditions apcn, BldgapplicationInspections apin,
                                               BldgapplicationValues appv) =>
-            new OtherPermitDetail(othd.OfficeProjectDescription, othd.FireDistrictCode, fdst.LongFireDistrictName,
-                                  othd.AdditionalFireFlowRequired, othd.AmountOffireFlowRequired, othd.BldgDeptSetback,
-                                  othd.FireMarshalSetback, new PermitApprovedInfo(othd.BldgDeptApprovedBy, othd.BldgDeptDateApproved,
-                                  othd.BldgDeptApprovedUserId, othd.BldgDeptApprovedChangeDate), new PermitApprovedInfo(
-                                  othd.FireMarshalApprovedBy, othd.FireMarshalDateApproved, othd.FireMarshalApprovedUserId,
-                                  othd.FireMarshalApprovedChangeDate),apcn != null ?true:false,apin!=null?true:false,appv?.ExtendedValue);
+            new OtherPermitDetail(othd.OfficeProjectDescription, othd.FireDistrictCode, fdst.LongFireDistrictName, othd.AdditionalFireFlowRequired,
+                othd.AmountOffireFlowRequired, othd.BldgDeptSetback, othd.FireMarshalSetback,
+                new PermitApprovedInfo(othd.BldgDeptApprovedBy, othd.BldgDeptDateApproved, othd.BldgDeptApprovedUserId, othd.BldgDeptApprovedChangeDate),
+                new PermitApprovedInfo(othd.FireMarshalApprovedBy, othd.FireMarshalDateApproved, othd.FireMarshalApprovedUserId, othd.FireMarshalApprovedChangeDate),
+                (apcn != null ? true : false), (apin != null ? true : false), appv?.ExtendedValue);
+
         internal static MechanicalPermitDetail Map(BldgpermitApplicationMaster bldg, BldgapplicationConditions apcnConditionRecord,
                                    BldgapplicationInspections apinConditionRecord, BldgmechanicalPermitDetail mecd,
-                                   BldgfireDistrictCodes fdst)=>
-            new MechanicalPermitDetail(mecd.OfficeProjectDescription,mecd.Nrecreceived,mecd.FireDistrictCode,fdst?.LongFireDistrictName,
-                                       mecd.BldgDeptSetback,mecd.FireMarshalSetback,apcnConditionRecord == null,
-                                       apinConditionRecord==null, new PermitApprovedInfo(mecd.BldgDeptApprovedBy, mecd.BldgDeptDateApproved, mecd.BldgDeptApprovedUserId, mecd.BldgDeptApprovedChangeDate),
-                                        new PermitApprovedInfo(mecd.FireMarshalApprovedBy, mecd.FireMarshalDateApproved, mecd.FireMarshalApprovedUserId, mecd.FireMarshalApprovedChangeDate));
+                                   BldgfireDistrictCodes fdst) =>
+            new MechanicalPermitDetail(mecd.OfficeProjectDescription, mecd.Nrecreceived, mecd.FireDistrictCode, fdst?.LongFireDistrictName,
+                mecd.BldgDeptSetback, mecd.FireMarshalSetback, apcnConditionRecord == null, apinConditionRecord == null,
+                new PermitApprovedInfo(mecd.BldgDeptApprovedBy, mecd.BldgDeptDateApproved, mecd.BldgDeptApprovedUserId, mecd.BldgDeptApprovedChangeDate),
+                new PermitApprovedInfo(mecd.FireMarshalApprovedBy, mecd.FireMarshalDateApproved, mecd.FireMarshalApprovedUserId, mecd.FireMarshalApprovedChangeDate));
 
         internal static StructurePermitDetail Map(BldgpermitApplicationMaster bldg, BldgapplicationConditions apcnConditionRecord,
                                                   BldgapplicationInspections apinConditionRecord,
@@ -67,5 +66,23 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                                                new PermitApprovedInfo(grdd.FireMarshalApprovedBy, grdd.FireMarshalDateApproved, grdd.FireMarshalApprovedUserId,
                                                                grdd.FireMarshalApprovedChangeDate));
 
+        internal static ManufactureModularPermit Map(BldgpermitApplicationMaster bldgpermit,
+                                                     BldgmanufactureModularBuildingPermit permit,
+                                                     BldgfireDistrictCodes bldgfire,
+                                                     BldgapplicationConditions bldgCondition,
+                                                     BldgapplicationInspections bldgInspection,
+                                                     BldgapplicationValues bldgValue,
+                                                     BldgmobileHomeDealersInstallersArchitects bldgDealer,
+                                                     BldgmobileHomeDealersInstallersArchitects bldgInstaller) =>
+           new ManufactureModularPermit(permit.OfficeProjectDescription, permit.ManorMod, permit.YearManufactured.Value, permit.NewOrUsed, permit.SquareFeet.Value, permit.Dimensions, permit.BuildingDescription,
+               permit.ResCommStor, permit.CommercialUseDesc1, permit.CommercialUseDesc2, permit.DealerNameCode, permit.ManufacturerName, permit.LotorMan, permit.ApproxPurchaseDate,
+               permit.ApproxDeliveryDate, permit.InstallationIncludedInPrice, permit.MovingFromGrantCounty, permit.CountyStateIfNotGrant, permit.TitleOwnerName, permit.TaxpayerName,
+               permit.MovingFromParcelNumber.Value, permit.MovingFromAddress, permit.CertInstallerCode, permit.FireDistrictCode, permit.FireFlowAlreadyProvided, permit.AdditionalFireFlowRequired,
+               permit.AmountOfFireFlowRequired, permit.BldgDeptSetback.Value, permit.FireMarshalSetback.Value, bldgValue.ExtendedValue.Value, bldgfire.LongFireDistrictName,
+               (bldgCondition != null), (bldgInspection != null),
+               new PermitApprovedInfo(permit.BldgDeptApprovedBy, permit.BldgDeptDateApproved, permit.BldgDeptApprovedUserId, permit.BldgDeptApprovedChangeDate),
+               new PermitApprovedInfo(permit.FireMarshalApprovedBy, permit.FireMarshalDateApproved, permit.FireMarshalApprovedUserId, permit.FireMarshalApprovedChangeDate),
+               new DealersInstallersArchitectInfo(bldgDealer.BusinessName, bldgDealer.LicenseNumber, bldgDealer.LicenseExpireDate, bldgDealer.PhoneNumber.Value),
+               new DealersInstallersArchitectInfo(bldgInstaller.BusinessName, bldgInstaller.LicenseNumber, bldgInstaller.LicenseExpireDate, bldgInstaller.PhoneNumber.Value));
     }
 }
