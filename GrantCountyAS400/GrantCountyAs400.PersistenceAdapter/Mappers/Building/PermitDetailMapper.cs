@@ -66,5 +66,23 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                                                new PermitApprovedInfo(grdd.FireMarshalApprovedBy, grdd.FireMarshalDateApproved, grdd.FireMarshalApprovedUserId,
                                                                grdd.FireMarshalApprovedChangeDate));
 
+        internal static ManufactureModularPermit Map(BldgpermitApplicationMaster bldgpermit,
+                                                     BldgmanufactureModularBuildingPermit permit,
+                                                     BldgfireDistrictCodes bldgfire,
+                                                     BldgapplicationConditions bldgCondition,
+                                                     BldgapplicationInspections bldgInspection,
+                                                     BldgapplicationValues bldgValue,
+                                                     BldgmobileHomeDealersInstallersArchitects bldgDealer,
+                                                     BldgmobileHomeDealersInstallersArchitects bldgInstaller) =>
+           new ManufactureModularPermit(permit.OfficeProjectDescription, permit.ManorMod, permit.YearManufactured.Value, permit.NewOrUsed, permit.SquareFeet.Value, permit.Dimensions, permit.BuildingDescription,
+               permit.ResCommStor, permit.CommercialUseDesc1, permit.CommercialUseDesc2, permit.DealerNameCode, permit.ManufacturerName, permit.LotorMan, permit.ApproxPurchaseDate,
+               permit.ApproxDeliveryDate, permit.InstallationIncludedInPrice, permit.MovingFromGrantCounty, permit.CountyStateIfNotGrant, permit.TitleOwnerName, permit.TaxpayerName,
+               permit.MovingFromParcelNumber.Value, permit.MovingFromAddress, permit.CertInstallerCode, permit.FireDistrictCode, permit.FireFlowAlreadyProvided, permit.AdditionalFireFlowRequired,
+               permit.AmountOfFireFlowRequired, permit.BldgDeptSetback.Value, permit.FireMarshalSetback.Value, bldgValue.ExtendedValue.Value, bldgfire.LongFireDistrictName,
+               (bldgCondition != null), (bldgInspection != null),
+               new PermitApprovedInfo(permit.BldgDeptApprovedBy, permit.BldgDeptDateApproved, permit.BldgDeptApprovedUserId, permit.BldgDeptApprovedChangeDate),
+               new PermitApprovedInfo(permit.FireMarshalApprovedBy, permit.FireMarshalDateApproved, permit.FireMarshalApprovedUserId, permit.FireMarshalApprovedChangeDate),
+               new DealersInstallersArchitectInfo(bldgDealer.BusinessName, bldgDealer.LicenseNumber, bldgDealer.LicenseExpireDate, bldgDealer.PhoneNumber.Value),
+               new DealersInstallersArchitectInfo(bldgInstaller.BusinessName, bldgInstaller.LicenseNumber, bldgInstaller.LicenseExpireDate, bldgInstaller.PhoneNumber.Value));
     }
 }

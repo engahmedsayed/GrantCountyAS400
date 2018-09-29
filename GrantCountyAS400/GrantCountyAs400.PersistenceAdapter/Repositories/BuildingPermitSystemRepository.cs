@@ -129,10 +129,10 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          join fdst in _context.BldgfireDistrictCodes
                          on othd.FireDistrictCode equals fdst.FireDistrictCode
                          where bldg.Id == id
-                         select new { bldg,apcnConditionRecord,apinConditionRecord,appvConditionRecord, othd, fdst }).FirstOrDefault();
-            if(query != null)
+                         select new { bldg, apcnConditionRecord, apinConditionRecord, appvConditionRecord, othd, fdst }).FirstOrDefault();
+            if (query != null)
             {
-                return PermitDetailMapper.Map(query.othd, query.fdst,query.apcnConditionRecord,query.apinConditionRecord,query.appvConditionRecord);
+                return PermitDetailMapper.Map(query.othd, query.fdst, query.apcnConditionRecord, query.apinConditionRecord, query.appvConditionRecord);
             }
             return null;
         }
@@ -155,12 +155,13 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          where bldg.Id == id
                          select new { bldg, apcnConditionRecord, apinConditionRecord, mecd, fdst }).FirstOrDefault();
 
-            if(query != null)
+            if (query != null)
             {
                 return PermitDetailMapper.Map(query.bldg, query.apcnConditionRecord, query.apinConditionRecord, query.mecd, query.fdst);
             }
             return null;
         }
+
         public StructurePermitDetail GetStructurePermitDetailByBuildingPermitSystemId(int id)
         {
             var query = (from bldg in _context.BldgpermitApplicationMaster
@@ -211,6 +212,50 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             {
                 return PermitDetailMapper.Map(query.bldg, query.fdst, query.apcnConditionRecord, query.apinConditionRecord, query.grdd);
             }
+            return null;
+        }
+
+        public ManufactureModularPermit GetManufactureModularPermitByBuildingPermitSystemId(int id)
+        {
+            var query = (from bldg in _context.BldgpermitApplicationMaster
+                         join permit in _context.BldgmanufactureModularBuildingPermit
+                         on new { bldg.ApplicationYear, bldg.ApplicationNumber } equals new { permit.ApplicationYear, permit.ApplicationNumber }
+                         join bldgFire in _context.BldgfireDistrictCodes on permit.FireDistrictCode equals bldgFire.FireDistrictCode
+                         join bldgCondition in _context.BldgapplicationConditions
+                         on new { permit.ApplicationYear, permit.ApplicationNumber } equals new { bldgCondition.ApplicationYear, bldgCondition.ApplicationNumber }
+                         into bldgConditionJoin
+                         from bldgConditionRecord in bldgConditionJoin.DefaultIfEmpty()
+                         join bldgInspection in _context.BldgapplicationInspections
+                         on new { permit.ApplicationYear, permit.ApplicationNumber } equals new { bldgInspection.ApplicationYear, bldgInspection.ApplicationNumber }
+                         into bldgInspectionJoin
+                         from bldgInspectionRecord in bldgInspectionJoin.DefaultIfEmpty()
+                         join bldgValue in _context.BldgapplicationValues
+                         on new { permit.ApplicationYear, permit.ApplicationNumber } equals new { bldgValue.ApplicationYear, bldgValue.ApplicationNumber }
+                         into bldgValueJoin
+                         from bldgValueRecord in bldgValueJoin.DefaultIfEmpty()
+                         join bldgDealer in _context.BldgmobileHomeDealersInstallersArchitects on permit.DealerNameCode equals bldgDealer.BusinessCode
+                         into bldgDealerJoin
+                         from bldgDealerRecord in bldgDealerJoin.DefaultIfEmpty()
+                         join bldgInstaller in _context.BldgmobileHomeDealersInstallersArchitects on permit.CertInstallerCode equals bldgInstaller.BusinessCode
+                         into bldgInstallerJoin
+                         from bldgInstallerRecord in bldgInstallerJoin.DefaultIfEmpty()
+                         where bldg.Id == id
+                         select new { bldg, permit, bldgFire, bldgConditionRecord, bldgInspectionRecord, bldgValueRecord, bldgDealerRecord, bldgInstallerRecord }
+                         ).FirstOrDefault();
+
+            if (query != null)
+            {
+                return PermitDetailMapper.Map(
+                    query.bldg,
+                    query.permit,
+                    query.bldgFire,
+                    query.bldgConditionRecord,
+                    query.bldgInspectionRecord,
+                    query.bldgValueRecord,
+                    query.bldgDealerRecord,
+                    query.bldgInstallerRecord);
+            }
+
             return null;
         }
     }
