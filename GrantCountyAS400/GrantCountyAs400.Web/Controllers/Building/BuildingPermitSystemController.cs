@@ -42,7 +42,16 @@ namespace GrantCountyAs400.Web.Controllers.Building
 
             // load permit details data.
             (ViewBag.PermitDetailViewName, ViewBag.PermitDetailViewModel) = GetPermitDetail(id, entity.PermitCode);
+            var buildingPermitMaster = _buildingModuleRepository.Get(id);
+            ViewBag.ValuationAndFeesViewModel = GetValuationAndFees(id,buildingPermitMaster.ApplicationYear,buildingPermitMaster.ApplicationNumber);
             return View(viewmodel);
+        }
+
+        private ValuationAndFeesViewModel GetValuationAndFees(int id,decimal? applicationYear,decimal? applicationNumber)
+        {
+            var result = _buildingModuleRepository.GetValuationAndFees(id,applicationYear,applicationNumber);
+            var resultMapped = AutoMapper.Mapper.Map<ValuationAndFeesViewModel>(result);
+            return resultMapped;
         }
 
         private (string viewName, dynamic permitDetail) GetPermitDetail(int id, string permitCode)

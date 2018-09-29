@@ -1,0 +1,56 @@
+﻿
+@model GrantCountyAs400.Web.ViewModels.BuildingVM.ValuationAndFeesViewModel
+
+<div class="col-xs-12">
+    <table class="table">
+        <tbody>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.ExtendedAmountTotal) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.ExtendedAmountTotal) </span></td>
+              
+            </tr>
+            <tr>
+                <td><strong>Total Fees </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.ExtendedValue) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.AssignStructNanNodFees) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.AssignStructNanNodFees) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.AssignPlanReviewFee) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.AssignPlanReviewFee) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.AssignPlumbingFees) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.AssignPlumbingFees) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.AssignMechanicalFees) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.AssignMechanicalFees) </span></td>
+            </tr>
+            <tr>
+                <td><strong>-- OR --</strong></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.AssignBidPermitFee) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.AssignBidPermitFee) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.AssignBidPlanReview) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.AssignBidPlanReview) </span></td>
+            </tr>
+            <tr>
+                <td>-- AND --</td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.AssignBidBuildingCodeFee) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.AssignBidBuildingCodeFee) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.AssignOtherFees) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.AssignOtherFees) </span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

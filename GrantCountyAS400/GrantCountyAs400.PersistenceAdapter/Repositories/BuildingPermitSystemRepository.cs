@@ -43,6 +43,14 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
 
             return results;
         }
+        public BuildingPermitSystem Get(int id)
+        {
+            
+            var result = (from appm in _context.BldgpermitApplicationMaster
+                        where appm.Id == id
+                        select BuildingPermitSystemMapper.Map(appm)).SingleOrDefault();
+            return result;
+        }
 
         public BuildingPermitSystemDetails Details(int id)
         {
@@ -213,5 +221,26 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             }
             return null;
         }
+
+        public ValuationAndFees GetValuationAndFees(int id, decimal? applicationYear, decimal? applicationNumber)
+        {
+            var query = (from appf in _context.BldgapplicationFees
+                         join bldg in _context.BldgpermitApplicationMaster
+                         on new { appf.ApplicationYear, appf.ApplicationNumber } equals new { bldg.ApplicationYear, bldg.ApplicationNumber }
+                         join appv in _context.BldgapplicationValues
+                         on new { appf.ApplicationYear, appf.ApplicationNumber } equals new { appv.ApplicationYear, appv.ApplicationNumber }
+                         where  bldg.Id == id && 
+                                bldg.ApplicationYear == applicationYear && 
+                                bldg.ApplicationNumber == applicationNumber 
+                         select new ValuationAndFeesClass{ Appv=appv, Appf=appf, Bldg=bldg }).ToList();
+
+            return ValuationAndFeesMapper.Map(query);
+        }
+    }
+    internal class ValuationAndFeesClass
+    {
+        public BldgapplicationFees Appf { get; set; }
+        public BldgpermitApplicationMaster Bldg { get; set; }
+        public BldgapplicationValues Appv { get; set; }
     }
 }
