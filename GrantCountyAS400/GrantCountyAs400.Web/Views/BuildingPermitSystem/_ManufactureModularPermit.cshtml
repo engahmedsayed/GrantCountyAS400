@@ -1,0 +1,201 @@
+﻿@model GrantCountyAs400.Web.ViewModels.BuildingVM.ManufactureModularPermitViewModel
+
+<div class="col-xs-6">
+    <table class="table">
+        <tbody>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.OfficeProjectDescription) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.OfficeProjectDescription) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.ManorMod) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.ManorMod) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.YearManufactured) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.YearManufactured) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.NewOrUsed) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.NewOrUsed) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.SquareFeet) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.SquareFeet) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.Dimensions) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.Dimensions) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.BuildingDescription) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.BuildingDescription) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.ResCommStor) </strong></td>
+                <td class="text-right">
+                    <span> @Html.DisplayFor(model => model.ResCommStor) </span>
+                    @if (Model.ShowCommercialUse)
+                    {
+                        <br />
+                        <span> @Html.DisplayFor(model => model.CommercialUseDescDisplay) </span>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Dealer:</strong><br />
+                    <strong>Business Code</strong><br />
+                    <strong>Business Name</strong><br />
+                    <strong>Phone Number</strong><br />
+                    <strong>License Number</strong><br />
+                </td>
+                <td class="text-right">
+                    <br />
+                    <span> @Html.DisplayFor(model => model.DealerNameCode) </span><br />
+                    <span> @Html.DisplayFor(model => model.DealerInfo.BusinessName) </span><br />
+                    <span> @Html.DisplayFor(model => model.DealerInfo.PhoneNumber) </span><br />
+                    <span> @Html.DisplayFor(model => model.DealerInfo.LicenseNumber) </span><br />
+                </td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.ManufacturerName) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.ManufacturerName) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.LotorMan) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.LotorMan) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.ApproxPurchaseDate) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.ApproxPurchaseDate) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.ApproxDeliveryDate) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.ApproxDeliveryDate) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.InstallationIncludedInPrice) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.InstallationIncludedInPrice) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.MovingFromGrantCounty) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.MovingFromGrantCounty) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.CountyStateIfNotGrant) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.CountyStateIfNotGrant) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.TitleOwnerName) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.TitleOwnerName) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.TaxpayerName) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.TaxpayerName) </span></td>
+            </tr>            
+        </tbody>
+    </table>
+</div>
+<div class="col-xs-6">
+    <table class="table">
+        <tbody>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.MovingFromParcelNumber) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.MovingFromParcelNumber) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.MovingFromAddress) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.MovingFromAddress) </span></td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Certified Installer:</strong><br />
+                    <strong>Business Code</strong><br />
+                    <strong>Business Name</strong><br />
+                    <strong>License Number</strong><br />
+                    <strong>License Expireation Date</strong><br />
+                </td>
+                <td class="text-right">
+                    <br />
+                    <span> @Html.DisplayFor(model => model.CertInstallerCode) </span><br />
+                    <span> @Html.DisplayFor(model => model.InstallerInfo.BusinessName) </span><br />
+                    <span> @Html.DisplayFor(model => model.InstallerInfo.PhoneNumber) </span><br />
+                    <span> @Html.DisplayFor(model => model.InstallerInfo.LicenseNumber) </span><br />
+                </td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.FireDistrictDisplay) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.FireDistrictDisplay) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.FireFlowAlreadyProvided) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.FireFlowAlreadyProvided) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.AdditionalFireFlowRequired) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.AdditionalFireFlowRequired) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.AmountOfFireFlowRequired) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.AmountOfFireFlowRequired) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.BldgDeptSetback) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.BldgDeptSetback) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.FireMarshalSetback) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.FireMarshalSetback) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.ExtendedValue) </strong></td>
+                <td class="text-right">
+                    <span> @Html.DisplayFor(model => model.ExtendedValue) </span><br />
+                    <span> @Html.DisplayFor(model => model.ConditionsExist) </span><br />
+                    <span> @Html.DisplayFor(model => model.InspectionsExist) </span>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.LotorMan) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.LotorMan) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.LotorMan) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.LotorMan) </span></td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Building Department Approval:</strong><br />
+                    <strong>By</strong><br />
+                    <strong>Date Approved</strong><br />
+                    <strong>Change User</strong><br />
+                    <strong>Change Date</strong><br />
+                </td>
+                <td class="text-right">
+                    <br />
+                    <span> @Html.DisplayFor(model => model.BldgDept.ApprovalBy) </span><br />
+                    <span> @Html.DisplayFor(model => model.BldgDept.DateApproved) </span><br />
+                    <span> @Html.DisplayFor(model => model.BldgDept.ApprovedUserId) </span><br />
+                    <span> @Html.DisplayFor(model => model.BldgDept.ApprovedChangeDate) </span><br />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Fire Marshal Approval:</strong><br />
+                    <strong>By</strong><br />
+                    <strong>Date Approved</strong><br />
+                    <strong>Change User</strong><br />
+                    <strong>Change Date</strong><br />
+                </td>
+                <td class="text-right">
+                    <br />
+                    <span> @Html.DisplayFor(model => model.FireMarshal.ApprovalBy) </span><br />
+                    <span> @Html.DisplayFor(model => model.FireMarshal.DateApproved) </span><br />
+                    <span> @Html.DisplayFor(model => model.FireMarshal.ApprovedUserId) </span><br />
+                    <span> @Html.DisplayFor(model => model.FireMarshal.ApprovedChangeDate) </span><br />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
