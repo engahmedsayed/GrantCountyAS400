@@ -83,6 +83,11 @@ namespace GrantCountyAs400.Web.Controllers.Building
                     break;
 
                 case "PLMB":
+                    var plumbingPermitEntity = _buildingModuleRepository.GetPlumbingPermitByBuildingPermitSystemId(id);
+                    permitDetailViewModel = AutoMapper.Mapper.Map<PlumbingPermitViewModel>(plumbingPermitEntity);
+                    permitDetailViewName = "_PlumbingPermit";
+                    break;
+
                 case "STRUT":
                     var structurePermitDetailEntity = _buildingModuleRepository.GetStructurePermitDetailByBuildingPermitSystemId(id);
                     permitDetailViewModel = AutoMapper.Mapper.Map<StructurePermitDetailViewModel>(structurePermitDetailEntity);
