@@ -267,6 +267,37 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             return null;
         }
 
+        public PlumbingPermit GetPlumbingPermitByBuildingPermitSystemId(int id)
+        {
+            var query = (from bldg in _context.BldgpermitApplicationMaster
+                         join permit in _context.BldgplumbingPermitDetail
+                         on new { bldg.ApplicationYear, bldg.ApplicationNumber } equals new { permit.ApplicationYear, permit.ApplicationNumber }
+                         join bldgFire in _context.BldgfireDistrictCodes on permit.FireDistrictCode equals bldgFire.FireDistrictCode
+                         join bldgCondition in _context.BldgapplicationConditions
+                         on new { permit.ApplicationYear, permit.ApplicationNumber } equals new { bldgCondition.ApplicationYear, bldgCondition.ApplicationNumber }
+                         into bldgConditionJoin
+                         from bldgConditionRecord in bldgConditionJoin.DefaultIfEmpty()
+                         join bldgInspection in _context.BldgapplicationInspections
+                         on new { permit.ApplicationYear, permit.ApplicationNumber } equals new { bldgInspection.ApplicationYear, bldgInspection.ApplicationNumber }
+                         into bldgInspectionJoin
+                         from bldgInspectionRecord in bldgInspectionJoin.DefaultIfEmpty()
+                         where bldg.Id == id
+                         select new { bldg, permit, bldgFire, bldgConditionRecord, bldgInspectionRecord }
+                         ).FirstOrDefault();
+
+            if (query != null)
+            {
+                return PermitDetailMapper.Map(
+                    query.bldg,
+                    query.permit,
+                    query.bldgFire,
+                    query.bldgConditionRecord,
+                    query.bldgInspectionRecord);
+            }
+
+            return null;
+        }
+
         public ValuationAndFees GetValuationAndFees(int id, decimal? applicationYear, decimal? applicationNumber)
         {
             var query = (from appf in _context.BldgapplicationFees

@@ -84,5 +84,15 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                new PermitApprovedInfo(permit.FireMarshalApprovedBy, permit.FireMarshalDateApproved, permit.FireMarshalApprovedUserId, permit.FireMarshalApprovedChangeDate),
                new DealersInstallersArchitectInfo(bldgDealer.BusinessName, bldgDealer.LicenseNumber, bldgDealer.LicenseExpireDate, bldgDealer.PhoneNumber.Value),
                new DealersInstallersArchitectInfo(bldgInstaller.BusinessName, bldgInstaller.LicenseNumber, bldgInstaller.LicenseExpireDate, bldgInstaller.PhoneNumber.Value));
+
+        internal static PlumbingPermit Map(BldgpermitApplicationMaster bldgpermit,
+                                           BldgplumbingPermitDetail permit,
+                                           BldgfireDistrictCodes bldgfire,
+                                           BldgapplicationConditions bldgCondition,
+                                           BldgapplicationInspections bldgInspection) =>
+           new PlumbingPermit(permit.OfficeProjectDescription, permit.FireDistrictCode, permit.BldgDeptSetback.Value, permit.FireMarshalSetback.Value,
+               bldgfire.LongFireDistrictName, (bldgCondition != null), (bldgInspection != null),
+               new PermitApprovedInfo(permit.BldgDeptApprovedBy, permit.BldgDeptDateApproved, permit.BldgDeptApprovedUserId, permit.BldgDeptApprovedChangeDate),
+               new PermitApprovedInfo(permit.FireMarshalApprovedBy, permit.FireMarshalDateApproved, permit.FireMarshalApprovedUserId, permit.FireMarshalApprovedChangeDate));
     }
 }
