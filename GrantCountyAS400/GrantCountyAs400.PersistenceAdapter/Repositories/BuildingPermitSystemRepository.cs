@@ -43,12 +43,12 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
 
             return results;
         }
+
         public BuildingPermitSystem Get(int id)
         {
-            
             var result = (from appm in _context.BldgpermitApplicationMaster
-                        where appm.Id == id
-                        select BuildingPermitSystemMapper.Map(appm)).SingleOrDefault();
+                          where appm.Id == id
+                          select BuildingPermitSystemMapper.Map(appm)).SingleOrDefault();
             return result;
         }
 
@@ -216,7 +216,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          from apinConditionRecord in apinConditionJoin.DefaultIfEmpty()
                          where bldg.Id == id
                          select new { bldg, fdst, apcnConditionRecord, apinConditionRecord, grdd }).FirstOrDefault();
-            if(query != null)
+            if (query != null)
             {
                 return PermitDetailMapper.Map(query.bldg, query.fdst, query.apcnConditionRecord, query.apinConditionRecord, query.grdd);
             }
@@ -274,15 +274,16 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          on new { appf.ApplicationYear, appf.ApplicationNumber } equals new { bldg.ApplicationYear, bldg.ApplicationNumber }
                          join appv in _context.BldgapplicationValues
                          on new { appf.ApplicationYear, appf.ApplicationNumber } equals new { appv.ApplicationYear, appv.ApplicationNumber }
-                         where  bldg.Id == id && 
-                                bldg.ApplicationYear == applicationYear && 
-                                bldg.ApplicationNumber == applicationNumber 
-                         select new ValuationAndFeesClass{ Appv=appv, Appf=appf, Bldg=bldg }).ToList();
+                         where bldg.Id == id &&
+                               bldg.ApplicationYear == applicationYear &&
+                               bldg.ApplicationNumber == applicationNumber
+                         select new ValuationAndFeesRecord { Appv = appv, Appf = appf, Bldg = bldg }).ToList();
 
             return ValuationAndFeesMapper.Map(query);
         }
     }
-    internal class ValuationAndFeesClass
+
+    internal class ValuationAndFeesRecord
     {
         public BldgapplicationFees Appf { get; set; }
         public BldgpermitApplicationMaster Bldg { get; set; }
