@@ -73,6 +73,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
         public virtual DbSet<BldgpermitCodes> BldgpermitCodes { get; set; }
         public virtual DbSet<BldgpermitsConditionsUserAuthority> BldgpermitsConditionsUserAuthority { get; set; }
         public virtual DbSet<BldgplanningApproval> BldgplanningApproval { get; set; }
+        public virtual DbSet<BldgplumbingPermitDetail> BldgplumbingPermitDetail { get; set; }
         public virtual DbSet<BldgstateClassifications> BldgstateClassifications { get; set; }
         public virtual DbSet<BldgstructureBuildingPermitDetail> BldgstructureBuildingPermitDetail { get; set; }
 
@@ -4414,6 +4415,67 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
 
                 entity.Property(e => e.ZoneCode)
                     .HasMaxLength(6)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<BldgplumbingPermitDetail>(entity =>
+            {
+                entity.ToTable("BLDGPlumbingPermitDetail");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.AddendumNumber).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.ApplicationNumber).HasColumnType("numeric(5, 0)");
+
+                entity.Property(e => e.ApplicationYear).HasColumnType("numeric(4, 0)");
+
+                entity.Property(e => e.BldgDeptApprovedBy)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.BldgDeptApprovedChangeDate).HasColumnType("date");
+
+                entity.Property(e => e.BldgDeptApprovedUserId)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.BldgDeptDateApproved).HasColumnType("date");
+
+                entity.Property(e => e.BldgDeptSetback).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.DepartmentCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FireDistrictCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FireMarshalApprovedBy)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FireMarshalApprovedChangeDate).HasColumnType("date");
+
+                entity.Property(e => e.FireMarshalApprovedUserId)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FireMarshalDateApproved).HasColumnType("date");
+
+                entity.Property(e => e.FireMarshalSetback).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.JurisdictionCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.OfficeProjectDescription)
+                    .HasMaxLength(75)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecordStatus)
+                    .HasMaxLength(1)
                     .IsUnicode(false);
             });
 
