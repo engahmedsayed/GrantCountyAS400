@@ -42,16 +42,8 @@ namespace GrantCountyAs400.Web.Controllers.Building
 
             // load permit details data.
             (ViewBag.PermitDetailViewName, ViewBag.PermitDetailViewModel) = GetPermitDetail(id, entity.PermitCode);
-            var buildingPermitMaster = _buildingModuleRepository.Get(id);
-            ViewBag.ValuationAndFeesViewModel = GetValuationAndFees(id,buildingPermitMaster.ApplicationYear,buildingPermitMaster.ApplicationNumber);
+            ViewBag.ValuationAndFeesViewModel = GetValuationAndFees(id, viewmodel.BasicInfo.ApplicationYear, viewmodel.BasicInfo.ApplicationNumber);
             return View(viewmodel);
-        }
-
-        private ValuationAndFeesViewModel GetValuationAndFees(int id,decimal? applicationYear,decimal? applicationNumber)
-        {
-            var result = _buildingModuleRepository.GetValuationAndFees(id,applicationYear,applicationNumber);
-            var resultMapped = AutoMapper.Mapper.Map<ValuationAndFeesViewModel>(result);
-            return resultMapped;
         }
 
         private (string viewName, dynamic permitDetail) GetPermitDetail(int id, string permitCode)
@@ -71,6 +63,7 @@ namespace GrantCountyAs400.Web.Controllers.Building
                     permitDetailViewModel = AutoMapper.Mapper.Map<GradingExcavationPermitDetailViewModel>(gradingExcavationPermitDetailEntity);
                     permitDetailViewName = "_GradingExcavationPermitDetail";
                     break;
+
                 case "MECH":
                     var mechanicalPermitDetailEntity = _buildingModuleRepository.GetMechanicalPermitDetailByBuildingPermitSystemId(id);
                     permitDetailViewModel = AutoMapper.Mapper.Map<MechanicalPermitDetailViewModel>(mechanicalPermitDetailEntity);
@@ -103,6 +96,13 @@ namespace GrantCountyAs400.Web.Controllers.Building
                         $"Couldn't find PermitCode: {permitCode} for Building Permit System with ID:{id}");
             }
             return (permitDetailViewName, permitDetailViewModel);
+        }
+
+        private ValuationAndFeesViewModel GetValuationAndFees(int id, decimal? applicationYear, decimal? applicationNumber)
+        {
+            var result = _buildingModuleRepository.GetValuationAndFees(id, applicationYear, applicationNumber);
+            var resultMapped = AutoMapper.Mapper.Map<ValuationAndFeesViewModel>(result);
+            return resultMapped;
         }
     }
 }
