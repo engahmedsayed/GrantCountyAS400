@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GrantCountyAs400.PersistenceAdapter.Extensions
+﻿namespace GrantCountyAs400.PersistenceAdapter.Extensions
 {
     public static class StringExtentions
     {
@@ -11,6 +7,11 @@ namespace GrantCountyAs400.PersistenceAdapter.Extensions
             if (nameSplit == NameEnum.FirstName)
                 return name.Split(splitter)[1];
             return name.Split(splitter)[0];
+        }
+
+        public static string TrimAndLower(this string value)
+        {
+            return value.Trim().ToLower();
         }
     }
 

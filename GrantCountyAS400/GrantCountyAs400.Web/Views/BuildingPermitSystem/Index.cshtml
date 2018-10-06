@@ -15,27 +15,53 @@
     {
         <div class="form-horizontal">
             <hr />
-            <div class="row" data-search-type="fundAndProgram">
-                <div class="form-group">
-                    @Html.LabelFor(model => filterViewModel.JurisdictionCode, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.EditorFor(model => filterViewModel.JurisdictionCode, null, "jurisdictionCode", new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
-                    @Html.LabelFor(model => filterViewModel.DepartmentCode, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.EditorFor(model => filterViewModel.DepartmentCode, null, "departmentCode", new { htmlAttributes = new { @class = "form-control" } })
+            <div class="row">
+                <div class="col-md-4 col-xs-6">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label asp-for="@filterViewModel.ApplicationYear"></label>
+                            <input type="number" asp-for="@filterViewModel.ApplicationYear" name="applicationyear" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@filterViewModel.ApplicationNumber"></label>
+                            <input type="number" asp-for="@filterViewModel.ApplicationNumber" name="applicationnumber" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@filterViewModel.PermitNumber"></label>
+                            <input type="number" asp-for="@filterViewModel.PermitNumber" name="permitnumber" class="form-control" />
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row" data-search-type="departmentAndProject">
-                <div class="form-group">
-                    @Html.LabelFor(model => filterViewModel.ApplicationYear, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.EditorFor(model => filterViewModel.ApplicationYear, null, "applicationYear", new { htmlAttributes = new { @class = "form-control" } })
+                <div class="col-md-4 col-xs-6 adjcant-col-right">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label asp-for="@filterViewModel.ApplicantBusinessName"></label>
+                            <input type="text" asp-for="@filterViewModel.ApplicantBusinessName" name="applicantbusinessname" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@filterViewModel.ApplicantFirstName"></label>
+                            <input type="text" asp-for="@filterViewModel.ApplicantFirstName" name="applicantfirstname" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@filterViewModel.ApplicantLastName"></label>
+                            <input type="text" asp-for="@filterViewModel.ApplicantLastName" name="applicantlastname" class="form-control" />
+                        </div>
                     </div>
-                    @Html.LabelFor(model => filterViewModel.ApplicationNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.EditorFor(model => filterViewModel.ApplicationNumber, null, "applicationNumber", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="col-md-4 col-xs-6">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label asp-for="@filterViewModel.PreliminaryParcelNumber"></label>
+                            <input type="number" asp-for="@filterViewModel.PreliminaryParcelNumber" name="preliminaryparcelnumber" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@filterViewModel.AssessorParcelNumber"></label>
+                            <input type="number" asp-for="@filterViewModel.AssessorParcelNumber" name="assessorparcelnumber" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@filterViewModel.JurisdictionCode"></label>
+                            <input type="text" asp-for="@filterViewModel.JurisdictionCode" name="jurisdictioncode" class="form-control" />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -183,10 +209,15 @@
 <nav aria-label="navigation">
     @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
     pageNumber = pageNumber,
-    jurisdictionCode = filterViewModel.JurisdictionCode,
-    departmentCode = filterViewModel.DepartmentCode,
-    applicationYear = filterViewModel.ApplicationYear,
-    applicationNumber = filterViewModel.ApplicationNumber
+    applicationyear = filterViewModel.ApplicationYear,
+    applicationnumber = filterViewModel.ApplicationNumber,
+    permitnumber = filterViewModel.PermitNumber,
+    applicantbusinessname = filterViewModel.ApplicantBusinessName,
+    applicantlastname = filterViewModel.ApplicantLastName,
+    applicantfirstname = filterViewModel.ApplicantFirstName,
+    preliminaryparcelnumber = filterViewModel.PreliminaryParcelNumber,
+    assessorparcelnumber = filterViewModel.AssessorParcelNumber,
+    jurisdictioncode = filterViewModel.JurisdictionCode,
 }))
 </nav>
 

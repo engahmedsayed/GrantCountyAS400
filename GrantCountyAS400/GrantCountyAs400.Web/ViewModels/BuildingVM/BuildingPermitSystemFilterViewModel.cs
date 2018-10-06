@@ -1,23 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 {
     public class BuildingPermitSystemFilterViewModel
     {
-        [Display(Name ="Juris")]
-        public string JurisdictionCode { get; set; }
-
-        [Display(Name ="Dept")]
-        public string DepartmentCode { get; set; }
-
-        [Display(Name = "Year")]
+        [Display(Name = "Application Year")]
         public int? ApplicationYear { get; set; }
 
-        [Display(Name = "Numb")]
+        [Display(Name = "Application Number")]
         public decimal? ApplicationNumber { get; set; }
+
+        [Display(Name = "Permit Number")]
+        public decimal? PermitNumber { get; set; }
+
+        [Display(Name = "Applicant Business Name")]
+        public string ApplicantBusinessName { get; set; }
+
+        [Display(Name = "Applicant Last Name")]
+        public string ApplicantLastName { get; set; }
+
+        [Display(Name = "Applicant First Name")]
+        public string ApplicantFirstName { get; set; }
+
+        [Display(Name = "Preliminary Parcel Number")]
+        public decimal? PreliminaryParcelNumber { get; set; }
+
+        [Display(Name = "Assessor Parcel Number")]
+        public decimal? AssessorParcelNumber { get; set; }
+
+        [Display(Name = "Jurisdiction Code")]
+        public string JurisdictionCode { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using GrantCountyAs400.Domain.Building;
 using GrantCountyAs400.Domain.Building.Repository;
+using GrantCountyAs400.PersistenceAdapter.Extensions;
 using GrantCountyAs400.PersistenceAdapter.Mappers.Building;
 using GrantCountyAs400.PersistenceAdapter.Models;
 using System.Collections.Generic;
@@ -16,15 +17,21 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             _context = dbContext;
         }
 
-        public List<BuildingPermitSystem> GetAll(decimal? applicationNumber, int? applicationYear, string departmentCode, string jurisdictionCode,
-                                                 out int resultCount, int pageNumber = 1, int pageSize = 50)
+        public List<BuildingPermitSystem> GetAll(decimal? applicationNumber, int? applicationYear, decimal? permitNumber, string applicantBusinessName,
+                                                 string applicantLastName, string applicantFirstName, decimal? preliminaryParcelNumber, decimal? assessorParcelNumber,
+                                                 string jurisdictionCode, out int resultCount, int pageNumber = 1, int pageSize = 50)
         {
             List<BuildingPermitSystem> results = new List<BuildingPermitSystem>();
             var query = from appm in _context.BldgpermitApplicationMaster
-                        where (appm.ApplicationNumber == applicationNumber || applicationNumber == null)
-                        && (appm.ApplicationYear == applicationYear || applicationYear == null)
-                        && (appm.DepartmentCode == departmentCode || string.IsNullOrWhiteSpace(departmentCode))
-                        && (appm.JurisdictionCode == jurisdictionCode || string.IsNullOrWhiteSpace(jurisdictionCode))
+                        where (applicationNumber == null || appm.ApplicationNumber == applicationNumber)
+                        && (applicationYear == null || appm.ApplicationYear == applicationYear)
+                        && (permitNumber == null || appm.PermitNumber == permitNumber)
+                        && (string.IsNullOrWhiteSpace(applicantBusinessName) || appm.ApplicantBusinessName.TrimAndLower() == applicantBusinessName.TrimAndLower())
+                        && (string.IsNullOrWhiteSpace(applicantLastName) || appm.ApplicantLastName.TrimAndLower() == applicantLastName.TrimAndLower())
+                        && (string.IsNullOrWhiteSpace(applicantFirstName) || appm.ApplicantFirstName.TrimAndLower() == applicantFirstName.TrimAndLower())
+                        && (preliminaryParcelNumber == null || appm.PreliminaryParcelNumber == preliminaryParcelNumber)
+                        && (assessorParcelNumber == null || appm.AssessorParcelNumber == assessorParcelNumber)
+                        && (string.IsNullOrWhiteSpace(jurisdictionCode) || appm.JurisdictionCode.TrimAndLower() == jurisdictionCode.TrimAndLower())
                         select BuildingPermitSystemMapper.Map(appm);
             if (pageNumber > 0)
             {

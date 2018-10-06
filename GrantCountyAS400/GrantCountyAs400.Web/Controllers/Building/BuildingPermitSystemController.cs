@@ -21,10 +21,21 @@ namespace GrantCountyAs400.Web.Controllers.Building
         [HttpGet]
         public IActionResult Index(int pageNumber = 1, BuildingPermitSystemFilterViewModel filter = default(BuildingPermitSystemFilterViewModel))
         {
-            int resultCount;
             var pagingInfo = new PagingInfo() { PageNumber = pageNumber };
 
-            var results = _buildingModuleRepository.GetAll(filter.ApplicationNumber, filter.ApplicationYear, filter.DepartmentCode, filter.JurisdictionCode, out resultCount, pageNumber, AppSettings.PageSize).ToList();
+            var results = _buildingModuleRepository.GetAll(
+                filter.ApplicationNumber,
+                filter.ApplicationYear,
+                filter.PermitNumber,
+                filter.ApplicantBusinessName,
+                filter.ApplicantLastName,
+                filter.ApplicantFirstName,
+                filter.PreliminaryParcelNumber,
+                filter.AssessorParcelNumber,
+                filter.JurisdictionCode,
+                out int resultCount,
+                pageNumber,
+                AppSettings.PageSize).ToList();
             pagingInfo.Total = resultCount;
             ViewBag.FilterViewModel = filter;
             return View(results.ToMappedPagedList<BuildingPermitSystem, BuildingPermitSystemViewModel>(pagingInfo));
