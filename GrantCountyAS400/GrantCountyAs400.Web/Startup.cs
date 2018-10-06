@@ -3,8 +3,11 @@ using GrantCountyAs400.Domain.Assessment.Repository;
 using GrantCountyAs400.Domain.Building.Repository;
 using GrantCountyAs400.PersistenceAdapter.Models;
 using GrantCountyAs400.PersistenceAdapter.Repositories;
+using GrantCountyAs400.PersistenceAdapter.SecurityModule;
+using GrantCountyAs400.PersistenceAdapter.SecurityModule.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +33,12 @@ namespace GrantCountyAs400.Web
             services.AddMvc();
             services.AddDbContext<GrantCountyDbContext>(options =>
                         options.UseSqlServer(Configuration.GetConnectionString("GrantCountyDbContext")));
+            services.AddDbContext<ApplicationDbContext>(options =>
+                       options.UseSqlServer(Configuration.GetConnectionString("GrantCountySecurityDbContext")));
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
 
             // Add application services.
             services.AddScoped<IPersonnelRepository, PersonnelRepository>();
@@ -44,6 +53,11 @@ namespace GrantCountyAs400.Web
             services.AddScoped<IBuildingPermitsRepository, BuildingPermitsRepository>();
             services.AddScoped<ILegalDocumentRepository, LegalDocumentRepository>();
             services.AddScoped<IBuildingPermitSystemRepository, BuildingPermitSystemRepository>();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +74,7 @@ namespace GrantCountyAs400.Web
             }
 
             app.UseStaticFiles();
+            app.UseAuthentication();
 
             app.UseMvc();
 

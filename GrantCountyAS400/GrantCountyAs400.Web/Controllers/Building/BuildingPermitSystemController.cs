@@ -3,12 +3,14 @@ using GrantCountyAs400.Domain.Building.Repository;
 using GrantCountyAs400.Web.Extensions;
 using GrantCountyAs400.Web.ViewModels;
 using GrantCountyAs400.Web.ViewModels.BuildingVM;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
 namespace GrantCountyAs400.Web.Controllers.Building
 {
     [Route("building-permit-system")]
+    //[Authorize(Policy = "RequireAdminRole")]
     public class BuildingPermitSystemController : Controller
     {
         private readonly IBuildingPermitSystemRepository _buildingModuleRepository;
