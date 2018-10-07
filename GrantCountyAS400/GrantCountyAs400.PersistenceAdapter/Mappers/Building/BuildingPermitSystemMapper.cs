@@ -39,6 +39,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                                                         Bldgdepartments dept,
                                                         BldgpermitCodes perm,
                                                         AsmtsitusAddress situs,
+                                                        AsmtcityCodeFile cityCode,
                                                         BldgmobileHomeDealersInstallersArchitects mdia,
                                                         BldgmobileHomeDealersInstallersArchitects mdiaBusinessEngineer,
                                                         Bldgcontractors bldgContractor,
@@ -48,7 +49,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                 bldgpermit.City, bldgpermit.State, bldgpermit.ZipCode, bldgpermit.PhoneNumber.Value, bldgpermit.PreliminaryParcelNumber.Value,
                 bldgpermit.AssessorParcelNumber.Value, bldgpermit.AdditionalInformation, bldgpermit.ParkInformation, perm.PermitDescription, processedJuri.ShortDepartmentName,
                 MapToBasicInfo(bldgpermit, juri, dept), MapToApplicantDetails(bldgpermit, mdia, mdiaBusinessEngineer, bldgContractor), Map(preliminaryValueMaster),
-                Map(assessorValueMaster), Map(situs), MapToApprovalStatus(bldgpermit), MapToPlanningApproval(plap, bldgpermit));
+                Map(assessorValueMaster), Map(situs, cityCode), MapToApprovalStatus(bldgpermit), MapToPlanningApproval(plap, bldgpermit));
 
         private static BuildingPermitSystemBasicInfo MapToBasicInfo(BldgpermitApplicationMaster bldgpermit,
                                                                     Bldgjurisdictions juri,
@@ -68,10 +69,10 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
         private static BuildingValueMasterNameInfo Map(ASMTValueMasterNameView valueMaster) =>
             new BuildingValueMasterNameInfo(valueMaster.TitleOwnerName, valueMaster.Description1.Trim(), valueMaster.Description2.Trim());
 
-        private static BuildingSitusAddressInfo Map(AsmtsitusAddress situs) =>
+        private static BuildingSitusAddressInfo Map(AsmtsitusAddress situs, AsmtcityCodeFile cityCode) =>
             (situs == null) ?
             null :
-            new BuildingSitusAddressInfo(situs.HouseNumber.Value, situs.StreetDirectionQuadrant, situs.LocationCode);
+            new BuildingSitusAddressInfo(situs.HouseNumber.Value, situs.StreetDirectionQuadrant, situs.LocationCode, situs.StreetName, cityCode?.LocationCityCode);
 
         private static BuildingPermitSystemApprovalStatusInfo MapToApprovalStatus(BldgpermitApplicationMaster bldgpermit) =>
             new BuildingPermitSystemApprovalStatusInfo(

@@ -72,6 +72,9 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          join situs in _context.AsmtsitusAddress on bldgpermit.AssessorParcelNumber equals situs.ParcelNumber
                          into situsJoin
                          from situsRecord in situsJoin.DefaultIfEmpty()
+                         join cityCode in _context.AsmtcityCodeFile on situsRecord.LocationCode equals cityCode.LocationCode
+                         into cityCodeJoin
+                         from cityCodeRecord in cityCodeJoin.DefaultIfEmpty()
                          join mdia in _context.BldgmobileHomeDealersInstallersArchitects on bldgpermit.ArchitectFirmNumber equals mdia.BusinessCode
                          into mdiaArchitectJoin
                          from mdiaArchitectRecord in mdiaArchitectJoin.DefaultIfEmpty()
@@ -91,6 +94,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                                                dept,
                                                                perm,
                                                                situsRecord,
+                                                               cityCodeRecord,
                                                                mdiaArchitectRecord,
                                                                mdiaEngineerRecord,
                                                                bldgContractor,
