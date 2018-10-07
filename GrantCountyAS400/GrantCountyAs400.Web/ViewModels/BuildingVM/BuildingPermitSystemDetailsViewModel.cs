@@ -32,12 +32,16 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         public string ZipCode { get; set; }
 
         [Display(Name = "Phone #")]
+        [DisplayFormat(DataFormatString = "{0:(###) ###-####}")]
         public decimal PhoneNumber { get; set; }
 
         [Display(Name = "Preliminary Parcel #")]
         public decimal PreliminaryParcelNumber { get; set; }
 
         public decimal AssessorParcelNumber { get; set; }
+
+        [Display(Name = "Additional Information")]
+        public string AdditionalInformation { get; set; }
 
         [Display(Name = "Park Info")]
         public string ParkInformation { get; set; }
