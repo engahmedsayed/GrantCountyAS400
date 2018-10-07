@@ -153,12 +153,16 @@ namespace GrantCountyAs400.Domain.Building
         public decimal HouseNumber { get; }
         public string StreetDirectionQuadrant { get; }
         public string LocationCode { get; }
+        public string StreetName { get; }
+        public string LocationCityCode { get; }
 
-        public BuildingSitusAddressInfo(decimal houseNumber, string streetDirectionQuadrant, string locationCode)
+        public BuildingSitusAddressInfo(decimal houseNumber, string streetDirectionQuadrant, string locationCode, string streetName, string locationCityCode)
         {
             HouseNumber = houseNumber;
             StreetDirectionQuadrant = streetDirectionQuadrant;
             LocationCode = locationCode;
+            StreetName = streetName;
+            LocationCityCode = locationCityCode;
         }
     }
 

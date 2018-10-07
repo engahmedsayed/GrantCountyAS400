@@ -28,6 +28,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
         public virtual DbSet<AcctPersonnel> AcctPersonnel { get; set; }
         public virtual DbSet<AcctPrWarrant> AcctPrWarrant { get; set; }
         public virtual DbSet<AcctVendor> AcctVendor { get; set; }
+        public virtual DbSet<AsmtcityCodeFile> AsmtcityCodeFile { get; set; }
         public virtual DbSet<AsmtfullLegalDescription> AsmtfullLegalDescription { get; set; }
         public virtual DbSet<AsmtinstrumentType> AsmtinstrumentType { get; set; }
         public virtual DbSet<AsmtlandUseCodes> AsmtlandUseCodes { get; set; }
@@ -1334,6 +1335,34 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
 
                 entity.Property(e => e.ZipCodeSuffix)
                     .HasMaxLength(4)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<AsmtcityCodeFile>(entity =>
+            {
+                entity.ToTable("ASMTCityCodeFile");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Comment)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Filler01)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LocationCityCode)
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LocationCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecordCode)
+                    .IsRequired()
+                    .HasMaxLength(1)
                     .IsUnicode(false);
             });
 
