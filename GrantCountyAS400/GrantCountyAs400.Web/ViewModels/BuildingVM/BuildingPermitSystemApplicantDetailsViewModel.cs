@@ -13,7 +13,7 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         public string ContractorBusinessName { get; set; }
 
         [Display(Name = "Gen. Contractor")]
-        public string ContractorDisplay => $"{ContractLicenseNumber} {ContractorBusinessName}";
+        public string ContractorDisplay => $"{ContractLicenseNumber} - {ContractorBusinessName}";
 
         public string ArchitectFirmNumber { get; set; }
         public string ArchitectBusinessName { get; set; }
@@ -29,7 +29,7 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 
         [Display(Name = "Application Project Description")]
         public string ApplicantProjectDescription { get; set; }
-        
+
         [Display(Name = "Result Of Enforcement Action?")]
         public string ResultOfEnforcementAction { get; set; }
 
@@ -46,6 +46,6 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 
         [Display(Name = "Result of Enforcement Action?")]
         public string EnforcementActionDisplay => (ResultOfEnforcementAction == "N")
-            ? $"{ResultOfEnforcementAction}" : $"{ResultOfEnforcementAction}" + $"{EnforcementDescription}";
+            ? $"{ResultOfEnforcementAction}" : $"{ResultOfEnforcementAction} ({EnforcementDescription})";
     }
 }
