@@ -1,4 +1,4 @@
-@model GrantCountyAs400.Web.ViewModels.BuildingVM.BuildingPermitSystemDetailsViewModel
+﻿@model GrantCountyAs400.Web.ViewModels.BuildingVM.BuildingPermitSystemDetailsViewModel
 @{
     ViewData["Title"] = "Building Permit Application";
 }
@@ -159,6 +159,20 @@
                     <div id="valuationAndFees" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <partial name="_ValuationAndFees" model="ViewBag.ValuationAndFeesViewModel" />
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#inspections">
+                                Inspections
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="inspections" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <partial name="_Inspections" model="ViewBag.Inspections" />
                         </div>
                     </div>
                 </div>

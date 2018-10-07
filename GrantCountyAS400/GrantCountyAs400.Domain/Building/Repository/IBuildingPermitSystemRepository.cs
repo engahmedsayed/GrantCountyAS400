@@ -17,5 +17,6 @@ namespace GrantCountyAs400.Domain.Building.Repository
         ManufactureModularPermit GetManufactureModularPermitByBuildingPermitSystemId(int id);
         PlumbingPermit GetPlumbingPermitByBuildingPermitSystemId(int id);
         ValuationAndFees GetValuationAndFees(int id, decimal? applictionYear, decimal? applicationNumber);
+        IEnumerable<BuildingInspection> GetInspectionsByBuildingPermitSystemId(int id);
     }
 }

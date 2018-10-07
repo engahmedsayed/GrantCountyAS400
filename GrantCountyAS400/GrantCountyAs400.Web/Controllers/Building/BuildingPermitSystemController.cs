@@ -1,9 +1,11 @@
-﻿using GrantCountyAs400.Domain.Building;
+﻿using AutoMapper;
+using GrantCountyAs400.Domain.Building;
 using GrantCountyAs400.Domain.Building.Repository;
 using GrantCountyAs400.Web.Extensions;
 using GrantCountyAs400.Web.ViewModels;
 using GrantCountyAs400.Web.ViewModels.BuildingVM;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace GrantCountyAs400.Web.Controllers.Building
@@ -54,6 +56,10 @@ namespace GrantCountyAs400.Web.Controllers.Building
             // load permit details data.
             (ViewBag.PermitDetailViewName, ViewBag.PermitDetailViewModel) = GetPermitDetail(id, entity.PermitCode);
             ViewBag.ValuationAndFeesViewModel = GetValuationAndFees(id, viewmodel.BasicInfo.ApplicationYear, viewmodel.BasicInfo.ApplicationNumber);
+
+            // load inspections data.
+            ViewBag.Inspections = GetInspections(id);
+
             return View(viewmodel);
         }
 
@@ -119,6 +125,12 @@ namespace GrantCountyAs400.Web.Controllers.Building
             var result = _buildingModuleRepository.GetValuationAndFees(id, applicationYear, applicationNumber);
             var resultMapped = AutoMapper.Mapper.Map<ValuationAndFeesViewModel>(result);
             return resultMapped;
+        }
+
+        private List<BuildingInspectionViewModel> GetInspections(int id)
+        {
+            var inspections = _buildingModuleRepository.GetInspectionsByBuildingPermitSystemId(id);
+            return Mapper.Map<IEnumerable<BuildingInspection>, IEnumerable<BuildingInspectionViewModel>>(inspections).ToList();
         }
     }
 }

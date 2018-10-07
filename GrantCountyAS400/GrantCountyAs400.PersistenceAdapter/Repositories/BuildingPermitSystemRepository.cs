@@ -319,6 +319,17 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
 
             return ValuationAndFeesMapper.Map(query);
         }
+
+        public IEnumerable<BuildingInspection> GetInspectionsByBuildingPermitSystemId(int id)
+        {
+            var inspections = (from bldg in _context.BldgpermitApplicationMaster
+                               join bldgInspection in _context.BldgapplicationInspections
+                               on new { bldg.ApplicationYear, bldg.ApplicationNumber } equals new { bldgInspection.ApplicationYear, bldgInspection.ApplicationNumber }
+                               where bldg.Id == id
+                               select BuildingInspectionMapper.Map(bldgInspection)).ToList();
+
+            return inspections;
+        }
     }
 
     internal class ValuationAndFeesRecord
