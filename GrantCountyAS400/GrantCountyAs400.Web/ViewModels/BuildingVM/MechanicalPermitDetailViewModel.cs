@@ -24,7 +24,7 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         [Display(Name = "Bldg Setbacks")]
         public string BldgDeptSetbacks { get; set; }
 
-        [Display(Name = "Fn Setbacks?")]
+        [Display(Name = "FM Setbacks?")]
         public string FireMarshallSetback { get; set; }
 
         public bool IsConditionExistInApcn { get; set; }
