@@ -51,14 +51,15 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                                         new PermitApprovedInfo(strd.FireMarshalApprovedBy, strd.FireMarshalDateApproved, strd.FireMarshalApprovedUserId,
                                                                strd.FireMarshalApprovedChangeDate));
 
-        internal static GradingExcavationPermitDetail Map(BldgpermitApplicationMaster bldg, BldgfireDistrictCodes fdst,
+        internal static GradingExcavationPermitDetail Map(BldgpermitApplicationMaster bldg,
+                                                          BldgfireDistrictCodes fdst,
                                                           BldgapplicationConditions apcnConditionRecord,
                                                           BldgapplicationInspections apinConditionRecord,
                                                           BldggradingExcavatingPermitDetail grdd) =>
              new GradingExcavationPermitDetail(bldg.ApplicantProjectDescription, grdd.OfficeProjectDescription, grdd.CubicYardsOfFill,
                                                grdd.PercentOfSlope, grdd.SoilErosionControlRequired, grdd.DustAndTrackControlReceived,
                                                grdd.DustAndTrackReceivedDate, grdd.EngineeringReceived, grdd.EngineeringReceivedDate,
-                                               grdd.FireDistrictCode, fdst.ShortFireDistrictName, grdd.FireFlowAlreadyProvided,
+                                               grdd.FireDistrictCode, fdst.LongFireDistrictName, grdd.FireFlowAlreadyProvided,
                                                grdd.AdditionalFireFlowRequired, grdd.AmountOfFireFlowRequired, grdd.BldgDeptSetback,
                                                grdd.FireMarshalSetback, apcnConditionRecord == null, apinConditionRecord == null,
                                                new PermitApprovedInfo(grdd.BldgDeptApprovedBy, grdd.BldgDeptDateApproved,

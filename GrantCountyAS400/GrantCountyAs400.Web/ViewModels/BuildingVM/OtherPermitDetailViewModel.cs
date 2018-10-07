@@ -25,7 +25,7 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         public string AmountOFFireFlowRequired { get; set; }
         [Display(Name ="Bldg Setbacks")]
         public decimal? BldgDeptSetback { get; set; }
-        [Display(Name ="Fn Setbacks")]
+        [Display(Name ="FM Setbacks")]
         public decimal? FireMarshalSetback { get; set; }
 
         public bool IsConditionExistInApcn { get; set; }

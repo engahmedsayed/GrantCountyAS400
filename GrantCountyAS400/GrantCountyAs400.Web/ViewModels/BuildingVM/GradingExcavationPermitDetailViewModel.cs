@@ -53,7 +53,7 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         [Display(Name ="Bldg Setbacks")]
         public decimal? BldgDeptSetback { get; set; }
 
-        [Display(Name ="FN Setbacks")]
+        [Display(Name ="FM Setbacks")]
         public decimal? FireMarshalSetback { get; set; }
 
         public bool IsConditionExistInApcn { get; set; }
