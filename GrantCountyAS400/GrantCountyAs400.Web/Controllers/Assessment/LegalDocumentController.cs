@@ -1,10 +1,12 @@
 ﻿using GrantCountyAs400.Domain.Assessment.Repository;
 using GrantCountyAs400.Web.ViewModels.Assessment.LegalDocument;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GrantCountyAs400.Web.Controllers.Assessment
 {
     [Route("legal-document")]
+    [Authorize]
     public class LegalDocumentController : Controller
     {
         private readonly ILegalDocumentRepository _legalDocumentRepository;

@@ -57,6 +57,8 @@ namespace GrantCountyAs400.Web
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
+                options.AddPolicy("RequireAccountantRole", policy => policy.RequireRole("Accountant"));
+                options.AddPolicy("RequireEitherAccountantOrAdminRole", policy => policy.RequireRole("Accountant", "Admin"));
             });
         }
 
@@ -75,7 +77,6 @@ namespace GrantCountyAs400.Web
 
             app.UseStaticFiles();
             app.UseAuthentication();
-
             app.UseMvc();
 
             AutoMapperConfig.Configure();

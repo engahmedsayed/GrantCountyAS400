@@ -3,6 +3,7 @@ using GrantCountyAs400.Domain.Accounting.Repository;
 using GrantCountyAs400.Web.Extensions;
 using GrantCountyAs400.Web.ViewModels;
 using GrantCountyAs400.Web.ViewModels.AccountingVM;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
@@ -10,6 +11,7 @@ using System.Linq;
 namespace GrantCountyAs400.Web.Controllers.Accounting
 {
     [Route("personnel")]
+    [Authorize(Policy = "RequireEitherAccountantOrAdminRole")]
     public class PersonnelController : Controller
     {
         private readonly IPersonnelRepository _personnelRepository;

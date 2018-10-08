@@ -7,11 +7,13 @@ using GrantCountyAs400.Domain.Accounting.Repository;
 using GrantCountyAs400.Web.Extensions;
 using GrantCountyAs400.Web.ViewModels;
 using GrantCountyAs400.Web.ViewModels.GeneralLedgerVM;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GrantCountyAs400.Web.Controllers.Accounting
 {
     [Route("GeneralLedger")]
+    [Authorize(Policy = "RequireEitherAccountantOrAdminRole")]
     public class GeneralLedgerController : Controller
     {
         private readonly IGeneralLedgerRepository _generalLedgerRepository;

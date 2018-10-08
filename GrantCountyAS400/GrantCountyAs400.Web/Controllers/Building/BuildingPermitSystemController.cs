@@ -11,6 +11,7 @@ namespace GrantCountyAs400.Web.Controllers.Building
 {
     [Route("building-permit-system")]
     //[Authorize(Policy = "RequireAdminRole")]
+    [Authorize]
     public class BuildingPermitSystemController : Controller
     {
         private readonly IBuildingPermitSystemRepository _buildingModuleRepository;

@@ -7,11 +7,13 @@ using GrantCountyAs400.Domain.Assessment.Repository;
 using GrantCountyAs400.Web.Extensions;
 using GrantCountyAs400.Web.ViewModels;
 using GrantCountyAs400.Web.ViewModels.Assessment.BuildingPermits;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GrantCountyAs400.Web.Controllers.Assessment
 {
     [Route("building-permits")]
+    [Authorize]
     public class BuildingPermitsController : Controller
     {
         private readonly IBuildingPermitsRepository _buildingPermitsRepository;

@@ -3,12 +3,14 @@ using GrantCountyAs400.Domain.Assessment.Repository;
 using GrantCountyAs400.Web.Extensions;
 using GrantCountyAs400.Web.ViewModels;
 using GrantCountyAs400.Web.ViewModels.Assessment.ChildParentParcel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
 namespace GrantCountyAs400.Web.Controllers.Assessment
 {
     [Route("child-parent-parcel")]
+    [Authorize]
     public class ChildParentParcelController : Controller
     {
         private readonly IChildParentParcelRepository _childParentParcelRepository;

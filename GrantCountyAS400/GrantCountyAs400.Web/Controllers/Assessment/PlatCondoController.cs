@@ -3,6 +3,7 @@ using GrantCountyAs400.Domain.Assessment.Repository;
 using GrantCountyAs400.Web.Extensions;
 using GrantCountyAs400.Web.ViewModels;
 using GrantCountyAs400.Web.ViewModels.Assessment.PlatCondo;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
@@ -10,6 +11,7 @@ using System.Linq;
 namespace GrantCountyAs400.Web.Controllers.Assessment
 {
     [Route("plat-condo")]
+    [Authorize]
     public class PlatCondoController : Controller
     {
         private readonly IPlatCondoRepository _platCondoRepository;
