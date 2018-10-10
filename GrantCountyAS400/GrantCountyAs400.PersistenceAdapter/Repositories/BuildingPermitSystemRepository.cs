@@ -334,6 +334,17 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
 
             return inspections;
         }
+
+        public IEnumerable<BuildingCondition> GetConditionsByBuildingPermitSystemId(int id)
+        {
+            var conditions = (from bldg in _context.BldgpermitApplicationMaster
+                              join bldgCondition in _context.BldgapplicationConditions
+                              on new { bldg.ApplicationYear, bldg.ApplicationNumber } equals new { bldgCondition.ApplicationYear, bldgCondition.ApplicationNumber }
+                              where bldg.Id == id
+                              select BuildingConditionMapper.Map(bldgCondition)).ToList();
+
+            return conditions;
+        }
     }
 
     internal class ValuationAndFeesRecord
