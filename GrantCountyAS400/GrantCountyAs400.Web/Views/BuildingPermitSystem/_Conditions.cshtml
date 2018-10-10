@@ -1,0 +1,169 @@
+﻿@model List<GrantCountyAs400.Web.ViewModels.BuildingVM.BuildingConditionViewModel>
+
+@if (Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().JurisdictionCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().DepartmentCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().ApplicationYear)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().ApplicationNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().AddendumNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().ConditionDepartmentCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().ConditionSequence)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().EntryDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().EnteredByUser)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().RemoveAuthorizedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().RemoveAuthorizedBy)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a class="toggle-row-details" data-toggle="collapse" data-target="#condition-@item.Id" aria-expanded="false" aria-controls="condition-@item.Id">
+                            <i class="glyphicon glyphicon-chevron-right pull-right"></i>
+                            <i class="glyphicon glyphicon-chevron-down pull-right"></i>
+                        </a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JurisdictionCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DepartmentCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ApplicationYear)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ApplicationNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AddendumNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ConditionDepartmentCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ConditionSequence)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EntryDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EnteredByUser)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RemoveAuthorizedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RemoveAuthorizedBy)
+                    </td>
+                </tr>
+                <tr class="row-details">
+                    <td colspan="100">
+                        <div class="collapse" id="condition-@item.Id">
+                            <div class="col-md-6 col-xs-12">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().ConditionLine1) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.ConditionLine1) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().ConditionLine2) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.ConditionLine2) </span></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().ConditionLine3) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.ConditionLine3) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().ConditionLine4) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.ConditionLine4) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().ConditionLine5) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.ConditionLine5) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().ConditionLine6) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.ConditionLine6) </span></td>
+                                        </tr>                                       
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-6 col-xs-12">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().EnteredByUser) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.EnteredByUser) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().EntryDate) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.EntryDate) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().ReasonRemoved) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.ReasonRemoved) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().RemoveAuthorizedBy) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.RemoveAuthorizedBy) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().RemoveAuthorizedDate) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.RemoveAuthorizedDate) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().DateRemoved) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.DateRemoved) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().RemovedByUser) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.RemovedByUser) </span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p class="empty-results">
+        <span class="label label-info label-small">No condition records found for the specified application</span>
+    </p>
+}

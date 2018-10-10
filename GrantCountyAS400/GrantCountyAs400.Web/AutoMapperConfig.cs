@@ -92,6 +92,7 @@ namespace GrantCountyAs400.Web
                 cfg.CreateMap<DealersInstallersArchitectInfo, DealersInstallersArchitectInfoViewModel>();
                 cfg.CreateMap<PlumbingPermit, PlumbingPermitViewModel>();
                 cfg.CreateMap<BuildingInspection, BuildingInspectionViewModel>();
+                cfg.CreateMap<BuildingCondition, BuildingConditionViewModel>();
 
                 #endregion BuildingModule
             });

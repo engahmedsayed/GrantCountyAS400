@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using GrantCountyAs400.Domain.Building;
 using GrantCountyAs400.Domain.Building.Repository;
 using GrantCountyAs400.Web.Extensions;
@@ -54,14 +54,15 @@ namespace GrantCountyAs400.Web.Controllers.Building
             if (entity == null)
                 return NotFound();
 
-            var viewmodel = AutoMapper.Mapper.Map<BuildingPermitSystemDetailsViewModel>(entity);
+            var viewmodel = Mapper.Map<BuildingPermitSystemDetailsViewModel>(entity);
 
             // load permit details data.
             (ViewBag.PermitDetailViewName, ViewBag.PermitDetailViewModel) = GetPermitDetail(id, entity.PermitCode);
             ViewBag.ValuationAndFeesViewModel = GetValuationAndFees(id, viewmodel.BasicInfo.ApplicationYear, viewmodel.BasicInfo.ApplicationNumber);
 
-            // load inspections data.
+            // load inspections & Conditions data.
             ViewBag.Inspections = GetInspections(id);
+            ViewBag.Conditions = GetConditions(id);
 
             return View(viewmodel);
         }
@@ -74,43 +75,43 @@ namespace GrantCountyAs400.Web.Controllers.Building
             {
                 case "DEMO":
                     var permitDetailEntity = _buildingModuleRepository.GetDemolitionPermitByBuildingPermitSystemId(id);
-                    permitDetailViewModel = AutoMapper.Mapper.Map<DemolitionPermitViewModel>(permitDetailEntity);
+                    permitDetailViewModel = Mapper.Map<DemolitionPermitViewModel>(permitDetailEntity);
                     permitDetailViewName = "_DemolitionPermit";
                     break;
 
                 case "GRAD":
                     var gradingExcavationPermitDetailEntity = _buildingModuleRepository.GetGradingExcavationPermitDetail(id);
-                    permitDetailViewModel = AutoMapper.Mapper.Map<GradingExcavationPermitDetailViewModel>(gradingExcavationPermitDetailEntity);
+                    permitDetailViewModel = Mapper.Map<GradingExcavationPermitDetailViewModel>(gradingExcavationPermitDetailEntity);
                     permitDetailViewName = "_GradingExcavationPermitDetail";
                     break;
 
                 case "MECH":
                     var mechanicalPermitDetailEntity = _buildingModuleRepository.GetMechanicalPermitDetailByBuildingPermitSystemId(id);
-                    permitDetailViewModel = AutoMapper.Mapper.Map<MechanicalPermitDetailViewModel>(mechanicalPermitDetailEntity);
+                    permitDetailViewModel = Mapper.Map<MechanicalPermitDetailViewModel>(mechanicalPermitDetailEntity);
                     permitDetailViewName = "_MechanicalPermitDetail";
                     break;
 
                 case "FIREM":
                     var otherPermitDetailEntity = _buildingModuleRepository.GetOtherPermitDetailByBuildingPermitSystemId(id);
-                    permitDetailViewModel = AutoMapper.Mapper.Map<OtherPermitDetailViewModel>(otherPermitDetailEntity);
+                    permitDetailViewModel = Mapper.Map<OtherPermitDetailViewModel>(otherPermitDetailEntity);
                     permitDetailViewName = "_OtherPermitDetail";
                     break;
 
                 case "MANH":
                     var manufactureModularPermitEntity = _buildingModuleRepository.GetManufactureModularPermitByBuildingPermitSystemId(id);
-                    permitDetailViewModel = AutoMapper.Mapper.Map<ManufactureModularPermitViewModel>(manufactureModularPermitEntity);
+                    permitDetailViewModel = Mapper.Map<ManufactureModularPermitViewModel>(manufactureModularPermitEntity);
                     permitDetailViewName = "_ManufactureModularPermit";
                     break;
 
                 case "PLMB":
                     var plumbingPermitEntity = _buildingModuleRepository.GetPlumbingPermitByBuildingPermitSystemId(id);
-                    permitDetailViewModel = AutoMapper.Mapper.Map<PlumbingPermitViewModel>(plumbingPermitEntity);
+                    permitDetailViewModel = Mapper.Map<PlumbingPermitViewModel>(plumbingPermitEntity);
                     permitDetailViewName = "_PlumbingPermit";
                     break;
 
                 case "STRUT":
                     var structurePermitDetailEntity = _buildingModuleRepository.GetStructurePermitDetailByBuildingPermitSystemId(id);
-                    permitDetailViewModel = AutoMapper.Mapper.Map<StructurePermitDetailViewModel>(structurePermitDetailEntity);
+                    permitDetailViewModel = Mapper.Map<StructurePermitDetailViewModel>(structurePermitDetailEntity);
                     permitDetailViewName = "_StructurePermitDetail";
                     break;
 
@@ -126,7 +127,7 @@ namespace GrantCountyAs400.Web.Controllers.Building
         private ValuationAndFeesViewModel GetValuationAndFees(int id, decimal? applicationYear, decimal? applicationNumber)
         {
             var result = _buildingModuleRepository.GetValuationAndFees(id, applicationYear, applicationNumber);
-            var resultMapped = AutoMapper.Mapper.Map<ValuationAndFeesViewModel>(result);
+            var resultMapped = Mapper.Map<ValuationAndFeesViewModel>(result);
             return resultMapped;
         }
 
@@ -134,6 +135,12 @@ namespace GrantCountyAs400.Web.Controllers.Building
         {
             var inspections = _buildingModuleRepository.GetInspectionsByBuildingPermitSystemId(id);
             return Mapper.Map<IEnumerable<BuildingInspection>, IEnumerable<BuildingInspectionViewModel>>(inspections).ToList();
+        }
+
+        private List<BuildingConditionViewModel> GetConditions(int id)
+        {
+            var conditions = _buildingModuleRepository.GetConditionsByBuildingPermitSystemId(id);
+            return Mapper.Map<IEnumerable<BuildingCondition>, IEnumerable<BuildingConditionViewModel>>(conditions).ToList();
         }
     }
 }
