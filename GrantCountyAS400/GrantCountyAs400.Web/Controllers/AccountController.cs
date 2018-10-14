@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GrantCountyAs400.PersistenceAdapter.SecurityModule.Models;
+using GrantCountyAs400.Web.Services;
 using GrantCountyAs400.Web.ViewModels.AccountVM;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -16,10 +17,14 @@ namespace GrantCountyAs400.Web.Controllers
     public class AccountController : Controller
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IEmailSender _emailSender;
 
-        public AccountController(SignInManager<ApplicationUser> signInManager)
+        public AccountController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IEmailSender emailSender)
         {
             _signInManager = signInManager;
+            _userManager = userManager;
+            _emailSender = emailSender;
         }
 
         [HttpGet]
@@ -75,6 +80,98 @@ namespace GrantCountyAs400.Web.Controllers
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Lockout()
+        {
+            return View();
+        }
+
+        //
+        // GET: /Account/ForgotPassword
+        [AllowAnonymous]
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Account/ForgotPassword
+        /// <summary>
+        /// forgot password 
+        /// </summary>
+        /// <param name="model">forgot password information</param>
+        /// <returns>redirect to forgot password confirmation </returns>
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await this._userManager.FindByEmailAsync(model.Email);
+                if (user == null)
+                    return RedirectToAction("ForgotPasswordEmailSent");
+
+
+                var confrimationCode =
+                        await this._userManager.GeneratePasswordResetTokenAsync(user);
+
+                var callbackurl = Url.Action(
+                    controller: "Account",
+                    action: "ResetPassword",
+                    values: new { userId = user.Id, code = confrimationCode },
+                    protocol: Request.Scheme);
+
+                await this._emailSender.SendEmailAsync(
+                    email: user.Email,
+                    subject: "Reset Password",
+                    message: callbackurl);
+
+                return RedirectToAction("ForgotPasswordEmailSent");
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        [AllowAnonymous]
+        public IActionResult ForgotPasswordEmailSent()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public IActionResult ResetPassword(string userId, string code)
+        {
+            if (userId == null || code == null)
+                throw new ApplicationException("Code must be supplied for password reset.");
+
+            var model = new ResetPasswordViewModel { Code = code };
+            return View(model);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var user = await this._userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+                return RedirectToAction("ResetPasswordConfirm");
+
+            var result = await this._userManager.ResetPasswordAsync(
+                                        user, model.Code, model.Password);
+            if (result.Succeeded)
+                return RedirectToAction("ResetPasswordConfirm");
+
+            foreach (var error in result.Errors)
+                ModelState.AddModelError(string.Empty, error.Description);
+
+            return View(model);
+        }
+
+        public IActionResult ResetPasswordConfirm()
         {
             return View();
         }

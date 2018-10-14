@@ -5,6 +5,7 @@ using GrantCountyAs400.PersistenceAdapter.Models;
 using GrantCountyAs400.PersistenceAdapter.Repositories;
 using GrantCountyAs400.PersistenceAdapter.SecurityModule;
 using GrantCountyAs400.PersistenceAdapter.SecurityModule.Models;
+using GrantCountyAs400.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -30,6 +31,7 @@ namespace GrantCountyAs400.Web
             services.Configure<IISOptions>(options =>
             {
             });
+            services.AddTransient<IEmailSender, EmailSender>();
             services.AddMvc();
             services.AddDbContext<GrantCountyDbContext>(options =>
                         options.UseSqlServer(Configuration.GetConnectionString("GrantCountyDbContext")));
@@ -53,6 +55,7 @@ namespace GrantCountyAs400.Web
             services.AddScoped<IBuildingPermitsRepository, BuildingPermitsRepository>();
             services.AddScoped<ILegalDocumentRepository, LegalDocumentRepository>();
             services.AddScoped<IBuildingPermitSystemRepository, BuildingPermitSystemRepository>();
+            
 
             services.AddAuthorization(options =>
             {
