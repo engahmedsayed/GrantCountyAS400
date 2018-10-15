@@ -34,7 +34,7 @@
             </div>
            
             <div class="navbar-collapse collapse">
-                @if (User.IsInRole("Accountant") || User.IsInRole("Member") || User.IsInRole("Admin"))
+                @if(User.IsInRole("Accountant") || User.IsInRole("Member") || User.IsInRole("Admin"))
                 {
                 <ul class="nav navbar-nav">
                     @if (User.IsInRole("Accountant") || User.IsInRole("Admin"))
@@ -83,6 +83,8 @@
                             Health <span class="caret"></span>
                         </a>
                     </li>
+                    @if (User.IsInRole("Admin"))
+                    {
                     <li>
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             Users <span class="caret"></span>
@@ -91,6 +93,7 @@
                             <li><a asp-controller="UserAdmin" asp-action="Index">User Management</a></li>
                         </ul>
                     </li>
+                    }
                 </ul>
                 }
                     <partial name="_LoginPartial" />

@@ -26,7 +26,7 @@ namespace GrantCountyAs400.Web.Controllers.UserAdmin
         public async Task<ActionResult> Index(int? page)
         {
 
-            return View(GetUsersData(null,""));
+            return View(await GetUsersData(null,""));
         }
 
         public UserAdminController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
@@ -35,10 +35,10 @@ namespace GrantCountyAs400.Web.Controllers.UserAdmin
             this._roleManager = roleManager;
         }
         [Route("GetUsers")]
-        public ActionResult GetUsers(int? page, string searchVal)
+        public async  Task<ActionResult> GetUsers(int? page, string searchVal)
         {
             
-            var query = GetUsersData(page, searchVal);
+            var query = await GetUsersData(page, searchVal);
 
             return PartialView(query);
         }
@@ -214,7 +214,7 @@ namespace GrantCountyAs400.Web.Controllers.UserAdmin
             return View(user);
         }
 
-        private IPagedList<ApplicationUser> GetUsersData(int? page,string searchVal)
+        private async  Task<IPagedList<ApplicationUser>> GetUsersData(int? page,string searchVal)
         {
             int pageNumber = (page ?? 1);
             var query = _userManager.Users.Where(u => 1 == 1);
@@ -222,7 +222,10 @@ namespace GrantCountyAs400.Web.Controllers.UserAdmin
             {
                 query = query.Where(u => u.UserName.Contains(searchVal));
             }
-
+            foreach (var item in query)
+            {
+                item.Roles = (await _userManager.GetRolesAsync(item)).ToList();
+            }
             ViewBag.searchVal = searchVal;
             return query.OrderByDescending(u => u.UserName).ToPagedList(pageNumber, pageSize);
         }

@@ -176,6 +176,35 @@ namespace GrantCountyAs400.Web.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            var model = new ChangePasswordViewModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            
+            if (user == null)
+                return RedirectToAction("ResetPasswordConfirm");
+
+            var result = await this._userManager.ChangePasswordAsync(
+                                        user, model.OldPassword, model.NewPassword);
+            if (result.Succeeded)
+                return RedirectToAction("ResetPasswordConfirm");
+
+            foreach (var error in result.Errors)
+                ModelState.AddModelError(string.Empty, error.Description);
+
+            return View(model);
+        }
+
         private IActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
