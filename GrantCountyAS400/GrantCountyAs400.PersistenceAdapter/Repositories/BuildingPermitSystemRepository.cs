@@ -345,6 +345,34 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
 
             return conditions;
         }
+
+        public
+            (IEnumerable<ReceiptHeader> ReceiptHeaders, IEnumerable<BuildingApplicationFee> BuildingApplicationFees)
+            GetReceiptHeadersAndFeesByBuildingPermitSystemId(int id)
+        {
+            var receipts = (from bldg in _context.BldgpermitApplicationMaster
+                            join receipt in _context.BldgapplcationReceiptHeader
+                            on new { bldg.ApplicationYear, bldg.ApplicationNumber } equals new { receipt.ApplicationYear, receipt.ApplicationNumber }
+                            join receiptDetailRecord in _context.BldgapplcationReceiptDetail
+                            on new { bldg.ApplicationYear, bldg.ApplicationNumber } equals new { receiptDetailRecord.ApplicationYear, receiptDetailRecord.ApplicationNumber }
+                            into receiptDetailJoin
+                            from receiptDetail in receiptDetailJoin.DefaultIfEmpty()
+                            join receiptCategory in _context.BldgfeeDistributionCategories
+                            on receiptDetail.FeeDistributionCategory equals receiptCategory.FeeDistributionCategory
+                            where bldg.Id == id
+                            select new { receipt, receiptDetail, receiptCategory })
+                            .ToList()
+                            .GroupBy(t => t.receipt, t => (t.receiptCategory, t.receiptDetail))
+                            .Select(group => ReceiptHeaderMapper.Map(group.Key, group.ToList()));
+
+            var fees = (from bldg in _context.BldgpermitApplicationMaster
+                        join fee in _context.BldgapplicationFees
+                        on new { bldg.ApplicationYear, bldg.ApplicationNumber } equals new { fee.ApplicationYear, fee.ApplicationNumber }
+                        where bldg.Id == id
+                        select BuildingApplicationFeeMapper.Map(fee)).ToList();
+
+            return (receipts, fees);
+        }
     }
 
     internal class ValuationAndFeesRecord
