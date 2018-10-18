@@ -29,6 +29,9 @@
     <Content Update="Views\BuildingPermitSystem\_ApprovalStatus.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Views\BuildingPermitSystem\_Receipts.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\BuildingPermitSystem\_Conditions.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

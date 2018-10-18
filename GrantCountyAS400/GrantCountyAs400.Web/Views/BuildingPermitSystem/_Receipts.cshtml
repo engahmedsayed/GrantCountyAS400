@@ -1,0 +1,200 @@
+﻿@model GrantCountyAs400.Web.ViewModels.BuildingVM.BuildingReceiptsReportViewModel
+
+@if (Model.ReceiptHeaders.Any())
+{
+    <table class="table">
+        <tbody>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.TotalFees) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.TotalFees) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.TotalPaid) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.TotalPaid) </span></td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(model => model.Balance) </strong></td>
+                <td class="text-right"><span> @Html.DisplayFor(model => model.Balance) </span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReceiptHeaders.FirstOrDefault().JurisdictionCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReceiptHeaders.FirstOrDefault().DepartmentCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReceiptHeaders.FirstOrDefault().ApplicationYear)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReceiptHeaders.FirstOrDefault().ApplicationNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReceiptHeaders.FirstOrDefault().AddendumNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReceiptHeaders.FirstOrDefault().ReceiptNumberDisplay)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReceiptHeaders.FirstOrDefault().ReceiptType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReceiptHeaders.FirstOrDefault().PaidByCheckNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReceiptHeaders.FirstOrDefault().ReceiptComment)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReceiptHeaders.FirstOrDefault().ReceiptDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReceiptHeaders.FirstOrDefault().CheckAmount)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ReceiptHeaders)
+            {
+                <tr>
+                    <td>
+                        <a class="toggle-row-details" data-toggle="collapse" data-target="#receipt-@item.Id" aria-expanded="false" aria-controls="receipt-@item.Id">
+                            <i class="glyphicon glyphicon-chevron-right pull-right"></i>
+                            <i class="glyphicon glyphicon-chevron-down pull-right"></i>
+                        </a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JurisdictionCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DepartmentCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ApplicationYear)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ApplicationNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AddendumNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReceiptNumberDisplay)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReceiptType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PaidByCheckNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReceiptComment)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReceiptDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CheckAmount)
+                    </td>
+                </tr>
+                <tr class="row-details">
+                    <td colspan="100">
+                        <div class="collapse" id="receipt-@item.Id">
+                            <div class="col-xs-12">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.ReceiptHeaders.FirstOrDefault().CheckAmount) </strong></td>
+                                            <td class="text-right">
+                                                <span> @Html.DisplayFor(modelItem => item.CheckAmount) </span>
+                                                <span class="bold">&nbsp;&nbsp;&nbsp;# @Html.DisplayFor(modelItem => item.PaidByCheckNumber) </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.ReceiptHeaders.FirstOrDefault().CashAmount) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.CashAmount) </span></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.ReceiptHeaders.FirstOrDefault().OtherAmount) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.OtherAmount) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.ReceiptHeaders.FirstOrDefault().ChangeAmount) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.ChangeAmount) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.ReceiptHeaders.FirstOrDefault().TotalReceipt) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.TotalReceipt) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.ReceiptHeaders.FirstOrDefault().ReceiptNumberDisplay) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.ReceiptNumberDisplay) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.ReceiptHeaders.FirstOrDefault().ReceiptType) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.ReceiptType) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.ReceiptHeaders.FirstOrDefault().ReceiptName) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.ReceiptName) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.ReceiptHeaders.FirstOrDefault().ReceiptComment) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.ReceiptComment) </span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-xs-12">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.ReceiptHeaders.FirstOrDefault().ReceiptInfos.FirstOrDefault().FeeDistributionDescription)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.ReceiptHeaders.FirstOrDefault().ReceiptInfos.FirstOrDefault().FeeDistributionCategory)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.ReceiptHeaders.FirstOrDefault().ReceiptInfos.FirstOrDefault().Amount)
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var infoItem in item.ReceiptInfos)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => infoItem.FeeDistributionDescription)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => infoItem.FeeDistributionCategory)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => infoItem.Amount)
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p class="empty-results">
+        <span class="label label-info label-small">No receipt records found for the specified application</span>
+    </p>
+}

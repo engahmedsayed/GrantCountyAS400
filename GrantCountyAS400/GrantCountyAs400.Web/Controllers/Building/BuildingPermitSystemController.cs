@@ -60,9 +60,10 @@ namespace GrantCountyAs400.Web.Controllers.Building
             (ViewBag.PermitDetailViewName, ViewBag.PermitDetailViewModel) = GetPermitDetail(id, entity.PermitCode);
             ViewBag.ValuationAndFeesViewModel = GetValuationAndFees(id, viewmodel.BasicInfo.ApplicationYear, viewmodel.BasicInfo.ApplicationNumber);
 
-            // load inspections & Conditions data.
+            // load inspections & Conditions & receipts data.
             ViewBag.Inspections = GetInspections(id);
             ViewBag.Conditions = GetConditions(id);
+            ViewBag.Receipts = GetReceiptsReport(id);
 
             return View(viewmodel);
         }
@@ -141,6 +142,17 @@ namespace GrantCountyAs400.Web.Controllers.Building
         {
             var conditions = _buildingModuleRepository.GetConditionsByBuildingPermitSystemId(id);
             return Mapper.Map<IEnumerable<BuildingCondition>, IEnumerable<BuildingConditionViewModel>>(conditions).ToList();
+        }
+
+        private BuildingReceiptsReportViewModel GetReceiptsReport(int id)
+        {
+            var result = new BuildingReceiptsReportViewModel();
+
+            var (receipts, fees) = _buildingModuleRepository.GetReceiptHeadersAndFeesByBuildingPermitSystemId(id);
+            result.ReceiptHeaders = Mapper.Map<IEnumerable<ReceiptHeader>, IEnumerable<ReceiptHeaderViewModel>>(receipts).ToList();
+            result.Fees = Mapper.Map<IEnumerable<BuildingApplicationFee>, IEnumerable<BuildingApplicationFeeViewModel>>(fees).ToList();
+
+            return result;
         }
     }
 }
