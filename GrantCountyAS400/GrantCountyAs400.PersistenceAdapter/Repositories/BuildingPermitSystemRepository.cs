@@ -326,10 +326,12 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          on new { appf.ApplicationYear, appf.ApplicationNumber } equals new { bldg.ApplicationYear, bldg.ApplicationNumber }
                          join appv in _context.BldgapplicationValues
                          on new { appf.ApplicationYear, appf.ApplicationNumber } equals new { appv.ApplicationYear, appv.ApplicationNumber }
+                         into appvJoin 
+                         from appvDetail in appvJoin.DefaultIfEmpty()
                          where bldg.Id == id &&
                                bldg.ApplicationYear == applicationYear &&
                                bldg.ApplicationNumber == applicationNumber
-                         select new ValuationAndFeesRecord { Appv = appv, Appf = appf, Bldg = bldg }).ToList();
+                         select new ValuationAndFeesRecord { Appv = appvDetail, Appf = appf, Bldg = bldg }).ToList();
 
             return ValuationAndFeesMapper.Map(query);
         }

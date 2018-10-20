@@ -15,9 +15,12 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
               GetFeesAmount(valuationAndFeesClass, "plrvw"),
               GetFeesAmount(valuationAndFeesClass, "plmb"),
               GetFeesAmount(valuationAndFeesClass, "mech"),
+              GetFeesAmount(valuationAndFeesClass, "grad"),
+              GetFeesAmount(valuationAndFeesClass,"demo"),
               GetFeesAmount(valuationAndFeesClass, "bidfe"),
               GetFeesAmount(valuationAndFeesClass, "bidpr"),
               GetFeesAmount(valuationAndFeesClass, "stbcd"),
+              GetFeesAmount(valuationAndFeesClass, "fire"),
               GetFeesAmount(valuationAndFeesClass, "othrb"));
             return result;
         }

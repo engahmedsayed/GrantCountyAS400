@@ -18,17 +18,24 @@ namespace GrantCountyAs400.Domain.Building
 
         public decimal? AssignMechanicalFees { get;}
 
+        public decimal? AssignGradingFees { get; }
+
+        public decimal? AssignDemolitionFees { get;}
+
         public decimal? AssignBidPermitFee { get;}
 
         public decimal? AssignBidPlanReview { get;}
 
         public decimal? AssignBidBuildingCodeFee { get;}
 
+        public decimal? AssignFireMarshalFees { get; }
+
         public decimal? AssignOtherFees { get;}
 
         public ValuationAndFees(decimal? extendedAmountTotal, decimal? extendedValue, decimal? assignStructNanNodFees,
                                 decimal? assignPlanReviewFee, decimal? assignPlumbingFees, decimal? assignMechanicalFees,
-                                decimal? assignBidPermitFee, decimal? assignBidPlanReview, decimal? assignBidBuildingCodeFee,
+                                decimal? assignGradingFees, decimal? assignDemolitionFees, decimal? assignBidPermitFee, 
+                                decimal? assignBidPlanReview, decimal? assignBidBuildingCodeFee, decimal? assignFireMarshalFees, 
                                 decimal? assignOtherFees)
         {
             ExtendedAmountTotal = extendedAmountTotal;
@@ -37,9 +44,12 @@ namespace GrantCountyAs400.Domain.Building
             AssignPlanReviewFee = assignPlanReviewFee;
             AssignPlumbingFees = assignPlumbingFees;
             AssignMechanicalFees = assignMechanicalFees;
+            AssignGradingFees = assignGradingFees;
+            AssignDemolitionFees = assignDemolitionFees;
             AssignBidPermitFee = assignBidPermitFee;
             AssignBidPlanReview = assignBidPlanReview;
             AssignBidBuildingCodeFee = assignBidBuildingCodeFee;
+            AssignFireMarshalFees = assignFireMarshalFees;
             AssignOtherFees = assignOtherFees;
         }
     }
