@@ -82,9 +82,19 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          into mdiaEngineerJoin
                          from mdiaEngineerRecord in mdiaEngineerJoin.DefaultIfEmpty()
                          join plap in _context.BldgplanningApproval
-                         on new { bldgpermit.ApplicationYear, bldgpermit.ApplicationNumber } equals new { plap.ApplicationYear, plap.ApplicationNumber }
+                         on new { bldgpermit.ApplicationYear, bldgpermit.ApplicationNumber }
+                         equals new { plap.ApplicationYear, plap.ApplicationNumber }
                          into plapJoin
                          from plapRecord in plapJoin.DefaultIfEmpty()
+                         join rpmas in _context.AsmtrealPropertyAssessedValueMaster
+                         on  bldgpermit.AssessorParcelNumber
+                         equals  rpmas.ParcelNumber
+                         into rpmasJoin
+                         from rpmasRecord in rpmasJoin.DefaultIfEmpty()
+                         join nName in _context.AsmtmasterNameAddress
+                         on rpmasRecord.TitleOwnerCode equals nName.Name
+                         into nNameJoin
+                         from nNameRecord in nNameJoin.DefaultIfEmpty()
                          where bldgpermit.Id == id
                          select BuildingPermitSystemMapper.Map(bldgpermit,
                                                                preliminaryNames,
@@ -98,7 +108,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                                                mdiaArchitectRecord,
                                                                mdiaEngineerRecord,
                                                                bldgContractor,
-                                                               plapRecord)).SingleOrDefault();
+                                                               plapRecord,rpmasRecord,nNameRecord)).SingleOrDefault();
 
             return query;
         }

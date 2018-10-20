@@ -37,12 +37,15 @@ namespace GrantCountyAs400.Domain.Building
 
         public PlanningApproval PlanningApproval { get; }
 
+        public AssessorApproval AssessorApproval { get;}
+
         public BuildingPermitSystemDetails(string applicantLastName, string applicantFirstName, string permitCode, string processedForJurisdiction, DateTime applicationDate,
             string applicationUserId, string applicantBusinessName, string addressLine1, string addressLine2, string city, string state, string zipCode, decimal phoneNumber,
             decimal preliminaryParcelNumber, decimal assessorParcelNumber, string additionalInformation, string parkInformation, string permitDescription,
             string processedForJurisdictionShortDepartmentName, BuildingPermitSystemBasicInfo basicInfo, BuildingPermitSystemApplicantDetails applicantDetails,
             BuildingValueMasterNameInfo preliminaryValueMasterName, BuildingValueMasterNameInfo asessorValueMasterName, BuildingSitusAddressInfo situsAddress,
-            BuildingPermitSystemApprovalStatusInfo approvalStatus,PlanningApproval planningApproval)
+            BuildingPermitSystemApprovalStatusInfo approvalStatus,PlanningApproval planningApproval,
+            AssessorApproval assessorApproval)
         {
             ApplicantLastName = applicantLastName;
             ApplicantFirstName = applicantFirstName;
@@ -73,6 +76,7 @@ namespace GrantCountyAs400.Domain.Building
             SitusAddress = situsAddress;
             ApprovalStatus = approvalStatus;
             PlanningApproval = planningApproval;
+            AssessorApproval = assessorApproval;
         }
     }
 
@@ -261,5 +265,40 @@ namespace GrantCountyAs400.Domain.Building
             UserID = userID;
             ChangeDate = changeDate;
         }
+    }
+
+    public class AssessorApproval
+    {
+        public string ApplicantProjectDescription { get; }
+
+        public string Comments { get; }
+        public string ApprovedBy { get; }
+
+        public string UserID { get; }
+
+        public DateTime? ChangeDate { get; }
+
+        public decimal? AssessorParcelNumber { get; }
+
+        public string Name { get;}
+
+        public string Description1 { get;}
+
+        public string Description2 { get; }
+
+        public AssessorApproval(string applicantProjectDescription, string comments, string approvedBy, string userID,
+            DateTime? changeDate, decimal? assessorParcelNumber, string name, string description1, string description2)
+        {
+            ApplicantProjectDescription = applicantProjectDescription;
+            Comments = comments;
+            ApprovedBy = approvedBy;
+            UserID = userID;
+            ChangeDate = changeDate;
+            AssessorParcelNumber = assessorParcelNumber;
+            Name = name;
+            Description1 = description1;
+            Description2 = description2;
+        }
+
     }
 }

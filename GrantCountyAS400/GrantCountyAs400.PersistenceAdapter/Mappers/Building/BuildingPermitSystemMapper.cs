@@ -43,13 +43,15 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                                                         BldgmobileHomeDealersInstallersArchitects mdia,
                                                         BldgmobileHomeDealersInstallersArchitects mdiaBusinessEngineer,
                                                         Bldgcontractors bldgContractor,
-                                                        BldgplanningApproval plap) =>
+                                                        BldgplanningApproval plap,AsmtrealPropertyAssessedValueMaster rpmas,
+                                                        AsmtmasterNameAddress nName) =>
             new BuildingPermitSystemDetails(bldgpermit.ApplicantLastName, bldgpermit.ApplicantFirstName, bldgpermit.PermitCode.Trim(), bldgpermit.ProcessedForJurisdiction,
                 bldgpermit.ApplicationDate.Value, bldgpermit.ApplicationUserId, bldgpermit.ApplicantBusinessName, bldgpermit.AddressLine1, bldgpermit.AddressLine2,
                 bldgpermit.City, bldgpermit.State, bldgpermit.ZipCode, bldgpermit.PhoneNumber.Value, bldgpermit.PreliminaryParcelNumber.Value,
                 bldgpermit.AssessorParcelNumber.Value, bldgpermit.AdditionalInformation, bldgpermit.ParkInformation, perm.PermitDescription, processedJuri.ShortDepartmentName,
                 MapToBasicInfo(bldgpermit, juri, dept), MapToApplicantDetails(bldgpermit, mdia, mdiaBusinessEngineer, bldgContractor), Map(preliminaryValueMaster),
-                Map(assessorValueMaster), Map(situs, cityCode), MapToApprovalStatus(bldgpermit), MapToPlanningApproval(plap, bldgpermit));
+                Map(assessorValueMaster), Map(situs, cityCode),
+                MapToApprovalStatus(bldgpermit), MapToPlanningApproval(plap, bldgpermit),MaptToAssessorApproval(rpmas,nName,bldgpermit));
 
         private static BuildingPermitSystemBasicInfo MapToBasicInfo(BldgpermitApplicationMaster bldgpermit,
                                                                     Bldgjurisdictions juri,
@@ -96,5 +98,11 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
             new PlanningApproval(appm.ApplicantProjectDescription, plap.ZoneCode, plap.FrontPropertySetback, plap.SideFlankingSetback,
                                  plap.SidePropertySetback, plap.BackPropertySetback, plap.FloodZone, plap.FloodZoneMapNumber,
                                  plap.LUpermitRequired, plap.Comments, plap.ApprovedBy, plap.UserId, plap.ChangeDate);
+
+        private static AssessorApproval MaptToAssessorApproval(AsmtrealPropertyAssessedValueMaster rpmas,
+                                                        AsmtmasterNameAddress nName, BldgpermitApplicationMaster appm) =>
+            new AssessorApproval(appm?.ApplicantProjectDescription, string.Empty, string.Empty,
+                                 rpmas?.NameChangeId, rpmas?.ChangeDate, appm?.AssessorParcelNumber, nName?.Name,
+                                 rpmas?.Description1, rpmas?.Description2);
     }
 }
