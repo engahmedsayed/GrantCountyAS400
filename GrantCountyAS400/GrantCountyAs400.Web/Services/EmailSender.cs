@@ -19,7 +19,7 @@ namespace GrantCountyAs400.Web.Services
         {
             MailMessage msg = new MailMessage();
             msg.To.Add(new MailAddress(email, subject));
-            msg.From = new MailAddress(_configuration.GetSection("AppSettings")["SupportEmail"], _configuration.GetSection("AppSettings")["SupportEmailpassword"]);
+            msg.From = new MailAddress(_configuration.GetSection("AppSettings")["SupportEmail"], _configuration.GetSection("AppSettings")["SupportEmail"]);
             msg.Subject = "Reset password request";
             msg.Body = message;
             msg.IsBodyHtml = true;

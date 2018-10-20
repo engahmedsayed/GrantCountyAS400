@@ -42,7 +42,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                                       strd.PlansAnalystReviewDescription, strd.SprinklerSystemRequired, strd.SprinklerSystemDescription,
                                       strd.AlarmSystemRequired, strd.AlarmSystemDescription, strd.SpecialInspectionRequired,
                                       strd.SpecialInspectionDescription, strd.PermitIncludePlumbing, strd.PermitIncludeMechanical,
-                                      strd.FireDistrictCode, fdst.ShortFireDistrictName, strd.FireFlowAlreadyProvided, strd.AdditionalFireFlowRequired,
+                                      strd.FireDistrictCode, fdst.LongFireDistrictName, strd.FireFlowAlreadyProvided, strd.AdditionalFireFlowRequired,
                                       strd.AmountOfFireFlowRequired, strd.BldgDeptSetback, strd.FireMarshalSetback, apcnConditionRecord == null,
                                        apinConditionRecord == null, appv?.ExtendedValue, new PermitApprovedInfo(strd.BldgDeptApprovedBy,
                                                                                                                 strd.BldgDepDateApproved,

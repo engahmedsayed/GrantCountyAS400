@@ -75,10 +75,10 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 
         public string FireDistrictCode { get; set; }
 
-        public string ShortFireDistrictName { get; set; }
+        public string LongFireDistrictName { get; set; }
 
         [Display(Name ="Fire Dist")]
-        public string FireDistrictCodeDisplay => FireDistrictCode + " " + ShortFireDistrictName;
+        public string FireDistrictCodeDisplay => FireDistrictCode + " " + LongFireDistrictName;
 
         [Display(Name ="Fire Flow: Provided")]
         public string FireFlowAlreadyProvided { get; set; }

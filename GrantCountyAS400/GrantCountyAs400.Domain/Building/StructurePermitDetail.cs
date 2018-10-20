@@ -57,9 +57,9 @@ namespace GrantCountyAs400.Domain.Building
 
         public string FireDistrictCode { get;   }
 
-        public string ShortFireDistrictName { get;   }
+        public string LongFireDistrictName { get;   }
 
-        public string FireDistrictCodeDisplay => FireDistrictCode + " " + ShortFireDistrictName;
+        public string FireDistrictCodeDisplay => FireDistrictCode + " " + LongFireDistrictName;
 
         public string FireFlowAlreadyProvided { get;   }
 
@@ -85,7 +85,7 @@ namespace GrantCountyAs400.Domain.Building
                                      string sprinklerSystemRequired, string sprinklerSyustemDescription,
                                      string alarmSystemRequired, string alarmSystemDescription, string specialInspectionRequired,
                                      string specialInspectionDescription, string permitIncludePlumbing,
-                                     string permitIncludeMechanical, string fireDistrictCode, string shortFireDistrictName,
+                                     string permitIncludeMechanical, string fireDistrictCode, string longFireDistrictName,
                                      string fireFlowAlreadyProvided, string additionalFireFlowRequired,
                                      string amountOfFireFlowRequired, decimal? bldgDeptSetback, decimal? fireMarshalSetback,
                                      bool isConditionExistInApcn, bool isConditionExistInApin, decimal? extendedValue,
@@ -112,7 +112,7 @@ namespace GrantCountyAs400.Domain.Building
             PermitIncludePlumbing = permitIncludePlumbing;
             PermitIncludeMechanical = permitIncludeMechanical;
             FireDistrictCode = fireDistrictCode;
-            ShortFireDistrictName = shortFireDistrictName;
+            LongFireDistrictName = longFireDistrictName;
             FireFlowAlreadyProvided = fireFlowAlreadyProvided;
             AdditionalFireFlowRequired = additionalFireFlowRequired;
             AmountOfFireFlowRequired = amountOfFireFlowRequired;
