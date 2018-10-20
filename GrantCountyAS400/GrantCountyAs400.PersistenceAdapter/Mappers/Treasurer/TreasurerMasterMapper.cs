@@ -5,9 +5,9 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Treasurer
 {
     internal static class TreasurerMasterMapper
     {
-        internal static TreasurerMaster Map(TreasallPropertyMaster propertyMaster, ASMTValueMasterNameView valueMaster)
-            => new TreasurerMaster(
-                propertyMaster.Id, propertyMaster.ParcelNumber, propertyMaster.ParentParcelNumber, propertyMaster.TaxpayerCode, propertyMaster.TitleOwnerCode,
-                propertyMaster.TaxCodeArea, propertyMaster.LandUseCode, valueMaster.TaxpayerName);
+        internal static TreasurerMaster Map(TreasPropertyMasterInfoView treasurerProperty)
+        => new TreasurerMaster(
+                treasurerProperty.Id, treasurerProperty.ParcelNumber, treasurerProperty.ParentParcelNumber, treasurerProperty.TaxpayerCode, treasurerProperty.TitleOwnerCode,
+                treasurerProperty.TaxCodeArea, treasurerProperty.LandUseCode, treasurerProperty.TaxpayerName);
     }
 }

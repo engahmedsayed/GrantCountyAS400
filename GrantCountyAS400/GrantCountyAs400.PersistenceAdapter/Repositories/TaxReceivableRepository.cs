@@ -7,11 +7,11 @@ using System.Linq;
 
 namespace GrantCountyAs400.PersistenceAdapter.Repositories
 {
-    public class TreasurerMasterRepository : ITreasurerMasterRepository
+    public class TaxReceivableRepository : ITaxReceivableRepository
     {
         private readonly GrantCountyDbContext _context;
 
-        public TreasurerMasterRepository(GrantCountyDbContext dbContext)
+        public TaxReceivableRepository(GrantCountyDbContext dbContext)
         {
             _context = dbContext;
         }
@@ -24,11 +24,9 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
         {
             List<TreasurerMaster> results = new List<TreasurerMaster>();
 
-            var query = (from treasurerProperty in _context.TreasallPropertyMaster
-                         join valueMaster in _context.ASMTValueMasterNameView
-                         on new { treasurerProperty.TaxpayerCode, treasurerProperty.ParcelNumber } equals new { valueMaster.TaxpayerCode, valueMaster.ParcelNumber }
-                         where ((parcelNumber <= 0) || valueMaster.ParcelNumber == parcelNumber)
-                         select TreasurerMasterMapper.Map(treasurerProperty, valueMaster));
+            var query = (from treasurerProperty in _context.TreasPropertyMasterInfoView
+                         where ((parcelNumber <= 0) || treasurerProperty.ParcelNumber == parcelNumber)
+                         select TreasurerMasterMapper.Map(treasurerProperty));
 
             if (pageNumber > 0)
             {

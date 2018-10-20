@@ -11,9 +11,9 @@ namespace GrantCountyAs400.Web.Controllers.Treasurer
     [Route("tax-receivable")]
     public class TaxReceivableController : Controller
     {
-        private readonly ITreasurerMasterRepository _treasurerMasterRepository;
+        private readonly ITaxReceivableRepository _treasurerMasterRepository;
 
-        public TaxReceivableController(ITreasurerMasterRepository treasurerMasterRepository)
+        public TaxReceivableController(ITaxReceivableRepository treasurerMasterRepository)
         {
             _treasurerMasterRepository = treasurerMasterRepository;
         }
