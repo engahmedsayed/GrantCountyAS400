@@ -13,9 +13,15 @@ namespace GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceivable
         public string TaxpayerCode { get; set; }
         [Display(Name = "Title Owner Code")]
         public string TitleOwnerCode { get; set; }
+        [Display(Name = "Tax Code Area")]
+        [DisplayFormat(DataFormatString = "{0:n0}")]
         public decimal? TaxCodeArea { get; set; }
         public decimal? LandUseCode { get; set; }
         [Display(Name = "Tax Payer Name")]
         public string TaxpayerName { get; set; }
+        [Display(Name = "Title Owner")]
+        public string TitleOwnerName { get; set; }
+
+        public string ParcelTypeDisplay => (ParcelNumber < 9_999_999) ? "P" : "R";
     }
 }

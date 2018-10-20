@@ -11,9 +11,10 @@
         public decimal? LandUseCode { get; }
 
         public string TaxpayerName { get; }
+        public string TitleOwnerName { get; }
 
-        public TaxReceivable(int id, decimal? parcelNumber, decimal? parentParcelNumber, string taxpayerCode, string titleOwnerCode, decimal? taxCodeArea, 
-            decimal? landUseCode, string taxpayerName)
+        public TaxReceivable(int id, decimal? parcelNumber, decimal? parentParcelNumber, string taxpayerCode, string titleOwnerCode, decimal? taxCodeArea,
+            decimal? landUseCode, string taxpayerName, string titleOwnerName)
         {
             Id = id;
             ParcelNumber = parcelNumber;
@@ -23,6 +24,7 @@
             TaxCodeArea = taxCodeArea;
             LandUseCode = landUseCode;
             TaxpayerName = taxpayerName;
+            TitleOwnerName = titleOwnerName;
         }
     }
 }
