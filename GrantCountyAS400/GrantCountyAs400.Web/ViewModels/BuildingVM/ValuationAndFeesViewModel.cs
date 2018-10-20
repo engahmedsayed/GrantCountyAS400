@@ -14,7 +14,7 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         [Display(Name ="Assign Valuation")]
         public decimal? ExtendedValue { get; set; }
 
-        [Display(Name ="Assign Struct/Nan/Nod Fees")]
+        [Display(Name = "Assign Strict/Man/Mod Fees")]
         public decimal? AssignStructNanNodFees { get; set; }
 
         [Display(Name ="Assign Plan Review Fee")]
@@ -32,7 +32,7 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         [Display(Name ="Assign Bid Plan Review")]
         public decimal? AssignBidPlanReview { get; set; }
 
-        [Display(Name ="Assign Bid Building Code Fee")]
+        [Display(Name = "Assign State Building Code Fee")]
         public decimal? AssignBidBuildingCodeFee { get; set; }
 
         [Display(Name ="Assign Other Fees")]
