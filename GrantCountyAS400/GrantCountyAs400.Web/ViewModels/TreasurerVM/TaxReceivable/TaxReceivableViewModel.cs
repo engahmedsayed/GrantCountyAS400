@@ -2,7 +2,7 @@
 
 namespace GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceivable
 {
-    public class TreasurerMasterViewModel
+    public class TaxReceivableViewModel
     {
         public int Id { get; set; }
         [Display(Name = "Parcel")]

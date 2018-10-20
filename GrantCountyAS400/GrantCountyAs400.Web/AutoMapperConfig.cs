@@ -104,7 +104,7 @@ namespace GrantCountyAs400.Web
 
                 #region Treasurer
 
-                cfg.CreateMap<TreasurerMaster, TreasurerMasterViewModel>();
+                cfg.CreateMap<TaxReceivable, TaxReceivableViewModel>();
 
                 #endregion Treasurer
             });

@@ -11,22 +11,22 @@ namespace GrantCountyAs400.Web.Controllers.Treasurer
     [Route("tax-receivable")]
     public class TaxReceivableController : Controller
     {
-        private readonly ITaxReceivableRepository _treasurerMasterRepository;
+        private readonly ITaxReceivableRepository _taxReceivableRepository;
 
-        public TaxReceivableController(ITaxReceivableRepository treasurerMasterRepository)
+        public TaxReceivableController(ITaxReceivableRepository taxReceivableRepository)
         {
-            _treasurerMasterRepository = treasurerMasterRepository;
+            _taxReceivableRepository = taxReceivableRepository;
         }
 
         [HttpGet]
         public IActionResult Index(TaxReceivableFilterViewModel filter, int pageNumber = 1)
         {
             var pagingInfo = new PagingInfo() { PageNumber = pageNumber };
-            var results = _treasurerMasterRepository.GetAll(filter.ParcelNumber, out int resultCount, pageNumber, AppSettings.PageSize).ToList();
+            var results = _taxReceivableRepository.GetAll(filter.ParcelNumber, out int resultCount, pageNumber, AppSettings.PageSize).ToList();
 
             pagingInfo.Total = resultCount;
             ViewBag.FilterViewModel = filter;
-            return View(results.ToMappedPagedList<TreasurerMaster, TreasurerMasterViewModel>(pagingInfo));
+            return View(results.ToMappedPagedList<TaxReceivable, TaxReceivableViewModel>(pagingInfo));
         }
     }
 }

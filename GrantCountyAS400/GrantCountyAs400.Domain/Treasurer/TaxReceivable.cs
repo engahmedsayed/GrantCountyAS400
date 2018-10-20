@@ -1,6 +1,6 @@
 ﻿namespace GrantCountyAs400.Domain.Treasurer
 {
-    public class TreasurerMaster
+    public class TaxReceivable
     {
         public int Id { get; }
         public decimal? ParcelNumber { get; }
@@ -12,7 +12,7 @@
 
         public string TaxpayerName { get; }
 
-        public TreasurerMaster(int id, decimal? parcelNumber, decimal? parentParcelNumber, string taxpayerCode, string titleOwnerCode, decimal? taxCodeArea, 
+        public TaxReceivable(int id, decimal? parcelNumber, decimal? parentParcelNumber, string taxpayerCode, string titleOwnerCode, decimal? taxCodeArea, 
             decimal? landUseCode, string taxpayerName)
         {
             Id = id;

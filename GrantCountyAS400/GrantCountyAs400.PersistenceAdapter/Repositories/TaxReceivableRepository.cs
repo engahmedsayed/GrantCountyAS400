@@ -16,17 +16,17 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             _context = dbContext;
         }
 
-        public IEnumerable<TreasurerMaster> GetAll(
+        public IEnumerable<TaxReceivable> GetAll(
             decimal parcelNumber,
             out int resultCount,
             int pageNumber = 1,
             int pageSize = 50)
         {
-            List<TreasurerMaster> results = new List<TreasurerMaster>();
+            List<TaxReceivable> results = new List<TaxReceivable>();
 
             var query = (from treasurerProperty in _context.TreasPropertyMasterInfoView
                          where ((parcelNumber <= 0) || treasurerProperty.ParcelNumber == parcelNumber)
-                         select TreasurerMasterMapper.Map(treasurerProperty));
+                         select TaxReceivableMapper.Map(treasurerProperty));
 
             if (pageNumber > 0)
             {

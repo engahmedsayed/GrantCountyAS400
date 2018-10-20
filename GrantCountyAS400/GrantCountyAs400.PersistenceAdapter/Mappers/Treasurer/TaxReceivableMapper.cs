@@ -3,10 +3,10 @@ using GrantCountyAs400.PersistenceAdapter.Models;
 
 namespace GrantCountyAs400.PersistenceAdapter.Mappers.Treasurer
 {
-    internal static class TreasurerMasterMapper
+    internal static class TaxReceivableMapper
     {
-        internal static TreasurerMaster Map(TreasPropertyMasterInfoView treasurerProperty)
-        => new TreasurerMaster(
+        internal static TaxReceivable Map(TreasPropertyMasterInfoView treasurerProperty)
+        => new TaxReceivable(
                 treasurerProperty.Id, treasurerProperty.ParcelNumber, treasurerProperty.ParentParcelNumber, treasurerProperty.TaxpayerCode, treasurerProperty.TitleOwnerCode,
                 treasurerProperty.TaxCodeArea, treasurerProperty.LandUseCode, treasurerProperty.TaxpayerName);
     }
