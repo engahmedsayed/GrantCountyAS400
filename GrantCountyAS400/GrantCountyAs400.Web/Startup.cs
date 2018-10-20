@@ -1,6 +1,7 @@
 using GrantCountyAs400.Domain.Accounting.Repository;
 using GrantCountyAs400.Domain.Assessment.Repository;
 using GrantCountyAs400.Domain.Building.Repository;
+using GrantCountyAs400.Domain.Treasurer.Repository;
 using GrantCountyAs400.PersistenceAdapter.Models;
 using GrantCountyAs400.PersistenceAdapter.Repositories;
 using GrantCountyAs400.PersistenceAdapter.SecurityModule;
@@ -55,7 +56,8 @@ namespace GrantCountyAs400.Web
             services.AddScoped<IBuildingPermitsRepository, BuildingPermitsRepository>();
             services.AddScoped<ILegalDocumentRepository, LegalDocumentRepository>();
             services.AddScoped<IBuildingPermitSystemRepository, BuildingPermitSystemRepository>();
-            
+            services.AddScoped<ITreasurerMasterRepository, TreasurerMasterRepository>();
+
 
             services.AddAuthorization(options =>
             {
