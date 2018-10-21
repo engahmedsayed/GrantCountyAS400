@@ -119,22 +119,39 @@
                         </div>
                     </div>
                 </div>
-                @if(Model.ApprovalStatus!=null && Model.ApprovalStatus.Planning.Date.HasValue && Model.ApprovalStatus.Planning.Required.ToLower() == "y")
+                @if (Model.ApprovalStatus != null && Model.ApprovalStatus.Planning.Date.HasValue && Model.ApprovalStatus.Planning.Required.ToLower() == "y")
                 {
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#planningApproval">
-                                Planning Approval
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="planningApproval" class="panel-collapse collapse in">
-                        <div class="panel-body">
-                            <partial name="_PlanningApproval" for="@Model.PlanningApproval" />
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#planningApproval">
+                                    Planning Approval
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="planningApproval" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <partial name="_PlanningApproval" for="@Model.PlanningApproval" />
+                            </div>
                         </div>
                     </div>
-                </div>
+                }
+                @if (Model.ApprovalStatus != null && Model.ApprovalStatus.Assessor.Date.HasValue && Model.ApprovalStatus.Assessor.Required.ToLower() == "y")
+                {
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#assessorApproval">
+                                    Assessor Approval
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="assessorApproval" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <partial name="_AssessorApproval" for="@Model.AssessorApproval" />
+                            </div>
+                        </div>
+                    </div>
                 }
                 @if (!string.IsNullOrWhiteSpace(ViewBag.PermitDetailViewName))
                 {

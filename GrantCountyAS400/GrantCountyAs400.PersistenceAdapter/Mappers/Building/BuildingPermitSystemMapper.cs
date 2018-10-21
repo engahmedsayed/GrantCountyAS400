@@ -99,10 +99,10 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                                  plap.SidePropertySetback, plap.BackPropertySetback, plap.FloodZone, plap.FloodZoneMapNumber,
                                  plap.LUpermitRequired, plap.Comments, plap.ApprovedBy, plap.UserId, plap.ChangeDate);
 
-        private static AssessorApproval MaptToAssessorApproval(AsmtrealPropertyAssessedValueMaster rpmas,
+        public static AssessorApproval MaptToAssessorApproval(AsmtrealPropertyAssessedValueMaster rpmas, BldgassessorApproval assessorApproval,
                                                         AsmtmasterNameAddress nName, BldgpermitApplicationMaster appm) =>
-            new AssessorApproval(appm?.ApplicantProjectDescription, string.Empty, string.Empty,
-                                 rpmas?.NameChangeId, rpmas?.ChangeDate, appm?.AssessorParcelNumber, nName?.Name,
+            new AssessorApproval(appm?.ApplicantProjectDescription, assessorApproval?.Comments, assessorApproval?.ApprovedBy,
+                                 assessorApproval?.UserId, assessorApproval?.ChangeDate, appm?.AssessorParcelNumber, nName?.Name,
                                  rpmas?.Description1, rpmas?.Description2);
     }
 }

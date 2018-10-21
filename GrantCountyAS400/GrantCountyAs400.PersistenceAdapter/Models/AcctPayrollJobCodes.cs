@@ -5,7 +5,6 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
 {
     public partial class AcctPayrollJobCodes
     {
-        public int Id { get; set; }
         public decimal? Group { get; set; }
         public string JobCode { get; set; }
         public string JobTitle { get; set; }
@@ -16,5 +15,6 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
         public string Category { get; set; }
         public string Experience { get; set; }
         public decimal? Prjcmt { get; set; }
+        public int Id { get; set; }
     }
 }

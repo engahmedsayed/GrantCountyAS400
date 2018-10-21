@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -59,6 +59,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
         public virtual DbSet<BldgapplicationInspections> BldgapplicationInspections { get; set; }
         public virtual DbSet<BldgapplicationNotes> BldgapplicationNotes { get; set; }
         public virtual DbSet<BldgapplicationValues> BldgapplicationValues { get; set; }
+        public virtual DbSet<BldgassessorApproval> BldgassessorApproval { get; set; }
         public virtual DbSet<Bldgcontractors> Bldgcontractors { get; set; }
         public virtual DbSet<BldgdemolitionPermitDetail> BldgdemolitionPermitDetail { get; set; }
         public virtual DbSet<Bldgdepartments> Bldgdepartments { get; set; }
@@ -2991,6 +2992,61 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                 entity.Property(e => e.SquareFeet).HasColumnType("numeric(7, 0)");
 
                 entity.Property(e => e.TableNumberSectLineSeq).HasColumnType("numeric(6, 0)");
+            });
+
+            modelBuilder.Entity<BldgassessorApproval>(entity =>
+            {
+                entity.ToTable("BLDGAssessorApproval");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.AddendumNumber).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.ApplicationNumber).HasColumnType("numeric(5, 0)");
+
+                entity.Property(e => e.ApplicationYear).HasColumnType("numeric(4, 0)");
+
+                entity.Property(e => e.ApprovedBy)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ApprovedByAssr)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ChangeDate).HasColumnType("date");
+
+                entity.Property(e => e.ChangeDateAssr).HasColumnType("date");
+
+                entity.Property(e => e.CheckedYearMonth).HasColumnType("numeric(6, 0)");
+
+                entity.Property(e => e.Comments)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DepartmentCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.JurisdictionCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PercentComplete).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.RecordStatus)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserId)
+                    .HasColumnName("UserID")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserIdassr)
+                    .HasColumnName("UserIDAssr")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Bldgcontractors>(entity =>

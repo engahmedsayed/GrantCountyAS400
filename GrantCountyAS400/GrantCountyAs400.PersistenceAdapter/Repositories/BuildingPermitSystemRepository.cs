@@ -128,6 +128,37 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                                                            planningApproval.bldgpermit));
 
                 }
+                if(query.ApprovalStatus.Assessor != null &&
+                    query.ApprovalStatus.Assessor.Required.ToLower() == "y" &&
+                    query.ApprovalStatus.Assessor.Date.HasValue)
+                {
+                    var assessorApproval = (from bldgpermit in _context.BldgpermitApplicationMaster
+                                            join assessor in _context.BldgassessorApproval
+                                            on new { bldgpermit.ApplicationYear, bldgpermit.ApplicationNumber }
+                                            equals new { assessor.ApplicationYear, assessor.ApplicationNumber }
+                                            into assessorJoin
+                                            from assessorRecord in assessorJoin.DefaultIfEmpty()
+                                            join rpmas in _context.AsmtrealPropertyAssessedValueMaster
+                                            on bldgpermit.AssessorParcelNumber equals rpmas.ParcelNumber
+                                            into rpmasJoin
+                                            from rpmasRecord in rpmasJoin.DefaultIfEmpty()
+                                            join nName in _context.AsmtmasterNameAddress
+                                            on rpmasRecord.TitleOwnerCode equals nName.NameCode
+                                            into nNameJoin
+                                            from nNameRecord in nNameJoin.DefaultIfEmpty()
+                                            where bldgpermit.Id == id
+                                            select new
+                                            {
+                                                bldgpermit = bldgpermit,
+                                                assessorRecord = assessorRecord,
+                                                rpmasRecord = rpmasRecord,
+                                                nNameRecord = nNameRecord
+                                            }).SingleOrDefault();
+                    query.SetAssessorApproval(BuildingPermitSystemMapper.MaptToAssessorApproval(assessorApproval.rpmasRecord,
+                                                                                                assessorApproval.assessorRecord,
+                                                                                                assessorApproval.nNameRecord,
+                                                                                                assessorApproval.bldgpermit));
+                }
             }
 
             return query;
