@@ -75,6 +75,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
         public virtual DbSet<BldgpermitCodes> BldgpermitCodes { get; set; }
         public virtual DbSet<BldgpermitsConditionsUserAuthority> BldgpermitsConditionsUserAuthority { get; set; }
         public virtual DbSet<BldgplanningApproval> BldgplanningApproval { get; set; }
+        public virtual DbSet<BldgpublicWorksApproval> BldgpublicWorksApproval { get; set; }
         public virtual DbSet<BldgplumbingPermitDetail> BldgplumbingPermitDetail { get; set; }
         public virtual DbSet<BldgstateClassifications> BldgstateClassifications { get; set; }
         public virtual DbSet<BldgstructureBuildingPermitDetail> BldgstructureBuildingPermitDetail { get; set; }
@@ -3196,7 +3197,6 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                     .HasMaxLength(45)
                     .IsUnicode(false);
             });
-
             modelBuilder.Entity<AsmtsenirCitizenExemptionRate>(entity =>
             {
                 entity.ToTable("ASMTSenirCitizenExemptionRate");
@@ -3552,7 +3552,6 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                     .HasMaxLength(10)
                     .IsUnicode(false);
             });
-
             modelBuilder.Entity<BldgmanufactureModularBuildingPermit>(entity =>
             {
                 entity.ToTable("BLDGManufactureModularBuildingPermit");
@@ -4509,7 +4508,6 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                     .HasMaxLength(6)
                     .IsUnicode(false);
             });
-
             modelBuilder.Entity<BldgplumbingPermitDetail>(entity =>
             {
                 entity.ToTable("BLDGPlumbingPermitDetail");
@@ -4568,6 +4566,46 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
 
                 entity.Property(e => e.RecordStatus)
                     .HasMaxLength(1)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<BldgpublicWorksApproval>(entity =>
+            {
+                entity.ToTable("BLDGPublicWorksApproval");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.AddendumNumber).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.ApplicationNumber).HasColumnType("numeric(5, 0)");
+
+                entity.Property(e => e.ApplicationYear).HasColumnType("numeric(4, 0)");
+
+                entity.Property(e => e.ApprovedBy)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ChangeDate).HasColumnType("date");
+
+                entity.Property(e => e.Comments)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DepartmentCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.JurisdictionCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecordStatus)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserId)
+                    .HasColumnName("UserID")
+                    .HasMaxLength(10)
                     .IsUnicode(false);
             });
 
@@ -4742,7 +4780,6 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                     .HasMaxLength(1)
                     .IsUnicode(false);
             });
-
             modelBuilder.Entity<TreasallPropertyArtreasurerComments>(entity =>
             {
                 entity.ToTable("TREASAllPropertyARTreasurerComments");

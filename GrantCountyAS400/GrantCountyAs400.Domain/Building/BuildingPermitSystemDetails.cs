@@ -39,6 +39,8 @@ namespace GrantCountyAs400.Domain.Building
 
         public AssessorApproval AssessorApproval { get; private set; }
 
+        public PublicWorkApproval PublicWorkApproval { get;private set; }
+
         public void SetPlanningApproval(PlanningApproval planningApproval)
         {
             PlanningApproval = planningApproval;
@@ -47,6 +49,11 @@ namespace GrantCountyAs400.Domain.Building
         public void SetAssessorApproval(AssessorApproval assessorApproval)
         {
             AssessorApproval = assessorApproval;
+        }
+
+        public void SetPublicWorkApproval(PublicWorkApproval publicWorkApproval)
+        {
+            PublicWorkApproval = publicWorkApproval;
         }
 
         public BuildingPermitSystemDetails(string applicantLastName, string applicantFirstName, string permitCode, string processedForJurisdiction, DateTime applicationDate,
@@ -86,6 +93,7 @@ namespace GrantCountyAs400.Domain.Building
             ApprovalStatus = approvalStatus;
             
         }
+
     }
 
     public class BuildingPermitSystemBasicInfo
@@ -306,6 +314,31 @@ namespace GrantCountyAs400.Domain.Building
             Name = name;
             Description1 = description1;
             Description2 = description2;
+        }
+
+    }
+
+    public class PublicWorkApproval
+    {
+        public string ApplicantProjectDescription { get; }
+
+        public string Comments { get; }
+        public string ApprovedBy { get; }
+
+        public string UserID { get; }
+
+        public DateTime? ChangeDate { get; }
+
+
+
+        public PublicWorkApproval(string applicantProjectDescription, string comments, string approvedBy, string userID,
+            DateTime? changeDate)
+        {
+            ApplicantProjectDescription = applicantProjectDescription;
+            Comments = comments;
+            ApprovedBy = approvedBy;
+            UserID = userID;
+            ChangeDate = changeDate;
         }
 
     }

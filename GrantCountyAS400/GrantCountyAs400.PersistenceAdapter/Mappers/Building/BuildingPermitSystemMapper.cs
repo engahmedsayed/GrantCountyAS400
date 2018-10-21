@@ -1,3 +1,4 @@
+using System;
 using GrantCountyAs400.Domain.Building;
 using GrantCountyAs400.PersistenceAdapter.Models;
 
@@ -104,5 +105,12 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
             new AssessorApproval(appm?.ApplicantProjectDescription, assessorApproval?.Comments, assessorApproval?.ApprovedBy,
                                  assessorApproval?.UserId, assessorApproval?.ChangeDate, appm?.AssessorParcelNumber, nName?.Name,
                                  rpmas?.Description1, rpmas?.Description2);
+
+        internal static PublicWorkApproval MapToPublicWorkApproval(BldgpermitApplicationMaster appm,
+            BldgpublicWorksApproval publicWorkRecord) =>
+            new PublicWorkApproval(appm?.ApplicantProjectDescription, publicWorkRecord?.Comments, publicWorkRecord?.ApprovedBy,
+                                 publicWorkRecord?.UserId, publicWorkRecord?.ChangeDate);
+
+
     }
 }

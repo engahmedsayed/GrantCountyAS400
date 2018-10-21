@@ -84,6 +84,7 @@ namespace GrantCountyAs400.Web
                 cfg.CreateMap<ApprovalStatusInfo, ApprovalStatusViewModel>();
                 cfg.CreateMap<PlanningApproval, BuildingPermitSystemPlanningApprovalViewModel>();
                 cfg.CreateMap<AssessorApproval, BuildingPermitSystemAssessorApprovalViewModel>();
+                cfg.CreateMap<PublicWorkApproval, BuildingPermitSystemPublicWorkApprovalViewModel>(); 
                 cfg.CreateMap<PermitApprovedInfo, PermitApprovedInfoViewModel>();
                 cfg.CreateMap<DemolitionPermit, DemolitionPermitViewModel>();
                 cfg.CreateMap<OtherPermitDetail, OtherPermitDetailViewModel>();
