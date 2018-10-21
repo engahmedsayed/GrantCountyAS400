@@ -187,6 +187,23 @@
                         </div>
                     </div>
                 }
+                @if (Model.ApprovalStatus != null && Model.ApprovalStatus.CityJurisdiction.Date.HasValue && Model.ApprovalStatus.CityJurisdiction.Required.ToLower() == "y")
+                {
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#cityApproval">
+                                    City Approval
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="cityApproval" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <partial name="_CityApproval" for="@Model.CityApproval" />
+                            </div>
+                        </div>
+                    </div>
+                }
                 @if (!string.IsNullOrWhiteSpace(ViewBag.PermitDetailViewName))
                 {
                     <div class="panel panel-default">

@@ -116,5 +116,14 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
             new HealthApproval(appm?.ApplicantProjectDescription, healthRecord?.Comments, healthRecord?.ApprovedBy,
                                  healthRecord?.UserId, healthRecord?.ChangeDate);
 
+        internal static CityApproval MapToCityApproval(BldgpermitApplicationMaster appm,
+                                                       BldgcityApproval cityJoinRecord,
+                                                       Bldgjurisdictions jurisdictionRecord) =>
+            new CityApproval(appm?.ApplicantProjectDescription, cityJoinRecord?.JurisdictionCode,
+                            jurisdictionRecord?.ShortDepartmentName, cityJoinRecord.ZoningApproval,
+                            cityJoinRecord?.UtilitiesApproval, cityJoinRecord?.Comments, cityJoinRecord?.ApprovedBy,
+                                 cityJoinRecord?.UserId, cityJoinRecord?.ChangeDate);
+
+
     }
 }

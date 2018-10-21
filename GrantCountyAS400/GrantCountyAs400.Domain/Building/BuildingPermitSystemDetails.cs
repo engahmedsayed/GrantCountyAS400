@@ -43,6 +43,8 @@ namespace GrantCountyAs400.Domain.Building
 
         public HealthApproval HealthApproval { get; private set; }
 
+        public CityApproval CityApproval { get; private set; }
+
         public void SetPlanningApproval(PlanningApproval planningApproval)
         {
             PlanningApproval = planningApproval;
@@ -61,6 +63,11 @@ namespace GrantCountyAs400.Domain.Building
         public void SetHealthApproval(HealthApproval healthApproval)
         {
             HealthApproval = healthApproval;
+        }
+
+        public void SetCityApproval(CityApproval cityApproval)
+        {
+            CityApproval = cityApproval;
         }
 
         public BuildingPermitSystemDetails(string applicantLastName, string applicantFirstName, string permitCode, string processedForJurisdiction, DateTime applicationDate,
@@ -373,5 +380,40 @@ namespace GrantCountyAs400.Domain.Building
             ChangeDate = changeDate;
         }
 
+    }
+
+    public class CityApproval
+    {
+        public string ApplicantProjectDescription { get; }
+
+        public string JurisdictionCode { get; }
+
+        public string ShortDepartmentName { get;}
+
+        public string ZoniongApproval { get;}
+        public string UtilitiesApproval { get;}
+
+
+        public string Comments { get; }
+        public string ApprovedBy { get; }
+
+        public string UserID { get; }
+
+        public DateTime? ChangeDate { get; }
+
+        public CityApproval(string applicantProjectDescription, string jurisdictionCode, string shortDepartmentName,
+                            string zoniongApproval, string utilitiesApproval, string comments, string approvedBy,
+                            string userID, DateTime? changeDate)
+        {
+            ApplicantProjectDescription = applicantProjectDescription;
+            JurisdictionCode = jurisdictionCode;
+            ShortDepartmentName = shortDepartmentName;
+            ZoniongApproval = zoniongApproval;
+            UtilitiesApproval = utilitiesApproval;
+            Comments = comments;
+            ApprovedBy = approvedBy;
+            UserID = userID;
+            ChangeDate = changeDate;
+        }
     }
 }

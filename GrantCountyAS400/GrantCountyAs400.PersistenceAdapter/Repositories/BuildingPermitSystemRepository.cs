@@ -197,6 +197,33 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                     query.SetHealthApproval(BuildingPermitSystemMapper.MapToHealthApproval(healthApproval.bldgpermit, 
                                             healthApproval.healthRecord));
                 }
+                if (query.ApprovalStatus.CityJurisdiction != null &&
+                    query.ApprovalStatus.CityJurisdiction.Required.ToLower() == "y" &&
+                    query.ApprovalStatus.CityJurisdiction.Date.HasValue)
+                {
+                    var cityApproval = (from bldgpermit in _context.BldgpermitApplicationMaster
+                                        join city in _context.BldgcityApproval
+                                        on new { bldgpermit.ApplicationYear, bldgpermit.ApplicationNumber }
+                                               equals new { city.ApplicationYear, city.ApplicationNumber }
+                                               into cityJoin
+                                        from cityJoinRecord in cityJoin.DefaultIfEmpty()
+                                        join jurisdiction in _context.Bldgjurisdictions
+                                        on cityJoinRecord.ZoningApproval equals jurisdiction.DepartmentCode
+                                        into jurisdictionJoin
+                                        from jurisdictionRecord in jurisdictionJoin.DefaultIfEmpty()
+                                        where bldgpermit.Id == id
+                                        select new
+                                        {
+                                            bldgpermit = bldgpermit,
+                                            cityJoinRecord = cityJoinRecord,
+                                            jurisdictionRecord = jurisdictionRecord
+                                        }).SingleOrDefault();
+                    query.SetCityApproval(BuildingPermitSystemMapper.MapToCityApproval(cityApproval.bldgpermit,
+                                          cityApproval.cityJoinRecord, cityApproval.jurisdictionRecord));
+
+
+
+                }
             }
 
             return query;

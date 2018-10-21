@@ -89,6 +89,8 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         public BuildingPermitSystemPublicWorkApprovalViewModel PublicWorkApproval { get; set; }
 
         public BuildingPermitSystemHealthApprovalViewModel HealthApproval { get; set; }
+
+        public BuildingPermitSystemCityApprovalViewModel CityApproval { get; set; }
     }
 
     public class BuildingValueMasterNameInfoViewModel
