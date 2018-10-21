@@ -60,12 +60,14 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
         public virtual DbSet<BldgapplicationNotes> BldgapplicationNotes { get; set; }
         public virtual DbSet<BldgapplicationValues> BldgapplicationValues { get; set; }
         public virtual DbSet<BldgassessorApproval> BldgassessorApproval { get; set; }
+        public virtual DbSet<BldgcityApproval> BldgcityApproval { get; set; }
         public virtual DbSet<Bldgcontractors> Bldgcontractors { get; set; }
         public virtual DbSet<BldgdemolitionPermitDetail> BldgdemolitionPermitDetail { get; set; }
         public virtual DbSet<Bldgdepartments> Bldgdepartments { get; set; }
         public virtual DbSet<BldgfeeDistributionCategories> BldgfeeDistributionCategories { get; set; }
         public virtual DbSet<BldgfireDistrictCodes> BldgfireDistrictCodes { get; set; }
         public virtual DbSet<BldggradingExcavatingPermitDetail> BldggradingExcavatingPermitDetail { get; set; }
+        public virtual DbSet<BldghealthApproval> BldghealthApproval { get; set; }
         public virtual DbSet<Bldgjurisdictions> Bldgjurisdictions { get; set; }
         public virtual DbSet<BldgmanufactureModularBuildingPermit> BldgmanufactureModularBuildingPermit { get; set; }
         public virtual DbSet<BldgmechanicalPermitDetail> BldgmechanicalPermitDetail { get; set; }
@@ -88,6 +90,14 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
         public virtual DbSet<TreasspecialAssessmentsTransactions> TreasspecialAssessmentsTransactions { get; set; }
         public virtual DbSet<TreasPropertyMasterInfoView> TreasPropertyMasterInfoView { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=GrantAS400;Integrated Security=True");
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -1446,7 +1456,6 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                     .HasMaxLength(1)
                     .IsUnicode(false);
             });
-
             modelBuilder.Entity<AsmtlandUseCodes>(entity =>
             {
                 entity.ToTable("ASMTLandUseCodes");
@@ -3050,6 +3059,58 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<BldgcityApproval>(entity =>
+            {
+                entity.ToTable("BLDGCityApproval");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.AddendumNumber).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.ApplicationNumber).HasColumnType("numeric(5, 0)");
+
+                entity.Property(e => e.ApplicationYear).HasColumnType("numeric(4, 0)");
+
+                entity.Property(e => e.ApprovedBy)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ChangeDate).HasColumnType("date");
+
+                entity.Property(e => e.CityCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Comments)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DepartmentCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.JurisdictionCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecordStatus)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserId)
+                    .HasColumnName("UserID")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UtilitiesApproval)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ZoningApproval)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<Bldgcontractors>(entity =>
             {
                 entity.ToTable("BLDGContractors");
@@ -3522,6 +3583,76 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<BldghealthApproval>(entity =>
+            {
+                entity.ToTable("BLDGHealthApproval");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.AddendumNumber).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.ApplicationNumber).HasColumnType("numeric(5, 0)");
+
+                entity.Property(e => e.ApplicationYear).HasColumnType("numeric(4, 0)");
+
+                entity.Property(e => e.ApprovedBy)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ChangeDate).HasColumnType("date");
+
+                entity.Property(e => e.Comments)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DepartmentCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.JurisdictionCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecordStatus)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserId)
+                    .HasColumnName("UserID")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Bldgjurisdictions>(entity =>
+            {
+                entity.ToTable("BLDGJurisdictions");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.ChangeDate).HasColumnType("date");
+
+                entity.Property(e => e.DepartmentCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LongDepartmentName)
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecordStatus)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ShortDepartmentName)
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserId)
+                    .HasColumnName("UserID")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+            });
             modelBuilder.Entity<Bldgjurisdictions>(entity =>
             {
                 entity.ToTable("BLDGJurisdictions");

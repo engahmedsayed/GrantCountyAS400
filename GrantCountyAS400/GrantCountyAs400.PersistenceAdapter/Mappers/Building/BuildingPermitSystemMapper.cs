@@ -111,6 +111,10 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
             new PublicWorkApproval(appm?.ApplicantProjectDescription, publicWorkRecord?.Comments, publicWorkRecord?.ApprovedBy,
                                  publicWorkRecord?.UserId, publicWorkRecord?.ChangeDate);
 
+        internal static HealthApproval MapToHealthApproval(BldgpermitApplicationMaster appm, 
+                                        BldghealthApproval healthRecord)=>
+            new HealthApproval(appm?.ApplicantProjectDescription, healthRecord?.Comments, healthRecord?.ApprovedBy,
+                                 healthRecord?.UserId, healthRecord?.ChangeDate);
 
     }
 }
