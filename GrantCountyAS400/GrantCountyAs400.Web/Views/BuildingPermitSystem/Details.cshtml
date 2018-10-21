@@ -119,6 +119,8 @@
                         </div>
                     </div>
                 </div>
+                @if(Model.ApprovalStatus!=null && Model.ApprovalStatus.Planning.Date.HasValue && Model.ApprovalStatus.Planning.Required.ToLower() == "y")
+                {
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -133,6 +135,7 @@
                         </div>
                     </div>
                 </div>
+                }
                 @if (!string.IsNullOrWhiteSpace(ViewBag.PermitDetailViewName))
                 {
                     <div class="panel panel-default">

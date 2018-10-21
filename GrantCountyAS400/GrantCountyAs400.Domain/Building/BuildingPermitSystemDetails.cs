@@ -35,17 +35,26 @@ namespace GrantCountyAs400.Domain.Building
         public BuildingSitusAddressInfo SitusAddress { get; }
         public BuildingPermitSystemApprovalStatusInfo ApprovalStatus { get; }
 
-        public PlanningApproval PlanningApproval { get; }
+        public PlanningApproval PlanningApproval { get; private set; }
 
-        public AssessorApproval AssessorApproval { get;}
+        public AssessorApproval AssessorApproval { get; private set; }
+
+        public void SetPlanningApproval(PlanningApproval planningApproval)
+        {
+            PlanningApproval = planningApproval;
+        }
+
+        public void SetAssessorApproval(AssessorApproval assessorApproval)
+        {
+            AssessorApproval = assessorApproval;
+        }
 
         public BuildingPermitSystemDetails(string applicantLastName, string applicantFirstName, string permitCode, string processedForJurisdiction, DateTime applicationDate,
             string applicationUserId, string applicantBusinessName, string addressLine1, string addressLine2, string city, string state, string zipCode, decimal phoneNumber,
             decimal preliminaryParcelNumber, decimal assessorParcelNumber, string additionalInformation, string parkInformation, string permitDescription,
             string processedForJurisdictionShortDepartmentName, BuildingPermitSystemBasicInfo basicInfo, BuildingPermitSystemApplicantDetails applicantDetails,
             BuildingValueMasterNameInfo preliminaryValueMasterName, BuildingValueMasterNameInfo asessorValueMasterName, BuildingSitusAddressInfo situsAddress,
-            BuildingPermitSystemApprovalStatusInfo approvalStatus,PlanningApproval planningApproval,
-            AssessorApproval assessorApproval)
+            BuildingPermitSystemApprovalStatusInfo approvalStatus)
         {
             ApplicantLastName = applicantLastName;
             ApplicantFirstName = applicantFirstName;
@@ -75,8 +84,7 @@ namespace GrantCountyAs400.Domain.Building
             AssessorValueMasterName = asessorValueMasterName;
             SitusAddress = situsAddress;
             ApprovalStatus = approvalStatus;
-            PlanningApproval = planningApproval;
-            AssessorApproval = assessorApproval;
+            
         }
     }
 

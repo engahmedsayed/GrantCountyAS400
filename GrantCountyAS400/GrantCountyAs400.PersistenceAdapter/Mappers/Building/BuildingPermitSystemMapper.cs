@@ -43,7 +43,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                                                         BldgmobileHomeDealersInstallersArchitects mdia,
                                                         BldgmobileHomeDealersInstallersArchitects mdiaBusinessEngineer,
                                                         Bldgcontractors bldgContractor,
-                                                        BldgplanningApproval plap,AsmtrealPropertyAssessedValueMaster rpmas,
+                                                        AsmtrealPropertyAssessedValueMaster rpmas,
                                                         AsmtmasterNameAddress nName) =>
             new BuildingPermitSystemDetails(bldgpermit.ApplicantLastName, bldgpermit.ApplicantFirstName, bldgpermit.PermitCode.Trim(), bldgpermit.ProcessedForJurisdiction,
                 bldgpermit.ApplicationDate.Value, bldgpermit.ApplicationUserId, bldgpermit.ApplicantBusinessName, bldgpermit.AddressLine1, bldgpermit.AddressLine2,
@@ -51,7 +51,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                 bldgpermit.AssessorParcelNumber.Value, bldgpermit.AdditionalInformation, bldgpermit.ParkInformation, perm.PermitDescription, processedJuri.ShortDepartmentName,
                 MapToBasicInfo(bldgpermit, juri, dept), MapToApplicantDetails(bldgpermit, mdia, mdiaBusinessEngineer, bldgContractor), Map(preliminaryValueMaster),
                 Map(assessorValueMaster), Map(situs, cityCode),
-                MapToApprovalStatus(bldgpermit), MapToPlanningApproval(plap, bldgpermit),MaptToAssessorApproval(rpmas,nName,bldgpermit));
+                MapToApprovalStatus(bldgpermit));
 
         private static BuildingPermitSystemBasicInfo MapToBasicInfo(BldgpermitApplicationMaster bldgpermit,
                                                                     Bldgjurisdictions juri,
@@ -92,7 +92,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                 new ApprovalStatusInfo(bldgpermit.ApplicationAccepted, bldgpermit.ApplicationAcceptedDate, bldgpermit.ApplicationAcceptedUserId),
                 bldgpermit.OtherSpecialApprovalDescription);
 
-        private static PlanningApproval MapToPlanningApproval(BldgplanningApproval plap, BldgpermitApplicationMaster appm) =>
+        public static PlanningApproval MapToPlanningApproval(BldgplanningApproval plap, BldgpermitApplicationMaster appm) =>
             (plap == null) ?
             null :
             new PlanningApproval(appm.ApplicantProjectDescription, plap.ZoneCode, plap.FrontPropertySetback, plap.SideFlankingSetback,

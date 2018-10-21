@@ -81,11 +81,11 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          join mdiaBusinessEngineer in _context.BldgmobileHomeDealersInstallersArchitects on bldgpermit.EngineerFirmNumber equals mdiaBusinessEngineer.BusinessCode
                          into mdiaEngineerJoin
                          from mdiaEngineerRecord in mdiaEngineerJoin.DefaultIfEmpty()
-                         join plap in _context.BldgplanningApproval
-                         on new { bldgpermit.ApplicationYear, bldgpermit.ApplicationNumber }
-                         equals new { plap.ApplicationYear, plap.ApplicationNumber }
-                         into plapJoin
-                         from plapRecord in plapJoin.DefaultIfEmpty()
+                         //join plap in _context.BldgplanningApproval
+                         //on new { bldgpermit.ApplicationYear, bldgpermit.ApplicationNumber }
+                         //equals new { plap.ApplicationYear, plap.ApplicationNumber }
+                         //into plapJoin
+                         //from plapRecord in plapJoin.DefaultIfEmpty()
                          join rpmas in _context.AsmtrealPropertyAssessedValueMaster
                          on  bldgpermit.AssessorParcelNumber
                          equals  rpmas.ParcelNumber
@@ -108,7 +108,27 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                                                mdiaArchitectRecord,
                                                                mdiaEngineerRecord,
                                                                bldgContractor,
-                                                               plapRecord,rpmasRecord,nNameRecord)).SingleOrDefault();
+                                                               rpmasRecord,nNameRecord)).SingleOrDefault();
+            if(query != null &&  query.ApprovalStatus != null)
+            {
+                if (query.ApprovalStatus.Planning != null &&
+                   query.ApprovalStatus.Planning.Required.ToLower() == "y" &&
+                   query.ApprovalStatus.Planning.Date.HasValue)
+                {
+                    var planningApproval = (from bldgpermit in _context.BldgpermitApplicationMaster
+                                           join plap in _context.BldgplanningApproval
+                       on new { bldgpermit.ApplicationYear, bldgpermit.ApplicationNumber }
+                       equals new { plap.ApplicationYear, plap.ApplicationNumber }
+                       into plapJoin
+                                           from plapRecord in plapJoin.DefaultIfEmpty()
+                                            where bldgpermit.Id == id
+                                            select new { plapRecord= plapRecord, bldgpermit= bldgpermit }).SingleOrDefault();
+                    query.SetPlanningApproval(
+                          BuildingPermitSystemMapper.MapToPlanningApproval(planningApproval.plapRecord,
+                                                                           planningApproval.bldgpermit));
+
+                }
+            }
 
             return query;
         }
