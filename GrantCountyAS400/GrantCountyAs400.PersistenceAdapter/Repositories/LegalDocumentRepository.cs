@@ -55,8 +55,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          join codeArea in _context.AsmttaxCodeArea on namesRecord.TaxCodeArea equals codeArea.TaxCodeArea
                          join landUseCode in _context.AsmtlandUseCodes on valueMasterRecord.LandUseCode equals landUseCode.LandUseCode
                          join exciseTaxData in _context.AsmtsalesAndExciseTaxData
-                         on new { legalDocument.ParcelNumber, legalDocument.AffidavitNumber, legalDocument.LegalDocumentType }
-                         equals new { exciseTaxData.ParcelNumber, exciseTaxData.AffidavitNumber, exciseTaxData.LegalDocumentType }
+                         on new { legalDocument.ParcelNumber, legalDocument.AffidavitNumber, legalDocument.AffidavitNumberExtension, legalDocument.LegalDocumentType }
+                         equals new { exciseTaxData.ParcelNumber, exciseTaxData.AffidavitNumber, exciseTaxData.AffidavitNumberExtension, exciseTaxData.LegalDocumentType }
                          into legalDocumentJoin
                          from defaultExciseTaxData in legalDocumentJoin.DefaultIfEmpty()
                          join rejection in _context.AsmtsalesRejectionReasonCodes on defaultExciseTaxData.SaleRejectionCode equals rejection.SaleRejectionCode
