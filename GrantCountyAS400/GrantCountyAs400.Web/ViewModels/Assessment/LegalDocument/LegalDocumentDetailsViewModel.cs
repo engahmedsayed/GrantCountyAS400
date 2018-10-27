@@ -45,7 +45,6 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.LegalDocument
         public decimal AffidavitNumber { get; set; }
         public string AffidavitNumberExtension { get; set; }
 
-        [Display(Name = "Auditor's File #")]
         public decimal AuditorFileNumber { get; set; }
 
         [Display(Name = "Comment")]
@@ -137,6 +136,20 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.LegalDocument
 
         [Display(Name = "Net R/P Sale")]
         public decimal? NetRPSale => RPsalesAmount;
+
+        [Display(Name = "Auditor's File #")]
+        public string AuditorFileNumberDisplay
+        {
+            get
+            {
+                if (AuditorFileNumber == 0)
+                    return "";
+
+                var auditorFileNumberString = AuditorFileNumber.ToString();
+                var year = auditorFileNumberString.Substring(0, 4);
+                return $"{year} - {auditorFileNumberString.Substring(4)}";
+            }
+        }
 
         private string GetAffidavitDisplay()
         {
