@@ -6,11 +6,14 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers
     internal static class YtdHistoryMapper
     {
         internal static YtdHistory Map(AcctEmployeeYtdhistory record) =>
-            new YtdHistory(record.Id, (int)record.Year.Value, record.Group.Value, record.Name, record.Number, record.Fund.Value, record.Department.Value,
-                record.YearlyGrossPay.Value, record.YearlyGrossPayDeferred.Value, record.YearlyNonTaxable.Value, record.YearlyTaxable.Value,
-                record.YearlyFicaGross.Value, record.YearlyFederalWithholding.Value, record.YearlyStatWithholding.Value, record.YearlyFica.Value,
-                record.YearlyFicaBenefit.Value, record.YearlyMedicalGross.Value, record.YearlyMedical.Value, record.YearlyMedicalBenefit.Value,
-                record.YearlyTaxableBenefit.Value, record.YearlyNetPay.Value, record.YearlyTotalPay.Value, record.YearlyRetirementGross.Value,
-                record.YearlyRetirement.Value, record.YearlyRetirementBenefitEmployee.Value, record.YearlyRetirementBenefitEmployer.Value);
+            new YtdHistory(
+                record.Id, (int)record.Year.Value, record.Group, record.Name, record.Number, record.Ssnumber, record.Count, record.Fund, record.Department,
+                record.RetirementNumber, record.RetirementFlag, record.RetirementCode, record.PayCode, record.PayStatus, record.BondType, record.BondPurchase,
+                record.BondCurrent, record.Embondcnt, record.Rate, record.Emsftabl, record.Saif, record.Filled, record.Percent, record.Longevity, record.FicaExempt,
+                record.FicaCode, record.EmpJobCode, record.Table, record.Grade, record.Step, record.BargainingUnit, record.MeritFlag, record.Type, record.Flsa,
+                record.YearlyGrossPay, record.YearlyGrossPayDeferred, record.YearlyNonTaxable, record.YearlyTaxable, record.YearlyFicaGross,
+                record.YearlyFederalWithholding, record.YearlyStatWithholding, record.YearlyFica, record.YearlyFicaBenefit, record.YearlyMedicalGross,
+                record.YearlyMedical, record.YearlyMedicalBenefit, record.YearlyTaxableBenefit, record.YearlyNetPay, record.YearlyTotalPay, record.YearlyRetirementGross,
+                record.YearlyRetirement, record.YearlyRetirementBenefitEmployee, record.YearlyRetirementBenefitEmployer);
     }
 }

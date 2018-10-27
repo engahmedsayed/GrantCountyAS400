@@ -2,63 +2,241 @@
 
 @if (Model.Any())
 {
-<table class="table table-hover table-bordered text-center">
-    <thead class="upper-case">
-        <tr>
-            <th>@Html.LabelFor(model => model[0].Year)</th>
-            <th>@Html.LabelFor(model => model[0].YearlyGrossPay)</th>
-            <th>@Html.LabelFor(model => model[0].YearlyGrossPayDeferred)</th>
-            <th>@Html.LabelFor(model => model[0].YearlyNonTaxable)</th>
-            <th>@Html.LabelFor(model => model[0].YearlyTaxable)</th>
-            <th>@Html.LabelFor(model => model[0].YearlyFicaGross)</th>
-            <th>@Html.LabelFor(model => model[0].YearlyFederalWithholding)</th>
-            <th>@Html.LabelFor(model => model[0].YearlyStatWithholding)</th>
-            <th>@Html.LabelFor(model => model[0].YearlyFica)</th>
-            <th>@Html.LabelFor(model => model[0].YearlyMedical)</th>
-            <th>@Html.LabelFor(model => model[0].YearlyNetPay)</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <table class="table table-bordered text-center">
+        <thead class="upper-case">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Year)
-                </td>
-                <td class="text-right">
-                    @Html.DisplayFor(modelItem => item.YearlyGrossPay)
-                </td>
-                <td class="text-right">
-                    @Html.DisplayFor(modelItem => item.YearlyGrossPayDeferred)
-                </td>
-                <td class="text-right">
-                    @Html.DisplayFor(modelItem => item.YearlyNonTaxable)
-                </td>
-                <td class="text-right">
-                    @Html.DisplayFor(modelItem => item.YearlyTaxable)
-                </td>
-                <td class="text-right">
-                    @Html.DisplayFor(modelItem => item.YearlyFicaGross)
-                </td>
-                <td class="text-right">
-                    @Html.DisplayFor(modelItem => item.YearlyFederalWithholding)
-                </td>
-                <td class="text-right">
-                    @Html.DisplayFor(modelItem => item.YearlyStatWithholding)
-                </td>
-                <td class="text-right">
-                    @Html.DisplayFor(modelItem => item.YearlyFica)
-                </td>
-                <td class="text-right">
-                    @Html.DisplayFor(modelItem => item.YearlyMedical)
-                </td>
-                <td class="text-right">
-                    @Html.DisplayFor(modelItem => item.YearlyNetPay)
-                </td>
+                <th>
+                </th>
+                <th>@Html.LabelFor(model => model[0].Year)</th>
+                <th>@Html.LabelFor(model => model[0].YearlyGrossPay)</th>
+                <th>@Html.LabelFor(model => model[0].YearlyGrossPayDeferred)</th>
+                <th>@Html.LabelFor(model => model[0].YearlyNonTaxable)</th>
+                <th>@Html.LabelFor(model => model[0].YearlyTaxable)</th>
+                <th>@Html.LabelFor(model => model[0].YearlyFicaGross)</th>
+                <th>@Html.LabelFor(model => model[0].YearlyFederalWithholding)</th>
+                <th>@Html.LabelFor(model => model[0].YearlyStatWithholding)</th>
+                <th>@Html.LabelFor(model => model[0].YearlyFica)</th>
+                <th>@Html.LabelFor(model => model[0].YearlyMedical)</th>
+                <th>@Html.LabelFor(model => model[0].YearlyNetPay)</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a class="toggle-row-details" data-toggle="collapse" data-target="#@item.Id" aria-expanded="false" aria-controls="@item.Id">
+                            <i class="glyphicon glyphicon-chevron-right pull-right"></i>
+                            <i class="glyphicon glyphicon-chevron-down pull-right"></i>
+                        </a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Year)
+                    </td>
+                    <td class="text-right">
+                        @Html.DisplayFor(modelItem => item.YearlyGrossPay)
+                    </td>
+                    <td class="text-right">
+                        @Html.DisplayFor(modelItem => item.YearlyGrossPayDeferred)
+                    </td>
+                    <td class="text-right">
+                        @Html.DisplayFor(modelItem => item.YearlyNonTaxable)
+                    </td>
+                    <td class="text-right">
+                        @Html.DisplayFor(modelItem => item.YearlyTaxable)
+                    </td>
+                    <td class="text-right">
+                        @Html.DisplayFor(modelItem => item.YearlyFicaGross)
+                    </td>
+                    <td class="text-right">
+                        @Html.DisplayFor(modelItem => item.YearlyFederalWithholding)
+                    </td>
+                    <td class="text-right">
+                        @Html.DisplayFor(modelItem => item.YearlyStatWithholding)
+                    </td>
+                    <td class="text-right">
+                        @Html.DisplayFor(modelItem => item.YearlyFica)
+                    </td>
+                    <td class="text-right">
+                        @Html.DisplayFor(modelItem => item.YearlyMedical)
+                    </td>
+                    <td class="text-right">
+                        @Html.DisplayFor(modelItem => item.YearlyNetPay)
+                    </td>
+                </tr>
+                <tr class="row-details">
+                    <td colspan="100">
+                        <div class="collapse" id="@item.Id">
+                            <div class="col-md-6 col-xs-12">
+                                <table class="table text-left">
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().Year) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.Year) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().Group) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.Group) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().Name) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.Name) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().Number) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.Number) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().SSNumberDisplay) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.SSNumberDisplay) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().Count) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.Count) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().Fund) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.Fund) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().Department) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.Department) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().RetirementNumber) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.RetirementNumber) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().RetirementFlag) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.RetirementFlag) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().RetirementCode) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.RetirementCode) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().PayCode) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.PayCode) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().PayStatus) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.PayStatus) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().BondType) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.BondType) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().BondPurchase) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.BondPurchase) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().BondCurrent) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.BondCurrent) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().Embondcnt) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.Embondcnt) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().Rate) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.Rate) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().Emsftabl) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.Emsftabl) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().Saif) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.Saif) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().Filled) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.Filled) </span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-6 col-xs-12">
+                                <table class="table text-left">
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().Percent) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.Percent) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().Longevity) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.Longevity) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().FicaExempt) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.FicaExempt) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().FicaCode) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.FicaCode) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().EmpJobCode) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.EmpJobCode) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().Table) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.Table) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().Grade) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.Grade) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().Step) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.Step) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().BargainingUnit) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.BargainingUnit) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().MeritFlag) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.MeritFlag) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().Type) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.Type) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().Flsa) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.Flsa) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().YearlyTotalPay) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.YearlyTotalPay) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().YearlyRetirementGross) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.YearlyRetirementGross) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().YearlyRetirement) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.YearlyRetirement) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().YearlyRetirementBenefitEmployee) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.YearlyRetirementBenefitEmployee) </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>@Html.DisplayNameFor(model => model.FirstOrDefault().YearlyRetirementBenefitEmployer) </strong></td>
+                                            <td class="text-right"><span> @Html.DisplayFor(modelItem => item.YearlyRetirementBenefitEmployer) </span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 else
 {
