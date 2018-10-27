@@ -79,6 +79,11 @@ tr.row-details td, tr.row-details th {
     padding-bottom: 0 !important;
 }
 
+tr.row-details table td, tr.row-details table th {
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+}
+
 tr.row-details td {
     border: none !important;
 }
