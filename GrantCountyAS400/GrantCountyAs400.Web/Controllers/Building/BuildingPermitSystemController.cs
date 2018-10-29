@@ -64,8 +64,30 @@ namespace GrantCountyAs400.Web.Controllers.Building
             ViewBag.Inspections = GetInspections(id);
             ViewBag.Conditions = GetConditions(id);
             ViewBag.Receipts = GetReceiptsReport(id);
-
+            TempData["BasicInfo"] = Newtonsoft.Json.JsonConvert.SerializeObject(viewmodel.BasicInfo);
+            TempData.Keep("BasicInfo");
             return View(viewmodel);
+        }
+
+        [HttpGet]
+        [Route("/building-permit-system/grading-details/{id}",Name ="gradingDetailsRoute")]
+        public IActionResult GradingFeesDetails(int id)
+        {
+            GradingFeesDetailsViewModel result = new GradingFeesDetailsViewModel();
+            string tempDataObj = TempData.Peek("BasicInfo") as string;
+            result.BasicInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<BuildingPermitSystemBasicInfoViewModel>(tempDataObj);
+            var gradingExcavationPermitDetailEntity = _buildingModuleRepository.GetGradingExcavationPermitDetail(id);
+            result.CubicYardsOfFill = gradingExcavationPermitDetailEntity?.CubicYardsOfFill;
+            var valuationAndFeesEntity = GetValuationAndFees(id, result.BasicInfo.ApplicationYear,
+                                                             result.BasicInfo.ApplicationNumber,"grad");
+            result.GradExtendedAmount = valuationAndFeesEntity?.AssignGradingFees;
+            result.PlrvwExtendedAmount = valuationAndFeesEntity?.AssignPlanReviewFee;
+            result.SequenceNumber = valuationAndFeesEntity?.SequenceNumber;
+            result.FeeDescription = valuationAndFeesEntity?.FeeDescription;
+            result.BaseFee = valuationAndFeesEntity.BaseFee;
+            result.FeeIncrement = valuationAndFeesEntity.FeeIncrement;
+            result.MinMaxFlag = valuationAndFeesEntity.MinMaxFlag;
+            return View(result);
         }
 
         private (string viewName, dynamic permitDetail) GetPermitDetail(int id, string permitCode)
@@ -125,10 +147,11 @@ namespace GrantCountyAs400.Web.Controllers.Building
             return (permitDetailViewName, permitDetailViewModel);
         }
 
-        private ValuationAndFeesViewModel GetValuationAndFees(int id, decimal? applicationYear, decimal? applicationNumber)
+        private ValuationAndFeesViewModel GetValuationAndFees(int id, decimal? applicationYear, decimal? applicationNumber,string feeCode=null)
         {
-            var result = _buildingModuleRepository.GetValuationAndFees(id, applicationYear, applicationNumber);
+            var result = _buildingModuleRepository.GetValuationAndFees(id, applicationYear, applicationNumber,feeCode);
             var resultMapped = Mapper.Map<ValuationAndFeesViewModel>(result);
+            resultMapped.Id = id;
             return resultMapped;
         }
 

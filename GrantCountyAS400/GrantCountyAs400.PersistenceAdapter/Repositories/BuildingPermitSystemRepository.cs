@@ -81,11 +81,6 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          join mdiaBusinessEngineer in _context.BldgmobileHomeDealersInstallersArchitects on bldgpermit.EngineerFirmNumber equals mdiaBusinessEngineer.BusinessCode
                          into mdiaEngineerJoin
                          from mdiaEngineerRecord in mdiaEngineerJoin.DefaultIfEmpty()
-                         //join plap in _context.BldgplanningApproval
-                         //on new { bldgpermit.ApplicationYear, bldgpermit.ApplicationNumber }
-                         //equals new { plap.ApplicationYear, plap.ApplicationNumber }
-                         //into plapJoin
-                         //from plapRecord in plapJoin.DefaultIfEmpty()
                          join rpmas in _context.AsmtrealPropertyAssessedValueMaster
                          on  bldgpermit.AssessorParcelNumber
                          equals  rpmas.ParcelNumber
@@ -435,7 +430,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             return null;
         }
 
-        public ValuationAndFees GetValuationAndFees(int id, decimal? applicationYear, decimal? applicationNumber)
+        public ValuationAndFees GetValuationAndFees(int id, decimal? applicationYear, decimal? applicationNumber,string feeCode=null)
         {
             var query = (from appf in _context.BldgapplicationFees
                          join bldg in _context.BldgpermitApplicationMaster
@@ -449,7 +444,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                bldg.ApplicationNumber == applicationNumber
                          select new ValuationAndFeesRecord { Appv = appvDetail, Appf = appf, Bldg = bldg }).ToList();
 
-            return ValuationAndFeesMapper.Map(query);
+            return ValuationAndFeesMapper.Map(query,feeCode);
         }
 
         public IEnumerable<BuildingInspection> GetInspectionsByBuildingPermitSystemId(int id)
@@ -474,8 +469,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             return conditions;
         }
 
-        public
-            (IEnumerable<ReceiptHeader> ReceiptHeaders, IEnumerable<BuildingApplicationFee> BuildingApplicationFees)
+        public (IEnumerable<ReceiptHeader> ReceiptHeaders, IEnumerable<BuildingApplicationFee> BuildingApplicationFees)
             GetReceiptHeadersAndFeesByBuildingPermitSystemId(int id)
         {
             var receipts = (from bldg in _context.BldgpermitApplicationMaster

@@ -10,6 +10,7 @@ using GrantCountyAs400.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,7 +34,16 @@ namespace GrantCountyAs400.Web
             {
             });
             services.AddTransient<IEmailSender, EmailSender>();
-            services.AddMvc();
+            services.AddDistributedMemoryCache();
+
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+        .AddSessionStateTempDataProvider();
+
+            services.AddSession(options =>
+            {
+                options.Cookie.HttpOnly = true;
+            });
             services.AddDbContext<GrantCountyDbContext>(options =>
                         options.UseSqlServer(Configuration.GetConnectionString("GrantCountyDbContext")));
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -82,6 +92,7 @@ namespace GrantCountyAs400.Web
 
             app.UseStaticFiles();
             app.UseAuthentication();
+            app.UseSession();
             app.UseMvc();
 
             AutoMapperConfig.Configure();

@@ -11,10 +11,20 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         [Display(Name ="Bid Amount")]
         public decimal? ExtendedAmountTotal { get; set; }
 
+        public decimal? SequenceNumber { get; set; }
+
+        public string FeeDescription { get; set; }
+
+        public decimal? BaseFee { get; set; }
+
+        public decimal? FeeIncrement { get; set; }
+
+        public string MinMaxFlag { get; set; }
+
         [Display(Name ="Assign Valuation")]
         public decimal? ExtendedValue { get; set; }
 
-        [Display(Name = "Assign Strict/Man/Mod Fees")]
+        [Display(Name = "Assign Struct/Man/Mod Fees")]
         public decimal? AssignStructNanNodFees { get; set; }
 
         [Display(Name ="Assign Plan Review Fee")]
@@ -46,5 +56,7 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 
         [Display(Name ="Assign Other Fees")]
         public decimal? AssignOtherFees { get; set; }
+
+        public int Id { get; set; }
     }
 }

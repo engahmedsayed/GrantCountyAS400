@@ -16,7 +16,7 @@ namespace GrantCountyAs400.Domain.Building.Repository
         GradingExcavationPermitDetail GetGradingExcavationPermitDetail(int id);
         ManufactureModularPermit GetManufactureModularPermitByBuildingPermitSystemId(int id);
         PlumbingPermit GetPlumbingPermitByBuildingPermitSystemId(int id);
-        ValuationAndFees GetValuationAndFees(int id, decimal? applictionYear, decimal? applicationNumber);
+        ValuationAndFees GetValuationAndFees(int id, decimal? applictionYear, decimal? applicationNumber, string feeCode = null);
         IEnumerable<BuildingInspection> GetInspectionsByBuildingPermitSystemId(int id);
         IEnumerable<BuildingCondition> GetConditionsByBuildingPermitSystemId(int id);
         (IEnumerable<ReceiptHeader> ReceiptHeaders, IEnumerable<BuildingApplicationFee> BuildingApplicationFees) GetReceiptHeadersAndFeesByBuildingPermitSystemId(int id);
