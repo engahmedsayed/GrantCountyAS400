@@ -1,4 +1,4 @@
-﻿using GrantCountyAs400.Domain.Assessment;
+using GrantCountyAs400.Domain.Assessment;
 using GrantCountyAs400.Domain.Assessment.Repository;
 using GrantCountyAs400.Web.Extensions;
 using GrantCountyAs400.Web.ViewModels;
@@ -23,11 +23,9 @@ namespace GrantCountyAs400.Web.Controllers.Assessment
         [HttpGet]
         public IActionResult Index(RealPropertyFilterViewModel filter, int pageNumber = 1)
         {
-            int resultCount;
             var pagingInfo = new PagingInfo() { PageNumber = pageNumber };
-
-            var results = _assessmentRepository.GetAll(filter.ParcelNumber, filter.TaxPayer, filter.Owner, filter.ContractHolder, filter.TaxCodeArea,
-                                                       out resultCount, pageNumber, AppSettings.PageSize)
+            var results = _assessmentRepository.GetAll(filter.MinParcelNumber, filter.MaxParcelNumber, filter.TaxPayer, filter.Owner, filter.ContractHolder,
+                                                       filter.TaxCodeArea, out int resultCount, pageNumber, AppSettings.PageSize)
                                                        .ToList();
 
             pagingInfo.Total = resultCount;

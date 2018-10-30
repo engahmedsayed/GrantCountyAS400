@@ -15,9 +15,15 @@
         <div class="form-horizontal">
             <hr />
             <div class="form-group">
-                <label asp-for="@filterViewModel.ParcelNumber" class="control-label col-md-2"></label>
+                <label asp-for="@filterViewModel.MinParcelNumber" class="control-label col-md-2"></label>
                 <div class="col-md-10">
-                    <input type="number" asp-for="@filterViewModel.ParcelNumber" name="parcelnumber" class="form-control" />
+                    <input type="number" asp-for="@filterViewModel.MinParcelNumber" name="minparcelnumber" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@filterViewModel.MaxParcelNumber" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input type="number" asp-for="@filterViewModel.MaxParcelNumber" name="maxparcelnumber" class="form-control" />
                 </div>
             </div>
             <div class="form-group">
@@ -60,7 +66,8 @@
 <nav aria-label="navigation">
     @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
     pageNumber = pageNumber,
-    parcelnumber = filterViewModel.ParcelNumber,
+    minparcelnumber = filterViewModel.MinParcelNumber,
+    maxparcelnumber = filterViewModel.MaxParcelNumber,
     taxpayer = filterViewModel.TaxPayer,
     owner = filterViewModel.Owner,
     contractholder = filterViewModel.ContractHolder,
@@ -122,7 +129,8 @@
 <nav aria-label="navigation">
     @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
     pageNumber = pageNumber,
-    parcelnumber = filterViewModel.ParcelNumber,
+    minParcelnumber = filterViewModel.MinParcelNumber,
+    maxParcelnumber = filterViewModel.MaxParcelNumber,
     taxpayer = filterViewModel.TaxPayer,
     owner = filterViewModel.Owner,
     contractholder = filterViewModel.ContractHolder,
