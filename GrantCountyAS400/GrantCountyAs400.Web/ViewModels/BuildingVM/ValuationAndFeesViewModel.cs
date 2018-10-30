@@ -11,6 +11,8 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         [Display(Name ="Bid Amount")]
         public decimal? ExtendedAmountTotal { get; set; }
 
+        public decimal? NumberOfUnits { get; set; }
+
         public decimal? SequenceNumber { get; set; }
 
         public string FeeDescription { get; set; }

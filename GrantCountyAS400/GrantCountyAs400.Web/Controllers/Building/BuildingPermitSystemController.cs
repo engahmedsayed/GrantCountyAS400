@@ -90,6 +90,22 @@ namespace GrantCountyAs400.Web.Controllers.Building
             return View(result);
         }
 
+        [HttpGet]
+        [Route("/building-permit-system/statebuilding-fee-details/{id}", Name = "stateBuildingfeeDetailsRoute")]
+        public IActionResult StateBuildingFeeDetails(int id)
+        {
+            StateBuildingFeesDetailsViewModel result = new StateBuildingFeesDetailsViewModel();
+            string tempDataObj = TempData.Peek("BasicInfo") as string;
+            result.BasicInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<BuildingPermitSystemBasicInfoViewModel>(tempDataObj);
+            var gradingExcavationPermitDetailEntity = _buildingModuleRepository.GetGradingExcavationPermitDetail(id);
+            var valuationAndFeesEntity = GetValuationAndFees(id, result.BasicInfo.ApplicationYear,
+                                                             result.BasicInfo.ApplicationNumber, "stbcd");
+            result.StateBuildingExtendedAmount = valuationAndFeesEntity?.AssignBidBuildingCodeFee;
+            result.NumberOfUnits = valuationAndFeesEntity?.NumberOfUnits;
+            result.ExtendedAmount = valuationAndFeesEntity?.AssignBidBuildingCodeFee;
+            return View(result);
+        }
+
         private (string viewName, dynamic permitDetail) GetPermitDetail(int id, string permitCode)
         {
             dynamic permitDetailViewModel = null;

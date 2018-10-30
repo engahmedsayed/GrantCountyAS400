@@ -31,7 +31,9 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
               valuationAndFeesClass.Select(t => t.Appf)
               .FirstOrDefault(t => t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode)).FeeIncrement,
               valuationAndFeesClass.Select(t => t.Appf)
-              .FirstOrDefault(t => t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode)).MinMaxFlag) ;
+              .FirstOrDefault(t => t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode)).MinMaxFlag,
+              valuationAndFeesClass.Select(t => t.Appf)
+              .FirstOrDefault(t => t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode)).NumberOfUnits) ;
             return result;
         }
 
