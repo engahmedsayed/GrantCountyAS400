@@ -13,9 +13,13 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 
         public decimal? NumberOfUnits { get; set; }
 
+        public decimal? UnitCharge { get; set; }
+
         public decimal? SequenceNumber { get; set; }
 
         public string FeeDescription { get; set; }
+
+        public string Description { get; set; }
 
         public decimal? BaseFee { get; set; }
 

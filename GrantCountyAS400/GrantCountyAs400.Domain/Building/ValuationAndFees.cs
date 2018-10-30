@@ -11,6 +11,8 @@ namespace GrantCountyAs400.Domain.Building
         public decimal? NumberOfUnits { get;}
         public decimal? SequenceNumber { get; }
 
+        public decimal? UnitCharge { get; }
+
         public decimal? ExtendedValue { get;}
 
         public decimal? AssignStructNanNodFees { get; }
@@ -48,7 +50,7 @@ namespace GrantCountyAs400.Domain.Building
                                 decimal? assignGradingFees, decimal? assignDemolitionFees, decimal? assignBidPermitFee, 
                                 decimal? assignBidPlanReview, decimal? assignBidBuildingCodeFee, decimal? assignFireMarshalFees, 
                                 decimal? assignOtherFees,decimal? sequenceNumber,string description,decimal? baseFee,
-                                decimal? feeIncrement,string minMaxFlag,decimal? numberOfUnits)
+                                decimal? feeIncrement,string minMaxFlag,decimal? numberOfUnits,decimal? unitCharge)
         {
             ExtendedAmountTotal = extendedAmountTotal;
             ExtendedValue = extendedValue;
@@ -69,6 +71,7 @@ namespace GrantCountyAs400.Domain.Building
             FeelIncrement = feeIncrement;
             MinMaxFlag = minMaxFlag;
             NumberOfUnits = numberOfUnits;
+            UnitCharge = unitCharge;
 
         }
     }

@@ -1,0 +1,62 @@
+﻿@model GrantCountyAs400.Web.ViewModels.BuildingVM.OtherFeesDetailsViewModel
+@{
+    ViewData["Title"] = "Other fees";
+}
+
+<h2>Grading fees</h2>
+
+<div>
+    <div class="entity-details row">
+        <div class="entity-info clearfix">
+            <partial name="_Header" for="@Model.BasicInfo" />
+            <div class="col-xs-6">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><strong>Total Value </strong></td>
+                            <td class="text-right"><span> ? </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model=>model.OtherExtendedAmount) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.OtherExtendedAmount) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.OtherExtendedAmount) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.OtherExtendedAmount) </span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-6">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model=>model.SequenceNumber) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.SequenceNumber) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.FeeDescription) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.FeeDescription) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.NumberOfUnits) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.NumberOfUnits) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.UnitCharge) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.UnitCharge) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.TotalExtendedAmount) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.TotalExtendedAmount) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fee Category</strong></td>
+                            <td class="text-right"><span> Plan Review </span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

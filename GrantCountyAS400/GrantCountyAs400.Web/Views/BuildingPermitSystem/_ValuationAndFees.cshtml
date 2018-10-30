@@ -35,8 +35,13 @@
             </tr>
             <tr>
                 <td><strong>@Html.DisplayNameFor(model => model.AssignGradingFees) </strong></td>
-                <td class="text-right"><span><a asp-route="gradingDetailsRoute" asp-route-id="@Model.Id">
-                    @Html.DisplayFor(model => model.AssignGradingFees)</a></span></td>
+                <td class="text-right">
+                    <span>
+                        <a asp-route="gradingDetailsRoute" asp-route-id="@Model.Id">
+                            @Html.DisplayFor(model => model.AssignGradingFees)
+                        </a>
+                    </span>
+                </td>
             </tr>
             <tr>
                 <td><strong>@Html.DisplayNameFor(model => model.AssignDemolitionFees) </strong></td>
@@ -58,10 +63,13 @@
             </tr>
             <tr>
                 <td><strong>@Html.DisplayNameFor(model => model.AssignBidBuildingCodeFee) </strong></td>
-                <td class="text-right"><span>
-                    <a asp-route="stateBuildingfeeDetailsRoute" asp-route-id="@Model.Id">
-                    @Html.DisplayFor(model => model.AssignBidBuildingCodeFee)</a> 
-                     </span></td>
+                <td class="text-right">
+                    <span>
+                        <a asp-route="stateBuildingfeeDetailsRoute" asp-route-id="@Model.Id">
+                            @Html.DisplayFor(model => model.AssignBidBuildingCodeFee)
+                        </a>
+                    </span>
+                </td>
             </tr>
             <tr>
                 <td><strong>@Html.DisplayNameFor(model => model.AssignFireMarshalFees) </strong></td>
@@ -69,7 +77,11 @@
             </tr>
             <tr>
                 <td><strong>@Html.DisplayNameFor(model => model.AssignOtherFees) </strong></td>
-                <td class="text-right"><span> @Html.DisplayFor(model => model.AssignOtherFees) </span></td>
+                <td class="text-right">
+                    <span>
+                        <a asp-route="otherFeesDetailsRoute" asp-route-id="@Model.Id">@Html.DisplayFor(model => model.AssignOtherFees)</a>
+                    </span>
+                </td>
             </tr>
         </tbody>
     </table>
