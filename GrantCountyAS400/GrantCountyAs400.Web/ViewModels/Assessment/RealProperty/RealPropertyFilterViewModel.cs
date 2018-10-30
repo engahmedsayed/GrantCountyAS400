@@ -4,8 +4,11 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.RealProperty
 {
     public class RealPropertyFilterViewModel
     {
-        [Display(Name = "Parcel")]
-        public decimal ParcelNumber { get; set; }
+        [Display(Name = "Parcel (from)")]
+        public decimal MinParcelNumber { get; set; }
+
+        [Display(Name = "Parcel (to)")]
+        public decimal MaxParcelNumber { get; set; }
 
         [Display(Name = "Tax Payer")]
         public string TaxPayer { get; set; }

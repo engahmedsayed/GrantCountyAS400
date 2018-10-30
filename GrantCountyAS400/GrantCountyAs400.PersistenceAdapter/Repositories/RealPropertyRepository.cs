@@ -16,14 +16,22 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             _context = dbContext;
         }
 
-        public IEnumerable<RealProperty> GetAll(decimal parcelNumber, string taxpayer, string owner, string contractHolder, decimal taxcodeArea,
-                                                out int resultCount, int pageNumber = 1, int pageSize = 50)
+        public IEnumerable<RealProperty> GetAll(
+            decimal minParcelNumber, decimal? maxParcelNumber, string taxpayer, string owner, string contractHolder, decimal taxcodeArea,
+            out int resultCount, int pageNumber = 1, int pageSize = 50)
         {
             List<RealProperty> results = new List<RealProperty>();
 
+            // if Max parcelNumber is null or zero, make it same as Min value as if "single" value was provided
+            if (!maxParcelNumber.HasValue || maxParcelNumber.Value == 0)
+            {
+                maxParcelNumber = minParcelNumber;
+            }
+
             var query = (from valueMaster in _context.ASMTValueMasterNameView
                          join codeArea in _context.AsmttaxCodeArea on valueMaster.TaxCodeArea equals codeArea.TaxCodeArea
-                         where ((parcelNumber <= 0) || valueMaster.ParcelNumber == parcelNumber)
+                         where ((minParcelNumber <= 0) || valueMaster.ParcelNumber >= minParcelNumber)
+                         && ((maxParcelNumber <= 0) || valueMaster.ParcelNumber <= maxParcelNumber)
                          && ((taxcodeArea <= 0) || codeArea.TaxCodeArea == taxcodeArea)
                          && (string.IsNullOrEmpty(taxpayer) || valueMaster.TaxpayerName.ToLower().Contains(taxpayer.Trim().ToLower()))
                          && (string.IsNullOrEmpty(owner) || valueMaster.TitleOwnerName.ToLower().Contains(owner.Trim().ToLower()))

@@ -147,7 +147,15 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.LegalDocument
 
                 var auditorFileNumberString = AuditorFileNumber.ToString();
                 var year = auditorFileNumberString.Substring(0, 4);
-                return $"{year} - {auditorFileNumberString.Substring(4)}";
+
+                if (int.Parse(year) >= 1980 && int.Parse(year) <= DateTime.Now.Year)
+                {
+                    return $"{year} - {auditorFileNumberString.Substring(4)}";
+                }
+                else
+                {
+                    return auditorFileNumberString;
+                }
             }
         }
 
