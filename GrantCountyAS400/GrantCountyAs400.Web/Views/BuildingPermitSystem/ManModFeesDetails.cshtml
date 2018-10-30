@@ -1,0 +1,71 @@
+﻿@model GrantCountyAs400.Web.ViewModels.BuildingVM.ManModFeesDetailsViewModel
+@{
+    ViewData["Title"] = "Other fees";
+}
+
+<h2>Grading fees</h2>
+
+<div>
+    <div class="entity-details row">
+        <div class="entity-info clearfix">
+            <partial name="_Header" for="@Model.BasicInfo" />
+            <div class="col-xs-6">
+                <table class="table">
+                    <tbody>
+                        
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.TotalValue) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.TotalValue) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.TotalBuildingFees) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.TotalBuildingFees) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.InspectPlanReview) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.InspectPlanReview) </span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-6">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.SequenceNumber) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.SequenceNumber) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.FeeDescription) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.FeeDescription) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.NumberOfUnits) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.NumberOfUnits) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.BaseFee) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.BaseFee) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.FeeIncrement) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.FeeIncrement) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.ExtendedAmount) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.ExtendedAmount) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.MinMaxFlag) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.MinMaxFlag) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fee Category</strong></td>
+                            <td class="text-right"><span> Structure </span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
