@@ -145,6 +145,24 @@ namespace GrantCountyAs400.Web.Controllers.Building
             return View(result);
         }
 
+        [HttpGet]
+        [Route("/building-permit-system/plan-review-fee-details/{id}", Name = "planReviewFeeDetailsRoute")]
+        public IActionResult PlanReviewFeeDetails(int id)
+        {
+            PlanReviewFeeDetailsViewModel result = new PlanReviewFeeDetailsViewModel();
+            string tempDataObj = TempData.Peek("BasicInfo") as string;
+            result.BasicInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<BuildingPermitSystemBasicInfoViewModel>(tempDataObj);
+            var valuationAndFeesEntity = GetValuationAndFees(id, result.BasicInfo.ApplicationYear,
+                                                             result.BasicInfo.ApplicationNumber, "plrvw");
+            result.ExtendedAmount = valuationAndFeesEntity?.AssignPlanReviewFee;
+            result.PlanReviewFee = valuationAndFeesEntity?.BaseFee;
+            result.TotalValue = valuationAndFeesEntity?.ExtendedValue;
+            result.TotalPlanReviewFees = valuationAndFeesEntity?.AssignPlanReviewFee;
+            result.BuildingPermit = valuationAndFeesEntity?.AssignStructNanNodFees;
+                
+            return View(result);
+        }
+
         private (string viewName, dynamic permitDetail) GetPermitDetail(int id, string permitCode)
         {
             dynamic permitDetailViewModel = null;

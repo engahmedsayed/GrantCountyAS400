@@ -1,0 +1,47 @@
+﻿@model GrantCountyAs400.Web.ViewModels.BuildingVM.PlanReviewFeeDetailsViewModel
+@{
+    ViewData["Title"] = "Other fees";
+}
+
+<h2>Grading fees</h2>
+
+<div>
+    <div class="entity-details row">
+        <div class="entity-info clearfix">
+            <partial name="_Header" for="@Model.BasicInfo" />
+            <div class="col-xs-6">
+                <table class="table">
+                    <tbody>
+
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.TotalValue) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.TotalValue) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.TotalPlanReviewFees) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.TotalPlanReviewFees) </span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-6">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.BuildingPermit) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.BuildingPermit) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.PlanReviewFee) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.PlanReviewFee)  %</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.ExtendedAmount) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.ExtendedAmount) </span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
