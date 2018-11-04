@@ -102,7 +102,7 @@ namespace GrantCountyAs400.Web.Controllers.Building
                                                              result.BasicInfo.ApplicationNumber, "stbcd");
             result.StateBuildingExtendedAmount = valuationAndFeesEntity?.AssignBidBuildingCodeFee;
             result.NumberOfUnits = valuationAndFeesEntity?.NumberOfUnits;
-            result.ExtendedAmount =new List<decimal?> { valuationAndFeesEntity?.AssignBidBuildingCodeFee };
+            result.ExtendedAmount = valuationAndFeesEntity?.ExtendedAmount;
             return View(result);
         }
 
@@ -183,6 +183,7 @@ namespace GrantCountyAs400.Web.Controllers.Building
             result.ExtendedAmount = valuationAndFeesEntity?.ExtendedAmount;
             return View(result);
         }
+
 
         private (string viewName, dynamic permitDetail) GetPermitDetail(int id, string permitCode)
         {
