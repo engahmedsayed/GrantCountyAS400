@@ -16,24 +16,16 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         public decimal? ExtendedAmount { get; set; }
 
         [Display(Name ="Seq #")]
-        public decimal? SequenceNumber { get; set; }
+        public List<decimal?> SequenceNumber { get; set; }
 
         [Display(Name ="Fee description")]
-        public string FeeDescription { get; set; }
+        public List<string> FeeDescription { get; set; }
 
         [Display(Name ="Units/Hrs")]
-        public decimal? NumberOfUnits { get; set; }
+        public List<decimal?> NumberOfUnits { get; set; }
 
         [Display(Name ="Unit Fee")]
-        public decimal? UnitCharge { get; set; }
+        public List<decimal?> UnitCharge { get; set; }
 
-        [Display(Name ="Extended Amount")]
-        public decimal? TotalExtendedAmount
-        {
-            get
-            {
-                return NumberOfUnits.GetValueOrDefault() * UnitCharge.GetValueOrDefault();
-            }
-        }
     }
 }

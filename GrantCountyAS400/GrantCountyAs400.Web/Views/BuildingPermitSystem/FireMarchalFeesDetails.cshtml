@@ -1,4 +1,4 @@
-﻿@model GrantCountyAs400.Web.ViewModels.BuildingVM.OtherFeesDetailsViewModel
+﻿@model GrantCountyAs400.Web.ViewModels.BuildingVM.FireMarshalFeesDetailsViewModel
 @{
     ViewData["Title"] = "Other fees";
 }
@@ -12,17 +12,14 @@
             <div class="col-xs-6">
                 <table class="table">
                     <tbody>
+
                         <tr>
-                            <td><strong>Total Value </strong></td>
-                            <td class="text-right"><span> ? </span></td>
+                            <td><strong>@Html.DisplayNameFor(model => model.TotalValue) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.TotalValue) </span></td>
                         </tr>
                         <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.OtherExtendedAmount) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.OtherExtendedAmount) </span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.ExtendedAmount) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.ExtendedAmount) </span></td>
+                            <td><strong>@Html.DisplayNameFor(model => model.TotalFireMarshalFees) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.TotalFireMarshalFees) </span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -43,12 +40,13 @@
                             <td>
                                 Unit Fee
                             </td>
-                            <td>Extended Amount</td>
+                            <td>
+                                Extended Amt
+                            </td>
                             <td>
                                 Fee Category
                             </td>
                         </tr>
-
                     </thead>
 
                     @for (int i = 0; i < Model.SequenceNumber.Count; i++)
@@ -67,14 +65,12 @@
                                 @Html.DisplayFor(t => t.UnitCharge[i])
                             </td>
                             <td class="text-left">
-                                @{ var totalAmount = Model.NumberOfUnits[i].GetValueOrDefault() * Model.UnitCharge[i].GetValueOrDefault();}
-                                @Html.DisplayFor(t => totalAmount)
+                                @Html.DisplayFor(t => t.ExtendedAmount[i])
                             </td>
                             <td class="text-left">
-                                PLAN REVIEW
+                                FIRE MARSHAL -PERMI
                             </td>
                         </tr>
-
                     }
 
                 </table>

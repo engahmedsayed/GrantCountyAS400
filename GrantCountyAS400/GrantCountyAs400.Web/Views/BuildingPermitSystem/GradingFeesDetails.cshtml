@@ -14,22 +14,8 @@
                     <tbody>
                         <tr>
                             <td><strong>Total C/U Yds </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.CubicYardsOfFill) </span></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.TotalCubicYardsOfFill) </span></td>
                         </tr>
-                        <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.SequenceNumber) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.SequenceNumber) </span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.FeeDescription) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.FeeDescription) </span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-xs-6">
-                <table class="table">
-                    <tbody>
                         <tr>
                             <td><strong>Total Grading Fees </strong></td>
                             <td class="text-right"><span> @Html.DisplayFor(model => model.GradExtendedAmount) </span></td>
@@ -38,27 +24,57 @@
                             <td><strong>Inspect/Pln-Rvw </strong></td>
                             <td class="text-right"><span> @Html.DisplayFor(model => model.PlrvwExtendedAmount) </span></td>
                         </tr>
-                        <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.CubicYardsOfFill) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.CubicYardsOfFill) </span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.BaseFee) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.BaseFee) </span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.FeeIncrement) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.FeeIncrement) </span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.ExtendedAmount) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.ExtendedAmount) </span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.MinMaxFlag) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.MinMaxFlag) </span></td>
-                        </tr>
+
                     </tbody>
+                </table>
+            </div>
+            <div class="col-xs-6">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>
+                                <strong>Fee Code</strong>
+                            </td>
+                            <td>Fee Description</td>
+                            <td>Cu Yds/Hrs</td>
+                            <td>Base Fee</td>
+                            <td>Incr Fee</td>
+                            <td>Extended Amount</td>
+                            <td>%</td>
+                            <td>Fee Category</td>
+                        </tr>
+
+                        @for (int i = 0; i < Model.SequenceNumber.Count; i++)
+                        {
+                            <tr>
+                                <td class="text-right">
+                                    @Html.DisplayFor(t => t.SequenceNumber[i])
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(t => t.FeeDescription[i])
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(t => t.CubicYardsOfFill[i])
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(t => t.BaseFee[i])
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(t => t.FeeIncrement[i])
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(t => t.BaseFee[i])
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(t => t.MinMaxFlag[i])
+                                </td>
+                                <td>
+                                    Grading
+                                </td>
+                            </tr>
+                        }
+
+                    </thead>
                 </table>
             </div>
         </div>

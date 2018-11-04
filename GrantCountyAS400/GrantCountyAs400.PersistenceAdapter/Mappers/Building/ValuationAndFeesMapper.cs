@@ -22,20 +22,22 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
               GetFeesAmount(valuationAndFeesClass, "stbcd"),
               GetFeesAmount(valuationAndFeesClass, "fire"),
               GetFeesAmount(valuationAndFeesClass, "othrb"), 
-              valuationAndFeesClass.Select(t => t.Appf)
-              .FirstOrDefault(t => t.FeeCode.Trim().ToLower() ==(feeCode==null? "grad":feeCode))?.SequenceNumber,
+              valuationAndFeesClass.Select(t => t.Appf).Where(t => t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode))?
+              .Select(t=>t.SequenceNumber)?.ToList(),
               valuationAndFeesClass.Select(t=>t.Appf)
-              .FirstOrDefault(t=>t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode))?.FeeDescription,
+              .Where(t=>t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode))?.Select(t=>t.FeeDescription)?.ToList(),
               valuationAndFeesClass.Select(t => t.Appf)
-              .FirstOrDefault(t => t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode))?.BaseFee,
+              .Where(t => t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode))?.Select(t=>t.BaseFee)?.ToList(),
               valuationAndFeesClass.Select(t => t.Appf)
-              .FirstOrDefault(t => t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode))?.FeeIncrement,
+              .Where(t => t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode))?.Select(t=>t.FeeIncrement)?.ToList(),
               valuationAndFeesClass.Select(t => t.Appf)
-              .FirstOrDefault(t => t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode))?.MinMaxFlag,
+              .Where(t => t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode))?.Select(t=>t.MinMaxFlag)?.ToList(),
               valuationAndFeesClass.Select(t => t.Appf)
-              .FirstOrDefault(t => t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode))?.NumberOfUnits,
+              .Where(t => t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode))?.Select(t=>t.NumberOfUnits)?.ToList(),
               valuationAndFeesClass.Select(t => t.Appf)
-              .FirstOrDefault(t => t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode))?.UnitCharge) ;
+              .Where(t => t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode))?.Select(t=>t.UnitCharge)?.ToList(),
+            valuationAndFeesClass.Select(t => t.Appf)
+             .Where(t => t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode))?.Select(t => t.ExtendedAmount)?.ToList()) ;
             return result;
         }
 

@@ -11,21 +11,23 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         [Display(Name ="Bid Amount")]
         public decimal? ExtendedAmountTotal { get; set; }
 
-        public decimal? NumberOfUnits { get; set; }
+        public List<string> Description { get; set; }
 
-        public decimal? UnitCharge { get; set; }
+        public List<decimal?> NumberOfUnits { get; set; }
 
-        public decimal? SequenceNumber { get; set; }
+        public List<decimal?> UnitCharge { get; set; }
 
-        public string FeeDescription { get; set; }
+        public List<decimal?> SequenceNumber { get; set; }
 
-        public string Description { get; set; }
+        public List<decimal?>  ExtendedAmount { get; set; }
 
-        public decimal? BaseFee { get; set; }
 
-        public decimal? FeeIncrement { get; set; }
 
-        public string MinMaxFlag { get; set; }
+        public List<decimal?> BaseFee { get; set; }
+
+        public List<decimal?> FeeIncrement { get; set; }
+
+        public List<string> MinMaxFlag { get; set; }
 
         [Display(Name ="Assign Valuation")]
         public decimal? ExtendedValue { get; set; }

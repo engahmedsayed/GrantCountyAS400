@@ -8,10 +8,10 @@ namespace GrantCountyAs400.Domain.Building
     {
         public decimal? ExtendedAmountTotal { get; }
 
-        public decimal? NumberOfUnits { get;}
-        public decimal? SequenceNumber { get; }
+        public List<decimal?> NumberOfUnits { get;}
+        public List<decimal?> SequenceNumber { get; }
 
-        public decimal? UnitCharge { get; }
+        public List<decimal?> UnitCharge { get; }
 
         public decimal? ExtendedValue { get;}
 
@@ -37,20 +37,21 @@ namespace GrantCountyAs400.Domain.Building
 
         public decimal? AssignOtherFees { get;}
 
-        public string Description { get; }
+        public List<string> Description { get; }
 
-        public decimal? BaseFee { get; }
+        public List<decimal?> BaseFee { get; }
 
-        public decimal? FeelIncrement { get; }
+        public List<decimal?> FeeIncrement { get; }
 
-        public string MinMaxFlag { get; set; }
+        public List<string> MinMaxFlag { get; }
+        public List<decimal?> ExtendedAmount { get;}
 
         public ValuationAndFees(decimal? extendedAmountTotal, decimal? extendedValue, decimal? assignStructNanNodFees,
                                 decimal? assignPlanReviewFee, decimal? assignPlumbingFees, decimal? assignMechanicalFees,
                                 decimal? assignGradingFees, decimal? assignDemolitionFees, decimal? assignBidPermitFee, 
                                 decimal? assignBidPlanReview, decimal? assignBidBuildingCodeFee, decimal? assignFireMarshalFees, 
-                                decimal? assignOtherFees,decimal? sequenceNumber,string description,decimal? baseFee,
-                                decimal? feeIncrement,string minMaxFlag,decimal? numberOfUnits,decimal? unitCharge)
+                                decimal? assignOtherFees,List<decimal?> sequenceNumber,List<string> description,List<decimal?> baseFee,
+                                List<decimal?> feeIncrement,List<string> minMaxFlag,List<decimal?> numberOfUnits,List<decimal?> unitCharge,List<decimal?> extendedAmount)
         {
             ExtendedAmountTotal = extendedAmountTotal;
             ExtendedValue = extendedValue;
@@ -68,10 +69,11 @@ namespace GrantCountyAs400.Domain.Building
             SequenceNumber = sequenceNumber;
             Description = description;
             BaseFee = baseFee;
-            FeelIncrement = feeIncrement;
+            FeeIncrement = feeIncrement;
             MinMaxFlag = minMaxFlag;
             NumberOfUnits = numberOfUnits;
             UnitCharge = unitCharge;
+            ExtendedAmount = extendedAmount;
 
         }
     }

@@ -77,13 +77,13 @@ namespace GrantCountyAs400.Web.Controllers.Building
             string tempDataObj = TempData.Peek("BasicInfo") as string;
             result.BasicInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<BuildingPermitSystemBasicInfoViewModel>(tempDataObj);
             var gradingExcavationPermitDetailEntity = _buildingModuleRepository.GetGradingExcavationPermitDetail(id);
-            result.CubicYardsOfFill = gradingExcavationPermitDetailEntity?.CubicYardsOfFill;
+            result.CubicYardsOfFill =new List<decimal?> { gradingExcavationPermitDetailEntity?.CubicYardsOfFill };
             var valuationAndFeesEntity = GetValuationAndFees(id, result.BasicInfo.ApplicationYear,
                                                              result.BasicInfo.ApplicationNumber,"grad");
             result.GradExtendedAmount = valuationAndFeesEntity?.AssignGradingFees;
             result.PlrvwExtendedAmount = valuationAndFeesEntity?.AssignPlanReviewFee;
             result.SequenceNumber = valuationAndFeesEntity?.SequenceNumber;
-            result.FeeDescription = valuationAndFeesEntity?.FeeDescription;
+            result.FeeDescription = valuationAndFeesEntity?.Description;
             result.BaseFee = valuationAndFeesEntity.BaseFee;
             result.FeeIncrement = valuationAndFeesEntity.FeeIncrement;
             result.MinMaxFlag = valuationAndFeesEntity.MinMaxFlag;
@@ -102,7 +102,7 @@ namespace GrantCountyAs400.Web.Controllers.Building
                                                              result.BasicInfo.ApplicationNumber, "stbcd");
             result.StateBuildingExtendedAmount = valuationAndFeesEntity?.AssignBidBuildingCodeFee;
             result.NumberOfUnits = valuationAndFeesEntity?.NumberOfUnits;
-            result.ExtendedAmount = valuationAndFeesEntity?.AssignBidBuildingCodeFee;
+            result.ExtendedAmount =new List<decimal?> { valuationAndFeesEntity?.AssignBidBuildingCodeFee };
             return View(result);
         }
 
@@ -133,7 +133,8 @@ namespace GrantCountyAs400.Web.Controllers.Building
             result.BasicInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<BuildingPermitSystemBasicInfoViewModel>(tempDataObj);
             var valuationAndFeesEntity = GetValuationAndFees(id, result.BasicInfo.ApplicationYear,
                                                              result.BasicInfo.ApplicationNumber, "bldg");
-            result.ExtendedAmount = valuationAndFeesEntity?.AssignStructNanNodFees;
+            result.TotalBuildingFees = valuationAndFeesEntity?.AssignStructNanNodFees;
+            result.ExtendedAmount = valuationAndFeesEntity?.BaseFee;
             result.SequenceNumber = valuationAndFeesEntity?.SequenceNumber;
             result.FeeDescription = valuationAndFeesEntity?.Description;
             result.NumberOfUnits = valuationAndFeesEntity.NumberOfUnits;
@@ -141,7 +142,7 @@ namespace GrantCountyAs400.Web.Controllers.Building
             result.TotalValue = valuationAndFeesEntity?.ExtendedValue;
             result.FeeIncrement = valuationAndFeesEntity?.FeeIncrement;
             result.MinMaxFlag = valuationAndFeesEntity?.MinMaxFlag;
-            result.TotalBuildingFees = valuationAndFeesEntity?.BaseFee;
+            result.TotalBuildingFees = valuationAndFeesEntity?.BaseFee.Where(t=>t.HasValue).Sum();
             return View(result);
         }
 
@@ -155,11 +156,31 @@ namespace GrantCountyAs400.Web.Controllers.Building
             var valuationAndFeesEntity = GetValuationAndFees(id, result.BasicInfo.ApplicationYear,
                                                              result.BasicInfo.ApplicationNumber, "plrvw");
             result.ExtendedAmount = valuationAndFeesEntity?.AssignPlanReviewFee;
-            result.PlanReviewFee = valuationAndFeesEntity?.BaseFee;
+            result.PlanReviewFee = valuationAndFeesEntity?.BaseFee.FirstOrDefault();
             result.TotalValue = valuationAndFeesEntity?.ExtendedValue;
             result.TotalPlanReviewFees = valuationAndFeesEntity?.AssignPlanReviewFee;
             result.BuildingPermit = valuationAndFeesEntity?.AssignStructNanNodFees;
                 
+            return View(result);
+        }
+
+        [Route("/building-permit-system/fire-marshal-fees-details/{id}", Name = "fireMarshalFeesDetailsRoute")]
+        public IActionResult FireMarchalFeesDetails(int id)
+        {
+            FireMarshalFeesDetailsViewModel result = new FireMarshalFeesDetailsViewModel();
+            string tempDataObj = TempData.Peek("BasicInfo") as string;
+            result.BasicInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<BuildingPermitSystemBasicInfoViewModel>(tempDataObj);
+
+            var valuationAndFeesEntity = GetValuationAndFees(id, result.BasicInfo.ApplicationYear,
+                                                            result.BasicInfo.ApplicationNumber, "fire");
+
+            result.TotalValue = valuationAndFeesEntity?.ExtendedValue;
+            result.TotalFireMarshalFees = valuationAndFeesEntity?.AssignFireMarshalFees;
+            result.SequenceNumber = valuationAndFeesEntity?.SequenceNumber;
+            result.FeeDescription = valuationAndFeesEntity?.Description;
+            result.NumberOfUnits = valuationAndFeesEntity?.NumberOfUnits;
+            result.UnitCharge = valuationAndFeesEntity?.UnitCharge;
+            result.ExtendedAmount = valuationAndFeesEntity?.ExtendedAmount;
             return View(result);
         }
 

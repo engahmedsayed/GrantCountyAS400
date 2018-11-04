@@ -13,9 +13,9 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         public decimal? StateBuildingExtendedAmount { get; set; }
 
         [Display(Name ="Number Of units")]
-        public decimal? NumberOfUnits { get; set; }
+        public List<decimal?> NumberOfUnits { get; set; }
 
         [Display(Name ="Extended Amount")]
-        public decimal? ExtendedAmount { get; set; }
+        public List<decimal?> ExtendedAmount { get; set; }
     }
 }
