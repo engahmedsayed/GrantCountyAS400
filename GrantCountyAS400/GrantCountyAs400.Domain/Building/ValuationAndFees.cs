@@ -45,13 +45,24 @@ namespace GrantCountyAs400.Domain.Building
 
         public List<string> MinMaxFlag { get; }
         public List<decimal?> ExtendedAmount { get;}
+        public decimal? AssignedValue { get; }
+
+        public decimal? StateClassCode { get;}
+
+        public DateTime? ProjectedExpireDate { get;}
+
+        public DateTime? ActualExpireDate { get;}
+
+        public string ExpiredByUser { get; }
 
         public ValuationAndFees(decimal? extendedAmountTotal, decimal? extendedValue, decimal? assignStructNanNodFees,
                                 decimal? assignPlanReviewFee, decimal? assignPlumbingFees, decimal? assignMechanicalFees,
                                 decimal? assignGradingFees, decimal? assignDemolitionFees, decimal? assignBidPermitFee, 
                                 decimal? assignBidPlanReview, decimal? assignBidBuildingCodeFee, decimal? assignFireMarshalFees, 
                                 decimal? assignOtherFees,List<decimal?> sequenceNumber,List<string> description,List<decimal?> baseFee,
-                                List<decimal?> feeIncrement,List<string> minMaxFlag,List<decimal?> numberOfUnits,List<decimal?> unitCharge,List<decimal?> extendedAmount)
+                                List<decimal?> feeIncrement,List<string> minMaxFlag,List<decimal?> numberOfUnits,List<decimal?> unitCharge,
+                                List<decimal?> extendedAmount,decimal? assignedValue,decimal?stateClassCode,DateTime? projectedExpireDate,
+                                DateTime? actualExpireDate,string expiredByUser)
         {
             ExtendedAmountTotal = extendedAmountTotal;
             ExtendedValue = extendedValue;
@@ -74,7 +85,11 @@ namespace GrantCountyAs400.Domain.Building
             NumberOfUnits = numberOfUnits;
             UnitCharge = unitCharge;
             ExtendedAmount = extendedAmount;
-
+            AssignedValue = assignedValue;
+            StateClassCode = stateClassCode;
+            ProjectedExpireDate = projectedExpireDate;
+            ActualExpireDate = actualExpireDate;
+            ExpiredByUser = expiredByUser;
         }
     }
 }

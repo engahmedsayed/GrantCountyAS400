@@ -65,6 +65,16 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         [Display(Name ="Assign Other Fees")]
         public decimal? AssignOtherFees { get; set; }
 
+        public decimal? AssignedValue { get; set; }
+
+        public decimal? StateClassCode { get; set; }
+
+        public DateTime? ProjectedExpireDate { get; set; }
+
+        public string ExpiredByUser { get; set; }
+
+        public DateTime? ActualExpireDate { get; set; }
+
         public int Id { get; set; }
     }
 }

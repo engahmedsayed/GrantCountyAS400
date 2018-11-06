@@ -184,6 +184,31 @@ namespace GrantCountyAs400.Web.Controllers.Building
             return View(result);
         }
 
+        [Route("/building-permit-system/total-fees-details/{id}", Name = "totalFeesDetailsRoute")]
+        public IActionResult TotalFeesDetails(int id)
+        {
+            TotalFeesDetailsViewModel result = new TotalFeesDetailsViewModel();
+            string tempDataObj = TempData.Peek("BasicInfo") as string;
+            result.BasicInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<BuildingPermitSystemBasicInfoViewModel>(tempDataObj);
+
+            var valuationAndFeesEntity = GetValuationAndFees(id, result.BasicInfo.ApplicationYear,
+                                                            result.BasicInfo.ApplicationNumber, "fire");
+            var receiptHeader = GetReceiptsReport(id);
+
+            result.TotalValue = valuationAndFeesEntity?.AssignedValue;
+            result.TotalFeesDue = valuationAndFeesEntity?.ExtendedAmountTotal;
+            result.TotalPaid = receiptHeader?.ReceiptHeaders.Where(t=>t.ApplicationNumber == result.BasicInfo.ApplicationNumber && t.ApplicationYear == result.BasicInfo.ApplicationYear).
+                               Select(t=>t.TotalReceipt-t.CheckAmount).Sum();
+            result.BalanceDue = result.TotalFeesDue - result.TotalPaid;
+            result.StateClassification = valuationAndFeesEntity?.StateClassCode;
+            result.ProjectedExpireDate = valuationAndFeesEntity?.ProjectedExpireDate;
+            result.ActualExpireDate = valuationAndFeesEntity?.ActualExpireDate;
+            result.ByUser = valuationAndFeesEntity?.ExpiredByUser;
+            return View(result);
+        }
+
+        ///totalFeesDetailsRoute
+
 
         private (string viewName, dynamic permitDetail) GetPermitDetail(int id, string permitCode)
         {

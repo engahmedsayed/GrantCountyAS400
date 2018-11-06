@@ -11,7 +11,11 @@
             </tr>
             <tr>
                 <td><strong>Total Fees </strong></td>
-                <td class="text-right"><span> @Html.DisplayFor(model => model.ExtendedAmountTotal) </span></td>
+                <td class="text-right">
+                    <span>
+                        <a asp-route="totalFeesDetailsRoute" asp-route-id="@Model.Id"> @Html.DisplayFor(model => model.ExtendedAmountTotal)</a>
+                    </span>
+                </td>
             </tr>
             <tr>
                 <td><strong>@Html.DisplayNameFor(model => model.ExtendedValue) </strong></td>
