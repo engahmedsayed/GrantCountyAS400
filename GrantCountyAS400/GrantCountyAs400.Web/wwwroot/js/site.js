@@ -8,6 +8,14 @@ $(function () { // onDomReady
 
         return false;
     });
+
+    // show nested submenu
+    $('.dropdown-submenu a.sub-link').on("click", function (e) {
+        $('.dropdown-submenu a.sub-link').next('ul').hide(); // hide any previous displayed submenus
+        $(this).next('ul').toggle();
+        e.stopPropagation();
+        e.preventDefault();
+    });
 });
 
 //import { debug } from "util";
@@ -16,7 +24,6 @@ $(function () { // onDomReady
 function Search() {
     var searchVal = $("#searchText").val();
     var param = {};
-    debugger;
     param.searchVal = searchVal;
     $.ajax({
         url: refreshUrl,
@@ -30,7 +37,6 @@ function Search() {
         }
     });
 }
-
 
 /*press enter on search textBox*/
 /*@event event object*/
