@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -32,76 +32,100 @@
                 </button>
                 <a asp-page="/Index" class="navbar-brand">GrantCountyAs400</a>
             </div>
-           
+
             <div class="navbar-collapse collapse">
-                @if(User.IsInRole("Accountant") || User.IsInRole("Member") || User.IsInRole("Admin"))
+                @if (User.IsInRole("Accountant") || User.IsInRole("Member") || User.IsInRole("Admin"))
                 {
-                <ul class="nav navbar-nav">
-                    @if (User.IsInRole("Accountant") || User.IsInRole("Admin"))
-                    {
+                    <ul class="nav navbar-nav">
+                        @if (User.IsInRole("Accountant") || User.IsInRole("Admin"))
+                        {
+                            <li>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Accounting<span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    <li><a asp-controller="Personnel" asp-action="Index">Personnel</a></li>
+                                    <li><a asp-controller="GeneralLedger" asp-action="Index">General Ledger</a></li>
+                                </ul>
+                            </li>
+                        }
                         <li>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                Accounting<span class="caret"></span>
+                                Assessment<span class="caret"></span>
                             </a>
-
                             <ul class="dropdown-menu">
-                                <li><a asp-controller="Personnel" asp-action="Index">Personnel</a></li>
-                                <li><a asp-controller="GeneralLedger" asp-action="Index">General Ledger</a></li>
+                                <li><a asp-controller="RealProperty" asp-action="Index">Real Property</a></li>
+                                <li><a asp-controller="LegalDocument" asp-action="Index">Legal Documents</a></li>
+                                <li><a asp-controller="ChildParentParcel" asp-action="Index">Child-Parent Parcels</a></li>
+                                <li><a asp-controller="PlatCondo" asp-action="Index">Plats and Condos</a></li>
+                                <li><a asp-controller="ManufacturedHomePark" asp-action="Index">Manufactured Home Parks</a></li>
+                                <li><a asp-controller="LegalDescription" asp-action="Index">Legal Descriptions</a></li>
+                                <li><a asp-controller="AssociatedPersons" asp-action="Index">Associated Persons</a></li>
+                                <li><a asp-controller="BuildingPermits" asp-action="Index">Building Permits</a></li>
                             </ul>
                         </li>
-                    }
-                    <li>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            Assessment<span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a asp-controller="RealProperty" asp-action="Index">Real Property</a></li>
-                            <li><a asp-controller="LegalDocument" asp-action="Index">Legal Documents</a></li>
-                            <li><a asp-controller="ChildParentParcel" asp-action="Index">Child-Parent Parcels</a></li>
-                            <li><a asp-controller="PlatCondo" asp-action="Index">Plats and Condos</a></li>
-                            <li><a asp-controller="ManufacturedHomePark" asp-action="Index">Manufactured Home Parks</a></li>
-                            <li><a asp-controller="LegalDescription" asp-action="Index">Legal Descriptions</a></li>
-                            <li><a asp-controller="AssociatedPersons" asp-action="Index">Associated Persons</a></li>
-                            <li><a asp-controller="BuildingPermits" asp-action="Index">Building Permits</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            Building <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a asp-controller="BuildingPermitSystem" asp-action="Index">Building Permits</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            Treasurer <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a asp-controller="TaxReceivable" asp-action="Index">Tax Receivable</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            Health <span class="caret"></span>
-                        </a>
-                    </li>
-                    @if (User.IsInRole("Admin"))
-                    {
-                    <li>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            Users <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a asp-controller="UserAdmin" asp-action="Index">User Management</a></li>
-                        </ul>
-                    </li>
-                    }
-                </ul>
+                        <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Building <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a asp-controller="BuildingPermitSystem" asp-action="Index">Building Permits</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Treasurer <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a asp-controller="TaxReceivable" asp-action="Index">Tax Receivable</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Health <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-submenu">
+                                    <a href="#" class="sub-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        Assessment<span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a asp-controller="RealProperty" asp-action="Index">Real Property</a></li>
+                                        <li><a asp-controller="LegalDocument" asp-action="Index">Legal Documents</a></li>
+                                        <li><a asp-controller="ChildParentParcel" asp-action="Index">Child-Parent Parcels</a></li>
+                                        <li><a asp-controller="PlatCondo" asp-action="Index">Plats and Condos</a></li>
+                                        <li><a asp-controller="ManufacturedHomePark" asp-action="Index">Manufactured Home Parks</a></li>
+                                        <li><a asp-controller="LegalDescription" asp-action="Index">Legal Descriptions</a></li>
+                                        <li><a asp-controller="AssociatedPersons" asp-action="Index">Associated Persons</a></li>
+                                        <li><a asp-controller="BuildingPermits" asp-action="Index">Building Permits</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <a href="#" class="sub-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        Building <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a asp-controller="BuildingPermitSystem" asp-action="Index">Building Permits</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Users <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a asp-controller="UserAdmin" asp-action="Index">User Management</a></li>
+                                </ul>
+                            </li>
+                        }
+                    </ul>
                 }
-                    <partial name="_LoginPartial" />
-                </div>
-            
+                <partial name="_LoginPartial" />
+            </div>
         </div>
     </nav>
     <div class="container body-content">
