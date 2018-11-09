@@ -200,6 +200,64 @@ namespace GrantCountyAs400.Web.Controllers.UserAdmin
             return View();
         }
 
+        //
+        // GET: /Users/Delete/5
+        /// <summary>
+        /// delete user page
+        /// </summary>
+        /// <param name="id">user id</param>
+        /// <returns>delete user confirm page html</returns>
+        [Route("Delete")]
+        public async Task<ActionResult> Delete(string id)
+        {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return View(user);
+        }
+
+        //
+        // POST: /Users/Delete/5
+        /// <summary>
+        /// delete user from database
+        /// </summary>
+        /// <param name="id">user id</param>
+        /// <returns>if success return to users list page if there is error stay on the same page</returns>
+        [HttpPost]
+        [Route("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed(string id)
+        {
+            if (ModelState.IsValid)
+            {
+                if (id == null)
+                {
+                    return BadRequest();
+                }
+
+                var user = await _userManager.FindByIdAsync(id);
+                if (user == null)
+                {
+                    return NotFound();
+                }
+                var result = await _userManager.DeleteAsync(user);
+                if (!result.Succeeded)
+                {
+                    ModelState.AddModelError("", result.Errors.First().Description);
+                    return View();
+                }
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+
         [Route("Details")]
         public async Task<ActionResult> Details(string id)
         {
