@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace GrantCountyAs400.Domain.Building
 {
@@ -213,11 +213,12 @@ namespace GrantCountyAs400.Domain.Building
         public ApprovalStatusInfo CityUtility { get; }
         public ApprovalStatusInfo Owner { get; }
         public ApprovalStatusInfo OtherSpecial { get; }
-        public string OtherSpecialDescription { get; }
         public ApprovalStatusInfo Application { get; }
+        public string OtherSpecialDescription { get; }
 
-        public BuildingPermitSystemApprovalStatusInfo(ApprovalStatusInfo planning, ApprovalStatusInfo health, ApprovalStatusInfo assessor, ApprovalStatusInfo publicWroks,
-            ApprovalStatusInfo cityJurisdiction, ApprovalStatusInfo architect, ApprovalStatusInfo fire, ApprovalStatusInfo li, ApprovalStatusInfo cityUtility, ApprovalStatusInfo owner,
+        public BuildingPermitSystemApprovalStatusInfo(
+            ApprovalStatusInfo planning, ApprovalStatusInfo health, ApprovalStatusInfo assessor, ApprovalStatusInfo publicWroks, ApprovalStatusInfo cityJurisdiction,
+            ApprovalStatusInfo architect, ApprovalStatusInfo fire, ApprovalStatusInfo li, ApprovalStatusInfo cityUtility, ApprovalStatusInfo owner,
             ApprovalStatusInfo otherSpecial, ApprovalStatusInfo application, string otherSpecialDescription)
         {
             Planning = planning;
@@ -228,11 +229,11 @@ namespace GrantCountyAs400.Domain.Building
             Architect = architect;
             Fire = fire;
             LI = li;
-            CityUtility = CityUtility;
+            CityUtility = cityUtility;
             Owner = owner;
             OtherSpecial = otherSpecial;
-            OtherSpecialDescription = otherSpecialDescription;
             Application = application;
+            OtherSpecialDescription = otherSpecialDescription;
         }
     }
 
