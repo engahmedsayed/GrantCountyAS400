@@ -2,10 +2,8 @@
 using GrantCountyAs400.Domain.Assessment.Repository;
 using GrantCountyAs400.PersistenceAdapter.Mappers.Assessment;
 using GrantCountyAs400.PersistenceAdapter.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace GrantCountyAs400.PersistenceAdapter.Repositories
 {
@@ -17,12 +15,12 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
         {
             _context = dbContext;
         }
+
         public AssociatedPerson GetAssociatedPerson(decimal? parcelNumber, string nameCode)
         {
-
             var rpasc = _context.AsmtrealPropertyAssociatedPersons.Where(t => ((parcelNumber == null) || (parcelNumber == 0) || (t.ParcelNumber == parcelNumber))
                                 && ((nameCode == null) || (t.NameCode == nameCode))).FirstOrDefault();
-            var nnamejoinedRpasc = _context.AsmtmasterNameAddress.Where(t =>rpasc!=null && t.NameCode == rpasc.NameCode).FirstOrDefault();
+            var nnamejoinedRpasc = _context.AsmtmasterNameAddress.FirstOrDefault(t => rpasc != null && t.NameCode == rpasc.NameCode);
             var rpmas = _context.AsmtrealPropertyAssessedValueMaster.Where(t => t.ParcelNumber == parcelNumber).FirstOrDefault();
             var taxPayerNName = _context.AsmtmasterNameAddress.Where(t => t.NameCode == rpmas.TaxpayerCode).FirstOrDefault();
             var ownerNName = _context.AsmtmasterNameAddress.Where(t => t.NameCode == rpmas.TaxpayerCode).FirstOrDefault();
@@ -34,31 +32,31 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                              on RPASC.NameCode equals NNAME.NameCode
                              where ((parcelNumber == null) || (parcelNumber == 0) || (RPASC.ParcelNumber == parcelNumber))
                                 && ((nameCode == null) || (RPASC.NameCode == nameCode))
-                             select AssociatedPersonMapper.Map(RPASC,NNAME);
+                             select AssociatedPersonMapper.Map(RPASC, NNAME);
             lineValues = lineValues?.OrderBy(t => t.AsmtmasterNameAddressNameCode);
-            if (rpasc != null )
+            if (rpasc != null)
             {
                 var result = new AssociatedPerson(rpasc.Id, rpasc?.ParcelNumber, taxPayerNName?.Name, ownerNName?.Name, rpmas?.Description1,
-                aplnd?.UseCodeShortDesc, rpmas?.Description2,rpmas?.Description3,rpmas?.Description4,rpmas?.Description5
-                ,rpmas?.LienDate,rpmas?.AffidavitNumber,rpzon?.ZoneCodeDesc,aptxc?.TaxCodeDesc,rpmas?.FirePatrolAcres
-                ,rpmas?.UnimprovedLandAcres,rpmas?.ImprovedLandAcers,rpmas?.FmimprovedLandValue,rpmas?.BuildingValue
-                ,rpmas?.AffidavitTaxYear,lineValues.ToList()
-                , nnamejoinedRpasc?.AddressLine1, nnamejoinedRpasc?.City, nnamejoinedRpasc?.State 
-                ,nnamejoinedRpasc?.Zip,rpasc?.ChangeId,rpasc?.ChangeDate,rpasc.NameCode,nnamejoinedRpasc.Name,rpasc.Comment);
+                aplnd?.UseCodeShortDesc, rpmas?.Description2, rpmas?.Description3, rpmas?.Description4, rpmas?.Description5
+                , rpmas?.LienDate, rpmas?.AffidavitNumber, rpzon?.ZoneCodeDesc, aptxc?.TaxCodeDesc, rpmas?.FirePatrolAcres
+                , rpmas?.UnimprovedLandAcres, rpmas?.ImprovedLandAcers, rpmas?.FmimprovedLandValue, rpmas?.BuildingValue
+                , rpmas?.AffidavitTaxYear, lineValues.ToList()
+                , nnamejoinedRpasc?.AddressLine1, nnamejoinedRpasc?.City, nnamejoinedRpasc?.State
+                , nnamejoinedRpasc?.Zip, rpasc?.ChangeId, rpasc?.ChangeDate, rpasc.NameCode, nnamejoinedRpasc?.Name, rpasc.Comment);
                 return result;
             }
-            
+
             return null;
         }
 
         public List<AssociatedPersonMain> GetAssociatedPersonMain(decimal? parcelNumber, string nameCode
-                                                                  ,out int resultCount, int pageNumber = 1, int pageSize = 50)
+                                                                  , out int resultCount, int pageNumber = 1, int pageSize = 50)
         {
             List<AssociatedPersonMain> results = new List<AssociatedPersonMain>();
 
             var query = from RPASC in _context.AsmtrealPropertyAssociatedPersons
-                        where ((parcelNumber == null) ||(parcelNumber == 0) || (RPASC.ParcelNumber == parcelNumber))
-                        && ((nameCode == null ) || (RPASC.NameCode == nameCode))
+                        where ((parcelNumber == null) || (parcelNumber == 0) || (RPASC.ParcelNumber == parcelNumber))
+                        && ((nameCode == null) || (RPASC.NameCode == nameCode))
                         select AssociatedPersonMapper.Map(RPASC);
 
             if (pageNumber > 0)
