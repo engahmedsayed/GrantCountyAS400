@@ -40,15 +40,17 @@
                     <tbody>
                         <tr>
                             <td><strong>@Html.DisplayNameFor(model => model.StateClassification) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.StateClassification) </span></td>
-                            <td>Grading</td>
+                            <td class="text-right">
+                                <span> @Html.DisplayFor(model => model.StateClassification) </span>&nbsp;&nbsp;
+                                <span>Grading</span>
+                            </td>
                         </tr>
                         <tr>
                             <td><strong>@Html.DisplayNameFor(model => model.ProjectedExpireDate) </strong></td>
                             <td class="text-right"><span> @Html.DisplayFor(model => model.ProjectedExpireDate) </span></td>
                         </tr>
                         <tr>
-                            <td><strong>Permit Expired</strong></td>
+                            <td><strong>@Html.DisplayNameFor(model => model.ActualExpireDate) </strong></td>
                             <td class="text-right"><span> @Html.DisplayFor(model => model.ActualExpireDate) </span></td>
                         </tr>
                         <tr>

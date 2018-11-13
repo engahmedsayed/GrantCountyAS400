@@ -30,8 +30,11 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         public string ViewIssuePermit { get; set; }
 
         [Display(Name ="Projected Expire Date")]
+        [DataType(DataType.Date)]
         public DateTime? ProjectedExpireDate { get; set; }
 
+        [Display(Name = "Permit Expired")]
+        [DataType(DataType.Date)]
         public DateTime? ActualExpireDate { get; set; }
 
         [Display(Name ="User")]
