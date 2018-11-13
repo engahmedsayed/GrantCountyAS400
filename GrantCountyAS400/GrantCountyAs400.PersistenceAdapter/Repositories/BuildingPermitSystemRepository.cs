@@ -69,6 +69,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          join preliminaryNames in _context.ASMTValueMasterNameView on bldgpermit.PreliminaryParcelNumber equals preliminaryNames.ParcelNumber
                          join assessorNames in _context.ASMTValueMasterNameView on bldgpermit.PreliminaryParcelNumber equals assessorNames.ParcelNumber
                          join bldgContractor in _context.Bldgcontractors on bldgpermit.ContractLicenseNumber equals bldgContractor.ContractLicenseNumber
+                         into bldgContractorJoin
+                         from bldgContractorRecord in bldgContractorJoin.DefaultIfEmpty()
                          join situs in _context.AsmtsitusAddress on bldgpermit.AssessorParcelNumber equals situs.ParcelNumber
                          into situsJoin
                          from situsRecord in situsJoin.DefaultIfEmpty()
@@ -102,7 +104,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                                                cityCodeRecord,
                                                                mdiaArchitectRecord,
                                                                mdiaEngineerRecord,
-                                                               bldgContractor,
+                                                               bldgContractorRecord,
                                                                rpmasRecord,nNameRecord)).SingleOrDefault();
             if(query != null &&  query.ApprovalStatus != null)
             {

@@ -66,7 +66,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                                                                                   Bldgcontractors bldgContractor) =>
             new BuildingPermitSystemApplicantDetails(bldgpermit.ContractLicenseNumber,
                 bldgpermit.ApplicantProjectDescription, bldgpermit.ResultOfEnforcementAction, bldgpermit.EnforcementDescription, bldgpermit.PlotPlanReceived,
-                bldgpermit.OnlyStructureOnParcel, bldgpermit.OnlyResidenceOnParcel, bldgContractor.ContractorBusinessName,
+                bldgpermit.OnlyStructureOnParcel, bldgpermit.OnlyResidenceOnParcel, bldgContractor?.ContractorBusinessName,
                 bldgpermit.ArchitectFirmNumber, mdia?.BusinessName, bldgpermit.EngineerFirmNumber, mdiaBusinessEngineer?.BusinessName);
 
         private static BuildingValueMasterNameInfo Map(ASMTValueMasterNameView valueMaster) =>
