@@ -102,8 +102,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
 
         public static AssessorApproval MaptToAssessorApproval(AsmtrealPropertyAssessedValueMaster rpmas, BldgassessorApproval assessorApproval,
                                                         AsmtmasterNameAddress nName, BldgpermitApplicationMaster appm) =>
-            new AssessorApproval(appm?.ApplicantProjectDescription, assessorApproval?.Comments, assessorApproval?.ApprovedBy,
-                                 assessorApproval?.UserId, assessorApproval?.ChangeDate, appm?.AssessorParcelNumber, nName?.Name,
+            new AssessorApproval(appm?.ApplicantProjectDescription, assessorApproval?.Comments, assessorApproval?.ApprovedByAssr,
+                                 assessorApproval?.UserIdassr, assessorApproval?.ChangeDate, appm?.AssessorParcelNumber, nName?.Name,
                                  rpmas?.Description1, rpmas?.Description2);
 
         internal static PublicWorkApproval MapToPublicWorkApproval(BldgpermitApplicationMaster appm,
