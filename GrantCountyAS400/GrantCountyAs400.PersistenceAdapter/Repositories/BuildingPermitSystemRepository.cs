@@ -194,9 +194,9 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                     query.SetHealthApproval(BuildingPermitSystemMapper.MapToHealthApproval(healthApproval.bldgpermit, 
                                             healthApproval.healthRecord));
                 }
-                if (query.ApprovalStatus.CityJurisdiction != null &&
-                    query.ApprovalStatus.CityJurisdiction.Required.ToLower() == "y" &&
-                    query.ApprovalStatus.CityJurisdiction.Date.HasValue)
+                if (query.ApprovalStatus.CityUtility != null &&
+                    query.ApprovalStatus.CityUtility.Required.ToLower() == "y" &&
+                    query.ApprovalStatus.CityUtility.Date.HasValue)
                 {
                     var cityApproval = (from bldgpermit in _context.BldgpermitApplicationMaster
                                         join city in _context.BldgcityApproval
