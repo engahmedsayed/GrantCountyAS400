@@ -54,7 +54,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                 Map(assessorValueMaster), Map(situs, cityCode),
                 MapToApprovalStatus(bldgpermit));
 
-        private static BuildingPermitSystemBasicInfo MapToBasicInfo(BldgpermitApplicationMaster bldgpermit,
+        public static BuildingPermitSystemBasicInfo MapToBasicInfo(BldgpermitApplicationMaster bldgpermit,
                                                                     Bldgjurisdictions juri,
                                                                     Bldgdepartments dept) =>
             new BuildingPermitSystemBasicInfo(bldgpermit.JurisdictionCode, bldgpermit.DepartmentCode, bldgpermit.ApplicationYear.Value, bldgpermit.ApplicationNumber.Value,

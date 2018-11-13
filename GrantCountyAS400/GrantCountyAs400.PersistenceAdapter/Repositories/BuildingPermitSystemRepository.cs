@@ -224,6 +224,17 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             return query;
         }
 
+        public BuildingPermitSystemBasicInfo GetBasicInfo(int id)
+        {
+            var query = (from bldgpermit in _context.BldgpermitApplicationMaster
+                         join juri in _context.Bldgjurisdictions on bldgpermit.JurisdictionCode equals juri.DepartmentCode
+                         join dept in _context.Bldgdepartments on bldgpermit.DepartmentCode equals dept.DepartmentCode
+                         where bldgpermit.Id == id
+                         select new { bldgpermit, juri, dept }).SingleOrDefault();
+
+            return BuildingPermitSystemMapper.MapToBasicInfo(query.bldgpermit, query.juri, query.dept);
+        }
+
         public DemolitionPermit GetDemolitionPermitByBuildingPermitSystemId(int id)
         {
             var query = (from bldg in _context.BldgpermitApplicationMaster
@@ -319,14 +330,16 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          from apinConditionRecord in apinConditionJoin.DefaultIfEmpty()
                          join appv in _context.BldgapplicationValues
                          on new { strd.ApplicationYear, strd.ApplicationNumber } equals new { appv.ApplicationYear, appv.ApplicationNumber }
-                         into appvCondition
-                         from appvConditionRecord in appvCondition.DefaultIfEmpty()
+                         into appvApplicationValues
+                         from appvApplicationRecord in appvApplicationValues.DefaultIfEmpty()
                          where bldg.Id == id
-                         select new { bldg, apcnConditionRecord, apinConditionRecord, strd, fdst, appvConditionRecord }).FirstOrDefault();
+                         select new { bldg, apcnConditionRecord, apinConditionRecord, strd, fdst, appvApplicationValues });
 
             if (query != null)
             {
-                return PermitDetailMapper.Map(query.bldg, query.apcnConditionRecord, query.apinConditionRecord, query.strd, query.fdst, query.appvConditionRecord);
+                return PermitDetailMapper.Map(query.FirstOrDefault().bldg, query.FirstOrDefault().apcnConditionRecord, 
+                                              query.FirstOrDefault().apinConditionRecord, query.FirstOrDefault().strd, query.FirstOrDefault().fdst,
+                                              query.SelectMany(t=>t.appvApplicationValues).Distinct());
             }
             return null;
         }

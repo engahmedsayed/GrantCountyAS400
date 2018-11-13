@@ -64,8 +64,6 @@ namespace GrantCountyAs400.Web.Controllers.Building
             ViewBag.Inspections = GetInspections(id);
             ViewBag.Conditions = GetConditions(id);
             ViewBag.Receipts = GetReceiptsReport(id);
-            TempData["BasicInfo"] = Newtonsoft.Json.JsonConvert.SerializeObject(viewmodel.BasicInfo);
-            TempData.Keep("BasicInfo");
             return View(viewmodel);
         }
 
@@ -74,8 +72,9 @@ namespace GrantCountyAs400.Web.Controllers.Building
         public IActionResult GradingFeesDetails(int id)
         {
             GradingFeesDetailsViewModel result = new GradingFeesDetailsViewModel();
-            string tempDataObj = TempData.Peek("BasicInfo") as string;
-            result.BasicInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<BuildingPermitSystemBasicInfoViewModel>(tempDataObj);
+           
+            result.BasicInfo = Mapper.Map<BuildingPermitSystemBasicInfoViewModel>(_buildingModuleRepository.GetBasicInfo(id));
+            
             var gradingExcavationPermitDetailEntity = _buildingModuleRepository.GetGradingExcavationPermitDetail(id);
             result.CubicYardsOfFill =new List<decimal?> { gradingExcavationPermitDetailEntity?.CubicYardsOfFill };
             var valuationAndFeesEntity = GetValuationAndFees(id, result.BasicInfo.ApplicationYear,
@@ -95,8 +94,7 @@ namespace GrantCountyAs400.Web.Controllers.Building
         public IActionResult StateBuildingFeeDetails(int id)
         {
             StateBuildingFeesDetailsViewModel result = new StateBuildingFeesDetailsViewModel();
-            string tempDataObj = TempData.Peek("BasicInfo") as string;
-            result.BasicInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<BuildingPermitSystemBasicInfoViewModel>(tempDataObj);
+            result.BasicInfo = Mapper.Map<BuildingPermitSystemBasicInfoViewModel>(_buildingModuleRepository.GetBasicInfo(id));
             var gradingExcavationPermitDetailEntity = _buildingModuleRepository.GetGradingExcavationPermitDetail(id);
             var valuationAndFeesEntity = GetValuationAndFees(id, result.BasicInfo.ApplicationYear,
                                                              result.BasicInfo.ApplicationNumber, "stbcd");
@@ -111,8 +109,7 @@ namespace GrantCountyAs400.Web.Controllers.Building
         public IActionResult OtherFeesDetails(int id)
         {
             OtherFeesDetailsViewModel result = new OtherFeesDetailsViewModel();
-            string tempDataObj = TempData.Peek("BasicInfo") as string;
-            result.BasicInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<BuildingPermitSystemBasicInfoViewModel>(tempDataObj);
+            result.BasicInfo = Mapper.Map<BuildingPermitSystemBasicInfoViewModel>(_buildingModuleRepository.GetBasicInfo(id));
             var valuationAndFeesEntity = GetValuationAndFees(id, result.BasicInfo.ApplicationYear,
                                                              result.BasicInfo.ApplicationNumber, "othrb");
             result.OtherExtendedAmount = valuationAndFeesEntity?.AssignOtherFees;
@@ -129,8 +126,7 @@ namespace GrantCountyAs400.Web.Controllers.Building
         public IActionResult ManModFeesDetails(int id)
         {
             ManModFeesDetailsViewModel result = new ManModFeesDetailsViewModel();
-            string tempDataObj = TempData.Peek("BasicInfo") as string;
-            result.BasicInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<BuildingPermitSystemBasicInfoViewModel>(tempDataObj);
+            result.BasicInfo = Mapper.Map<BuildingPermitSystemBasicInfoViewModel>(_buildingModuleRepository.GetBasicInfo(id));
             var valuationAndFeesEntity = GetValuationAndFees(id, result.BasicInfo.ApplicationYear,
                                                              result.BasicInfo.ApplicationNumber, "bldg");
             result.TotalBuildingFees = valuationAndFeesEntity?.AssignStructNanNodFees;
@@ -151,8 +147,7 @@ namespace GrantCountyAs400.Web.Controllers.Building
         public IActionResult PlanReviewFeeDetails(int id)
         {
             PlanReviewFeeDetailsViewModel result = new PlanReviewFeeDetailsViewModel();
-            string tempDataObj = TempData.Peek("BasicInfo") as string;
-            result.BasicInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<BuildingPermitSystemBasicInfoViewModel>(tempDataObj);
+            result.BasicInfo = Mapper.Map<BuildingPermitSystemBasicInfoViewModel>(_buildingModuleRepository.GetBasicInfo(id));
             var valuationAndFeesEntity = GetValuationAndFees(id, result.BasicInfo.ApplicationYear,
                                                              result.BasicInfo.ApplicationNumber, "plrvw");
             result.ExtendedAmount = valuationAndFeesEntity?.AssignPlanReviewFee;
@@ -168,8 +163,7 @@ namespace GrantCountyAs400.Web.Controllers.Building
         public IActionResult FireMarchalFeesDetails(int id)
         {
             FireMarshalFeesDetailsViewModel result = new FireMarshalFeesDetailsViewModel();
-            string tempDataObj = TempData.Peek("BasicInfo") as string;
-            result.BasicInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<BuildingPermitSystemBasicInfoViewModel>(tempDataObj);
+            result.BasicInfo = Mapper.Map<BuildingPermitSystemBasicInfoViewModel>(_buildingModuleRepository.GetBasicInfo(id));
 
             var valuationAndFeesEntity = GetValuationAndFees(id, result.BasicInfo.ApplicationYear,
                                                             result.BasicInfo.ApplicationNumber, "fire");
@@ -188,8 +182,7 @@ namespace GrantCountyAs400.Web.Controllers.Building
         public IActionResult TotalFeesDetails(int id)
         {
             TotalFeesDetailsViewModel result = new TotalFeesDetailsViewModel();
-            string tempDataObj = TempData.Peek("BasicInfo") as string;
-            result.BasicInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<BuildingPermitSystemBasicInfoViewModel>(tempDataObj);
+            result.BasicInfo = Mapper.Map<BuildingPermitSystemBasicInfoViewModel>(_buildingModuleRepository.GetBasicInfo(id));
 
             var valuationAndFeesEntity = GetValuationAndFees(id, result.BasicInfo.ApplicationYear,
                                                             result.BasicInfo.ApplicationNumber, "fire");

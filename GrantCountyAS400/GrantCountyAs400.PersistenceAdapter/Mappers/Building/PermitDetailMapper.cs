@@ -1,5 +1,7 @@
 ﻿using GrantCountyAs400.Domain.Building;
 using GrantCountyAs400.PersistenceAdapter.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
 {
@@ -35,7 +37,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
 
         internal static StructurePermitDetail Map(BldgpermitApplicationMaster bldg, BldgapplicationConditions apcnConditionRecord,
                                                   BldgapplicationInspections apinConditionRecord,
-                                                  BldgstructureBuildingPermitDetail strd, BldgfireDistrictCodes fdst, BldgapplicationValues appv) =>
+                                                  BldgstructureBuildingPermitDetail strd, BldgfireDistrictCodes fdst, IEnumerable<BldgapplicationValues> appv) =>
             new StructurePermitDetail(strd.OfficeProjectDescription, strd.ResAgCommOther, strd.NumberOfBedrooms,
                                       strd.NumberOfBathrooms, strd.NumberOfUnits, strd.Heated, strd.HeatSourceDescription,
                                       strd.PrescriptiveReviewDone, strd.WattsunRunReviewDone, strd.Nrecreceived, strd.PlansAnalystReviewDone,
@@ -44,7 +46,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                                       strd.SpecialInspectionDescription, strd.PermitIncludePlumbing, strd.PermitIncludeMechanical,
                                       strd.FireDistrictCode, fdst.LongFireDistrictName, strd.FireFlowAlreadyProvided, strd.AdditionalFireFlowRequired,
                                       strd.AmountOfFireFlowRequired, strd.BldgDeptSetback, strd.FireMarshalSetback, apcnConditionRecord == null,
-                                       apinConditionRecord == null, appv?.ExtendedValue, new PermitApprovedInfo(strd.BldgDeptApprovedBy,
+                                       apinConditionRecord == null, appv?.Sum(t=>t.ExtendedValue), new PermitApprovedInfo(strd.BldgDeptApprovedBy,
                                                                                                                 strd.BldgDepDateApproved,
                                                                                                                 strd.BldgDeptApprovedUserId,
                                                                                                                 strd.BldgDeptApprovedChangeDate),

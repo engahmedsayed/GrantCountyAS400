@@ -9,6 +9,8 @@ namespace GrantCountyAs400.Domain.Building.Repository
                                           string jurisdictionCode, out int resultCount, int pageNumber = 1, int pageSize = 50);
         BuildingPermitSystem Get(int id);
         BuildingPermitSystemDetails Details(int id);
+
+        BuildingPermitSystemBasicInfo GetBasicInfo(int id);
         DemolitionPermit GetDemolitionPermitByBuildingPermitSystemId(int id);
         OtherPermitDetail GetOtherPermitDetailByBuildingPermitSystemId(int id);
         MechanicalPermitDetail GetMechanicalPermitDetailByBuildingPermitSystemId(int id);
