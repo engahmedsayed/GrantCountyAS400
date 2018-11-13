@@ -10,8 +10,9 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         public string JurisidictionShortDepartmentName { get; set; }
 
         [Display(Name = "Application Yr/#")]
-        public decimal ApplicationYear { get; set; }
+        public int ApplicationYear { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:n0}")]
         public decimal ApplicationNumber { get; set; }
 
         [Display(Name = "Department")]
