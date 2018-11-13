@@ -4902,6 +4902,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                     .HasMaxLength(1)
                     .IsUnicode(false);
             });
+
             modelBuilder.Entity<TreasallPropertyArtreasurerComments>(entity =>
             {
                 entity.ToTable("TREASAllPropertyARTreasurerComments");
