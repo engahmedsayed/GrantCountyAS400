@@ -67,7 +67,9 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ParcelNumber)
+                    <a asp-action="Details" asp-route-id="@item.Id">
+                        @Html.DisplayFor(modelItem => item.ParcelNumber)
+                    </a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ParcelTypeDisplay)

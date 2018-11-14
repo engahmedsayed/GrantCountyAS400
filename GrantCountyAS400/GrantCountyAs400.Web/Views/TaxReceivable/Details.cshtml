@@ -1,0 +1,147 @@
+﻿@model GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceivable.TaxReceivableDetailsViewModel
+
+@{
+    ViewData["Title"] = "Transaction Inquiry";
+}
+
+<div>
+    <h2>Transaction Inquiry</h2>
+
+    <div class="entity-details">
+        <div class="entity-info clearfix">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.ParcelNumber) </strong></td>
+                        <td class="text-right"><span> @Html.DisplayFor(model => model.ParcelNumber) </span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.TaxPayerDisplay) </strong></td>
+                        <td class="text-right"><span> @Html.DisplayFor(model => model.TaxPayerDisplay) </span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => model.TaxCodeArea) </strong></td>
+                        <td class="text-right"><span> @Html.DisplayFor(model => model.TaxCodeArea) </span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PropertyTaxReceivables.FirstOrDefault().TaxYear)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PropertyTaxReceivables.FirstOrDefault().ParcelExtension)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PropertyTaxReceivables.FirstOrDefault().TaxAmount)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PropertyTaxReceivables.FirstOrDefault().TotalAssessmentAmount)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PropertyTaxReceivables.FirstOrDefault().TotalPenaltyAmount)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PropertyTaxReceivables.FirstOrDefault().TotalInterestPaid)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PropertyTaxReceivables.FirstOrDefault().Type)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var taxReceivable in Model.PropertyTaxReceivables)
+                    {
+                        <tr>
+                            <td>
+                                <a class="toggle-row-details" data-toggle="collapse" data-target="#@taxReceivable.TaxYear" aria-expanded="false" aria-controls="@taxReceivable.TaxYear">
+                                    <i class="glyphicon glyphicon-chevron-right pull-right"></i>
+                                    <i class="glyphicon glyphicon-chevron-down pull-right"></i>
+                                </a>
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => taxReceivable.TaxYear)</td>
+                            <td>@Html.DisplayFor(modelItem => taxReceivable.ParcelExtension)</td>
+                            <td>@Html.DisplayFor(modelItem => taxReceivable.TaxAmount)</td>
+                            <td>@Html.DisplayFor(modelItem => taxReceivable.TotalAssessmentAmount)</td>
+                            <td>@Html.DisplayFor(modelItem => taxReceivable.TotalPenaltyAmount)</td>
+                            <td>@Html.DisplayFor(modelItem => taxReceivable.TotalInterestPaid)</td>
+                            <td>@Html.DisplayFor(modelItem => taxReceivable.Type)</td>
+                        </tr>
+                        <tr class="row-details">
+                            <td colspan="100">
+                                <div class="collapse" id="@taxReceivable.TaxYear">
+                                    <table class="table table-hover">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th>
+                                                    @Html.DisplayNameFor(modelItem => taxReceivable.Transactions.FirstOrDefault().ParcelExtension)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(modelItem => taxReceivable.Transactions.FirstOrDefault().TaxAmount)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(modelItem => taxReceivable.Transactions.FirstOrDefault().TotalAssessmentPaid)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(modelItem => taxReceivable.Transactions.FirstOrDefault().TotalPenaltyPaid)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(modelItem => taxReceivable.Transactions.FirstOrDefault().TotalInterestPaid)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(modelItem => taxReceivable.Transactions.FirstOrDefault().TransactionNumber)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(modelItem => taxReceivable.Transactions.FirstOrDefault().Type)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(modelItem => taxReceivable.Transactions.FirstOrDefault().TransactionDate)
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var transaction in taxReceivable.Transactions)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => transaction.ParcelExtension)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => transaction.TaxAmount)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => transaction.TotalAssessmentPaid)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => transaction.TotalPenaltyPaid)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => transaction.TotalInterestPaid)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => transaction.TransactionNumber)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => transaction.Type)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => transaction.TransactionDate)
+                                                    </td>
+                                                </tr>
+                                            }
+                                        <tbody>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <a asp-action="Index">Back to List</a>
+</div>

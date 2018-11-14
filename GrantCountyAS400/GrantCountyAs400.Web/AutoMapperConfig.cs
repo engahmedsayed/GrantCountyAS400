@@ -86,7 +86,7 @@ namespace GrantCountyAs400.Web
                 cfg.CreateMap<AssessorApproval, BuildingPermitSystemAssessorApprovalViewModel>();
                 cfg.CreateMap<PublicWorkApproval, BuildingPermitSystemPublicWorkApprovalViewModel>();
                 cfg.CreateMap<HealthApproval, BuildingPermitSystemHealthApprovalViewModel>();
-                cfg.CreateMap<CityApproval, BuildingPermitSystemCityApprovalViewModel>(); 
+                cfg.CreateMap<CityApproval, BuildingPermitSystemCityApprovalViewModel>();
                 cfg.CreateMap<PermitApprovedInfo, PermitApprovedInfoViewModel>();
                 cfg.CreateMap<DemolitionPermit, DemolitionPermitViewModel>();
                 cfg.CreateMap<OtherPermitDetail, OtherPermitDetailViewModel>();
@@ -108,6 +108,11 @@ namespace GrantCountyAs400.Web
                 #region Treasurer
 
                 cfg.CreateMap<TaxReceivable, TaxReceivableViewModel>();
+                cfg.CreateMap<TaxReceivableDetails, TaxReceivableDetailsViewModel>();
+                cfg.CreateMap<PropertyTaxReceivable, PropertyTaxReceivableViewModel>();
+                cfg.CreateMap<SpecialAssessmentTaxReceivable, SpecialAssessmentTaxReceivableViewModel>();
+                cfg.CreateMap<PropertyTaxReceivableTransaction, PropertyTaxReceivableTransactionViewModel>();
+                cfg.CreateMap<SpecialAssessmentTransaction, SpecialAssessmentTransactionViewModel>();
 
                 #endregion Treasurer
             });

@@ -28,5 +28,17 @@ namespace GrantCountyAs400.Web.Controllers.Treasurer
             ViewBag.FilterViewModel = filter;
             return View(results.ToMappedPagedList<TaxReceivable, TaxReceivableViewModel>(pagingInfo));
         }
+
+        [HttpGet]
+        [Route("{id}")]
+        public IActionResult Details(int id)
+        {
+            var entity = _taxReceivableRepository.Details(id);
+            if (entity == null)
+                return NotFound();
+
+            var viewmodel = AutoMapper.Mapper.Map<TaxReceivableDetailsViewModel>(entity);
+            return View(viewmodel);
+        }
     }
 }
