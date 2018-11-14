@@ -73,7 +73,7 @@ namespace GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceivable
         public decimal? TotalAssessmentPaid => SpecialAssessmentTransactions.Sum(x => x.AssessmentPaid);
         [Display(Name = "Penalty Paid")]
         public decimal? TotalPenaltyPaid => SpecialAssessmentTransactions.Sum(x => x.PenaltyPaid);
-        [Display(Name = "Interes tPaid")]
+        [Display(Name = "Interest Paid")]
         public decimal? TotalInterestPaid => SpecialAssessmentTransactions.Sum(x => x.InterestPaid);
     }
 
