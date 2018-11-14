@@ -25,17 +25,17 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         public DateTime? ChangeDate { get; set; }
 
         
-        public string JurisdictionCode { get; }
+        public string JurisdictionCode { get; set; }
 
-        public string ShortDepartmentName { get; }
+        public string ShortDepartmentName { get; set; }
 
         [Display(Name = "What city is this inside?")]
         public string JurisdictionDisplay => JurisdictionCode + ShortDepartmentName;
 
         [Display(Name = "City approval for zoning, etc?")]
-        public string ZoniongApproval { get; }
+        public string ZoniongApproval { get; set; }
 
         [Display(Name = "Does this approval include utilitiez?")]
-        public string UtilitiesApproval { get; }
+        public string UtilitiesApproval { get; set; }
     }
 }
