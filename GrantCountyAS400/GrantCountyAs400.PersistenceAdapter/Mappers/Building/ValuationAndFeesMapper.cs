@@ -1,4 +1,5 @@
 ﻿using GrantCountyAs400.Domain.Building;
+using GrantCountyAs400.PersistenceAdapter.Models;
 using GrantCountyAs400.PersistenceAdapter.Repositories;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,6 +45,19 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
             valuationAndFeesClass.Select(t => t.Bldg)?.FirstOrDefault(t =>t!=null && !string.IsNullOrWhiteSpace(t.ExpiredByUser))?.ExpiredByUser) ;
             return result;
         }
+
+        internal static ValuationFeeDetails Map(List<BldgapplicationValues> bldgvalues)
+        {
+            List<ValuationFeeDetailsItem> items = new List<ValuationFeeDetailsItem>();
+            for (int i = 0; i < bldgvalues?.Count; i++)
+            {
+                items.Add(new ValuationFeeDetailsItem(bldgvalues[i].SequenceNumber, bldgvalues[i].ComponentDescription, bldgvalues[i].OccupantType, bldgvalues[i].NumberOfOccupants,
+                                                      bldgvalues[i].TableNumberSectLineSeq, bldgvalues[i].SquareFeet,
+                                                      bldgvalues[i].SectionDescription, bldgvalues[i].ConstructionTypeDescription, bldgvalues[i].Cost, bldgvalues[i].ExtendedValue));
+            }
+            return new ValuationFeeDetails(bldgvalues?.Sum(t => t.ExtendedValue), bldgvalues?.Sum(t => t.SquareFeet), items);
+        }
+           
 
         private static decimal? GetFeesAmount(List<ValuationAndFeesRecord> valuationAndFeesClass, string feeCode)
             => valuationAndFeesClass.Select(t => t.Appf).FirstOrDefault(t => t.FeeCode?.Trim().ToLower() == feeCode)?.ExtendedAmount;

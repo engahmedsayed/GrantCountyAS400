@@ -19,7 +19,11 @@
             </tr>
             <tr>
                 <td><strong>@Html.DisplayNameFor(model => model.ExtendedValue) </strong></td>
-                <td class="text-right"><span> @Html.DisplayFor(model => model.ExtendedValue) </span></td>
+                <td class="text-right">
+                    <span>
+                        <a asp-route="valuationFeeDetailsRoute" asp-route-id="@Model.Id"> @Html.DisplayFor(model => model.ExtendedValue)</a>
+                    </span>
+                </td>
             </tr>
             <tr>
                 <td><strong>@Html.DisplayNameFor(model => model.AssignStructNanNodFees) </strong></td>

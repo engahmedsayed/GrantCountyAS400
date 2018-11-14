@@ -158,8 +158,37 @@ namespace GrantCountyAs400.Web.Controllers.Building
                 
             return View(result);
         }
+        [HttpGet]
+        [Route("/building-permit-system/valuation-fee-details/{id}", Name = "valuationFeeDetailsRoute")]
+        public IActionResult ValuationFeeDetails(int id)
+        {
+            ValuationFeeDetailsViewModel result = new ValuationFeeDetailsViewModel();
+            result.BasicInfo = Mapper.Map<BuildingPermitSystemBasicInfoViewModel>(_buildingModuleRepository.GetBasicInfo(id));
+            var valuationAndFeesEntity = _buildingModuleRepository.GetValuationDetails(id);
+            result.ExtendedValue = valuationAndFeesEntity?.ExtendedValue;
+            result.SquareFeet = valuationAndFeesEntity?.SquareFeet;
+            result.Items = new List<ValuationFeeDetailsItemViewModel>();
+            for (int i = 0; i < valuationAndFeesEntity?.Items?.Count; i++)
+            {
+                result.Items.Add(new ValuationFeeDetailsItemViewModel
+                {
+                    ComponentDescription = valuationAndFeesEntity.Items[i].ComponentDescription,
+                    ConstructionTypeDescription = valuationAndFeesEntity.Items[i].ConstructionTypeDescription,
+                    Cost = valuationAndFeesEntity.Items[i].Cost,
+                    ExtendedValue = valuationAndFeesEntity.Items[i].ExtendedValue,
+                    NumberOfOccupants = valuationAndFeesEntity.Items[i].NumberOfOccupants,
+                    OccupantType = valuationAndFeesEntity.Items[i].OccupantType,
+                    SectionDescription = valuationAndFeesEntity.Items[i].SectionDescription,
+                    SequenceNumber = (int)valuationAndFeesEntity.Items[i].SequenceNumber,
+                    SquareFeet = valuationAndFeesEntity.Items[i].SquareFeet,
+                    TableNumberSectLineSeq = valuationAndFeesEntity.Items[i].TableNumberSectLineSeq
+                });
+            }
+            return View(result);
+        }
+        
 
-        [Route("/building-permit-system/fire-marshal-fees-details/{id}", Name = "fireMarshalFeesDetailsRoute")]
+       [Route("/building-permit-system/fire-marshal-fees-details/{id}", Name = "fireMarshalFeesDetailsRoute")]
         public IActionResult FireMarchalFeesDetails(int id)
         {
             FireMarshalFeesDetailsViewModel result = new FireMarshalFeesDetailsViewModel();

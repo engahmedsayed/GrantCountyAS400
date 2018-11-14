@@ -10,6 +10,8 @@ namespace GrantCountyAs400.Domain.Building.Repository
         BuildingPermitSystem Get(int id);
         BuildingPermitSystemDetails Details(int id);
 
+        ValuationFeeDetails GetValuationDetails(int id);
+
         BuildingPermitSystemBasicInfo GetBasicInfo(int id);
         DemolitionPermit GetDemolitionPermitByBuildingPermitSystemId(int id);
         OtherPermitDetail GetOtherPermitDetailByBuildingPermitSystemId(int id);

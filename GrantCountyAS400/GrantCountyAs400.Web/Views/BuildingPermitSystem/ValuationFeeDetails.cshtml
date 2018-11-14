@@ -1,0 +1,104 @@
+﻿@model GrantCountyAs400.Web.ViewModels.BuildingVM.ValuationFeeDetailsViewModel
+@{
+    ViewData["Title"] = "Structure Fees";
+}
+
+<h2>Structure Fees</h2>
+
+<div>
+    <div class="entity-details row">
+        <div class="entity-info clearfix">
+            <partial name="_Header" for="@Model.BasicInfo" />
+            <div class="col-xs-6">
+                <table class="table">
+                    <tbody>
+
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.ExtendedValue) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.ExtendedValue) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.SquareFeet) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.SquareFeet) </span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-6">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Items[0].SequenceNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Items[0].ComponentDescription)
+                            </td>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Items[0].OccupantType)
+                            </td>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Items[0].NumberOfOccupants)
+                            </td>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Items[0].TableNumberSectLineSeq)
+                            </td>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Items[0].SquareFeet)
+                            </td>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Items[0].SectionDescription)
+                            </td>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Items[0].ConstructionTypeDescription)
+                            </td>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Items[0].Cost)
+                            </td>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Items[0].ExtendedValue)
+                            </td>
+                        </tr>
+                    </thead>
+
+                    @for (int i = 0; i < Model.Items.Count; i++)
+                    {
+                    <tr>
+                        <td class="text-left">
+                            @Html.DisplayFor(t => t.Items[i].SequenceNumber)
+                        </td>
+                        <td class="text-left">
+                            @Html.DisplayFor(t => t.Items[i].ComponentDescription)
+                        </td>
+                        <td class="text-left">
+                            @Html.DisplayFor(t => t.Items[i].OccupantType)
+                        </td>
+                        <td class="text-left">
+                            @Html.DisplayFor(t => t.Items[i].NumberOfOccupants)
+                        </td>
+                        <td class="text-left">
+                            @Html.DisplayFor(t => t.Items[i].TableNumberSectLineSeq)
+                        </td>
+                        <td class="text-left">
+                            @Html.DisplayFor(t => t.Items[i].SquareFeet)
+                        </td>
+                        <td class="text-left">
+                            @Html.DisplayFor(t => t.Items[i].SectionDescription)
+                        </td>
+                        <td class="text-left">
+                            @Html.DisplayFor(t => t.Items[i].ConstructionTypeDescription)
+                        </td>
+                        <td class="text-left">
+                            @Html.DisplayFor(t => t.Items[i].Cost)
+                        </td>
+                        <td class="text-left">
+                            @Html.DisplayFor(t => t.Items[i].ExtendedValue)
+                        </td>
+                    </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
