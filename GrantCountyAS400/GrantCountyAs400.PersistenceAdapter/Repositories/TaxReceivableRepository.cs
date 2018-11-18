@@ -88,33 +88,41 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
 
         private IEnumerable<PropertyTaxReceivableTransaction> GetPropertyTaxReceivableTransactions(IEnumerable<decimal> targetYears, decimal parcelNumber)
         {
-            var query = (from specialTransaction in _context.TreasspecialAssessmentsTransactions
-                         join propertyTransaction in _context.TreasallPropertyTaxReceivableTransactions
+            // Query for propertyTransaction(TreasallPropertyTaxReceivableTransactions), along with all related specialTransaction(TreasspecialAssessmentsTransactions)
+            // A single "propertyTransaction" could have multiple or none "specialTransaction"
+            var query = (from propertyTransaction in _context.TreasallPropertyTaxReceivableTransactions
+                         join specialTransaction in _context.TreasspecialAssessmentsTransactions
                          on new
-                         {
-                             specialTransaction.ParcelNumber,
-                             specialTransaction.TaxYear,
-                             TransactionNumber = specialTransaction.ReceiptTransactionNumber
-                         }
-                         equals new
                          {
                              propertyTransaction.ParcelNumber,
                              propertyTransaction.TaxYear,
-                             TransactionNumber = propertyTransaction.ReceiptTranNumber
                          }
-                         where (specialTransaction.ParcelNumber == parcelNumber && targetYears.Contains(specialTransaction.TaxYear.Value)) &&
-                               (propertyTransaction.ParcelNumber == parcelNumber && targetYears.Contains(propertyTransaction.TaxYear.Value))
+                         equals new
+                         {
+                             specialTransaction.ParcelNumber,
+                             specialTransaction.TaxYear,
+                         }
+                         where (propertyTransaction.ParcelNumber == parcelNumber && targetYears.Contains(propertyTransaction.TaxYear.Value)) &&
+                               (specialTransaction.ParcelNumber == parcelNumber && targetYears.Contains(specialTransaction.TaxYear.Value))
                          select new
                          {
-                             SpecialTransactionRecord = specialTransaction,
-                             PropertyTransactionRecord = propertyTransaction
+                             PropertyTransactionRecord = propertyTransaction,
+                             SpecialTransactionRecord = specialTransaction
                          })
                          .ToList();
 
+            // Instead of doing grouping in the SQL query itself(which could be complex and unreadable), do it in memeory using C#
+            // Key => PropertyTransactionRecord (which is the main transaction record)
+            // Value => list of related "SpecialTransactionRecord", which belongs to the specified key
+            //       => because propertyTransaction could have NONE specialTransaction, then it should be filtered by Transaction Number
             return query.GroupBy(
                      g => g.PropertyTransactionRecord,
                      g => g.SpecialTransactionRecord,
-                     (propertyTransaction, specialTransaction) => TaxReceivableMapper.Map(propertyTransaction, specialTransaction)).ToList();
+                     (propertyTransaction, specialTransaction)
+                        => TaxReceivableMapper.Map(
+                                propertyTransaction,
+                                specialTransaction.Where(x => x.ReceiptTransactionNumber == propertyTransaction.ReceiptTranNumber))
+                           ).ToList();
         }
     }
 }
