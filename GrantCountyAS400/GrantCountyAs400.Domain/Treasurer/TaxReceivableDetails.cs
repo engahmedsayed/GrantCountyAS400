@@ -84,27 +84,29 @@ namespace GrantCountyAs400.Domain.Treasurer
         // TREASAllPropertyTaxReceivableTransactions => APTRD
         public decimal? ParcelExtension { get; }
         public decimal? TaxAmount { get; }
-        public decimal? TaxYear { get; set; }
-        public DateTime? TransactionDate { get; set; }
-        public decimal? TransactionNumber { get; set; }
+        public decimal? TaxYear { get; }
+        public DateTime? TransactionDate { get; }
+        public decimal? TransactionNumber { get; }
+        public string ChangeReasonCode { get; }
         public string Type => "Pd";
-
 
         public IEnumerable<SpecialAssessmentTransaction> SpecialAssessmentTransactions { get; }
 
-        public PropertyTaxReceivableTransaction(decimal? parcelExtension, decimal? taxAmount, decimal? taxYear, DateTime? transactionDate, decimal? transactionNumber)
+        public PropertyTaxReceivableTransaction(
+            decimal? parcelExtension, decimal? taxAmount, decimal? taxYear, DateTime? transactionDate, decimal? transactionNumber, string changeReasonCode)
         {
             ParcelExtension = parcelExtension;
             TaxAmount = taxAmount;
             TaxYear = taxYear;
             TransactionDate = transactionDate;
             TransactionNumber = transactionNumber;
+            ChangeReasonCode = changeReasonCode;
         }
 
         public PropertyTaxReceivableTransaction(
-            decimal? parcelExtension, decimal? taxAmount, decimal? taxYear, DateTime? transactionDate, decimal? transactionNumber,
+            decimal? parcelExtension, decimal? taxAmount, decimal? taxYear, DateTime? transactionDate, decimal? transactionNumber, string changeReasonCode,
             IEnumerable<SpecialAssessmentTransaction> specialAssessmentTransactions)
-            : this(parcelExtension, taxAmount, taxYear, transactionDate, transactionNumber)
+            : this(parcelExtension, taxAmount, taxYear, transactionDate, transactionNumber, changeReasonCode)
         {
             SpecialAssessmentTransactions = specialAssessmentTransactions;
         }

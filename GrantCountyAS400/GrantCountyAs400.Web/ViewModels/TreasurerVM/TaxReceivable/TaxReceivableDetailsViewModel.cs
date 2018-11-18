@@ -65,6 +65,7 @@ namespace GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceivable
         public DateTime? TransactionDate { get; set; }
         [Display(Name = "Transaction #")]
         public int? TransactionNumber { get; set; }
+        public string ChangeReasonCode { get; set; }
         [Display(Name = "Type")]
         public string Type { get; set; }
         public IEnumerable<SpecialAssessmentTransactionViewModel> SpecialAssessmentTransactions { get; set; }
@@ -75,6 +76,7 @@ namespace GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceivable
         public decimal? TotalPenaltyPaid => SpecialAssessmentTransactions.Sum(x => x.PenaltyPaid);
         [Display(Name = "Interest Paid")]
         public decimal? TotalInterestPaid => SpecialAssessmentTransactions.Sum(x => x.InterestPaid);
+        public string ChangeReasonCodeDisplay => string.IsNullOrWhiteSpace(ChangeReasonCode) ? "" : $"({ChangeReasonCode})";
     }
 
     public class SpecialAssessmentTransactionViewModel
