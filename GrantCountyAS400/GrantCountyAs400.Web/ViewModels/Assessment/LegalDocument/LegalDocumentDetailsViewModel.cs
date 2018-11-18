@@ -65,7 +65,6 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.LegalDocument
         [DisplayFormat(DataFormatString = "{0:n0}")]
         public decimal ProbateNumber { get; set; }
 
-        [Display(Name = "Gross Sale Amount")]
         public decimal? RPsalesAmount { get; set; }
 
         [Display(Name = "P/P Sale Amount")]
@@ -136,6 +135,9 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.LegalDocument
 
         [Display(Name = "Net R/P Sale")]
         public decimal? NetRPSale => RPsalesAmount;
+
+        [Display(Name = "Gross Sale Amount")]
+        public decimal? GrossSalesAmount => RPsalesAmount + PPsalesAmount;
 
         [Display(Name = "Auditor's File #")]
         public string AuditorFileNumberDisplay
