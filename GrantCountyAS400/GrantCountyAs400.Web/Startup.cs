@@ -67,8 +67,8 @@ namespace GrantCountyAs400.Web
             services.AddScoped<ILegalDocumentRepository, LegalDocumentRepository>();
             services.AddScoped<IBuildingPermitSystemRepository, BuildingPermitSystemRepository>();
             services.AddScoped<ITaxReceivableRepository, TaxReceivableRepository>();
-
-
+            services.AddScoped<IAccountPayableRepository, AccountPayableRepository>();
+            
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));

@@ -1,0 +1,243 @@
+﻿@model IEnumerable<VenderWarrentViewModel>
+@using GrantCountyAs400.Web.ViewModels.AccountingVM.VenderWarrent
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@{
+    ViewData["Title"] = "Accounts Payable - Index";
+    var filterViewModel = ViewBag.FilterViewModel as VenderWarrentFilterViewModel;
+}
+
+<h2>Accounts Payable </h2>
+
+<p>
+    @using (Html.BeginForm("Index", "AccountPayable", FormMethod.Get))
+    {
+        <div class="form-horizontal">
+            <hr />
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <label asp-for="@filterViewModel.VendorId" class="control-label col-md-2"></label>
+                        <div class="col-md-10">
+                            <input type="text" asp-for="@filterViewModel.VendorId" name="vendorid" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@filterViewModel.Name" class="control-label col-md-2"></label>
+                        <div class="col-md-10">
+                            <input type="text" asp-for="@filterViewModel.Name" name="name" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@filterViewModel.Representative" class="control-label col-md-2"></label>
+                        <div class="col-md-10">
+                            <input type="text" asp-for="@filterViewModel.Representative" name="representative" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <label asp-for="@filterViewModel.MinPayDate" class="control-label col-md-2"></label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => filterViewModel.MinPayDate, null, "minpaydate", new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="@filterViewModel.MaxPayDate" class="control-label col-md-2"></label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => filterViewModel.MaxPayDate, null, "maxpaydate", new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <div class="form-group pull-right">
+                        <input type="submit" value="Filter" class="btn btn-success" />
+                        <input type="reset" value="Clear" class="btn btn-default" id="btnReset" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</p>
+
+<nav aria-label="navigation">
+    @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
+    pageNumber = pageNumber,
+    vendorid = filterViewModel.VendorId,
+    name = filterViewModel.Name,
+    representative = filterViewModel.Representative,
+    minpaydate = filterViewModel.MinPayDate,
+    maxpaydate = filterViewModel.MaxPayDate
+}))
+</nav>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vendor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WarrantNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CheckNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WarrantDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PayDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ponumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountDisplay)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a class="toggle-row-details" data-toggle="collapse" data-target="#@item.Id" aria-expanded="false" aria-controls="@item.Id">
+                        <i class="glyphicon glyphicon-chevron-right pull-right"></i>
+                        <i class="glyphicon glyphicon-chevron-down pull-right"></i>
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vendor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WarrantNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CheckNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WarrantDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PayDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ponumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountDisplay)
+                </td>
+            </tr>
+            <tr class="row-details">
+                <td colspan="100">
+                    <div class="collapse" id="@item.Id">
+                        <div class="col-md-6 col-xs-12">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td><strong>@Html.DisplayNameFor(model => model.Vendor) </strong></td>
+                                        <td class="text-right"><span> @Html.DisplayFor(modelItem => item.Vendor) </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>@Html.DisplayNameFor(model => model.Invoice) </strong></td>
+                                        <td class="text-right"><span> @Html.DisplayFor(modelItem => item.Invoice) </span></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><strong>@Html.DisplayNameFor(model => model.InvoiceDate) </strong></td>
+                                        <td class="text-right"><span> @Html.DisplayFor(modelItem => item.InvoiceDate) </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>@Html.DisplayNameFor(model => model.Ponumber) </strong></td>
+                                        <td class="text-right"><span> @Html.DisplayFor(modelItem => item.Ponumber) </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>@Html.DisplayNameFor(model => model.FillType) </strong></td>
+                                        <td class="text-right"><span> @Html.DisplayFor(modelItem => item.FillType) </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>@Html.DisplayNameFor(model => model.Description) </strong></td>
+                                        <td class="text-right"><span> @Html.DisplayFor(modelItem => item.Description) </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>@Html.DisplayNameFor(model => model.AccountDisplay) </strong></td>
+                                        <td class="text-right">
+                                            <span> @Html.DisplayFor(modelItem => item.AccountDisplay) </span>
+                                            &nbsp;&nbsp;<strong>in FY</strong>
+                                            <span> @Html.DisplayFor(modelItem => item.FiscalYear) </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-6 col-xs-12">
+                            <table class="table">
+                                <tbody>                                    
+                                    <tr>
+                                        <td><strong>@Html.DisplayNameFor(model => model.Amount) </strong></td>
+                                        <td class="text-right"><span> @Html.DisplayFor(modelItem => item.Amount) </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>@Html.DisplayNameFor(model => model.PayDate) </strong></td>
+                                        <td class="text-right"><span> @Html.DisplayFor(modelItem => item.PayDate) </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>@Html.DisplayNameFor(model => model.Combine) </strong></td>
+                                        <td class="text-right"><span> @Html.DisplayFor(modelItem => item.Combine) </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>@Html.DisplayNameFor(model => model.CheckNumber) </strong></td>
+                                        <td class="text-right"><span> @Html.DisplayFor(modelItem => item.CheckNumber) </span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>@Html.DisplayNameFor(model => model.WarrantDate) </strong></td>
+                                        <td class="text-right"><span> @Html.DisplayFor(modelItem => item.WarrantDate) </span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<nav aria-label="navigation">
+    @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
+    pageNumber = pageNumber,
+    vendorid = filterViewModel.VendorId,
+    name = filterViewModel.Name,
+    representative = filterViewModel.Representative,
+    minpaydate = filterViewModel.MinPayDate,
+    maxpaydate = filterViewModel.MaxPayDate
+}))
+</nav>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            $('.date-datepicker').datetimepicker({
+                format: 'MM/DD/YYYY',
+                showTodayButton: true,
+                ignoreReadonly: true,
+                showClear: true,
+                useCurrent: false,
+            });
+
+        });
+    </script>
+}
