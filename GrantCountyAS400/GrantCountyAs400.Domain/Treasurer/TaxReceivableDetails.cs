@@ -89,11 +89,14 @@ namespace GrantCountyAs400.Domain.Treasurer
         public decimal? TransactionNumber { get; }
         public string ChangeReasonCode { get; }
         public string Type { get; }
+        public decimal? InterestPaid { get; }
+        public decimal? LpAmount { get; }
 
         public IEnumerable<SpecialAssessmentTransaction> SpecialAssessmentTransactions { get; }
 
         public PropertyTaxReceivableTransaction(
-            decimal? parcelExtension, decimal? taxAmount, decimal? taxYear, DateTime? transactionDate, decimal? transactionNumber, string changeReasonCode, string type)
+            decimal? parcelExtension, decimal? taxAmount, decimal? taxYear, DateTime? transactionDate, decimal? transactionNumber, string changeReasonCode, string type,
+            decimal? interestPaid, decimal? lpAmount)
         {
             ParcelExtension = parcelExtension;
             TaxAmount = taxAmount;
@@ -102,12 +105,14 @@ namespace GrantCountyAs400.Domain.Treasurer
             TransactionNumber = transactionNumber;
             ChangeReasonCode = changeReasonCode;
             Type = type;
+            InterestPaid = interestPaid;
+            LpAmount = lpAmount;
         }
 
         public PropertyTaxReceivableTransaction(
             decimal? parcelExtension, decimal? taxAmount, decimal? taxYear, DateTime? transactionDate, decimal? transactionNumber, string changeReasonCode, string type,
-            IEnumerable<SpecialAssessmentTransaction> specialAssessmentTransactions)
-            : this(parcelExtension, taxAmount, taxYear, transactionDate, transactionNumber, changeReasonCode, type)
+            decimal? interestPaid, decimal? lpAmount, IEnumerable<SpecialAssessmentTransaction> specialAssessmentTransactions)
+            : this(parcelExtension, taxAmount, taxYear, transactionDate, transactionNumber, changeReasonCode, type, interestPaid, lpAmount)
         {
             SpecialAssessmentTransactions = specialAssessmentTransactions;
         }

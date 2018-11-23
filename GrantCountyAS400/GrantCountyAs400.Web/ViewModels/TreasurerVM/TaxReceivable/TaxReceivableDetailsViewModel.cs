@@ -68,14 +68,16 @@ namespace GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceivable
         public string ChangeReasonCode { get; set; }
         [Display(Name = "Type")]
         public string Type { get; set; }
+        public decimal? InterestPaid { get; set; }
+        public decimal? LpAmount { get; set; }
         public IEnumerable<SpecialAssessmentTransactionViewModel> SpecialAssessmentTransactions { get; set; }
 
         [Display(Name = "Assessment Paid")]
         public decimal? TotalAssessmentPaid => SpecialAssessmentTransactions.Sum(x => x.AssessmentPaid);
         [Display(Name = "Penalty Paid")]
-        public decimal? TotalPenaltyPaid => SpecialAssessmentTransactions.Sum(x => x.PenaltyPaid);
+        public decimal? TotalPenaltyPaid => SpecialAssessmentTransactions.Sum(x => x.PenaltyPaid) + LpAmount;
         [Display(Name = "Interest Paid")]
-        public decimal? TotalInterestPaid => SpecialAssessmentTransactions.Sum(x => x.InterestPaid);
+        public decimal? TotalInterestPaid => SpecialAssessmentTransactions.Sum(x => x.InterestPaid) + InterestPaid;
         public string ChangeReasonCodeDisplay => string.IsNullOrWhiteSpace(ChangeReasonCode) ? "" : $"({ChangeReasonCode})";
     }
 
