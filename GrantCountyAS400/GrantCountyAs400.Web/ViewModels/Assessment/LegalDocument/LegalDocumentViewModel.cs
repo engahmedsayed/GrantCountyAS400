@@ -97,7 +97,7 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.LegalDocument
             var withoutFirstTwoLetters = affidavitNumberString.Substring(2);
             var result = withoutFirstTwoLetters.Substring(0, 2) + "-" + withoutFirstTwoLetters.Substring(2);
 
-            return result.EndsWith("00000") ? string.Empty : result;
+            return  result;
         }
     }
 }

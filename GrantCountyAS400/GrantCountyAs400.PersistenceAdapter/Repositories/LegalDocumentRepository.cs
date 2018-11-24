@@ -27,26 +27,36 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
 
             if (realproperty != null)
             {
-                var legalDocs = (from legalDocument in _context.AsmtlegalDocuments
-                                 join exciseTaxData in _context.AsmtsalesAndExciseTaxData
-                                 on new
-                                 {
-                                     legalDocument.ParcelNumber,
-                                     legalDocument.AffidavitNumber,
-                                     legalDocument.AffidavitNumberExtension,
-                                     legalDocument.LegalDocumentType,
-                                 }
-                                 equals new
-                                 {
-                                     exciseTaxData.ParcelNumber,
-                                     exciseTaxData.AffidavitNumber,
-                                     exciseTaxData.AffidavitNumberExtension,
-                                     exciseTaxData.LegalDocumentType,
-                                 }
-                                 where legalDocument.ParcelNumber == parcelNumber
-                                    && legalDocument.RecordCode != "*" && exciseTaxData.RecordCode != "*"
-                                 orderby legalDocument.LegalInstrumentDate
-                                 select LegalDocumentMapper.Map(legalDocument, exciseTaxData)).ToList();
+                var query = (from legalDocument in _context.AsmtlegalDocuments
+                             join exciseTaxData in _context.AsmtsalesAndExciseTaxData
+                             on new
+                             {
+                                 legalDocument.ParcelNumber,
+                             }
+                             equals new
+                             {
+                                 exciseTaxData.ParcelNumber,
+                             }
+                             where legalDocument.ParcelNumber == parcelNumber
+                                && legalDocument.RecordCode != "*" && exciseTaxData.RecordCode != "*"
+                             orderby legalDocument.LegalInstrumentDate
+                             select new
+                             {
+                                 LegalDocumentRecord = legalDocument,
+                                 ExciseTaxDataRecord = exciseTaxData
+                             })
+                                 .ToList();
+
+                var legalDocs =
+                    query.GroupBy(
+                        g => g.LegalDocumentRecord,
+                        g => g.ExciseTaxDataRecord,
+                        (legalDocument, exciseTaxData)
+                            => LegalDocumentMapper.Map(
+                                    legalDocument,
+                                    exciseTaxData.SingleOrDefault(x => x.AffidavitNumber == legalDocument.AffidavitNumber))
+                               ).ToList();
+
                 return LegalDocumentMapper.Map(realproperty.valueMasterRecord,
                                                realproperty.namesRecord,
                                                realproperty.codeArea,
@@ -69,24 +79,22 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          {
                              legalDocument.ParcelNumber,
                              legalDocument.AffidavitNumber,
-                             legalDocument.AffidavitNumberExtension,
-                             legalDocument.LegalDocumentType,
                          }
                          equals new
                          {
                              exciseTaxData.ParcelNumber,
                              exciseTaxData.AffidavitNumber,
-                             exciseTaxData.AffidavitNumberExtension,
-                             exciseTaxData.LegalDocumentType,
                          }
-                         join rejection in _context.AsmtsalesRejectionReasonCodes on exciseTaxData.SaleRejectionCode equals rejection.SaleRejectionCode
+                         into exciseTaxDataJoin
+                         from exciseTaxDataRecord in exciseTaxDataJoin.DefaultIfEmpty()
+                         join rejection in _context.AsmtsalesRejectionReasonCodes on exciseTaxDataRecord.SaleRejectionCode equals rejection.SaleRejectionCode
                          into rejectionJoin
                          from defaultRejection in rejectionJoin.DefaultIfEmpty()
                          join instrument in _context.AsmtinstrumentType on legalDocument.LegalDocumentType equals instrument.InstrumentCode
                          into instrumentJoin
                          from defaultInstrument in instrumentJoin.DefaultIfEmpty()
                          where legalDocument.Id == legalDocumentId
-                         select new { namesRecord, codeArea, valueMasterRecord, landUseCode, exciseTaxData, legalDocument, defaultInstrument, defaultRejection }).SingleOrDefault();
+                         select new { namesRecord, codeArea, valueMasterRecord, landUseCode, exciseTaxDataRecord, legalDocument, defaultInstrument, defaultRejection }).SingleOrDefault();
 
             if (query != null)
             {
@@ -95,7 +103,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                                query.legalDocument,
                                                query.codeArea,
                                                query.landUseCode,
-                                               query.exciseTaxData,
+                                               query.exciseTaxDataRecord,
                                                query.defaultInstrument,
                                                query.defaultRejection);
             }
