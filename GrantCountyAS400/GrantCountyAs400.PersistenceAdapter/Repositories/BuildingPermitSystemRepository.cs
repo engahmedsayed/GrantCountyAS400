@@ -17,45 +17,144 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             _context = dbContext;
         }
 
-        public List<BuildingPermitSystem> GetAll(decimal? applicationNumber, int? applicationYear, decimal? permitNumber, string applicantBusinessName,
-                                                 string applicantLastName, string applicantFirstName, decimal? preliminaryParcelNumber, decimal? assessorParcelNumber,
-                                                 string jurisdictionCode, out int resultCount, int pageNumber = 1, int pageSize = 50)
+        public List<BuildingPermitSystem> GetAll(BuildingSearchCriteria searchCriteria, out int resultCount, int pageNumber = 1, int pageSize = 50)
         {
             List<BuildingPermitSystem> results = new List<BuildingPermitSystem>();
+            List<BldgpermitApplicationMaster> bldgResults = new List<BldgpermitApplicationMaster>();
             var query = from appm in _context.BldgpermitApplicationMaster
-                        where (applicationNumber == null || appm.ApplicationNumber == applicationNumber)
-                        && (applicationYear == null || appm.ApplicationYear == applicationYear)
-                        && (permitNumber == null || appm.PermitNumber == permitNumber)
-                        && (string.IsNullOrWhiteSpace(applicantBusinessName) || appm.ApplicantBusinessName.TrimAndLower().Contains(applicantBusinessName.TrimAndLower()))
-                        && (string.IsNullOrWhiteSpace(applicantLastName) || appm.ApplicantLastName.TrimAndLower().Contains(applicantLastName.TrimAndLower()))
-                        && (string.IsNullOrWhiteSpace(applicantFirstName) || appm.ApplicantFirstName.TrimAndLower().Contains(applicantFirstName.TrimAndLower()))
-                        && (preliminaryParcelNumber == null || appm.PreliminaryParcelNumber == preliminaryParcelNumber)
-                        && (assessorParcelNumber == null || appm.AssessorParcelNumber == assessorParcelNumber)
-                        && (string.IsNullOrWhiteSpace(jurisdictionCode) || appm.JurisdictionCode.TrimAndLower() == jurisdictionCode.TrimAndLower())
-                        select BuildingPermitSystemMapper.Map(appm);
+                        where (searchCriteria.ApplicationNumber == null || appm.ApplicationNumber == searchCriteria.ApplicationNumber)
+                        && (searchCriteria.ApplicationYear == null || appm.ApplicationYear == searchCriteria.ApplicationYear)
+                        && (searchCriteria.PermitNumber == null || appm.PermitNumber == searchCriteria.PermitNumber)
+                        && (string.IsNullOrWhiteSpace(searchCriteria.ApplicantBusinessName) || appm.ApplicantBusinessName.TrimAndLower().Contains(searchCriteria.ApplicantBusinessName.TrimAndLower()))
+                        && (string.IsNullOrWhiteSpace(searchCriteria.ApplicantLastName) || appm.ApplicantLastName.TrimAndLower().Contains(searchCriteria.ApplicantLastName.TrimAndLower()))
+                        && (string.IsNullOrWhiteSpace(searchCriteria.ApplicantFirstName) || appm.ApplicantFirstName.TrimAndLower().Contains(searchCriteria.ApplicantFirstName.TrimAndLower()))
+                        && (searchCriteria.PreliminaryParcelNumber == null || appm.PreliminaryParcelNumber == searchCriteria.PreliminaryParcelNumber)
+                        && (searchCriteria.AssessorParcelNumber == null || appm.AssessorParcelNumber == searchCriteria.AssessorParcelNumber)
+                        && (string.IsNullOrWhiteSpace(searchCriteria.JurisdictionCode) || appm.JurisdictionCode.TrimAndLower() == searchCriteria.JurisdictionCode.TrimAndLower())
+                        && (string.IsNullOrWhiteSpace(searchCriteria.ProjectDescription)  || appm.ApplicantProjectDescription.TrimAndLower().Contains(searchCriteria.ProjectDescription.TrimAndLower()))
+                        select appm;
+          
             if (pageNumber > 0)
             {
                 resultCount = query.Count();
-                results = query.Skip((pageNumber - 1) * pageSize)
+                bldgResults = query.Skip((pageNumber - 1) * pageSize)
                                .Take(pageSize)
                                .OrderBy(t => t.ApplicationDate)
                                .ToList();
+                foreach (var item in bldgResults)
+                {
+                    if (!string.IsNullOrWhiteSpace(searchCriteria.OfficeProjectDescription))
+                    {
+                        var officeProjDesc = GetOfficeProjectDescription(_context, item.PermitCode.TrimAndLower(), searchCriteria.OfficeProjectDescription.TrimAndLower(), item.ApplicationYear, item.ApplicationNumber);
+                        if (!string.IsNullOrWhiteSpace(officeProjDesc))
+                        {
+                            results.Add(BuildingPermitSystemMapper.Map(item, officeProjDesc));
+                        }
+                    }
+                    else
+                    {
+                        results.Add(BuildingPermitSystemMapper.Map(item, GetOfficeProjectDescription(_context, item.PermitCode.TrimAndLower(), searchCriteria.OfficeProjectDescription.TrimAndLower(), item.ApplicationYear, item.ApplicationNumber)));
+                    }
+                }
             }
             else
             {
-                results = query.OrderBy(t => t.ApplicationDate)
+                bldgResults = query.OrderBy(t => t.ApplicationDate)
                                .ToList();
+                foreach (var item in bldgResults)
+                {
+                    if (!string.IsNullOrWhiteSpace(searchCriteria.OfficeProjectDescription)) {
+                        var officeProjDescr = GetOfficeProjectDescription(_context, item.PermitCode.TrimAndLower(), searchCriteria.OfficeProjectDescription.TrimAndLower(), item.ApplicationYear, item.ApplicationNumber);
+                        if (!string.IsNullOrWhiteSpace(officeProjDescr))
+                        {
+                            results.Add(BuildingPermitSystemMapper.Map(item,officeProjDescr));
+                        }
+                    }
+                    else
+                    {
+                        results.Add(BuildingPermitSystemMapper.Map(item, GetOfficeProjectDescription(_context, item.PermitCode.TrimAndLower(), searchCriteria.OfficeProjectDescription.TrimAndLower(), item.ApplicationYear, item.ApplicationNumber)));
+                    }
+                    
+                }
                 resultCount = results.Count();
             }
 
             return results;
         }
+        private string GetOfficeProjectDescription(GrantCountyDbContext context, string permitCode,string officeProjectDesc,decimal? applicationYear,decimal? applicationNumber)
+        {
+            string result;
+            switch (permitCode)
+            {
+                case "grad":
+                    result = (from appm in context.BldgpermitApplicationMaster
+                              join grd in context.BldggradingExcavatingPermitDetail
+                              on new { appm.ApplicationYear, appm.ApplicationNumber } equals new { grd.ApplicationYear, grd.ApplicationNumber }
+                              where
+                              ((string.IsNullOrWhiteSpace(officeProjectDesc) || grd.OfficeProjectDescription.TrimAndLower().Contains(officeProjectDesc.TrimAndLower()))&&
+                              appm.ApplicationYear == applicationYear && appm.ApplicationNumber == applicationNumber)
+                              select grd.OfficeProjectDescription).FirstOrDefault();
+                    break;
+                case "mech":
+                    result = (from appm in context.BldgpermitApplicationMaster
+                              join mech in context.BldgmechanicalPermitDetail
+                              on new { appm.ApplicationYear, appm.ApplicationNumber } equals new { mech.ApplicationYear, mech.ApplicationNumber }
+                              where ((string.IsNullOrWhiteSpace(officeProjectDesc) || mech.OfficeProjectDescription.TrimAndLower().Contains(officeProjectDesc.TrimAndLower())) &&
+                              appm.ApplicationYear == applicationYear && appm.ApplicationNumber == applicationNumber)
+                              select mech.OfficeProjectDescription).FirstOrDefault();
+                    break;
+                case "firem":
+                    result = string.Empty;
+                    //result = (from appm in _context.BldgpermitApplicationMaster
+                    //          join firem in _context.permitdetail
+                    //          on new { appm.ApplicationYear, appm.ApplicationNumber } equals new { firem.ApplicationYear, firem.ApplicationNumber }
+                    //          select firem.OfficeProjectDescription).FirstOrDefault();
+                    break;
+                case "demo":
+                    result = (from appm in context.BldgpermitApplicationMaster
+                              join demo in context.BldgdemolitionPermitDetail
+                              on new { appm.ApplicationYear, appm.ApplicationNumber } equals new { demo.ApplicationYear, demo.ApplicationNumber }
+                              where ((string.IsNullOrWhiteSpace(officeProjectDesc) || demo.OfficeProjectDescription.TrimAndLower().Contains(officeProjectDesc.TrimAndLower())) &&
+                              appm.ApplicationYear == applicationYear && appm.ApplicationNumber == applicationNumber)
+                              select demo.OfficeProjectDescription).FirstOrDefault();
+                    break;
+                case "manh":
+                    result = (from appm in context.BldgpermitApplicationMaster
+                              join manh in context.BldgmanufactureModularBuildingPermit
+                              on new { appm.ApplicationYear, appm.ApplicationNumber } equals new { manh.ApplicationYear, manh.ApplicationNumber }
+                              where ((string.IsNullOrWhiteSpace(officeProjectDesc) || manh.OfficeProjectDescription.TrimAndLower().Contains(officeProjectDesc.TrimAndLower())) &&
+                              appm.ApplicationYear == applicationYear && appm.ApplicationNumber == applicationNumber)
+                              select manh.OfficeProjectDescription).FirstOrDefault();
+                    break;
+                case "plmb":
+                    result = (from appm in context.BldgpermitApplicationMaster
+                              join plmp in context.BldgplumbingPermitDetail
+                              on new { appm.ApplicationYear, appm.ApplicationNumber } equals new { plmp.ApplicationYear, plmp.ApplicationNumber }
+                              where ((string.IsNullOrWhiteSpace(officeProjectDesc) || plmp.OfficeProjectDescription.TrimAndLower().Contains(officeProjectDesc.TrimAndLower())) &&
+                              appm.ApplicationYear == applicationYear && appm.ApplicationNumber == applicationNumber)
+                              select plmp.OfficeProjectDescription).FirstOrDefault();
+                    break;
+                case "strut":
+                    result = (from appm in context.BldgpermitApplicationMaster
+                              join strut in context.BldgstructureBuildingPermitDetail
+                              on new { appm.ApplicationYear, appm.ApplicationNumber } equals new { strut.ApplicationYear, strut.ApplicationNumber }
+                              where ((string.IsNullOrWhiteSpace(officeProjectDesc) || strut.OfficeProjectDescription.TrimAndLower().Contains(officeProjectDesc.TrimAndLower())) &&
+                              appm.ApplicationYear == applicationYear && appm.ApplicationNumber == applicationNumber)
+                              select strut.OfficeProjectDescription).FirstOrDefault();
+                    break;
+                default:
+                    result = string.Empty;
+                    break;
 
+                    
+            }
+            return result;
+        }
         public BuildingPermitSystem Get(int id)
         {
             var result = (from appm in _context.BldgpermitApplicationMaster
                           where appm.Id == id
-                          select BuildingPermitSystemMapper.Map(appm)).SingleOrDefault();
+                          select BuildingPermitSystemMapper.Map(appm,GetOfficeProjectDescription(_context,appm.PermitCode,string.Empty,appm.ApplicationYear,appm.ApplicationNumber))).SingleOrDefault();
             return result;
         }
 

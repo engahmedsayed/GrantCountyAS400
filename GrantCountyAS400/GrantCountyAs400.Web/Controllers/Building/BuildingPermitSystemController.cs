@@ -29,15 +29,7 @@ namespace GrantCountyAs400.Web.Controllers.Building
             var pagingInfo = new PagingInfo() { PageNumber = pageNumber };
 
             var results = _buildingModuleRepository.GetAll(
-                filter.ApplicationNumber,
-                filter.ApplicationYear,
-                filter.PermitNumber,
-                filter.ApplicantBusinessName,
-                filter.ApplicantLastName,
-                filter.ApplicantFirstName,
-                filter.PreliminaryParcelNumber,
-                filter.AssessorParcelNumber,
-                filter.JurisdictionCode,
+                Mapper.Map<BuildingSearchCriteria>(filter),
                 out int resultCount,
                 pageNumber,
                 AppSettings.PageSize).ToList();

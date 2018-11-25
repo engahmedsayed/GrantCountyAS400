@@ -45,7 +45,7 @@ namespace GrantCountyAs400.Web
                 options.Cookie.HttpOnly = true;
             });
             services.AddDbContext<GrantCountyDbContext>(options =>
-                        options.UseSqlServer(Configuration.GetConnectionString("GrantCountyDbContext")));
+                        options.UseSqlServer(Configuration.GetConnectionString("GrantCountyDbContext")), ServiceLifetime.Transient);
             services.AddDbContext<ApplicationDbContext>(options =>
                        options.UseSqlServer(Configuration.GetConnectionString("GrantCountySecurityDbContext")));
 

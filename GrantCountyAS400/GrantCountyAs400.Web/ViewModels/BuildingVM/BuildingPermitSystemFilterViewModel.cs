@@ -30,5 +30,11 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 
         [Display(Name = "Jurisdiction Code")]
         public string JurisdictionCode { get; set; }
+
+        [Display(Name ="Project Description")]
+        public string ProjectDescription { get; set; }
+
+        [Display(Name ="Office Project Description")]
+        public string OfficeProjectDescription { get; set; }
     }
 }

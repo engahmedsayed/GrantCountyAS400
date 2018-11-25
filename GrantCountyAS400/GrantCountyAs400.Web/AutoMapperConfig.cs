@@ -105,6 +105,8 @@ namespace GrantCountyAs400.Web
                 cfg.CreateMap<BuildingApplicationFee, BuildingApplicationFeeViewModel>();
                 cfg.CreateMap<ApplicationReceiptInfo, ApplicationReceiptInfoViewModel>();
 
+                cfg.CreateMap<BuildingPermitSystemFilterViewModel, BuildingSearchCriteria>();
+
                 #endregion BuildingModule
 
                 #region Treasurer

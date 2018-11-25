@@ -4,9 +4,7 @@ namespace GrantCountyAs400.Domain.Building.Repository
 {
     public interface IBuildingPermitSystemRepository
     {
-        List<BuildingPermitSystem> GetAll(decimal? applicationNumber, int? applicationYear, decimal? permitNumber, string applicantBusinessName,
-                                          string applicantLastName, string applicantFirstName, decimal? preliminaryParcelNumber, decimal? assessorParcelNumber,
-                                          string jurisdictionCode, out int resultCount, int pageNumber = 1, int pageSize = 50);
+        List<BuildingPermitSystem> GetAll(BuildingSearchCriteria searchCriteria, out int resultCount, int pageNumber = 1, int pageSize = 50);
         BuildingPermitSystem Get(int id);
         BuildingPermitSystemDetails Details(int id);
 

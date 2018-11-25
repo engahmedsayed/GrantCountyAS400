@@ -11,7 +11,7 @@
 
         public static string TrimAndLower(this string value)
         {
-            return value.Trim().ToLower();
+            return value?.Trim().ToLower();
         }
     }
 
