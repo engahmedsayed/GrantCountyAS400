@@ -9,11 +9,9 @@ namespace GrantCountyAs400.Web.ViewModels.AccountingVM.VenderWarrent
         [Display(Name = "Vendor")]
         public string Vendor { get; set; }
         [Display(Name = "Warrant Number")]
-        [DisplayFormat(DataFormatString = "{0:n0}")]
-        public decimal WarrantNumber { get; set; }
+        public int WarrantNumber { get; set; }
         [Display(Name = "Check Number")]
-        [DisplayFormat(DataFormatString = "{0:n0}")]
-        public decimal? CheckNumber { get; set; }
+        public int? CheckNumber { get; set; }
         [Display(Name = "Warrant Date")]
         [DataType(DataType.Date)]
         public DateTime? WarrantDate { get; set; }
