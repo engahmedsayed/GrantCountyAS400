@@ -26,8 +26,6 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.LegalDocument
 
         public decimal UnimprovedLandValue { get; set; }
 
-        [Display(Name = "Land AV")]
-        [DisplayFormat(DataFormatString = "{0:##,#}")]
         public decimal ImprovedLandValue { get; set; }
 
         [Display(Name = "Instrument Date")]
@@ -86,8 +84,6 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.LegalDocument
         [Display(Name = "Incorporated Area?")]
         public string IncorporatedArea { get; set; }
 
-        [Display(Name = "Land AV")]
-        [DisplayFormat(DataFormatString = "{0:##,#}")]
         public decimal? AssessedValue { get; set; }
 
         [Display(Name = "Tax Year")]
@@ -129,9 +125,13 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.LegalDocument
         [Display(Name = "Volume - Page")]
         public string VolumePageDisplay => $"{Volume} - {Page}";
 
+        [Display(Name = "Land AV")]
+        [DisplayFormat(DataFormatString = "{0:##,#}")]
+        public decimal? LandValue => UnimprovedLandValue + ImprovedLandValue;
+
         [Display(Name = "Total AV")]
         [DisplayFormat(DataFormatString = "{0:##,#}")]
-        public decimal TotalLandValue => BuildingValue + ImprovedLandValue;
+        public decimal? TotalLandValue => BuildingValue + LandValue;
 
         [Display(Name = "Net R/P Sale")]
         public decimal? NetRPSale => RPsalesAmount;
