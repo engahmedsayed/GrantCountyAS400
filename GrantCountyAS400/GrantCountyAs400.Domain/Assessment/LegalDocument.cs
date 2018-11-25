@@ -20,12 +20,13 @@ namespace GrantCountyAs400.Domain.Assessment
         public decimal TaxCodeArea { get; }
         public string TaxCodeDesc { get; }
         public string UseCodeShortDesc { get; }
+        public decimal? UnimprovedLandValue { get; }
 
         public IEnumerable<LegalDocument> LegalDocuments { get; }
 
         public RealPropertyLegalDocument(decimal parcelNumber, string taxPayerCode, string taxPayerName, string titleOwnerCode, string titleOwnerName,
             string contractHolderCode, string contractHolderName, string loanNumber, decimal improvedLandValue, decimal buildingValue, decimal landUseCode, decimal taxYear,
-            decimal taxCodeArea, string taxCodeDesc, string useCodeShortDesc, IEnumerable<LegalDocument> legalDocuments)
+            decimal taxCodeArea, string taxCodeDesc, string useCodeShortDesc, decimal? unimprovedLandValue, IEnumerable<LegalDocument> legalDocuments)
         {
             ParcelNumber = parcelNumber;
             TaxPayerCode = taxPayerCode;
@@ -42,6 +43,7 @@ namespace GrantCountyAs400.Domain.Assessment
             TaxCodeArea = taxCodeArea;
             TaxCodeDesc = taxCodeDesc;
             UseCodeShortDesc = useCodeShortDesc;
+            UnimprovedLandValue = unimprovedLandValue;
 
             LegalDocuments = legalDocuments;
         }

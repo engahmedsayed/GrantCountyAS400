@@ -19,7 +19,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Assessment
             new RealPropertyLegalDocument(valueMaster.ParcelNumber.Value, namesRecord.TaxpayerCode, namesRecord.TaxpayerName?.Trim(), namesRecord.TitleOwnerCode,
                 namesRecord.TitleOwnerName?.Trim(), namesRecord.ContractHolderCode, namesRecord.ContractHolderName?.Trim(), valueMaster.LoanNumber,
                 valueMaster.BuildingValue.Value, valueMaster.ImprovedLandValue.Value, valueMaster.LandUseCode.Value, valueMaster.TaxYear.Value, codeArea.TaxCodeArea.Value,
-                codeArea.TaxCodeDesc.Trim(), landUserCode?.UseCodeShortDesc, legalDocuments);
+                codeArea.TaxCodeDesc.Trim(), landUserCode?.UseCodeShortDesc, valueMaster.UnimprovedLandValue, legalDocuments);
 
         internal static LegalDocumentDetails Map(AsmtrealPropertyAssessedValueMaster valueMaster,
                                                       ASMTValueMasterNameView namesRecord,
