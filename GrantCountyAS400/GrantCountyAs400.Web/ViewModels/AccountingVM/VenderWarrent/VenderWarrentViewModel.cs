@@ -8,9 +8,9 @@ namespace GrantCountyAs400.Web.ViewModels.AccountingVM.VenderWarrent
         public int Id { get; set; }
         [Display(Name = "Vendor")]
         public string Vendor { get; set; }
-        [Display(Name = "Warrant Number")]
+        [Display(Name = "Warrant #")]
         public int WarrantNumber { get; set; }
-        [Display(Name = "Check Number")]
+        [Display(Name = "Check #")]
         public int? CheckNumber { get; set; }
         [Display(Name = "Warrant Date")]
         [DataType(DataType.Date)]
@@ -42,9 +42,10 @@ namespace GrantCountyAs400.Web.ViewModels.AccountingVM.VenderWarrent
         [Display(Name = "Invoice Date")]
         [DataType(DataType.Date)]
         public DateTime? InvoiceDate { get; set; }
+        [Display(Name = "Name")]
         public string Name { get; set; }
 
         [Display(Name = "Account")]
-        public string AccountDisplay => $"{Fund}-{Department}-{Program}-{Project}-{Base}";
+        public string AccountDisplay => $"{Fund.Trim()}-{Department.Trim()}-{Program.Trim()}-{Project.Trim()}-{Base.Trim()}";
     }
 }
