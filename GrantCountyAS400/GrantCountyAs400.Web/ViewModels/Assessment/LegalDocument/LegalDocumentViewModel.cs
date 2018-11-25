@@ -24,14 +24,12 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.LegalDocument
         [DisplayFormat(DataFormatString = "{0:##,#}")]
         public decimal BuildingValue { get; set; }
 
-        [Display(Name = "Land AV")]
-        [DisplayFormat(DataFormatString = "{0:##,#}")]
         public decimal ImprovedLandValue { get; set; }
-
         public decimal LandUseCode { get; set; }
         public decimal TaxCodeArea { get; set; }
         public string TaxCodeDesc { get; set; }
         public string UseCodeShortDesc { get; set; }
+        public decimal? UnimprovedLandValue { get; set; }
 
         [Display(Name = "Tax Year")]
         public int TaxYear { get; set; }
@@ -53,9 +51,13 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.LegalDocument
         [Display(Name = "Land Use(code - desciption)")]
         public string LandUseDisplay => $"{LandUseCode} - {UseCodeShortDesc}";
 
+        [Display(Name = "Land AV")]
+        [DisplayFormat(DataFormatString = "{0:##,#}")]
+        public decimal? LandValue => UnimprovedLandValue + ImprovedLandValue;
+
         [Display(Name = "Total AV")]
         [DisplayFormat(DataFormatString = "{0:##,#}")]
-        public decimal TotalLandValue => BuildingValue + ImprovedLandValue;
+        public decimal? TotalLandValue => BuildingValue + LandValue;
     }
 
     public class LegalDocumentViewModel
@@ -97,7 +99,7 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.LegalDocument
             var withoutFirstTwoLetters = affidavitNumberString.Substring(2);
             var result = withoutFirstTwoLetters.Substring(0, 2) + "-" + withoutFirstTwoLetters.Substring(2);
 
-            return result.EndsWith("00000") ? string.Empty : result;
+            return result;
         }
     }
 }
