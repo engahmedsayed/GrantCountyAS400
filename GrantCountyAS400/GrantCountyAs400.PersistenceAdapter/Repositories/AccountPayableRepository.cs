@@ -24,7 +24,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             var query = from warrent in _context.AcctApWarrant
                         join vendor in _context.AcctVendor on warrent.Vendor equals vendor.VendorId
                         where (string.IsNullOrEmpty(vendorId) || vendor.VendorId.ToLower() == vendorId.ToLower())
-                        && (string.IsNullOrEmpty(name) || vendor.Name.ToLower() == name.ToLower())
+                        && (string.IsNullOrEmpty(name) || vendor.Name.ToLower().Contains(name.ToLower()))
                         && (string.IsNullOrEmpty(representative) || vendor.Representative.ToLower() == representative.ToLower())
                         && ((!minPayDate.HasValue) || warrent.PayDate >= minPayDate.Value)
                         && ((!maxPayDate.HasValue) || warrent.PayDate <= maxPayDate.Value)
