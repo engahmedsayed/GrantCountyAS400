@@ -19,10 +19,11 @@ namespace GrantCountyAs400.Domain.Building
         public string OfficeProjectDescription { get; private set; }
 
         public string ProjectDescription { get; private set; }
+        public string ContractorBusinessName { get; private set; }
 
         public BuildingSearchCriteria(decimal? applicationNumber, int? applicationYear, decimal? permitNumber, string applicantBusinessName, string applicantLastName, 
                                       string applicantFirstName, decimal? preliminaryParcelNumber, decimal? assessorParcelNumber, string jurisdictionCode, 
-                                      string officeProjectDescription, string projectDescription)
+                                      string officeProjectDescription, string projectDescription,string contractorBusinessName)
         {
             ApplicationNumber = applicationNumber;
             ApplicationYear = applicationYear;
@@ -35,6 +36,7 @@ namespace GrantCountyAs400.Domain.Building
             JurisdictionCode = jurisdictionCode;
             OfficeProjectDescription = officeProjectDescription;
             ProjectDescription = projectDescription;
+            ContractorBusinessName = contractorBusinessName;
         }
     }
 }

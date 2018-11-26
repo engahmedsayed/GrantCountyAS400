@@ -36,5 +36,8 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 
         [Display(Name ="Office Project Description")]
         public string OfficeProjectDescription { get; set; }
+
+        [Display(Name ="General Contractor")]
+        public string ContractorBusinessName { get; set; }
     }
 }

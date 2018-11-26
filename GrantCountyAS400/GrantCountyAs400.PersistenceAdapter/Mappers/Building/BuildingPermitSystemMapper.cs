@@ -6,7 +6,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
 {
     internal static class BuildingPermitSystemMapper
     {
-        internal static BuildingPermitSystem Map(BldgpermitApplicationMaster appm,string officeProjectDesc) =>
+        internal static BuildingPermitSystem Map(BldgpermitApplicationMaster appm,string officeProjectDesc,string contractorBusinessName) =>
             new BuildingPermitSystem(appm.Id, appm.ApplicationDate, appm.ApplicationNumber, appm.AddendumNumber, appm.PermitCode,
                                   !string.IsNullOrWhiteSpace(appm.PermitStatus) && appm.PermitStatus.ToUpper() == "A" ? "Applica" :
                                   !string.IsNullOrWhiteSpace(appm.PermitStatus) && appm.PermitStatus.ToUpper() == "D" ? "VoidApp" :
@@ -30,7 +30,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                                   appm.CityJurisdictionApprovalRequired.ToUpper() == "Y" ? "R" : "",
                                   appm.CityJurisdictionApprovalDate != null ? "A" : "",
                                   !string.IsNullOrWhiteSpace(appm.CityUtilityApprovalRequired) && appm.CityUtilityApprovalRequired.ToUpper() == "Y" ? "R" : "",
-                                  appm.CityUtilityApprovalDate != null ? "A" : "",officeProjectDesc,appm.ApplicantProjectDescription);
+                                  appm.CityUtilityApprovalDate != null ? "A" : "",officeProjectDesc,appm.ApplicantProjectDescription,contractorBusinessName);
 
         internal static BuildingPermitSystemDetails Map(BldgpermitApplicationMaster bldgpermit,
                                                         ASMTValueMasterNameView preliminaryValueMaster,

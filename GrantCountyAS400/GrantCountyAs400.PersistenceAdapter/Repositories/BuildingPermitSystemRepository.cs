@@ -29,6 +29,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             string plmbString = "plmb";
             string strutString = "strut";
             queryResult = from appm in _context.BldgpermitApplicationMaster
+                          join ctr in _context.Bldgcontractors
+                          on appm.ContractLicenseNumber equals ctr.ContractLicenseNumber
                           join grd in _context.BldggradingExcavatingPermitDetail on
                           new { appm.ApplicationYear, appm.ApplicationNumber, permitCode = appm.PermitCode.TrimAndLower() } equals new { grd.ApplicationYear, grd.ApplicationNumber, permitCode = gradString }
                           into grdRecordrs
@@ -67,13 +69,14 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                           && (searchCriteria.AssessorParcelNumber == null || appm.AssessorParcelNumber == searchCriteria.AssessorParcelNumber)
                           && (string.IsNullOrWhiteSpace(searchCriteria.JurisdictionCode) || appm.JurisdictionCode.TrimAndLower() == searchCriteria.JurisdictionCode.TrimAndLower())
                           && (string.IsNullOrWhiteSpace(searchCriteria.ProjectDescription) || appm.ApplicantProjectDescription.TrimAndLower().Contains(searchCriteria.ProjectDescription.TrimAndLower()))
+                          &&(string.IsNullOrWhiteSpace(searchCriteria.ContractorBusinessName) || ctr.ContractorBusinessName.TrimAndLower().Contains(searchCriteria.ContractorBusinessName))
                           select BuildingPermitSystemMapper.Map(appm, appm.PermitCode.TrimAndLower() == gradString ? grdRecord.OfficeProjectDescription :
                                                                 appm.PermitCode.TrimAndLower() == mechString ? mechRecord.OfficeProjectDescription :
                                                                 appm.PermitCode.TrimAndLower() == firemString ? firemRecord.OfficeProjectDescription :
                                                                 appm.PermitCode.TrimAndLower() == demoString ? demoRecord.OfficeProjectDescription :
                                                                 appm.PermitCode.TrimAndLower() == manhString ? manhRecord.OfficeProjectDescription :
                                                                 appm.PermitCode.TrimAndLower() == plmbString ? plmbRecord.OfficeProjectDescription :
-                                                                appm.PermitCode.TrimAndLower() == strutString ? strutRecord.OfficeProjectDescription : string.Empty);
+                                                                appm.PermitCode.TrimAndLower() == strutString ? strutRecord.OfficeProjectDescription : string.Empty,ctr.ContractorBusinessName);
             if (!string.IsNullOrWhiteSpace(searchCriteria.OfficeProjectDescription))
             {
                 queryResult = queryResult.Where(t => !string.IsNullOrWhiteSpace(t.OfficeProjectDescription) && t.OfficeProjectDescription.TrimAndLower().Contains(searchCriteria.OfficeProjectDescription.TrimAndLower()));
@@ -168,8 +171,10 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
         public BuildingPermitSystem Get(int id)
         {
             var result = (from appm in _context.BldgpermitApplicationMaster
+                          join ctr in _context.Bldgcontractors
+                          on appm.ContractLicenseNumber equals ctr.ContractLicenseNumber
                           where appm.Id == id
-                          select BuildingPermitSystemMapper.Map(appm,GetOfficeProjectDescription(_context,appm.PermitCode,string.Empty,appm.ApplicationYear,appm.ApplicationNumber))).SingleOrDefault();
+                          select BuildingPermitSystemMapper.Map(appm,GetOfficeProjectDescription(_context,appm.PermitCode,string.Empty,appm.ApplicationYear,appm.ApplicationNumber),ctr.ContractorBusinessName)).SingleOrDefault();
             return result;
         }
 

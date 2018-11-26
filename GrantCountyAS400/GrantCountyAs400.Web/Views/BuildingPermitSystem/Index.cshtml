@@ -74,7 +74,10 @@
                             <label asp-for="@filterViewModel.OfficeProjectDescription"></label>
                             <input type="text" asp-for="@filterViewModel.OfficeProjectDescription" name="officeProjectDescription" class="form-control" />
                         </div>
-                      
+                        <div class="form-group">
+                            <label asp-for="@filterViewModel.ContractorBusinessName"></label>
+                            <input type="text" asp-for="@filterViewModel.ContractorBusinessName" name="contractorBusinessName" class="form-control" />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -126,6 +129,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.FirstOrDefault().OfficeProjectDescription)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ContractorBusinessName)
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -171,6 +177,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.OfficeProjectDescription)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContractorBusinessName)
+            </td>
         </tr>
         }
     </tbody>
@@ -188,7 +197,8 @@
     assessorparcelnumber = filterViewModel.AssessorParcelNumber,
     jurisdictioncode = filterViewModel.JurisdictionCode,
     projectDescription = filterViewModel.ProjectDescription,
-    officeProjectDescription = filterViewModel.OfficeProjectDescription
+    officeProjectDescription = filterViewModel.OfficeProjectDescription,
+    contractorBusinessName = filterViewModel.ContractorBusinessName
 }))
 </nav>
 
