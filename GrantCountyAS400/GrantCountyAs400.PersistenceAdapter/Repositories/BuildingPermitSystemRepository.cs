@@ -70,6 +70,9 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                           && (string.IsNullOrWhiteSpace(searchCriteria.JurisdictionCode) || appm.JurisdictionCode.TrimAndLower() == searchCriteria.JurisdictionCode.TrimAndLower())
                           && (string.IsNullOrWhiteSpace(searchCriteria.ProjectDescription) || appm.ApplicantProjectDescription.TrimAndLower().Contains(searchCriteria.ProjectDescription.TrimAndLower()))
                           &&(string.IsNullOrWhiteSpace(searchCriteria.ContractorBusinessName) || ctr.ContractorBusinessName.TrimAndLower().Contains(searchCriteria.ContractorBusinessName))
+                          &&(string.IsNullOrWhiteSpace(searchCriteria.ResultOfEnforcementAction) || appm.ResultOfEnforcementAction.Contains(searchCriteria.ResultOfEnforcementAction))
+                          &&(string.IsNullOrWhiteSpace(searchCriteria.CityJurisdictionApprovalRequired) || appm.CityJurisdictionApprovalRequired.Contains(searchCriteria.CityJurisdictionApprovalRequired))
+                          && (string.IsNullOrWhiteSpace(searchCriteria.CityUtilityApprovalRequired) || appm.CityUtilityApprovalRequired.Contains(searchCriteria.CityUtilityApprovalRequired))
                           select BuildingPermitSystemMapper.Map(appm, appm.PermitCode.TrimAndLower() == gradString ? grdRecord.OfficeProjectDescription :
                                                                 appm.PermitCode.TrimAndLower() == mechString ? mechRecord.OfficeProjectDescription :
                                                                 appm.PermitCode.TrimAndLower() == firemString ? firemRecord.OfficeProjectDescription :

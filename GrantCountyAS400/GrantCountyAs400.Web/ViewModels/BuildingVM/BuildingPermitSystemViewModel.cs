@@ -49,18 +49,25 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         public string PublicWorkApprovalRequired { get; set; }
         public string PublicWorkApprovalDate { get; set; }
 
+        [Display(Name = "City Jur. App. Req.")]
         public string CityJurisdictionApprovalRequired { get; set; }
         public string CityJurisdictionApprovalDate { get; set; }
+
+        [Display(Name = "City Utility App. Req.")]
         public string CityUtilityApprovalRequired { get; set; }
         public string CityUtilityApprovalDate { get; set; }
 
         [Display(Name = "Office Project Description")]
-        public string OfficeProjectDescription { get;  set; }
+        public string OfficeProjectDescription { get; set; }
 
         [Display(Name = "Project Description")]
-        public string ProjectDescription { get;  set; }
+        public string ProjectDescription { get; set; }
 
-        [Display(Name ="Contractor Name")]
+        [Display(Name = "Contractor Name")]
         public string ContractorBusinessName { get; set; }
+
+        [Display(Name = "Res. of Enf. action")]
+        public string ResultOfEnforcementAction { get; set; }
+
     }
 }

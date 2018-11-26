@@ -20,10 +20,15 @@ namespace GrantCountyAs400.Domain.Building
 
         public string ProjectDescription { get; private set; }
         public string ContractorBusinessName { get; private set; }
+        public string ResultOfEnforcementAction { get; private set; }
 
+        public string CityJurisdictionApprovalRequired { get;private set; }
+
+        public string CityUtilityApprovalRequired { get;private set; }
         public BuildingSearchCriteria(decimal? applicationNumber, int? applicationYear, decimal? permitNumber, string applicantBusinessName, string applicantLastName, 
                                       string applicantFirstName, decimal? preliminaryParcelNumber, decimal? assessorParcelNumber, string jurisdictionCode, 
-                                      string officeProjectDescription, string projectDescription,string contractorBusinessName)
+                                      string officeProjectDescription, string projectDescription,string contractorBusinessName,string resultOfEnforcementAction,
+                                      string cityJurisdictionApprovalRequired,string cityUtilityApprovalRequired)
         {
             ApplicationNumber = applicationNumber;
             ApplicationYear = applicationYear;
@@ -37,6 +42,9 @@ namespace GrantCountyAs400.Domain.Building
             OfficeProjectDescription = officeProjectDescription;
             ProjectDescription = projectDescription;
             ContractorBusinessName = contractorBusinessName;
+            ResultOfEnforcementAction = resultOfEnforcementAction;
+            CityJurisdictionApprovalRequired = cityJurisdictionApprovalRequired;
+            CityUtilityApprovalRequired = cityUtilityApprovalRequired;
         }
     }
 }

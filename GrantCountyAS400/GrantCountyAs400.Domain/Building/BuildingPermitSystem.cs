@@ -9,7 +9,7 @@ namespace GrantCountyAs400.Domain.Building
                                   string fireMarshalDate, string planningApprovalRequired, string planningApprovalDate, string healthApprovalRequired, string healthApprovalDate,
                                   string assessorApprovalRequired, string assessorApprovalDate, string publicWorkApprovalRequired, string publicWorkApprovalDate,
                                   string cityJurisdictionApprovalRequired, string cityJurisdictionApprovalDate, string cityUtilityApprovalRequired, string cityUtilityApprovalDate,
-                                  string officeProjectDescription,string projectDescription,string contractorBusinessName)
+                                  string officeProjectDescription,string projectDescription,string contractorBusinessName,string resultOfEnforcementAction)
         {
             ApplicationDate = applicationDate;
             ApplicationNumber = applicationNumber;
@@ -39,10 +39,12 @@ namespace GrantCountyAs400.Domain.Building
             OfficeProjectDescription = officeProjectDescription;
             ProjectDescription = projectDescription;
             ContractorBusinessName = contractorBusinessName;
+            ResultOfEnforcementAction = resultOfEnforcementAction;
         }
 
         public int ID { get; }
         public DateTime? ApplicationDate { get; }
+        public string ResultOfEnforcementAction { get; set; }
         public string ContractorBusinessName { get; }
         public decimal? ApplicationNumber { get; }
         public decimal? AddendumNumber { get; }

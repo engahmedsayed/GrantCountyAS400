@@ -30,7 +30,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                                   appm.CityJurisdictionApprovalRequired.ToUpper() == "Y" ? "R" : "",
                                   appm.CityJurisdictionApprovalDate != null ? "A" : "",
                                   !string.IsNullOrWhiteSpace(appm.CityUtilityApprovalRequired) && appm.CityUtilityApprovalRequired.ToUpper() == "Y" ? "R" : "",
-                                  appm.CityUtilityApprovalDate != null ? "A" : "",officeProjectDesc,appm.ApplicantProjectDescription,contractorBusinessName);
+                                  appm.CityUtilityApprovalDate != null ? "A" : "",officeProjectDesc,appm.ApplicantProjectDescription,contractorBusinessName,appm.ResultOfEnforcementAction);
 
         internal static BuildingPermitSystemDetails Map(BldgpermitApplicationMaster bldgpermit,
                                                         ASMTValueMasterNameView preliminaryValueMaster,

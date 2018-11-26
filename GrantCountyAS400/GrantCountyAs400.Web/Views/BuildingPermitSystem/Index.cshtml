@@ -16,68 +16,96 @@
         <div class="form-horizontal">
             <hr />
             <div class="row">
-                <div class="col-md-4 col-xs-6">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label asp-for="@filterViewModel.ApplicationYear"></label>
-                            <input type="number" asp-for="@filterViewModel.ApplicationYear" name="applicationyear" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="@filterViewModel.ApplicationNumber"></label>
-                            <input type="number" asp-for="@filterViewModel.ApplicationNumber" name="applicationnumber" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="@filterViewModel.PermitNumber"></label>
-                            <input type="number" asp-for="@filterViewModel.PermitNumber" name="permitnumber" class="form-control" />
-                        </div>
+
+                <div class="form-group">
+                    <label asp-for="@filterViewModel.ApplicationYear" class="control-label col-md-2"></label>
+                    <div class="col-md-4">
+                        <input type="number" asp-for="@filterViewModel.ApplicationYear" name="applicationyear" class="form-control" />
+                    </div>
+
+                    <label asp-for="@filterViewModel.ApplicationNumber" class="control-label col-md-2"></label>
+                    <div class="col-md-4">
+                        <input type="number" asp-for="@filterViewModel.ApplicationNumber" name="applicationnumber" class="form-control" />
+                    </div>
+                    <label asp-for="@filterViewModel.PermitNumber" class="control-label col-md-2"></label>
+                    <div class="col-md-4">
+                        <input type="number" asp-for="@filterViewModel.PermitNumber" name="permitnumber" class="form-control" />
                     </div>
                 </div>
-                <div class="col-md-4 col-xs-6 adjcant-col-right">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label asp-for="@filterViewModel.ApplicantBusinessName"></label>
-                            <input type="text" asp-for="@filterViewModel.ApplicantBusinessName" name="applicantbusinessname" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="@filterViewModel.ApplicantFirstName"></label>
-                            <input type="text" asp-for="@filterViewModel.ApplicantFirstName" name="applicantfirstname" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="@filterViewModel.ApplicantLastName"></label>
-                            <input type="text" asp-for="@filterViewModel.ApplicantLastName" name="applicantlastname" class="form-control" />
-                        </div>
+
+
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label asp-for="@filterViewModel.ApplicantBusinessName" class="control-label col-md-2"></label>
+                    <div class="col-md-4">
+                        <input type="text" asp-for="@filterViewModel.ApplicantBusinessName" name="applicantbusinessname" class="form-control" />
+                    </div>
+
+
+                    <label asp-for="@filterViewModel.ApplicantFirstName" class="control-label col-md-2"></label>
+                    <div class="col-md-4">
+                        <input type="text" asp-for="@filterViewModel.ApplicantFirstName" name="applicantfirstname" class="form-control" />
                     </div>
                 </div>
-                <div class="col-md-4 col-xs-6">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label asp-for="@filterViewModel.PreliminaryParcelNumber"></label>
-                            <input type="number" asp-for="@filterViewModel.PreliminaryParcelNumber" name="preliminaryparcelnumber" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="@filterViewModel.AssessorParcelNumber"></label>
-                            <input type="number" asp-for="@filterViewModel.AssessorParcelNumber" name="assessorparcelnumber" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="@filterViewModel.JurisdictionCode"></label>
-                            <input type="text" asp-for="@filterViewModel.JurisdictionCode" name="jurisdictioncode" class="form-control" />
-                        </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label asp-for="@filterViewModel.ApplicantLastName" class="control-label col-md-2"></label>
+                    <div class="col-md-4">
+                        <input type="text" asp-for="@filterViewModel.ApplicantLastName" name="applicantlastname" class="form-control" />
+                    </div>
+                    <label asp-for="@filterViewModel.PreliminaryParcelNumber" class="control-label col-md-2"></label>
+                    <div class="col-md-4">
+                        <input type="number" asp-for="@filterViewModel.PreliminaryParcelNumber" name="preliminaryparcelnumber" class="form-control" />
                     </div>
                 </div>
-                <div class="col-md-4 col-xs-6">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label asp-for="@filterViewModel.ProjectDescription"></label>
-                            <input type="text" asp-for="@filterViewModel.ProjectDescription" name="projectDescription" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="@filterViewModel.OfficeProjectDescription"></label>
-                            <input type="text" asp-for="@filterViewModel.OfficeProjectDescription" name="officeProjectDescription" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="@filterViewModel.ContractorBusinessName"></label>
-                            <input type="text" asp-for="@filterViewModel.ContractorBusinessName" name="contractorBusinessName" class="form-control" />
-                        </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label asp-for="@filterViewModel.AssessorParcelNumber" class="control-label col-md-2"></label>
+                    <div class="col-md-4">
+                        <input type="number" asp-for="@filterViewModel.AssessorParcelNumber" name="assessorparcelnumber" class="form-control" />
+                    </div>
+                    <label asp-for="@filterViewModel.JurisdictionCode" class="control-label col-md-2"></label>
+                    <div class="col-md-4">
+                        <input type="text" asp-for="@filterViewModel.JurisdictionCode" name="jurisdictioncode" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label asp-for="@filterViewModel.ProjectDescription" class="control-label col-md-2"></label>
+                    <div class="col-md-4">
+                        <input type="text" asp-for="@filterViewModel.ProjectDescription" name="projectDescription" class="form-control" />
+                    </div>
+                    <label asp-for="@filterViewModel.OfficeProjectDescription" class="control-label col-md-2"></label>
+                    <div class="col-md-4">
+                        <input type="text" asp-for="@filterViewModel.OfficeProjectDescription" name="officeProjectDescription" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label asp-for="@filterViewModel.ContractorBusinessName" class="control-label col-md-2"></label>
+                    <div class="col-md-4">
+                        <input type="text" asp-for="@filterViewModel.ContractorBusinessName" name="contractorBusinessName" class="form-control" />
+                    </div>
+                    <label asp-for="@filterViewModel.ResultOfEnforcementAction" class="control-label col-md-2"></label>
+                    <div class="col-md-4">
+                        <input type="text" asp-for="@filterViewModel.ResultOfEnforcementAction" name="resultOfEnforcementAction" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label asp-for="@filterViewModel.CityJurisdictionApprovalRequired" class="control-label col-md-2"></label>
+                    <div class="col-md-4">
+                        <input type="text" asp-for="@filterViewModel.CityJurisdictionApprovalRequired" name="cityJurisdictionApprovalRequired" class="form-control" />
+                    </div>
+                    <label asp-for="@filterViewModel.CityUtilityApprovalRequired" class="control-label col-md-2"></label>
+                    <div class="col-md-4">
+                        <input type="text" asp-for="@filterViewModel.CityUtilityApprovalRequired" name="cityUtilityApprovalRequired" class="form-control" />
                     </div>
                 </div>
             </div>
@@ -132,6 +160,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.FirstOrDefault().ContractorBusinessName)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ResultOfEnforcementAction)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().CityJurisdictionApprovalRequired)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().CityUtilityApprovalRequired)
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -180,6 +217,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ContractorBusinessName)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ResultOfEnforcementAction)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CityJurisdictionApprovalRequired)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CityUtilityApprovalRequired)
+            </td>
         </tr>
         }
     </tbody>
@@ -198,7 +244,10 @@
     jurisdictioncode = filterViewModel.JurisdictionCode,
     projectDescription = filterViewModel.ProjectDescription,
     officeProjectDescription = filterViewModel.OfficeProjectDescription,
-    contractorBusinessName = filterViewModel.ContractorBusinessName
+    contractorBusinessName = filterViewModel.ContractorBusinessName,
+    resultOfEnforcementAction = filterViewModel.ResultOfEnforcementAction,
+    cityJurisdictionApprovalRequired = filterViewModel.CityJurisdictionApprovalRequired,
+    cityUtilityApprovalRequired = filterViewModel.CityUtilityApprovalRequired
 }))
 </nav>
 
