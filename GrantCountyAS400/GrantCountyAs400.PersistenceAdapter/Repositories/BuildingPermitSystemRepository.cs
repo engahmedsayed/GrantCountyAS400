@@ -20,62 +20,77 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
         public List<BuildingPermitSystem> GetAll(BuildingSearchCriteria searchCriteria, out int resultCount, int pageNumber = 1, int pageSize = 50)
         {
             List<BuildingPermitSystem> results = new List<BuildingPermitSystem>();
-            List<BldgpermitApplicationMaster> bldgResults = new List<BldgpermitApplicationMaster>();
-            var query = from appm in _context.BldgpermitApplicationMaster
-                        where (searchCriteria.ApplicationNumber == null || appm.ApplicationNumber == searchCriteria.ApplicationNumber)
-                        && (searchCriteria.ApplicationYear == null || appm.ApplicationYear == searchCriteria.ApplicationYear)
-                        && (searchCriteria.PermitNumber == null || appm.PermitNumber == searchCriteria.PermitNumber)
-                        && (string.IsNullOrWhiteSpace(searchCriteria.ApplicantBusinessName) || appm.ApplicantBusinessName.TrimAndLower().Contains(searchCriteria.ApplicantBusinessName.TrimAndLower()))
-                        && (string.IsNullOrWhiteSpace(searchCriteria.ApplicantLastName) || appm.ApplicantLastName.TrimAndLower().Contains(searchCriteria.ApplicantLastName.TrimAndLower()))
-                        && (string.IsNullOrWhiteSpace(searchCriteria.ApplicantFirstName) || appm.ApplicantFirstName.TrimAndLower().Contains(searchCriteria.ApplicantFirstName.TrimAndLower()))
-                        && (searchCriteria.PreliminaryParcelNumber == null || appm.PreliminaryParcelNumber == searchCriteria.PreliminaryParcelNumber)
-                        && (searchCriteria.AssessorParcelNumber == null || appm.AssessorParcelNumber == searchCriteria.AssessorParcelNumber)
-                        && (string.IsNullOrWhiteSpace(searchCriteria.JurisdictionCode) || appm.JurisdictionCode.TrimAndLower() == searchCriteria.JurisdictionCode.TrimAndLower())
-                        && (string.IsNullOrWhiteSpace(searchCriteria.ProjectDescription)  || appm.ApplicantProjectDescription.TrimAndLower().Contains(searchCriteria.ProjectDescription.TrimAndLower()))
-                        select appm;
-          
+            IQueryable<BuildingPermitSystem> queryResult = null;
+            string gradString = "grad";
+            string mechString = "mech";
+            string firemString = "firem";
+            string demoString = "demo";
+            string manhString = "manh";
+            string plmbString = "plmb";
+            string strutString = "strut";
+            queryResult = from appm in _context.BldgpermitApplicationMaster
+                          join grd in _context.BldggradingExcavatingPermitDetail on
+                          new { appm.ApplicationYear, appm.ApplicationNumber, permitCode = appm.PermitCode.TrimAndLower() } equals new { grd.ApplicationYear, grd.ApplicationNumber, permitCode = gradString }
+                          into grdRecordrs
+                          from grdRecord in grdRecordrs.DefaultIfEmpty()
+                          join mech in _context.BldgmechanicalPermitDetail on
+                          new { appm.ApplicationYear, appm.ApplicationNumber, permitCode = appm.PermitCode.TrimAndLower() } equals new { mech.ApplicationYear, mech.ApplicationNumber, permitCode = mechString }
+                          into mechRecords
+                          from mechRecord in mechRecords.DefaultIfEmpty()
+                          join firem in _context.BldgotherPermitDetail on
+                          new { appm.ApplicationYear, appm.ApplicationNumber, permitCode = appm.PermitCode.TrimAndLower() } equals new { firem.ApplicationYear, firem.ApplicationNumber, permitCode = firemString }
+                          into firemRecords
+                          from firemRecord in firemRecords.DefaultIfEmpty()
+                          join demo in _context.BldgdemolitionPermitDetail on
+                          new { appm.ApplicationYear, appm.ApplicationNumber, permitCode = appm.PermitCode.TrimAndLower() } equals new { demo.ApplicationYear, demo.ApplicationNumber, permitCode = demoString }
+                          into demoRecords
+                          from demoRecord in demoRecords.DefaultIfEmpty()
+                          join manh in _context.BldgmanufactureModularBuildingPermit on
+                          new { appm.ApplicationYear, appm.ApplicationNumber, permitCode = appm.PermitCode.TrimAndLower() } equals new { manh.ApplicationYear, manh.ApplicationNumber, permitCode = manhString }
+                          into manhRecords
+                          from manhRecord in manhRecords.DefaultIfEmpty()
+                          join plmb in _context.BldgplumbingPermitDetail on
+                          new { appm.ApplicationYear, appm.ApplicationNumber, permitCode = appm.PermitCode.TrimAndLower() } equals new { plmb.ApplicationYear, plmb.ApplicationNumber, permitCode = plmbString }
+                          into plmbRecords
+                          from plmbRecord in plmbRecords.DefaultIfEmpty()
+                          join strut in _context.BldgstructureBuildingPermitDetail on
+                          new { appm.ApplicationYear, appm.ApplicationNumber, permitCode = appm.PermitCode.TrimAndLower() } equals new { strut.ApplicationYear, strut.ApplicationNumber, permitCode = strutString }
+                          into strutRecords
+                          from strutRecord in strutRecords.DefaultIfEmpty()
+                          where (searchCriteria.ApplicationNumber == null || appm.ApplicationNumber == searchCriteria.ApplicationNumber)
+                          && (searchCriteria.ApplicationYear == null || appm.ApplicationYear == searchCriteria.ApplicationYear)
+                          && (searchCriteria.PermitNumber == null || appm.PermitNumber == searchCriteria.PermitNumber)
+                          && (string.IsNullOrWhiteSpace(searchCriteria.ApplicantBusinessName) || appm.ApplicantBusinessName.TrimAndLower().Contains(searchCriteria.ApplicantBusinessName.TrimAndLower()))
+                          && (string.IsNullOrWhiteSpace(searchCriteria.ApplicantLastName) || appm.ApplicantLastName.TrimAndLower().Contains(searchCriteria.ApplicantLastName.TrimAndLower()))
+                          && (string.IsNullOrWhiteSpace(searchCriteria.ApplicantFirstName) || appm.ApplicantFirstName.TrimAndLower().Contains(searchCriteria.ApplicantFirstName.TrimAndLower()))
+                          && (searchCriteria.PreliminaryParcelNumber == null || appm.PreliminaryParcelNumber == searchCriteria.PreliminaryParcelNumber)
+                          && (searchCriteria.AssessorParcelNumber == null || appm.AssessorParcelNumber == searchCriteria.AssessorParcelNumber)
+                          && (string.IsNullOrWhiteSpace(searchCriteria.JurisdictionCode) || appm.JurisdictionCode.TrimAndLower() == searchCriteria.JurisdictionCode.TrimAndLower())
+                          && (string.IsNullOrWhiteSpace(searchCriteria.ProjectDescription) || appm.ApplicantProjectDescription.TrimAndLower().Contains(searchCriteria.ProjectDescription.TrimAndLower()))
+                          select BuildingPermitSystemMapper.Map(appm, appm.PermitCode.TrimAndLower() == gradString ? grdRecord.OfficeProjectDescription :
+                                                                appm.PermitCode.TrimAndLower() == mechString ? mechRecord.OfficeProjectDescription :
+                                                                appm.PermitCode.TrimAndLower() == firemString ? firemRecord.OfficeProjectDescription :
+                                                                appm.PermitCode.TrimAndLower() == demoString ? demoRecord.OfficeProjectDescription :
+                                                                appm.PermitCode.TrimAndLower() == manhString ? manhRecord.OfficeProjectDescription :
+                                                                appm.PermitCode.TrimAndLower() == plmbString ? plmbRecord.OfficeProjectDescription :
+                                                                appm.PermitCode.TrimAndLower() == strutString ? strutRecord.OfficeProjectDescription : string.Empty);
+            if (!string.IsNullOrWhiteSpace(searchCriteria.OfficeProjectDescription))
+            {
+                queryResult = queryResult.Where(t => !string.IsNullOrWhiteSpace(t.OfficeProjectDescription) && t.OfficeProjectDescription.TrimAndLower().Contains(searchCriteria.OfficeProjectDescription.TrimAndLower()));
+            }
+
             if (pageNumber > 0)
             {
-                resultCount = query.Count();
-                bldgResults = query.Skip((pageNumber - 1) * pageSize)
+                resultCount = queryResult.Count();
+                results = queryResult.Skip((pageNumber - 1) * pageSize)
                                .Take(pageSize)
                                .OrderBy(t => t.ApplicationDate)
                                .ToList();
-                foreach (var item in bldgResults)
-                {
-                    if (!string.IsNullOrWhiteSpace(searchCriteria.OfficeProjectDescription))
-                    {
-                        var officeProjDesc = GetOfficeProjectDescription(_context, item.PermitCode.TrimAndLower(), searchCriteria.OfficeProjectDescription.TrimAndLower(), item.ApplicationYear, item.ApplicationNumber);
-                        if (!string.IsNullOrWhiteSpace(officeProjDesc))
-                        {
-                            results.Add(BuildingPermitSystemMapper.Map(item, officeProjDesc));
-                        }
-                    }
-                    else
-                    {
-                        results.Add(BuildingPermitSystemMapper.Map(item, GetOfficeProjectDescription(_context, item.PermitCode.TrimAndLower(), searchCriteria.OfficeProjectDescription.TrimAndLower(), item.ApplicationYear, item.ApplicationNumber)));
-                    }
-                }
             }
             else
             {
-                bldgResults = query.OrderBy(t => t.ApplicationDate)
+                results = queryResult.OrderBy(t => t.ApplicationDate)
                                .ToList();
-                foreach (var item in bldgResults)
-                {
-                    if (!string.IsNullOrWhiteSpace(searchCriteria.OfficeProjectDescription)) {
-                        var officeProjDescr = GetOfficeProjectDescription(_context, item.PermitCode.TrimAndLower(), searchCriteria.OfficeProjectDescription.TrimAndLower(), item.ApplicationYear, item.ApplicationNumber);
-                        if (!string.IsNullOrWhiteSpace(officeProjDescr))
-                        {
-                            results.Add(BuildingPermitSystemMapper.Map(item,officeProjDescr));
-                        }
-                    }
-                    else
-                    {
-                        results.Add(BuildingPermitSystemMapper.Map(item, GetOfficeProjectDescription(_context, item.PermitCode.TrimAndLower(), searchCriteria.OfficeProjectDescription.TrimAndLower(), item.ApplicationYear, item.ApplicationNumber)));
-                    }
-                    
-                }
                 resultCount = results.Count();
             }
 
@@ -104,11 +119,11 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                               select mech.OfficeProjectDescription).FirstOrDefault();
                     break;
                 case "firem":
-                    result = string.Empty;
-                    //result = (from appm in _context.BldgpermitApplicationMaster
-                    //          join firem in _context.permitdetail
-                    //          on new { appm.ApplicationYear, appm.ApplicationNumber } equals new { firem.ApplicationYear, firem.ApplicationNumber }
-                    //          select firem.OfficeProjectDescription).FirstOrDefault();
+                   
+                    result = (from appm in _context.BldgpermitApplicationMaster
+                              join firem in _context.BldgotherPermitDetail
+                              on new { appm.ApplicationYear, appm.ApplicationNumber } equals new { firem.ApplicationYear, firem.ApplicationNumber }
+                              select firem.OfficeProjectDescription).FirstOrDefault();
                     break;
                 case "demo":
                     result = (from appm in context.BldgpermitApplicationMaster
