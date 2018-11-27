@@ -13,8 +13,8 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         [Display(Name = "#")]
         public decimal? ApplicationNumber { get; set; }
 
-        [Display(Name = "#")]
-        public decimal? AddendumNumber { get; set; }
+        [Display(Name = "Business Name")]
+        public string ApplicantBusinessName { get; set; }
 
         [Display(Name = "Type")]
         public string PermitCode { get; set; }

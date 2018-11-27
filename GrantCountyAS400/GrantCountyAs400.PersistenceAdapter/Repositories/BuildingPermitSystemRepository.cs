@@ -67,12 +67,14 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                           && (string.IsNullOrWhiteSpace(searchCriteria.ApplicantFirstName) || appm.ApplicantFirstName.TrimAndLower().Contains(searchCriteria.ApplicantFirstName.TrimAndLower()))
                           && (searchCriteria.PreliminaryParcelNumber == null || appm.PreliminaryParcelNumber == searchCriteria.PreliminaryParcelNumber)
                           && (searchCriteria.AssessorParcelNumber == null || appm.AssessorParcelNumber == searchCriteria.AssessorParcelNumber)
-                          && (string.IsNullOrWhiteSpace(searchCriteria.JurisdictionCode) || appm.JurisdictionCode.TrimAndLower() == searchCriteria.JurisdictionCode.TrimAndLower())
+                          && (searchCriteria.StateClassCode == null || appm.StateClassCode == searchCriteria.StateClassCode)
                           && (string.IsNullOrWhiteSpace(searchCriteria.ProjectDescription) || appm.ApplicantProjectDescription.TrimAndLower().Contains(searchCriteria.ProjectDescription.TrimAndLower()))
                           &&(string.IsNullOrWhiteSpace(searchCriteria.ContractorBusinessName) || ctr.ContractorBusinessName.TrimAndLower().Contains(searchCriteria.ContractorBusinessName))
-                          &&(string.IsNullOrWhiteSpace(searchCriteria.ResultOfEnforcementAction) || appm.ResultOfEnforcementAction.Contains(searchCriteria.ResultOfEnforcementAction))
-                          &&(string.IsNullOrWhiteSpace(searchCriteria.CityJurisdictionApprovalRequired) || appm.CityJurisdictionApprovalRequired.Contains(searchCriteria.CityJurisdictionApprovalRequired))
-                          && (string.IsNullOrWhiteSpace(searchCriteria.CityUtilityApprovalRequired) || appm.CityUtilityApprovalRequired.Contains(searchCriteria.CityUtilityApprovalRequired))
+                          &&(string.IsNullOrWhiteSpace(searchCriteria.EnforcementActionDesc) || appm.EnforcementDescription.Contains(searchCriteria.EnforcementActionDesc))
+                          &&(string.IsNullOrWhiteSpace(searchCriteria.CityJurisdictionApproval) || appm.CityJurisdictionApprovalRequired.Contains(searchCriteria.CityJurisdictionApproval))
+                          && (string.IsNullOrWhiteSpace(searchCriteria.CityUtilityApproval) || appm.CityUtilityApprovalRequired.Contains(searchCriteria.CityUtilityApproval))
+                          && ((!searchCriteria.FromDate.HasValue) || appm.PermitIssuedDate >= searchCriteria.FromDate)
+                          && ((!searchCriteria.ToDate.HasValue) || appm.PermitIssuedDate <= searchCriteria.ToDate)
                           select BuildingPermitSystemMapper.Map(appm, appm.PermitCode.TrimAndLower() == gradString ? grdRecord.OfficeProjectDescription :
                                                                 appm.PermitCode.TrimAndLower() == mechString ? mechRecord.OfficeProjectDescription :
                                                                 appm.PermitCode.TrimAndLower() == firemString ? firemRecord.OfficeProjectDescription :

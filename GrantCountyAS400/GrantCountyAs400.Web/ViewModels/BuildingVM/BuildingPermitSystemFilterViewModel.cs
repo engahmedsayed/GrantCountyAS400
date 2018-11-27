@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 {
@@ -28,25 +31,51 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         [Display(Name = "Assessor Parcel Number")]
         public decimal? AssessorParcelNumber { get; set; }
 
-        [Display(Name = "Jurisdiction Code")]
-        public string JurisdictionCode { get; set; }
+        [Display(Name = "State Class Code")]
+        public decimal? StateClassCode { get; set; }
 
-        [Display(Name ="Project Description")]
+        [Display(Name = "Project Description")]
         public string ProjectDescription { get; set; }
 
-        [Display(Name ="Office Project Description")]
+        [Display(Name = "Office Project Description")]
         public string OfficeProjectDescription { get; set; }
 
-        [Display(Name ="General Contractor")]
+        [Display(Name = "General Contractor")]
         public string ContractorBusinessName { get; set; }
 
-        [Display(Name ="Result of enforcement action")]
-        public string ResultOfEnforcementAction { get; set; }
+        [Display(Name = "Enforcement Action Description")]
+        public string EnforcementActionDesc { get; set; }
 
-        [Display(Name ="City Jurisdiction Approved (Y/N)")]
-        public string CityJurisdictionApprovalRequired { get; set; }
+        [Display(Name = "City Jurisdiction Approved (Y/N)")]
+        public List<SelectListItem> CityJurisdictionApprovalRequired
+        {
+            get
+            {
+                return new List<SelectListItem> { new SelectListItem { Text = "", Value = "" },
+                       new SelectListItem { Text = "Y", Value = "Y" },
+                       new SelectListItem { Text = "N", Value = "N" } };
+            }
+        }
+        public string CityJurisdictionApproval { get; set; }
 
         [Display(Name = "City Utility App. Req. (Y/N)")]
-        public string CityUtilityApprovalRequired { get; set; }
+        public List<SelectListItem> CityUtilityApprovalRequired
+        {
+            get
+            {
+                return new List<SelectListItem>{ new SelectListItem { Text = "", Value = "" },
+                       new SelectListItem { Text = "Y", Value = "Y" },
+                       new SelectListItem { Text = "N", Value = "N" }};
+            }
+        }
+
+        public string CityUtilityApproval { get; set; }
+
+        [Display(Name = "Issue Date From")]
+        [UIHint("DatePicker")]
+        public DateTime? FromDate { get; set; } = null;
+        [Display(Name = "Issue Date To")]
+        [UIHint("DatePicker")]
+        public DateTime? ToDate { get; set; } = null;
     }
 }

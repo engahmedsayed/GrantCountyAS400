@@ -12,23 +12,25 @@ namespace GrantCountyAs400.Domain.Building
         public string ApplicantBusinessName { get; private set; }
         public string ApplicantLastName { get; private set; }
         public string ApplicantFirstName { get; private set; }
+        public DateTime? FromDate { get; private set; }
+        public DateTime? ToDate { get; private set; } 
         public decimal? PreliminaryParcelNumber { get; private set; }
         public decimal? AssessorParcelNumber { get; private set; }
-        public string JurisdictionCode { get; private set; }
+        public decimal? StateClassCode { get; private set; }
 
         public string OfficeProjectDescription { get; private set; }
 
         public string ProjectDescription { get; private set; }
         public string ContractorBusinessName { get; private set; }
-        public string ResultOfEnforcementAction { get; private set; }
+        public string EnforcementActionDesc { get; private set; }
 
-        public string CityJurisdictionApprovalRequired { get;private set; }
+        public string CityJurisdictionApproval { get;private set; }
 
-        public string CityUtilityApprovalRequired { get;private set; }
+        public string CityUtilityApproval { get;private set; }
         public BuildingSearchCriteria(decimal? applicationNumber, int? applicationYear, decimal? permitNumber, string applicantBusinessName, string applicantLastName, 
-                                      string applicantFirstName, decimal? preliminaryParcelNumber, decimal? assessorParcelNumber, string jurisdictionCode, 
-                                      string officeProjectDescription, string projectDescription,string contractorBusinessName,string resultOfEnforcementAction,
-                                      string cityJurisdictionApprovalRequired,string cityUtilityApprovalRequired)
+                                      string applicantFirstName, decimal? preliminaryParcelNumber, decimal? assessorParcelNumber, decimal? stateClassCode, 
+                                      string officeProjectDescription, string projectDescription,string contractorBusinessName,string enforcementActionDesc,
+                                      string cityJurisdictionApproval,string cityUtilityApproval,DateTime? fromDate,DateTime? toDate)
         {
             ApplicationNumber = applicationNumber;
             ApplicationYear = applicationYear;
@@ -38,13 +40,15 @@ namespace GrantCountyAs400.Domain.Building
             ApplicantFirstName = applicantFirstName;
             PreliminaryParcelNumber = preliminaryParcelNumber;
             AssessorParcelNumber = assessorParcelNumber;
-            JurisdictionCode = jurisdictionCode;
+            StateClassCode = stateClassCode;
             OfficeProjectDescription = officeProjectDescription;
             ProjectDescription = projectDescription;
             ContractorBusinessName = contractorBusinessName;
-            ResultOfEnforcementAction = resultOfEnforcementAction;
-            CityJurisdictionApprovalRequired = cityJurisdictionApprovalRequired;
-            CityUtilityApprovalRequired = cityUtilityApprovalRequired;
+            EnforcementActionDesc = enforcementActionDesc;
+            CityJurisdictionApproval = cityJurisdictionApproval;
+            CityUtilityApproval = cityUtilityApproval;
+            FromDate = fromDate;
+            ToDate = toDate;
         }
     }
 }
