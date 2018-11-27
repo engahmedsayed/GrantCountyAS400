@@ -11,6 +11,6 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         [DataType(DataType.Date)]
         public DateTime? LicenseExpireDate { get; set; }
 
-        public decimal PhoneNumber { get; set; }
+        public decimal? PhoneNumber { get; set; }
     }
 }
