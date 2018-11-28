@@ -96,7 +96,7 @@
                                                     @Html.DisplayNameFor(modelItem => taxReceivable.Transactions.FirstOrDefault().TransactionNumber)
                                                 </th>
                                                 <th>
-                                                    @Html.DisplayNameFor(modelItem => taxReceivable.Transactions.FirstOrDefault().Type)
+                                                    @Html.DisplayNameFor(modelItem => taxReceivable.Transactions.FirstOrDefault().TypeDisplay)
                                                 </th>
                                                 <th>
                                                     @Html.DisplayNameFor(modelItem => taxReceivable.Transactions.FirstOrDefault().TransactionDate)
@@ -128,7 +128,7 @@
                                                         @Html.DisplayFor(modelItem => transaction.ChangeReasonCodeDisplay)
                                                     </td>
                                                     <td>
-                                                        @Html.DisplayFor(modelItem => transaction.Type)
+                                                        @Html.DisplayFor(modelItem => transaction.TypeDisplay)
                                                     </td>
                                                     <td>
                                                         @Html.DisplayFor(modelItem => transaction.TransactionDate)
