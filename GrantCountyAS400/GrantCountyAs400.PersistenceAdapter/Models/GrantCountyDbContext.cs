@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -1149,6 +1149,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
 
                 entity.Property(e => e.Group).HasColumnType("decimal(2, 0)");
 
+                entity.Property(e => e.Medical).HasColumnType("decimal(7, 2)");
+
                 entity.Property(e => e.MedicalBenefits).HasColumnType("decimal(7, 2)");
 
                 entity.Property(e => e.MedicalGross).HasColumnType("decimal(7, 2)");
@@ -1177,10 +1179,6 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                     .HasColumnName("PRWBARGUNT")
                     .HasMaxLength(2)
                     .IsUnicode(false);
-
-                entity.Property(e => e.Prwmed)
-                    .HasColumnName("PRWMED")
-                    .HasColumnType("decimal(7, 2)");
 
                 entity.Property(e => e.Prwper)
                     .HasColumnName("PRWPER")

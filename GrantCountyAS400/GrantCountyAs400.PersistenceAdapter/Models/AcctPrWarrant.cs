@@ -50,7 +50,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
         public decimal? RetirementBenefitsEmployee { get; set; }
         public decimal? RetirementBenefitsEmployer { get; set; }
         public decimal? MedicalGross { get; set; }
-        public decimal? Prwmed { get; set; }
+        public decimal? Medical { get; set; }
         public decimal? MedicalBenefits { get; set; }
         public decimal? TaxableMedicalBenefits { get; set; }
     }

@@ -35,13 +35,13 @@ namespace GrantCountyAs400.Domain.Accounting
         public DateTime? Date { get; }
         public decimal? Gross { get; }
         public decimal? Fica { get; }
-        public decimal? MedicalGross { get; }
+        public decimal? Medical { get; }
         public decimal? RetirementBenefitsEmployee { get; }
         public decimal? RetirementBenefitsEmployer { get; }
         public decimal? NetPay { get; }
 
         public AccountPayrollWarrant(
-            int id, decimal warrantNumber, decimal? checkNumber, decimal? employeeNumber, DateTime? date, decimal? gross, decimal? fica, decimal? medicalGross,
+            int id, decimal warrantNumber, decimal? checkNumber, decimal? employeeNumber, DateTime? date, decimal? gross, decimal? fica, decimal? medical,
             decimal? retirementBenefitsEmployee, decimal? retirementBenefitsEmployer, decimal? netPay)
         {
             Id = id;
@@ -51,7 +51,7 @@ namespace GrantCountyAs400.Domain.Accounting
             Date = date;
             Gross = gross;
             Fica = fica;
-            MedicalGross = medicalGross;
+            Medical = medical;
             RetirementBenefitsEmployee = retirementBenefitsEmployee;
             RetirementBenefitsEmployer = retirementBenefitsEmployer;
             NetPay = netPay;

@@ -33,8 +33,8 @@ namespace GrantCountyAs400.Web.ViewModels.AccountingVM.AccountPayroll
         public decimal? Gross { get; set; }
         [Display(Name = "Fica")]
         public decimal? Fica { get; set; }
-        [Display(Name = "Medical Gross")]
-        public decimal? MedicalGross { get; set; }
+        [Display(Name = "Medical")]
+        public decimal? Medical { get; set; }
         [Display(Name = "Retirement Benefits Employee")]
         public decimal? RetirementBenefitsEmployee { get; set; }
         [Display(Name = "Retirement Benefits Employer")]
