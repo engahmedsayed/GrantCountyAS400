@@ -36,7 +36,6 @@ namespace GrantCountyAs400.Web
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddDistributedMemoryCache();
 
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
         .AddSessionStateTempDataProvider();
 
@@ -68,7 +67,8 @@ namespace GrantCountyAs400.Web
             services.AddScoped<IBuildingPermitSystemRepository, BuildingPermitSystemRepository>();
             services.AddScoped<ITaxReceivableRepository, TaxReceivableRepository>();
             services.AddScoped<IAccountPayableRepository, AccountPayableRepository>();
-            
+            services.AddScoped<IAccountPayrollRepository, AccountPayrollRepository>();
+
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));

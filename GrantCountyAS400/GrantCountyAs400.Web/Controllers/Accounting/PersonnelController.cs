@@ -1,4 +1,4 @@
-﻿using GrantCountyAs400.Domain.Accounting;
+using GrantCountyAs400.Domain.Accounting;
 using GrantCountyAs400.Domain.Accounting.Repository;
 using GrantCountyAs400.Web.Extensions;
 using GrantCountyAs400.Web.ViewModels;
@@ -26,11 +26,10 @@ namespace GrantCountyAs400.Web.Controllers.Accounting
         [HttpGet]
         public IActionResult Index(int pageNumber = 1, PersonnelFilterViewModel filter = default(PersonnelFilterViewModel))
         {
-            int resultCount;
             var pagingInfo = new PagingInfo() { PageNumber = pageNumber };
 
             var results = _personnelRepository
-                                .GetAllWithContracts(filter.FirstName, filter.LastName, filter.SSN, out resultCount, pageNumber, AppSettings.PageSize)
+                                .GetAllWithContracts(filter.FirstName, filter.LastName, filter.SSN, out int resultCount, pageNumber, AppSettings.PageSize)
                                 .ToList();
 
             pagingInfo.Total = resultCount;

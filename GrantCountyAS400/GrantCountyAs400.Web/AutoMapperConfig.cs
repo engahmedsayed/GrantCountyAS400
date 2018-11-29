@@ -4,6 +4,7 @@ using GrantCountyAs400.Domain.Assessment;
 using GrantCountyAs400.Domain.Building;
 using GrantCountyAs400.Domain.Treasurer;
 using GrantCountyAs400.Web.ViewModels.AccountingVM;
+using GrantCountyAs400.Web.ViewModels.AccountingVM.AccountPayroll;
 using GrantCountyAs400.Web.ViewModels.AccountingVM.VenderWarrent;
 using GrantCountyAs400.Web.ViewModels.Assessment.AssociatedPerson;
 using GrantCountyAs400.Web.ViewModels.Assessment.BuildingPermits;
@@ -34,7 +35,9 @@ namespace GrantCountyAs400.Web
                 cfg.CreateMap<Deduction, DeductionViewModel>();
                 cfg.CreateMap<YtdHistory, YtdHistoryViewModel>();
                 cfg.CreateMap<VenderWarrent, VenderWarrentViewModel>();
-                
+                cfg.CreateMap<AccountPayroll, AccountPayrollViewModel>();
+                cfg.CreateMap<AccountPayrollWarrant, AccountPayrollWarrantViewModel>();
+
                 #endregion Accounting
 
                 #region General Ledger
