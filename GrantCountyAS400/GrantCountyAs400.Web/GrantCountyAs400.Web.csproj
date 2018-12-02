@@ -25,6 +25,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\dist\" />
     <Folder Include="wwwroot\js\" />
+    <Folder Include="wwwroot\ExcelTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="Views\BuildingPermitSystem\_ApprovalStatus.cshtml">
@@ -50,6 +51,9 @@
     </Content>
     <Content Update="Views\LegalDocument\Details.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="wwwroot\ExcelTemplates\BeginingBalancesTemplate.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 </Project>

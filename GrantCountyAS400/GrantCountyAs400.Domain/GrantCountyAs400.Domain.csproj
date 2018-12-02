@@ -8,4 +8,8 @@
     <Compile Remove="Building\BuildingPermitSystemDetail.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="4.5.2.1" />
+  </ItemGroup>
+
 </Project>

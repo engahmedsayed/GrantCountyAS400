@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<GrantCountyAs400.Web.ViewModels.BuildingVM.BuildingPermitSystemViewModel>
 @using X.PagedList.Mvc.Core;
-@using GrantCountyAs400.Web.ViewModels.BuildingVM
+@using GrantCountyAs400.Web.ViewModels.BuildingVM;
+@using GrantCountyAs400.Web.Extensions;
 @using X.PagedList;
 
 @{
@@ -13,121 +14,138 @@
 <p>
     @using (Html.BeginForm("Index", "BuildingPermitSystem", FormMethod.Get))
     {
-    <div class="form-horizontal">
-        <hr />
-        <div class="row">
+        <div class="form-horizontal">
+            <hr />
+            <div class="row">
+
+                <div class="form-group">
+                    <label asp-for="@filterViewModel.ApplicationYear" class="control-label col-md-2"></label>
+                    <div class="col-md-2">
+                        <input type="number" asp-for="@filterViewModel.ApplicationYear" name="applicationyear" class="form-control" />
+                    </div>
+
+                    <label asp-for="@filterViewModel.ApplicationNumber" class="control-label col-md-2"></label>
+                    <div class="col-md-2">
+                        <input type="number" asp-for="@filterViewModel.ApplicationNumber" name="applicationnumber" class="form-control" />
+                    </div>
+                    <label asp-for="@filterViewModel.PermitNumber" class="control-label col-md-2"></label>
+                    <div class="col-md-2">
+                        <input type="number" asp-for="@filterViewModel.PermitNumber" name="permitnumber" class="form-control" />
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label asp-for="@filterViewModel.ApplicantBusinessName" class="control-label col-md-2"></label>
+                    <div class="col-md-2">
+                        <input type="text" asp-for="@filterViewModel.ApplicantBusinessName" name="applicantbusinessname" class="form-control" />
+                    </div>
+
+
+                    <label asp-for="@filterViewModel.ApplicantFirstName" class="control-label col-md-2"></label>
+                    <div class="col-md-2">
+                        <input type="text" asp-for="@filterViewModel.ApplicantFirstName" name="applicantfirstname" class="form-control" />
+                    </div>
+                    <label asp-for="@filterViewModel.ApplicantLastName" class="control-label col-md-2"></label>
+                    <div class="col-md-2">
+                        <input type="text" asp-for="@filterViewModel.ApplicantLastName" name="applicantlastname" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+
+                    <label asp-for="@filterViewModel.PreliminaryParcelNumber" class="control-label col-md-2"></label>
+                    <div class="col-md-2">
+                        <input type="number" asp-for="@filterViewModel.PreliminaryParcelNumber" name="preliminaryparcelnumber" class="form-control" />
+                    </div>
+                    <label asp-for="@filterViewModel.AssessorParcelNumber" class="control-label col-md-2"></label>
+                    <div class="col-md-2">
+                        <input type="number" asp-for="@filterViewModel.AssessorParcelNumber" name="assessorparcelnumber" class="form-control" />
+                    </div>
+                    <label asp-for="@filterViewModel.StateClassCode" class="control-label col-md-2"></label>
+                    <div class="col-md-2">
+                        <input type="number" asp-for="@filterViewModel.StateClassCode" name="stateClassCode" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label asp-for="@filterViewModel.ProjectDescription" class="control-label col-md-2"></label>
+                    <div class="col-md-2">
+                        <input type="text" asp-for="@filterViewModel.ProjectDescription" name="projectDescription" class="form-control" />
+                    </div>
+                    <label asp-for="@filterViewModel.OfficeProjectDescription" class="control-label col-md-2"></label>
+                    <div class="col-md-2">
+                        <input type="text" asp-for="@filterViewModel.OfficeProjectDescription" name="officeProjectDescription" class="form-control" />
+                    </div>
+                    <label asp-for="@filterViewModel.ContractorBusinessName" class="control-label col-md-2"></label>
+                    <div class="col-md-2">
+                        <input type="text" asp-for="@filterViewModel.ContractorBusinessName" name="contractorBusinessName" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+
+                    <label asp-for="@filterViewModel.EnforcementActionDesc" class="control-label col-md-2"></label>
+                    <div class="col-md-2">
+                        <input type="text" asp-for="@filterViewModel.EnforcementActionDesc" name="enforcementActionDesc" class="form-control" />
+                    </div>
+                    <label asp-for="@filterViewModel.CityJurisdictionApprovalRequired" class="control-label col-md-2"></label>
+                    <div class="col-md-2">
+                        <select asp-for="@filterViewModel.CityJurisdictionApproval" name="cityJurisdictionApproval" asp-items="@filterViewModel.CityJurisdictionApprovalRequired" class="form-control"></select>
+                    </div>
+                    <label asp-for="@filterViewModel.CityUtilityApprovalRequired" class="control-label col-md-2"></label>
+                    <div class="col-md-2">
+                        <select type="text" asp-for="@filterViewModel.CityUtilityApproval" name="cityUtilityApproval" asp-items="@filterViewModel.CityUtilityApprovalRequired" class="form-control"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+
+                    <label asp-for="@filterViewModel.FromDate" class="control-label col-md-2"></label>
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => filterViewModel.FromDate, null, "fromDate", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <label asp-for="@filterViewModel.ToDate" class="control-label col-md-2"></label>
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => filterViewModel.ToDate, null, "toDate", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            </div>
 
             <div class="form-group">
-                <label asp-for="@filterViewModel.ApplicationYear" class="control-label col-md-2"></label>
-                <div class="col-md-2">
-                    <input type="number" asp-for="@filterViewModel.ApplicationYear" name="applicationyear" class="form-control" />
-                </div>
-
-                <label asp-for="@filterViewModel.ApplicationNumber" class="control-label col-md-2"></label>
-                <div class="col-md-2">
-                    <input type="number" asp-for="@filterViewModel.ApplicationNumber" name="applicationnumber" class="form-control" />
-                </div>
-                <label asp-for="@filterViewModel.PermitNumber" class="control-label col-md-2"></label>
-                <div class="col-md-2">
-                    <input type="number" asp-for="@filterViewModel.PermitNumber" name="permitnumber" class="form-control" />
-                </div>
-            </div>
-
-
-        </div>
-        <div class="row">
-            <div class="form-group">
-                <label asp-for="@filterViewModel.ApplicantBusinessName" class="control-label col-md-2"></label>
-                <div class="col-md-2">
-                    <input type="text" asp-for="@filterViewModel.ApplicantBusinessName" name="applicantbusinessname" class="form-control" />
-                </div>
-
-
-                <label asp-for="@filterViewModel.ApplicantFirstName" class="control-label col-md-2"></label>
-                <div class="col-md-2">
-                    <input type="text" asp-for="@filterViewModel.ApplicantFirstName" name="applicantfirstname" class="form-control" />
-                </div>
-                <label asp-for="@filterViewModel.ApplicantLastName" class="control-label col-md-2"></label>
-                <div class="col-md-2">
-                    <input type="text" asp-for="@filterViewModel.ApplicantLastName" name="applicantlastname" class="form-control" />
+                <div class="col-md-offset-2 col-md-10">
+                    <div class="form-group pull-right">
+                        <input type="submit" value="Filter" class="btn btn-success" />
+                        <input type="reset" value="Clear" class="btn btn-default" id="btnReset" />
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="form-group">
-
-                <label asp-for="@filterViewModel.PreliminaryParcelNumber" class="control-label col-md-2"></label>
-                <div class="col-md-2">
-                    <input type="number" asp-for="@filterViewModel.PreliminaryParcelNumber" name="preliminaryparcelnumber" class="form-control" />
-                </div>
-                <label asp-for="@filterViewModel.AssessorParcelNumber" class="control-label col-md-2"></label>
-                <div class="col-md-2">
-                    <input type="number" asp-for="@filterViewModel.AssessorParcelNumber" name="assessorparcelnumber" class="form-control" />
-                </div>
-                <label asp-for="@filterViewModel.StateClassCode" class="control-label col-md-2"></label>
-                <div class="col-md-2">
-                    <input type="number" asp-for="@filterViewModel.StateClassCode" name="stateClassCode" class="form-control" />
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group">
-                <label asp-for="@filterViewModel.ProjectDescription" class="control-label col-md-2"></label>
-                <div class="col-md-2">
-                    <input type="text" asp-for="@filterViewModel.ProjectDescription" name="projectDescription" class="form-control" />
-                </div>
-                <label asp-for="@filterViewModel.OfficeProjectDescription" class="control-label col-md-2"></label>
-                <div class="col-md-2">
-                    <input type="text" asp-for="@filterViewModel.OfficeProjectDescription" name="officeProjectDescription" class="form-control" />
-                </div>
-                <label asp-for="@filterViewModel.ContractorBusinessName" class="control-label col-md-2"></label>
-                <div class="col-md-2">
-                    <input type="text" asp-for="@filterViewModel.ContractorBusinessName" name="contractorBusinessName" class="form-control" />
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group">
-
-                <label asp-for="@filterViewModel.EnforcementActionDesc" class="control-label col-md-2"></label>
-                <div class="col-md-2">
-                    <input type="text" asp-for="@filterViewModel.EnforcementActionDesc" name="enforcementActionDesc" class="form-control" />
-                </div>
-                <label asp-for="@filterViewModel.CityJurisdictionApprovalRequired" class="control-label col-md-2"></label>
-                <div class="col-md-2">
-                    <select asp-for="@filterViewModel.CityJurisdictionApproval" name="cityJurisdictionApproval" asp-items="@filterViewModel.CityJurisdictionApprovalRequired" class="form-control"></select>
-                </div>
-                <label asp-for="@filterViewModel.CityUtilityApprovalRequired" class="control-label col-md-2"></label>
-                <div class="col-md-2">
-                    <select type="text" asp-for="@filterViewModel.CityUtilityApproval" name="cityUtilityApproval" asp-items="@filterViewModel.CityUtilityApprovalRequired" class="form-control"></select>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group">
-
-                <label asp-for="@filterViewModel.FromDate" class="control-label col-md-2"></label>
-                <div class="col-md-2">
-                    @Html.EditorFor(model => filterViewModel.FromDate, null, "fromDate", new { htmlAttributes = new { @class = "form-control" } })
-                </div>
-                <label asp-for="@filterViewModel.ToDate" class="control-label col-md-2"></label>
-                <div class="col-md-2">
-                    @Html.EditorFor(model => filterViewModel.ToDate, null, "toDate", new { htmlAttributes = new { @class = "form-control" } })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <div class="form-group pull-right">
-                    <input type="submit" value="Filter" class="btn btn-success" />
-                    <input type="reset" value="Clear" class="btn btn-default" id="btnReset" />
-                </div>
-            </div>
-        </div>
-    </div>
     }
 </p>
+<div class="row col-md-12 pad-bottom-15">
+    @if (Model.Any())
+    {
+        <div class="row">
+            <div class="dropdown pull-right">
+                <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">
+                    <i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Export
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="export" target="_blank" href="@Url.Action("ExportBuildingPermitSystemAsExcel", "BuildingPermitSystem")?@filterViewModel.GetQueryString()">Export To Excel</a></li>
+                    <li><a class="export" target="_blank" href="@Url.Action("ExportBuildingPermitSystemAsPdf", "BuildingPermitSystem")?@filterViewModel.GetQueryString()">Export To PDF</a></li>
+                </ul>
+            </div>
+        </div>
+    }
+</div>
 
 <table class="table">
     <thead>
@@ -206,7 +224,7 @@
                     @Html.DisplayFor(modelItem => formattedPermitNumber)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem=>item.ApplicantBusinessName)
+                    @Html.DisplayFor(modelItem => item.ApplicantBusinessName)
                 </td>
                 <td>
                     @{ var formattedApplicationName = item.ApplicationName.Trim() == "," ? "" : item.ApplicationName;}

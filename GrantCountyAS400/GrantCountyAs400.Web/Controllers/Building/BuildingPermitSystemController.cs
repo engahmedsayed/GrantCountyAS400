@@ -1,12 +1,15 @@
 using AutoMapper;
+using GrantCountyAs400.Domain;
 using GrantCountyAs400.Domain.Building;
 using GrantCountyAs400.Domain.Building.Repository;
+using GrantCountyAs400.Domain.ExportingService;
 using GrantCountyAs400.Web.Extensions;
 using GrantCountyAs400.Web.ViewModels;
 using GrantCountyAs400.Web.ViewModels.BuildingVM;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace GrantCountyAs400.Web.Controllers.Building
@@ -17,10 +20,12 @@ namespace GrantCountyAs400.Web.Controllers.Building
     public class BuildingPermitSystemController : Controller
     {
         private readonly IBuildingPermitSystemRepository _buildingModuleRepository;
+        private readonly IExportingService _exportingService;
 
-        public BuildingPermitSystemController(IBuildingPermitSystemRepository buildingModuleRepository)
+        public BuildingPermitSystemController(IBuildingPermitSystemRepository buildingModuleRepository,IExportingService exportingService)
         {
             _buildingModuleRepository = buildingModuleRepository;
+            _exportingService = exportingService;
         }
 
         [HttpGet]
@@ -36,6 +41,20 @@ namespace GrantCountyAs400.Web.Controllers.Building
             pagingInfo.Total = resultCount;
             ViewBag.FilterViewModel = filter;
             return View(results.ToMappedPagedList<BuildingPermitSystem, BuildingPermitSystemViewModel>(pagingInfo));
+        }
+
+
+        [HttpGet]
+        [Route("export/excel", Name = "ExportBuildingPermitSystemAsExcel")]
+        public FileResult ExportBuildingPermitSystemAsExcel(BuildingPermitSystemFilterViewModel filter)
+        {
+            //In order to get all data that match the given filter.
+            var pagingInfo = new PagingInfo() { PageNumber = -1 };
+
+            MemoryStream stream = _exportingService.GetBuildingPermitSystem(Mapper.Map<BuildingSearchCriteria>(filter));
+            return File(stream, Constants.ExcelFilesMimeType,
+            Constants.BuildingPermitTemplateExcelFileName);
+
         }
 
         [HttpGet]

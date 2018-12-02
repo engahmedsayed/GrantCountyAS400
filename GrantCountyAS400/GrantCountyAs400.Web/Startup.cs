@@ -1,6 +1,7 @@
 using GrantCountyAs400.Domain.Accounting.Repository;
 using GrantCountyAs400.Domain.Assessment.Repository;
 using GrantCountyAs400.Domain.Building.Repository;
+using GrantCountyAs400.Domain.ExportingService;
 using GrantCountyAs400.Domain.Treasurer.Repository;
 using GrantCountyAs400.PersistenceAdapter.Models;
 using GrantCountyAs400.PersistenceAdapter.Repositories;
@@ -68,6 +69,7 @@ namespace GrantCountyAs400.Web
             services.AddScoped<ITaxReceivableRepository, TaxReceivableRepository>();
             services.AddScoped<IAccountPayableRepository, AccountPayableRepository>();
             services.AddScoped<IAccountPayrollRepository, AccountPayrollRepository>();
+            services.AddScoped<IExportingService, ExportingService>();
 
             services.AddAuthorization(options =>
             {
