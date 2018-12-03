@@ -2,7 +2,6 @@
 using GrantCountyAs400.Domain.Accounting;
 using GrantCountyAs400.Domain.Assessment;
 using GrantCountyAs400.Domain.Building;
-using GrantCountyAs400.Domain.ExportingService;
 using GrantCountyAs400.Domain.Treasurer;
 using GrantCountyAs400.Web.ViewModels.AccountingVM;
 using GrantCountyAs400.Web.ViewModels.AccountingVM.AccountPayroll;
@@ -17,6 +16,7 @@ using GrantCountyAs400.Web.ViewModels.Assessment.PlatCondo;
 using GrantCountyAs400.Web.ViewModels.Assessment.RealProperty;
 using GrantCountyAs400.Web.ViewModels.BuildingVM;
 using GrantCountyAs400.Web.ViewModels.GeneralLedgerVM;
+using GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceipt;
 using GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceivable;
 
 namespace GrantCountyAs400.Web
@@ -110,7 +110,6 @@ namespace GrantCountyAs400.Web
                 cfg.CreateMap<ApplicationReceiptInfo, ApplicationReceiptInfoViewModel>();
 
                 cfg.CreateMap<BuildingPermitSystemFilterViewModel, BuildingSearchCriteria>();
-                
 
                 #endregion BuildingModule
 
@@ -122,6 +121,8 @@ namespace GrantCountyAs400.Web
                 cfg.CreateMap<SpecialAssessmentTaxReceivable, SpecialAssessmentTaxReceivableViewModel>();
                 cfg.CreateMap<PropertyTaxReceivableTransaction, PropertyTaxReceivableTransactionViewModel>();
                 cfg.CreateMap<SpecialAssessmentTransaction, SpecialAssessmentTransactionViewModel>();
+                cfg.CreateMap<TaxReceipt, TaxReceiptViewModel>();
+                cfg.CreateMap<PropertyTaxReceivableTransaction, PropertyTaxReceivableReceiptViewModel>();
 
                 #endregion Treasurer
             });

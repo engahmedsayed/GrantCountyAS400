@@ -42,12 +42,6 @@
                         <th>
                             @Html.DisplayNameFor(model => model.PropertyTaxReceivables.FirstOrDefault().TotalAssessmentAmount)
                         </th>
-                        @*<th>
-                            @Html.DisplayNameFor(model => model.PropertyTaxReceivables.FirstOrDefault().TotalPenaltyAmount)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.PropertyTaxReceivables.FirstOrDefault().TotalInterestPaid)
-                        </th>*@
                         <th>
                             @Html.DisplayNameFor(model => model.PropertyTaxReceivables.FirstOrDefault().Type)
                         </th>
@@ -67,8 +61,6 @@
                             <td>@Html.DisplayFor(modelItem => taxReceivable.ParcelExtension)</td>
                             <td>@Html.DisplayFor(modelItem => taxReceivable.TaxAmount)</td>
                             <td>@Html.DisplayFor(modelItem => taxReceivable.TotalAssessmentAmount)</td>
-                            @*<td>@Html.DisplayFor(modelItem => taxReceivable.TotalPenaltyAmount)</td>
-                            <td>@Html.DisplayFor(modelItem => taxReceivable.TotalInterestPaid)</td>*@
                             <td>@Html.DisplayFor(modelItem => taxReceivable.Type)</td>
                         </tr>
                         <tr class="row-details">
@@ -123,7 +115,9 @@
                                                         @Html.DisplayFor(modelItem => transaction.TotalInterestPaid)
                                                     </td>
                                                     <td>
-                                                        @Html.DisplayFor(modelItem => transaction.TransactionNumber)
+                                                        <a asp-controller="TaxReceipt" asp-action="details" asp-route-transactionNumber="@transaction.TransactionNumber">
+                                                            @Html.DisplayFor(modelItem => transaction.TransactionNumber)
+                                                        </a>                                                        
                                                         &nbsp;&nbsp;
                                                         @Html.DisplayFor(modelItem => transaction.ChangeReasonCodeDisplay)
                                                     </td>

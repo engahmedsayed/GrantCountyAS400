@@ -81,14 +81,20 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
         public virtual DbSet<BldgplumbingPermitDetail> BldgplumbingPermitDetail { get; set; }
         public virtual DbSet<BldgstateClassifications> BldgstateClassifications { get; set; }
         public virtual DbSet<BldgstructureBuildingPermitDetail> BldgstructureBuildingPermitDetail { get; set; }
+        public virtual DbSet<TreasaffadavitDocumentType> TreasaffadavitDocumentType { get; set; }
+        public virtual DbSet<TreasaffadavitExemptionCodes> TreasaffadavitExemptionCodes { get; set; }
         public virtual DbSet<TreasallPropertyArtreasurerComments> TreasallPropertyArtreasurerComments { get; set; }
         public virtual DbSet<TreasallPropertyMaster> TreasallPropertyMaster { get; set; }
         public virtual DbSet<TreasallPropertyTaxReceivableMaster> TreasallPropertyTaxReceivableMaster { get; set; }
         public virtual DbSet<TreasallPropertyTaxReceivableTransactions> TreasallPropertyTaxReceivableTransactions { get; set; }
+        public virtual DbSet<TreasPropertyMasterInfoView> TreasPropertyMasterInfoView { get; set; }
+        public virtual DbSet<TreascashReceiptsTender> TreascashReceiptsTender { get; set; }
+        public virtual DbSet<TreasexciseTaxRate> TreasexciseTaxRate { get; set; }
         public virtual DbSet<TreaspersonalPropertyMaster> TreaspersonalPropertyMaster { get; set; }
         public virtual DbSet<TreasspecialAssessmentsTaxReceivableMaster> TreasspecialAssessmentsTaxReceivableMaster { get; set; }
         public virtual DbSet<TreasspecialAssessmentsTransactions> TreasspecialAssessmentsTransactions { get; set; }
-        public virtual DbSet<TreasPropertyMasterInfoView> TreasPropertyMasterInfoView { get; set; }
+        public virtual DbSet<TreastenderAffadavits> TreastenderAffadavits { get; set; }
+        public virtual DbSet<TreastenderGeneralReceipts> TreastenderGeneralReceipts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -1445,6 +1451,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                     .HasMaxLength(1)
                     .IsUnicode(false);
             });
+
             modelBuilder.Entity<AsmtlandUseCodes>(entity =>
             {
                 entity.ToTable("ASMTLandUseCodes");
@@ -4628,6 +4635,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                     .HasMaxLength(6)
                     .IsUnicode(false);
             });
+
             modelBuilder.Entity<BldgplumbingPermitDetail>(entity =>
             {
                 entity.ToTable("BLDGPlumbingPermitDetail");
@@ -4901,6 +4909,36 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<TreasaffadavitDocumentType>(entity =>
+            {
+                entity.ToTable("TREASAffadavitDocumentType");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.DocumentTypeDescription)
+                    .HasMaxLength(60)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LegalDocumentType)
+                    .HasMaxLength(4)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<TreasaffadavitExemptionCodes>(entity =>
+            {
+                entity.ToTable("TREASAffadavitExemptionCodes");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.ExemptRegNumber)
+                    .HasMaxLength(11)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ExemptionCodeDescription)
+                    .HasMaxLength(75)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<TreasallPropertyArtreasurerComments>(entity =>
             {
                 entity.ToTable("TREASAllPropertyARTreasurerComments");
@@ -5125,6 +5163,146 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                 entity.Property(e => e.TranDate).HasColumnType("date");
 
                 entity.Property(e => e.TranTypeCd)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<TreascashReceiptsTender>(entity =>
+            {
+                entity.ToTable("TREASCashReceiptsTender");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.AccountNumber)
+                    .HasMaxLength(21)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AdditionalTender)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AddressLine1)
+                    .HasMaxLength(32)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AddressLine2)
+                    .HasMaxLength(32)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AddressLine3)
+                    .HasMaxLength(32)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AddressLine4)
+                    .HasMaxLength(32)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AmountDue).HasColumnType("decimal(9, 2)");
+
+                entity.Property(e => e.AmountTendered).HasColumnType("decimal(9, 2)");
+
+                entity.Property(e => e.BankBranchName)
+                    .HasMaxLength(32)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.BankCode)
+                    .HasMaxLength(4)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.BankName)
+                    .HasMaxLength(32)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CashBack).HasColumnType("decimal(9, 2)");
+
+                entity.Property(e => e.ChangeSerId)
+                    .HasColumnName("ChangeSerID")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Comments)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Comments2)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ExpirationDate).HasColumnType("date");
+
+                entity.Property(e => e.PaymentMethod)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RcptExt)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecCode)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecType)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ReceiptDate).HasColumnType("date");
+
+                entity.Property(e => e.ReceiptTranNumber).HasColumnType("numeric(7, 0)");
+
+                entity.Property(e => e.SequenceNumber).HasColumnType("numeric(2, 0)");
+
+                entity.Property(e => e.TaxPayerName)
+                    .HasMaxLength(32)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TaxpayerCode)
+                    .HasMaxLength(8)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TranYear).HasColumnType("numeric(4, 0)");
+            });
+
+            modelBuilder.Entity<TreasexciseTaxRate>(entity =>
+            {
+                entity.ToTable("TREASExciseTaxRate");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.AdministrativeFeePercent).HasColumnType("numeric(9, 0)");
+
+                entity.Property(e => e.AreaCode)
+                    .HasMaxLength(4)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ChangeDate).HasColumnType("date");
+
+                entity.Property(e => e.ChangeUserId)
+                    .HasColumnName("ChangeUser ID")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EffectiveCode).HasColumnType("numeric(8, 0)");
+
+                entity.Property(e => e.ExciseTaxRate).HasColumnType("decimal(7, 7)");
+
+                entity.Property(e => e.InterestMethod)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.InterestRate).HasColumnType("decimal(7, 7)");
+
+                entity.Property(e => e.PenaltyRate).HasColumnType("decimal(7, 7)");
+
+                entity.Property(e => e.PenaltyRate2).HasColumnType("decimal(7, 7)");
+
+                entity.Property(e => e.PenaltyRate3).HasColumnType("decimal(7, 7)");
+
+                entity.Property(e => e.RecordTypeStateLocal)
                     .HasMaxLength(1)
                     .IsUnicode(false);
             });
@@ -5384,6 +5562,181 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                 entity.Property(e => e.TransactionType)
                     .HasMaxLength(1)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<TreastenderAffadavits>(entity =>
+            {
+                entity.ToTable("TREASTenderAffadavits");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.AffidavitDate).HasColumnType("date");
+
+                entity.Property(e => e.AssessedValue).HasColumnType("decimal(9, 0)");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Description2)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DocumentDate).HasColumnType("date");
+
+                entity.Property(e => e.ExciseAreaCode)
+                    .HasMaxLength(4)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ExemptRegNumber)
+                    .HasMaxLength(11)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.GiftDebt).HasColumnType("decimal(9, 2)");
+
+                entity.Property(e => e.LegalDocumentType)
+                    .HasMaxLength(4)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LocalInterest).HasColumnType("decimal(9, 2)");
+
+                entity.Property(e => e.LocalPenalty).HasColumnType("decimal(9, 2)");
+
+                entity.Property(e => e.LocalTaxPaid).HasColumnType("decimal(9, 2)");
+
+                entity.Property(e => e.MobileHomeNotation)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NewOwnerBuyer)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PPtype)
+                    .HasColumnName("P/PType")
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PPvalue)
+                    .HasColumnName("P/PValue")
+                    .HasColumnType("decimal(9, 0)");
+
+                entity.Property(e => e.ParcelNumber).HasColumnType("numeric(16, 0)");
+
+                entity.Property(e => e.PreviousOwnerSeller)
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PrimaryUseCode).HasColumnType("numeric(2, 0)");
+
+                entity.Property(e => e.PropertyType)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RcptExt)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RcptExt1)
+                    .HasColumnName("RcptExt#")
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecCode)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ReceiptTran)
+                    .HasColumnName("ReceiptTran#")
+                    .HasColumnType("numeric(7, 0)");
+
+                entity.Property(e => e.ReceiptTranNumber).HasColumnType("numeric(7, 0)");
+
+                entity.Property(e => e.StateInterest).HasColumnType("decimal(9, 2)");
+
+                entity.Property(e => e.StatePenalty).HasColumnType("decimal(9, 2)");
+
+                entity.Property(e => e.StateTaxPaid).HasColumnType("decimal(9, 2)");
+
+                entity.Property(e => e.SubsidizedFee).HasColumnType("numeric(9, 2)");
+
+                entity.Property(e => e.SubsidizedRecipient)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TaxAmount).HasColumnType("decimal(9, 2)");
+
+                entity.Property(e => e.TaxCodeArea).HasColumnType("numeric(4, 0)");
+
+                entity.Property(e => e.TaxStatus)
+                    .HasMaxLength(2)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TechFeeRecipient)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TechnicalFee).HasColumnType("numeric(9, 2)");
+
+                entity.Property(e => e.TotalPaid).HasColumnType("decimal(9, 2)");
+
+                entity.Property(e => e.TranYear).HasColumnType("numeric(4, 0)");
+            });
+
+            modelBuilder.Entity<TreastenderGeneralReceipts>(entity =>
+            {
+                entity.ToTable("TREASTenderGeneralReceipts");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.BarsNumber).HasColumnType("numeric(3, 0)");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Description2)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Element).HasColumnType("numeric(2, 0)");
+
+                entity.Property(e => e.Function).HasColumnType("numeric(4, 0)");
+
+                entity.Property(e => e.FundNumber).HasColumnType("numeric(9, 0)");
+
+                entity.Property(e => e.Object).HasColumnType("numeric(2, 0)");
+
+                entity.Property(e => e.ProjActGrant)
+                    .HasMaxLength(6)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RcptExt)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RcptExt1)
+                    .HasColumnName("RcptExt#")
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecCode)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ReceiptTran)
+                    .HasColumnName("ReceiptTran#")
+                    .HasColumnType("numeric(7, 0)");
+
+                entity.Property(e => e.ReceiptTranNumber).HasColumnType("numeric(7, 0)");
+
+                entity.Property(e => e.SequenceNumber).HasColumnType("numeric(2, 0)");
+
+                entity.Property(e => e.TaxAmount).HasColumnType("decimal(9, 2)");
+
+                entity.Property(e => e.TranDate).HasColumnType("date");
+
+                entity.Property(e => e.TranYear).HasColumnType("numeric(4, 0)");
             });
         }
     }

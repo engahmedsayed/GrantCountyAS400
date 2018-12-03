@@ -37,8 +37,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Treasurer
             TreasallPropertyTaxReceivableTransactions propertyTransaction,
             IEnumerable<TreasspecialAssessmentsTransactions> specialTransactions)
                 => new PropertyTaxReceivableTransaction(
-                    propertyTransaction.ParcelExtension, propertyTransaction.TaxAmount, propertyTransaction.TaxYear.Value, propertyTransaction.TranDate,
-                    propertyTransaction.ReceiptTranNumber, propertyTransaction.ChgReasonCd, propertyTransaction.TranTypeCd, propertyTransaction.InterestPaid,
-                    propertyTransaction.LPamount, specialTransactions.Select(Map));
+                    propertyTransaction.ParcelNumber, propertyTransaction.ParcelExtension, propertyTransaction.TaxAmount, propertyTransaction.TaxYear.Value,
+                    propertyTransaction.TranDate, propertyTransaction.ReceiptTranNumber, propertyTransaction.ChgReasonCd, propertyTransaction.TranTypeCd,
+                    propertyTransaction.InterestPaid, propertyTransaction.LPamount, specialTransactions.Select(Map));
     }
 }

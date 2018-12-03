@@ -1,0 +1,230 @@
+﻿@model GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceipt.TaxReceiptViewModel
+@{
+    ViewData["Title"] = "Receipt Number: " + Model.TransactionNumber;
+}
+
+<div>
+    <h2>Receipt Number: @Model.TransactionNumber</h2>
+
+    <div class="entity-details">
+        <div class="entity-info clearfix">
+            @if (Model.CashReceipts.Any())
+            {
+                <div class="col-xs-6">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td><strong>Received From</strong></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(model => model.CashReceipts.FirstOrDefault().TaxPayerName) </strong></td>
+                                <td class="text-right"><span> @Html.DisplayFor(model => model.CashReceipts.FirstOrDefault().TaxPayerName) </span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(model => model.CashReceipts.FirstOrDefault().AddressLine1) </strong></td>
+                                <td class="text-right"><span> @Html.DisplayFor(model => model.CashReceipts.FirstOrDefault().AddressLine1) </span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(model => model.CashReceipts.FirstOrDefault().AddressLine2) </strong></td>
+                                <td class="text-right"><span> @Html.DisplayFor(model => model.CashReceipts.FirstOrDefault().AddressLine2) </span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(model => model.CashReceipts.FirstOrDefault().Comments) </strong></td>
+                                <td class="text-right">
+                                    <p> @Html.DisplayFor(model => model.CashReceipts.FirstOrDefault().Comments) </p>
+                                    <p> @Html.DisplayFor(model => model.CashReceipts.FirstOrDefault().Comments2) </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-xs-6">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td><strong>Inquiry</strong></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(model => model.CashReceipts.FirstOrDefault().ReceiptNumber) </strong></td>
+                                <td class="text-right"><span> @Html.DisplayFor(model => model.CashReceipts.FirstOrDefault().ReceiptNumber) </span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(model => model.CashReceipts.FirstOrDefault().ReceiptDate) </strong></td>
+                                <td class="text-right"><span> @Html.DisplayFor(model => model.CashReceipts.FirstOrDefault().ReceiptDate) </span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(model => model.CashReceipts.FirstOrDefault().ChangeSerId) </strong></td>
+                                <td class="text-right"><span> @Html.DisplayFor(model => model.CashReceipts.FirstOrDefault().ChangeSerId) </span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            }
+            <div class="clearfix"></div>
+            @if (Model.GeneralReceipts.Any())
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.GeneralReceipts.FirstOrDefault().ReceiptNumber)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.GeneralReceipts.FirstOrDefault().FundNumber)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.GeneralReceipts.FirstOrDefault().Description)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.GeneralReceipts.FirstOrDefault().RevenueDisplay)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.GeneralReceipts.FirstOrDefault().TaxAmount)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var receipt in Model.GeneralReceipts)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(_ => receipt.ReceiptNumber)</td>
+                                <td>@Html.DisplayFor(_ => receipt.FundNumber)</td>
+                                <td>@Html.DisplayFor(_ => receipt.Description)</td>
+                                <td>@Html.DisplayFor(_ => receipt.RevenueDisplay)</td>
+                                <td>@Html.DisplayFor(_ => receipt.TaxAmount)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            @if (Model.PropertyReceipts.Any())
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.PropertyReceipts.FirstOrDefault().ParcelNumber)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.PropertyReceipts.FirstOrDefault().TaxYear)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.PropertyReceipts.FirstOrDefault().TaxAmount)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.PropertyReceipts.FirstOrDefault().TotalAssessmentPaid)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.PropertyReceipts.FirstOrDefault().TotalInterestAndPenaltyPaid)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.PropertyReceipts.FirstOrDefault().TotalPaid)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var receipt in Model.PropertyReceipts)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(_ => receipt.ParcelNumber)</td>
+                                <td>@Html.DisplayFor(_ => receipt.TaxYear)</td>
+                                <td>@Html.DisplayFor(_ => receipt.TaxAmount)</td>
+                                <td>@Html.DisplayFor(_ => receipt.TotalAssessmentPaid)</td>
+                                <td>@Html.DisplayFor(_ => receipt.TotalInterestAndPenaltyPaid)</td>
+                                <td>@Html.DisplayFor(_ => receipt.TotalPaid)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            @if (Model.AffadavitReceipts.Any())
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.AffadavitReceipts.FirstOrDefault().ReceiptNumber)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.AffadavitReceipts.FirstOrDefault().NewOwnerBuyer)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.AffadavitReceipts.FirstOrDefault().PreviousOwnerSeller)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.AffadavitReceipts.FirstOrDefault().TotalPaid)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var receipt in Model.AffadavitReceipts)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(_ => receipt.ReceiptNumber)</td>
+                                <td>@Html.DisplayFor(_ => receipt.NewOwnerBuyer)</td>
+                                <td>@Html.DisplayFor(_ => receipt.PreviousOwnerSeller)</td>
+                                <td>@Html.DisplayFor(_ => receipt.TotalPaid)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>
+                            <strong>Totals</strong>
+                        </td>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TotalTaxAmount)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TotalAssessment)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TotalTotalInterestAndPenalty)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TotalPaid)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td>@Html.DisplayFor(model => model.TotalTaxAmount)</td>
+                        <td>@Html.DisplayFor(model => model.TotalAssessment)</td>
+                        <td>@Html.DisplayFor(model => model.TotalTotalInterestAndPenalty)</td>
+                        <td>@Html.DisplayFor(model => model.TotalPaid)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            @if (Model.CashReceipts.Any())
+            {
+                <div class="col-xs-6 col-xs-offset-6">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td><strong>Tender</strong></td>
+                                <td class="text-right">
+                                    <span> @Model.CashReceipts.FirstOrDefault().PaymentMethodDisplay</span>
+                                    <span>&nbsp; &nbsp;@Model.CashReceipts.FirstOrDefault().AmountTenderedDisplay</span>
+                                    @if (Model.CashReceipts.Skip(1).FirstOrDefault() != null)
+                                    {
+                                        <br />
+                                        <span> @Model.CashReceipts.Skip(1).FirstOrDefault().PaymentMethodDisplay</span>
+                                        <span>&nbsp; &nbsp;@Model.CashReceipts.Skip(1).FirstOrDefault().AmountTenderedDisplay</span>
+                                    }
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>

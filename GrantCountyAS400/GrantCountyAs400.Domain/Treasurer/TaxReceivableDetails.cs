@@ -82,6 +82,7 @@ namespace GrantCountyAs400.Domain.Treasurer
     public class PropertyTaxReceivableTransaction
     {
         // TREASAllPropertyTaxReceivableTransactions => APTRD
+        public decimal? ParcelNumber { get; }
         public decimal? ParcelExtension { get; }
         public decimal? TaxAmount { get; }
         public decimal? TaxYear { get; }
@@ -95,9 +96,10 @@ namespace GrantCountyAs400.Domain.Treasurer
         public IEnumerable<SpecialAssessmentTransaction> SpecialAssessmentTransactions { get; }
 
         public PropertyTaxReceivableTransaction(
-            decimal? parcelExtension, decimal? taxAmount, decimal? taxYear, DateTime? transactionDate, decimal? transactionNumber, string changeReasonCode, string type,
-            decimal? interestPaid, decimal? lpAmount)
+            decimal? parcelNumber, decimal? parcelExtension, decimal? taxAmount, decimal? taxYear, DateTime? transactionDate, decimal? transactionNumber,
+            string changeReasonCode, string type, decimal? interestPaid, decimal? lpAmount)
         {
+            ParcelNumber = parcelNumber;
             ParcelExtension = parcelExtension;
             TaxAmount = taxAmount;
             TaxYear = taxYear;
@@ -110,9 +112,9 @@ namespace GrantCountyAs400.Domain.Treasurer
         }
 
         public PropertyTaxReceivableTransaction(
-            decimal? parcelExtension, decimal? taxAmount, decimal? taxYear, DateTime? transactionDate, decimal? transactionNumber, string changeReasonCode, string type,
-            decimal? interestPaid, decimal? lpAmount, IEnumerable<SpecialAssessmentTransaction> specialAssessmentTransactions)
-            : this(parcelExtension, taxAmount, taxYear, transactionDate, transactionNumber, changeReasonCode, type, interestPaid, lpAmount)
+            decimal? parcelNumber, decimal? parcelExtension, decimal? taxAmount, decimal? taxYear, DateTime? transactionDate, decimal? transactionNumber,
+            string changeReasonCode, string type, decimal? interestPaid, decimal? lpAmount, IEnumerable<SpecialAssessmentTransaction> specialAssessmentTransactions)
+            : this(parcelNumber, parcelExtension, taxAmount, taxYear, transactionDate, transactionNumber, changeReasonCode, type, interestPaid, lpAmount)
         {
             SpecialAssessmentTransactions = specialAssessmentTransactions;
         }
