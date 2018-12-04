@@ -1,0 +1,113 @@
+﻿@model IEnumerable<GrantCountyAs400.Web.ViewModels.BuildingVM.BuildingPermitSystemViewModel>
+@{
+    ViewData["Title"] = "Export BuildingPermit System";
+}
+
+<h2>Export Building Permit System As Pdf</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ApplicationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ApplicationNumber)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().PermitCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().PermitStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ApplicationYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().PermitNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ApplicantBusinessName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ApplicationName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ProjectDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().OfficeProjectDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ContractorBusinessName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ResultOfEnforcementAction)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().CityJurisdictionApprovalRequired)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().CityUtilityApprovalRequired)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @{ var formattedDateTime = item.ApplicationDate.HasValue ? item.ApplicationDate.Value.ToString("MM/dd/yyyy") : "";}
+                    @Html.DisplayFor(modelItem => formattedDateTime)
+                </td>
+                <td>
+                    @{ var formattedApplicaionNumber = item.ApplicationNumber.HasValue ? item.ApplicationNumber.ToString() : "";}
+                    <a asp-action="Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => formattedApplicaionNumber)</a>
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.PermitCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PermitStatus)
+                </td>
+                <td>
+                    @{ var formattedApplicationYear = item.ApplicationYear.HasValue ? int.Parse(item.ApplicationYear.Value.ToString()).ToString() : "";}
+                    @Html.DisplayFor(modelItem => formattedApplicationYear)
+                </td>
+                <td>
+                    @{ var formattedPermitNumber = item.PermitNumber.HasValue ? item.PermitNumber.Value.ToString() : "";}
+                    @Html.DisplayFor(modelItem => formattedPermitNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicantBusinessName)
+                </td>
+                <td>
+                    @{ var formattedApplicationName = item.ApplicationName.Trim() == "," ? "" : item.ApplicationName;}
+                    @Html.DisplayFor(modelItem => formattedApplicationName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProjectDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OfficeProjectDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContractorBusinessName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ResultOfEnforcementAction)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CityJurisdictionApprovalRequired)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CityUtilityApprovalRequired)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

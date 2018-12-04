@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Rotativa.AspNetCore;
 
 namespace GrantCountyAs400.Web
 {
@@ -36,7 +37,7 @@ namespace GrantCountyAs400.Web
             });
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddDistributedMemoryCache();
-
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
         .AddSessionStateTempDataProvider();
 
@@ -98,6 +99,7 @@ namespace GrantCountyAs400.Web
             app.UseMvc();
 
             AutoMapperConfig.Configure();
+            RotativaConfiguration.Setup(env);
         }
     }
 }

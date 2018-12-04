@@ -58,6 +58,21 @@ namespace GrantCountyAs400.Web.Controllers.Building
         }
 
         [HttpGet]
+        [Route("export/pdf",Name = "ExportBuildingPermitSystemAsPdf")]
+        public ActionResult ExportBuildingPermitSystemAsPdf(BuildingPermitSystemFilterViewModel filter)
+        {
+            //In order to get all data that match the given filter.
+            var pagingInfo = new PagingInfo() { PageNumber = -1 };
+
+            var entities = _buildingModuleRepository.GetAll(
+                Mapper.Map<BuildingSearchCriteria>(filter),
+                out int resultCount,
+                pagingInfo.PageNumber,
+                AppSettings.PageSize).ToList();
+            return new Rotativa.AspNetCore.ViewAsPdf(entities.ToMappedPagedList<BuildingPermitSystem, BuildingPermitSystemViewModel>(pagingInfo)) { FileName = $"BuildingPermitSystem.pdf" };
+        }
+
+        [HttpGet]
         [Route("{id}")]
         public IActionResult Details(int id)
         {
