@@ -54,7 +54,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                         (legalDocument, exciseTaxData)
                             => LegalDocumentMapper.Map(
                                     legalDocument,
-                                    exciseTaxData.SingleOrDefault(x => x.AffidavitNumber == legalDocument.AffidavitNumber))
+                                    exciseTaxData.SingleOrDefault(x => x.AffidavitNumber == legalDocument.AffidavitNumber && 
+                                                                       x.AffidavitNumberExtension == legalDocument.AffidavitNumberExtension))
                                ).ToList();
 
                 return LegalDocumentMapper.Map(realproperty.valueMasterRecord,
@@ -79,11 +80,13 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          {
                              legalDocument.ParcelNumber,
                              legalDocument.AffidavitNumber,
+                             legalDocument.AffidavitNumberExtension,
                          }
                          equals new
                          {
                              exciseTaxData.ParcelNumber,
                              exciseTaxData.AffidavitNumber,
+                             exciseTaxData.AffidavitNumberExtension,
                          }
                          into exciseTaxDataJoin
                          from exciseTaxDataRecord in exciseTaxDataJoin.DefaultIfEmpty()
