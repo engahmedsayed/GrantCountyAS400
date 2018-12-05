@@ -42,7 +42,7 @@ namespace GrantCountyAs400.Domain.ExportingService
             var rowIndex = sheetStartingIndex; // starting index of each sheet.
             foreach (var item in reportData)
             {
-                rowIndex = 2;
+                
                 dataSheet.Cells["A" + rowIndex].Value = item.ApplicationDate;
                 dataSheet.Cells["B" + rowIndex].Value = item.ApplicationNumber;
                 dataSheet.Cells["C" + rowIndex].Value = item.PermitCode;
