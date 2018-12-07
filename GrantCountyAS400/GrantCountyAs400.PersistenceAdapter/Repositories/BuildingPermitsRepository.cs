@@ -49,7 +49,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             var parcelNumberWithTaxPayerCodeQuery = (from RPAV in _context.AsmtrealPropertyAssessedValueMaster
                         join NNAME in _context.AsmtmasterNameAddress
                         on RPAV.TaxpayerCode equals NNAME.NameCode
-                        where RPAV.ParcelNumber == parcelNumber && RPAV.TaxpayerCode == ownerCode
+                        where RPAV.ParcelNumber == parcelNumber && RPAV.TitleOwnerCode == ownerCode
                         select new { RPAV, NNAME }).FirstOrDefault();
 
             var parcelNumberWithTitleOwnerCodeQuery = (from RPAV in _context.AsmtrealPropertyAssessedValueMaster
@@ -77,12 +77,12 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                                            , item.NewOrDemo, item.Comments));
             }
 
-            BuildingPermits result = new BuildingPermits(parcelNumberWithTaxPayerCodeQuery.RPAV?.ParcelNumber, parcelNumberWithTaxPayerCodeQuery.NNAME?.Name
-                                                         , parcelNumberWithTitleOwnerCodeQuery.NNAME?.Name, parcelNumberWithTaxPayerCodeQuery.RPAV?.Description1
-                                                         , parcelNumberWithLandUseCodeQuery.LU?.UseCodeDesc, parcelNumberWithTaxPayerCodeQuery.RPAV?.Description2
-                                                         , parcelNumberWithTaxPayerCodeQuery.RPAV?.UnimprovedLandAcres + parcelNumberWithTaxPayerCodeQuery.RPAV?.ImprovedLandAcers
-                                                         , parcelNumberWithTaxPayerCodeQuery.RPAV?.Description3, parcelNumberWithTaxPayerCodeQuery.RPAV?.ImprovedLandValue
-                                                         , parcelNumberWithTaxPayerCodeQuery.RPAV?.Description4, parcelNumberWithTaxPayerCodeQuery.RPAV?.BuildingValue
+            BuildingPermits result = new BuildingPermits(parcelNumberWithTaxPayerCodeQuery?.RPAV?.ParcelNumber, parcelNumberWithTaxPayerCodeQuery?.NNAME?.Name
+                                                         , parcelNumberWithTitleOwnerCodeQuery?.NNAME?.Name, parcelNumberWithTaxPayerCodeQuery?.RPAV?.Description1
+                                                         , parcelNumberWithLandUseCodeQuery?.LU?.UseCodeDesc, parcelNumberWithTaxPayerCodeQuery?.RPAV?.Description2
+                                                         , parcelNumberWithTaxPayerCodeQuery?.RPAV?.UnimprovedLandAcres + parcelNumberWithTaxPayerCodeQuery?.RPAV?.ImprovedLandAcers
+                                                         , parcelNumberWithTaxPayerCodeQuery?.RPAV?.Description3, parcelNumberWithTaxPayerCodeQuery?.RPAV?.ImprovedLandValue
+                                                         , parcelNumberWithTaxPayerCodeQuery?.RPAV?.Description4, parcelNumberWithTaxPayerCodeQuery?.RPAV?.BuildingValue
                                                          , lineValues);
 
             return result;
