@@ -42,12 +42,11 @@
                     <div class="col-md-2">
                         <input type="text" asp-for="@filterViewModel.ApplicantBusinessName" name="applicantbusinessname" class="form-control" />
                     </div>
-
-
-                    <label asp-for="@filterViewModel.ApplicantFirstName" class="control-label col-md-2"></label>
+                    <label asp-for="@filterViewModel.PermitYear" class="control-label col-md-2"></label>
                     <div class="col-md-2">
-                        <input type="text" asp-for="@filterViewModel.ApplicantFirstName" name="applicantfirstname" class="form-control" />
+                        <input type="text" asp-for="@filterViewModel.PermitYear" name="permitYear" class="form-control" />
                     </div>
+
                     <label asp-for="@filterViewModel.ApplicantLastName" class="control-label col-md-2"></label>
                     <div class="col-md-2">
                         <input type="text" asp-for="@filterViewModel.ApplicantLastName" name="applicantlastname" class="form-control" />
@@ -170,6 +169,9 @@
                 @Html.DisplayNameFor(model => model.FirstOrDefault().PermitNumber)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().PermitYear)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.FirstOrDefault().ApplicantBusinessName)
             </th>
             <th>
@@ -198,57 +200,61 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+        <tr>
 
-                <td>
-                    @{ var formattedDateTime = item.ApplicationDate.HasValue ? item.ApplicationDate.Value.ToString("MM/dd/yyyy") : "";}
-                    @Html.DisplayFor(modelItem => formattedDateTime)
-                </td>
-                <td>
-                    @{ var formattedApplicaionNumber = item.ApplicationNumber.HasValue ? item.ApplicationNumber.ToString() : "";}
-                    <a asp-action="Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => formattedApplicaionNumber)</a>
-                </td>
+            <td>
+                @{ var formattedDateTime = item.ApplicationDate.HasValue ? item.ApplicationDate.Value.ToString("MM/dd/yyyy") : "";}
+                @Html.DisplayFor(modelItem => formattedDateTime)
+            </td>
+            <td>
+                @{ var formattedApplicaionNumber = item.ApplicationNumber.HasValue ? item.ApplicationNumber.ToString() : "";}
+                <a asp-action="Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => formattedApplicaionNumber)</a>
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.PermitCode)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PermitStatus)
-                </td>
-                <td>
-                    @{ var formattedApplicationYear = item.ApplicationYear.HasValue ? int.Parse(item.ApplicationYear.Value.ToString()).ToString() : "";}
-                    @Html.DisplayFor(modelItem => formattedApplicationYear)
-                </td>
-                <td>
-                    @{ var formattedPermitNumber = item.PermitNumber.HasValue ? item.PermitNumber.Value.ToString() : "";}
-                    @Html.DisplayFor(modelItem => formattedPermitNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ApplicantBusinessName)
-                </td>
-                <td>
-                    @{ var formattedApplicationName = item.ApplicationName.Trim() == "," ? "" : item.ApplicationName;}
-                    @Html.DisplayFor(modelItem => formattedApplicationName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProjectDescription)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OfficeProjectDescription)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ContractorBusinessName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ResultOfEnforcementAction)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CityJurisdictionApprovalRequired)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CityUtilityApprovalRequired)
-                </td>
-            </tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PermitCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PermitStatus)
+            </td>
+            <td>
+                @{ var formattedApplicationYear = item.ApplicationYear.HasValue ? int.Parse(item.ApplicationYear.Value.ToString()).ToString() : "";}
+                @Html.DisplayFor(modelItem => formattedApplicationYear)
+            </td>
+            <td>
+                @{ var formattedPermitNumber = item.PermitNumber.HasValue ? item.PermitNumber.Value.ToString() : "";}
+                @Html.DisplayFor(modelItem => formattedPermitNumber)
+            </td>
+            <td>
+                @{ var formattedPermitYear = item.PermitYear.HasValue ? int.Parse(item.PermitYear.Value.ToString()).ToString() : "";}
+                @Html.DisplayFor(modelItem => formattedPermitYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicantBusinessName)
+            </td>
+            <td>
+                @{ var formattedApplicationName = item.ApplicationName.Trim() == "," ? "" : item.ApplicationName;}
+                @Html.DisplayFor(modelItem => formattedApplicationName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OfficeProjectDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContractorBusinessName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ResultOfEnforcementAction)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CityJurisdictionApprovalRequired)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CityUtilityApprovalRequired)
+            </td>
+        </tr>
         }
     </tbody>
 </table>
@@ -271,7 +277,8 @@
     cityJurisdictionApproval = filterViewModel.CityJurisdictionApproval,
     cityUtilityApproval = filterViewModel.CityUtilityApproval,
     fromDate = filterViewModel.FromDate,
-    toDate = filterViewModel.ToDate
+    toDate = filterViewModel.ToDate,
+    permitYear = filterViewModel.PermitYear
 }))
 </nav>
 

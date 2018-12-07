@@ -62,6 +62,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                           where (searchCriteria.ApplicationNumber == null || appm.ApplicationNumber == searchCriteria.ApplicationNumber)
                           && (searchCriteria.ApplicationYear == null || appm.ApplicationYear == searchCriteria.ApplicationYear)
                           && (searchCriteria.PermitNumber == null || appm.PermitNumber == searchCriteria.PermitNumber)
+                          &&(searchCriteria.PermitYear == null || appm.PermitYear == searchCriteria.PermitYear)
                           && (string.IsNullOrWhiteSpace(searchCriteria.ApplicantBusinessName) || appm.ApplicantBusinessName.TrimAndLower().Contains(searchCriteria.ApplicantBusinessName.TrimAndLower()))
                           && (string.IsNullOrWhiteSpace(searchCriteria.ApplicantLastName) || appm.ApplicantLastName.TrimAndLower().Contains(searchCriteria.ApplicantLastName.TrimAndLower()))
                           && (string.IsNullOrWhiteSpace(searchCriteria.ApplicantFirstName) || appm.ApplicantFirstName.TrimAndLower().Contains(searchCriteria.ApplicantFirstName.TrimAndLower()))

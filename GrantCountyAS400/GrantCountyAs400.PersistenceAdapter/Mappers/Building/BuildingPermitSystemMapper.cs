@@ -15,7 +15,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                                   !string.IsNullOrWhiteSpace(appm.PermitStatus) && appm.PermitStatus.ToUpper() == "V" ? "VoidPer" : appm.PermitStatus.ToUpper() == "U" ? "ExpPer" :
                                   !string.IsNullOrWhiteSpace(appm.PermitStatus) && appm.PermitStatus.ToUpper() == "F" ? "Final" :
                                   !string.IsNullOrWhiteSpace(appm.PermitStatus) && appm.PermitStatus.ToUpper() == "C" ? "Closed" : "",
-                                  appm.ApplicationYear, appm.PermitNumber, appm.ApplicantLastName + ", " + appm.ApplicantFirstName,
+                                  appm.ApplicationYear, appm.PermitNumber,appm.PermitYear, appm.ApplicantLastName + ", " + appm.ApplicantFirstName,
                                   !string.IsNullOrWhiteSpace(appm.BuildingApprovalRequired) &&
                                   appm.BuildingApprovalRequired.ToUpper() == "Y" ? "R" : "", appm.BuildingApprovalDate != null ? "A" : "",
                                   !string.IsNullOrWhiteSpace(appm.FireMarshalApprovalRequired) &&

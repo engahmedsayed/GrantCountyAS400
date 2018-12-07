@@ -5,7 +5,7 @@ namespace GrantCountyAs400.Domain.Building
     public class BuildingPermitSystem
     {
         public BuildingPermitSystem(int id,DateTime? applicationDate,string businessName, decimal? applicationNumber, decimal? addendumNumber, string permitCode, string permitStatus, decimal? applicationYear,
-                                  decimal? permitNumber, string applicationName, string buildingApprovalRequired, string buildingApprovalDate, string fireMarchalRequired,
+                                  decimal? permitNumber,decimal?permitYear, string applicationName, string buildingApprovalRequired, string buildingApprovalDate, string fireMarchalRequired,
                                   string fireMarshalDate, string planningApprovalRequired, string planningApprovalDate, string healthApprovalRequired, string healthApprovalDate,
                                   string assessorApprovalRequired, string assessorApprovalDate, string publicWorkApprovalRequired, string publicWorkApprovalDate,
                                   string cityJurisdictionApprovalRequired, string cityJurisdictionApprovalDate, string cityUtilityApprovalRequired, string cityUtilityApprovalDate,
@@ -19,6 +19,7 @@ namespace GrantCountyAs400.Domain.Building
             PermitStatus = permitStatus;
             ApplicationYear = applicationYear;
             PermitNumber = permitNumber;
+            PermitYear = permitYear;
             ApplicationName = applicationName;
             BuildingApprovalRequired = buildingApprovalRequired;
             BuildingApprovalDate = buildingApprovalDate;
@@ -53,6 +54,7 @@ namespace GrantCountyAs400.Domain.Building
         public string PermitCode { get; }
         public string PermitStatus { get; }
         public decimal? ApplicationYear { get; }
+        public decimal? PermitYear { get; }
         public decimal? PermitNumber { get; }
         public string ApplicationName { get; }
         public string BuildingApprovalRequired { get; }

@@ -25,6 +25,9 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         [Display(Name = "Applicant First Name")]
         public string ApplicantFirstName { get; set; }
 
+        [Display(Name ="Permit Year")]
+        public int? PermitYear { get; set; }
+
         [Display(Name = "Preliminary Parcel Number")]
         public decimal? PreliminaryParcelNumber { get; set; }
 

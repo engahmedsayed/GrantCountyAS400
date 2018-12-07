@@ -28,6 +28,9 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         [Display(Name = "Permit #")]
         public decimal? PermitNumber { get; set; }
 
+        [Display(Name ="Permit Year")]
+        public decimal? PermitYear { get; set; }
+
         [Display(Name = "Application Name")]
         public string ApplicationName { get; set; }
 
