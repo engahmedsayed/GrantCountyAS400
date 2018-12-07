@@ -90,6 +90,7 @@ namespace GrantCountyAs400.Domain.ExportingService
             {
                 
                 dataSheet.Cells["A" + rowIndex].Value = item.ApplicationDate;
+                dataSheet.Cells["A" + rowIndex].Style.Numberformat.Format = "mm/d/yyyy";
                 dataSheet.Cells["B" + rowIndex].Value = item.ApplicationNumber;
                 dataSheet.Cells["C" + rowIndex].Value = item.PermitCode;
                 dataSheet.Cells["D" + rowIndex].Value = item.PermitStatus;
