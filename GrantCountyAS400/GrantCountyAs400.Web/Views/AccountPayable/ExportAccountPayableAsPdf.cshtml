@@ -3,95 +3,12 @@
 @using X.PagedList.Mvc.Core;
 @using GrantCountyAs400.Web.Extensions;
 @using X.PagedList;
+
 @{
-    ViewData["Title"] = "Accounts Payable - Index";
-    var filterViewModel = ViewBag.FilterViewModel as VenderWarrentFilterViewModel;
+    ViewData["Title"] = "Export Account Payable ";
 }
 
-<h2>Accounts Payable </h2>
-
-<p>
-    @using (Html.BeginForm("Index", "AccountPayable", FormMethod.Get))
-    {
-        <div class="form-horizontal">
-            <hr />
-            <div class="row">
-                <div class="col-md-6 col-xs-12">
-                    <div class="form-group">
-                        <label asp-for="@filterViewModel.VendorId" class="control-label col-md-2"></label>
-                        <div class="col-md-10">
-                            <input type="text" asp-for="@filterViewModel.VendorId" name="vendorid" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="@filterViewModel.Name" class="control-label col-md-2"></label>
-                        <div class="col-md-10">
-                            <input type="text" asp-for="@filterViewModel.Name" name="name" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="@filterViewModel.Representative" class="control-label col-md-2"></label>
-                        <div class="col-md-10">
-                            <input type="text" asp-for="@filterViewModel.Representative" name="representative" class="form-control" />
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-xs-12">
-                    <div class="form-group">
-                        <label asp-for="@filterViewModel.MinPayDate" class="control-label col-md-2"></label>
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => filterViewModel.MinPayDate, null, "minpaydate", new { htmlAttributes = new { @class = "form-control" } })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="@filterViewModel.MaxPayDate" class="control-label col-md-2"></label>
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => filterViewModel.MaxPayDate, null, "maxpaydate", new { htmlAttributes = new { @class = "form-control" } })
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="form-group pull-right">
-                        <input type="submit" value="Filter" class="btn btn-success" />
-                        <input type="reset" value="Clear" class="btn btn-default" id="btnReset" />
-                    </div>
-                </div>
-            </div>
-        </div>
-    }
-</p>
-
-<div class="row col-md-12 pad-bottom-15">
-    @if (Model.Any())
-    {
-        <div class="row">
-            <div class="dropdown pull-right">
-                <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">
-                    <i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Export
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="export" target="_blank" href="@Url.Action("ExportAccountPayableAsExcel", "AccountPayable")?@filterViewModel.GetQueryString()">Export To Excel</a></li>
-                    <li><a class="export" target="_blank" href="@Url.Action("ExportAccountPayableAsPdf", "AccountPayable")?@filterViewModel.GetQueryString()">Export To PDF</a></li>
-                </ul>
-            </div>
-        </div>
-    }
-</div>
-
-<nav aria-label="navigation">
-    @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
-    pageNumber = pageNumber,
-    vendorid = filterViewModel.VendorId,
-    name = filterViewModel.Name,
-    representative = filterViewModel.Representative,
-    minpaydate = filterViewModel.MinPayDate,
-    maxpaydate = filterViewModel.MaxPayDate
-}))
-</nav>
+<h2>Account Payable</h2>
 
 <table class="table">
     <thead>
@@ -243,28 +160,3 @@
     </tbody>
 </table>
 
-<nav aria-label="navigation">
-    @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
-    pageNumber = pageNumber,
-    vendorid = filterViewModel.VendorId,
-    name = filterViewModel.Name,
-    representative = filterViewModel.Representative,
-    minpaydate = filterViewModel.MinPayDate,
-    maxpaydate = filterViewModel.MaxPayDate
-}))
-</nav>
-
-@section Scripts {
-    <script type="text/javascript">
-        $(function () {
-            $('.date-datepicker').datetimepicker({
-                format: 'MM/DD/YYYY',
-                showTodayButton: true,
-                ignoreReadonly: true,
-                showClear: true,
-                useCurrent: false,
-            });
-
-        });
-    </script>
-}

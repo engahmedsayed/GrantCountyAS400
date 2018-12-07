@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using GrantCountyAs400.Domain.Accounting;
+using GrantCountyAs400.Domain.Accounting.Repository;
 using GrantCountyAs400.Domain.Building;
 using GrantCountyAs400.Domain.Building.Repository;
 using GrantCountyAs400.Domain.Enums;
@@ -14,18 +16,35 @@ namespace GrantCountyAs400.Domain.ExportingService
     {
 
         private readonly IBuildingPermitSystemRepository _buildingPermitRepo;
+        private readonly IAccountPayableRepository _accountPayableRepository;
 
-        public ExportingService(IBuildingPermitSystemRepository buildingPermitSystemRepository)
+        public ExportingService(IBuildingPermitSystemRepository buildingPermitSystemRepository, IAccountPayableRepository accountPayableRepository)
         {
             _buildingPermitRepo = buildingPermitSystemRepository;
+            _accountPayableRepository = accountPayableRepository;
         }
+
+        public MemoryStream GetAccountsPayable(string vendorId, string name, string representative, DateTime? minPayDate, DateTime? maxPayDate, out int resultCount, int pageNumber = 1, int pageSize = 50)
+        {
+            string excelTemplate = GetExcelTemplate(ReportType.AccountPayable);
+            var templateFile = new FileInfo(excelTemplate);
+            ExcelPackage package = new ExcelPackage(templateFile, true);
+
+            GenerateAccountPayableReportExcel(package, _accountPayableRepository.GetAll(
+                vendorId,name,representative,minPayDate,maxPayDate,out resultCount,pageNumber,pageSize).ToList());
+
+            var stream = new MemoryStream(package.GetAsByteArray());
+            return stream;
+
+        }
+
         public MemoryStream GetBuildingPermitSystem(BuildingSearchCriteria filter)
         {
             string excelTemplate = GetExcelTemplate(ReportType.BuildingPermitType);
             var templateFile = new FileInfo(excelTemplate);
             ExcelPackage package = new ExcelPackage(templateFile, true);
 
-            GenerateDailyDetailReportExcel(package, _buildingPermitRepo.GetAll(
+            GenerateBuildingModuleReportExcel(package, _buildingPermitRepo.GetAll(
                 filter,
                 out int resultCount,
                 -1,
@@ -35,7 +54,34 @@ namespace GrantCountyAs400.Domain.ExportingService
             return stream;
         }
 
-        private void GenerateDailyDetailReportExcel(ExcelPackage excelPackage, List<BuildingPermitSystem> reportData)
+        private void GenerateAccountPayableReportExcel(ExcelPackage excelPackage,List<VenderWarrent> reportData)
+        {
+            var dataSheet = excelPackage.Workbook.Worksheets[0];
+            var sheetStartingIndex = 2;
+            var rowIndex = sheetStartingIndex;
+            foreach (var item in reportData)
+            {
+
+                dataSheet.Cells["A" + rowIndex].Value = item.Name;
+                dataSheet.Cells["B" + rowIndex].Value = item.Vendor;
+                dataSheet.Cells["C" + rowIndex].Value = item.WarrantNumber;
+                dataSheet.Cells["D" + rowIndex].Value = item.CheckNumber;
+                dataSheet.Cells["E" + rowIndex].Value = item.WarrantDate;
+                dataSheet.Cells["F" + rowIndex].Value = item.PayDate;
+                dataSheet.Cells["G" + rowIndex].Value = item.Status;
+                dataSheet.Cells["H" + rowIndex].Value = item.Ponumber;
+                dataSheet.Cells["I" + rowIndex].Value = $"{item.Fund?.Trim()}-{item.Department?.Trim()}-{item.Program?.Trim()}-{item.Project?.Trim()}-{item.Base?.Trim()}";
+                dataSheet.Cells["J" + rowIndex].Value = item.Amount;
+
+
+                rowIndex++;
+            }
+
+            dataSheet.Cells.AutoFitColumns();
+            dataSheet.View.TabSelected = false;
+        }
+
+        private void GenerateBuildingModuleReportExcel(ExcelPackage excelPackage, List<BuildingPermitSystem> reportData)
         {
             var dataSheet = excelPackage.Workbook.Worksheets[0];
             var sheetStartingIndex = 2;
@@ -75,7 +121,9 @@ namespace GrantCountyAs400.Domain.ExportingService
                     templatePath = System.AppDomain.CurrentDomain.BaseDirectory + "wwwroot\\ExcelTemplates\\BeginingBalancesTemplate.xlsx";
                     break;
 
-
+                case ReportType.AccountPayable:
+                    templatePath = System.AppDomain.CurrentDomain.BaseDirectory + "wwwroot\\ExcelTemplates\\AccountPayableTemplate.xlsx";
+                    break;
 
                 default:
                     templatePath = String.Empty;
