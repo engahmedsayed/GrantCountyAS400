@@ -16,7 +16,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             _context = dbContext;
         }
 
-        public TaxReceipt Get(decimal transactionNumber)
+        public TaxReceiptDetails Details(decimal transactionNumber)
         {
             var cashReceipts = (from x in _context.TreascashReceiptsTender
                                 where x.ReceiptTranNumber == transactionNumber
@@ -33,7 +33,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
 
             var propertyTransactions = GetPropertyTaxReceivableTransactions(transactionNumber);
 
-            return new TaxReceipt(transactionNumber, cashReceipts, generalReceipts, affadavitReceipts, propertyTransactions);
+            return new TaxReceiptDetails(transactionNumber, cashReceipts, generalReceipts, affadavitReceipts, propertyTransactions);
         }
 
         private List<PropertyTaxReceivableTransaction> GetPropertyTaxReceivableTransactions(decimal transactionNumber)

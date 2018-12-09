@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceipt
 {
-    public class TaxReceiptViewModel
+    public class TaxReceiptDetailsViewModel
     {
         public decimal TransactionNumber { get; set; }
         public IEnumerable<CashReceiptViewModel> CashReceipts { get; set; }

@@ -6,6 +6,6 @@ namespace GrantCountyAs400.Domain.Treasurer.Repository
 {
     public interface ITaxReceiptRepository
     {
-        TaxReceipt Get(decimal transactionNumber);
+        TaxReceiptDetails Details(decimal transactionNumber);
     }
 }

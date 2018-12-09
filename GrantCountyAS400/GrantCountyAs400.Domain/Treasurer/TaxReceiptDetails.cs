@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GrantCountyAs400.Domain.Treasurer
 {
-    public class TaxReceipt
+    public class TaxReceiptDetails
     {
         public decimal TransactionNumber { get; }
         public IEnumerable<CashReceipt> CashReceipts { get; }
@@ -11,7 +11,7 @@ namespace GrantCountyAs400.Domain.Treasurer
         public IEnumerable<AffadavitReceipt> AffadavitReceipts { get; }
         public IEnumerable<PropertyTaxReceivableTransaction> PropertyReceipts { get; }
 
-        public TaxReceipt(
+        public TaxReceiptDetails(
             decimal transactionNumber, IEnumerable<CashReceipt> cashReceipts, IEnumerable<GeneralReceipt> generalReceipts, IEnumerable<AffadavitReceipt> affadavitReceipts,
             IEnumerable<PropertyTaxReceivableTransaction> propertyReceipts)
         {
