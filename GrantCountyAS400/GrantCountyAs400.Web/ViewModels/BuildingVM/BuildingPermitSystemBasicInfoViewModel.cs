@@ -9,6 +9,18 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 
         public string JurisidictionShortDepartmentName { get; set; }
 
+        [Display(Name = "Permit Year")]
+        
+        public int PermitYear { get; set; }
+
+        [Display(Name = "Permit Number")]
+        [DisplayFormat(DataFormatString = "{0:n0}")]
+        public decimal? PermitNumber { get; set; }
+
+        [Display(Name = "State Classification Code")]
+        [DisplayFormat(DataFormatString = "{0:n0}")]
+        public string StateClassCode { get; set; }
+
         [Display(Name = "Application Yr/#")]
         public int ApplicationYear { get; set; }
 

@@ -58,7 +58,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                                                                     Bldgjurisdictions juri,
                                                                     Bldgdepartments dept) =>
             new BuildingPermitSystemBasicInfo(bldgpermit.JurisdictionCode, bldgpermit.DepartmentCode, bldgpermit.ApplicationYear.Value, bldgpermit.ApplicationNumber.Value,
-                bldgpermit.AddendumNumber.Value, bldgpermit.PermitStatus, juri.ShortDepartmentName, dept.ShortDepartmentName);
+                bldgpermit.AddendumNumber.Value, bldgpermit.PermitStatus, juri.ShortDepartmentName, dept.ShortDepartmentName,bldgpermit.PermitYear,bldgpermit.PermitNumber,bldgpermit.StateClassCode);
 
         private static BuildingPermitSystemApplicantDetails MapToApplicantDetails(BldgpermitApplicationMaster bldgpermit,
                                                                                   BldgmobileHomeDealersInstallersArchitects mdia,

@@ -6,6 +6,8 @@ namespace GrantCountyAs400.Domain.Building
     {
         public string ApplicantLastName { get; }
         public string ApplicantFirstName { get; }
+
+        
         public string PermitCode { get; }
         public string ProcessedForJurisdiction { get; }
         public DateTime ApplicationDate { get; }
@@ -84,7 +86,6 @@ namespace GrantCountyAs400.Domain.Building
             ApplicationDate = applicationDate;
             ApplicationUserId = applicationUserId;
             ApplicantBusinessName = applicantBusinessName;
-
             AddressLine1 = addressLine1;
             AddressLine2 = addressLine2;
             City = city;
@@ -121,13 +122,24 @@ namespace GrantCountyAs400.Domain.Building
         public decimal AddendumNumber { get; }
         public string PermitStatus { get; }
 
+        public decimal? PermitYear { get; }
+
+        public decimal? PermitNumber { get; }
+
+        public decimal? StateClassCode { get; }
+
+
+
         public BuildingPermitSystemBasicInfo(string jurisdictionCode, string departmentCode, decimal applicationYear, decimal applicationNumber, decimal addendumNumber,
-            string permitStatus, string jurisidictionShortDepartmentName, string departmentShortDepartmentName)
+            string permitStatus, string jurisidictionShortDepartmentName, string departmentShortDepartmentName, decimal?permitYear,decimal?permitNumber, decimal?stateClassCode)
         {
             JurisdictionCode = jurisdictionCode;
             DepartmentCode = departmentCode;
             ApplicationYear = applicationYear;
             ApplicationNumber = applicationNumber;
+            PermitYear = permitYear;
+            PermitNumber = permitNumber;
+            StateClassCode = stateClassCode;
             AddendumNumber = addendumNumber;
             PermitStatus = permitStatus;
             JurisidictionShortDepartmentName = jurisidictionShortDepartmentName;
