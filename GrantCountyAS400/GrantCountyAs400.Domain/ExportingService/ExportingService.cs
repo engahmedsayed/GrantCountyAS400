@@ -91,19 +91,18 @@ namespace GrantCountyAs400.Domain.ExportingService
                 
                 dataSheet.Cells["A" + rowIndex].Value = item.ApplicationDate;
                 dataSheet.Cells["A" + rowIndex].Style.Numberformat.Format = "mm/d/yyyy";
-                dataSheet.Cells["B" + rowIndex].Value = item.ApplicationNumber;
+                dataSheet.Cells["B" + rowIndex].Value = item.ApplicationYear + (item.ApplicationNumber.HasValue ? "-" + item.ApplicationNumber : "");
                 dataSheet.Cells["C" + rowIndex].Value = item.PermitCode;
                 dataSheet.Cells["D" + rowIndex].Value = item.PermitStatus;
-                dataSheet.Cells["E" + rowIndex].Value = item.ApplicationYear;
-                dataSheet.Cells["F" + rowIndex].Value = item.PermitNumber;
-                dataSheet.Cells["G" + rowIndex].Value = item.ApplicantBusinessName;
-                dataSheet.Cells["H" + rowIndex].Value = item.ApplicationName;
-                dataSheet.Cells["I" + rowIndex].Value = item.ProjectDescription;
-                dataSheet.Cells["J" + rowIndex].Value = item.OfficeProjectDescription;
-                dataSheet.Cells["K" + rowIndex].Value = item.ContractorBusinessName;
-                dataSheet.Cells["L" + rowIndex].Value = item.ResultOfEnforcementAction;
-                dataSheet.Cells["M" + rowIndex].Value = item.CityJurisdictionApprovalRequired;
-                dataSheet.Cells["N" + rowIndex].Value = item.CityUtilityApprovalRequired;
+                dataSheet.Cells["E" + rowIndex].Value = (item.PermitYear.HasValue && item.PermitYear.Value != 0 ? item.PermitYear.Value.ToString() : "") + "-" + (item.PermitNumber.HasValue && item.PermitNumber.Value != 0 ? item.PermitNumber.Value.ToString() : "");
+                dataSheet.Cells["F" + rowIndex].Value = item.ApplicantBusinessName;
+                dataSheet.Cells["G" + rowIndex].Value = item.ApplicationName;
+                dataSheet.Cells["H" + rowIndex].Value = item.ProjectDescription;
+                dataSheet.Cells["I" + rowIndex].Value = item.OfficeProjectDescription;
+                dataSheet.Cells["J" + rowIndex].Value = item.ContractorBusinessName;
+                dataSheet.Cells["K" + rowIndex].Value = item.ResultOfEnforcementAction;
+                dataSheet.Cells["L" + rowIndex].Value = item.CityJurisdictionApprovalRequired;
+                dataSheet.Cells["M" + rowIndex].Value = item.CityUtilityApprovalRequired;
 
                 rowIndex++;
             }
@@ -119,7 +118,7 @@ namespace GrantCountyAs400.Domain.ExportingService
             switch (type)
             {
                 case ReportType.BuildingPermitType:
-                    templatePath = System.AppDomain.CurrentDomain.BaseDirectory + "wwwroot\\ExcelTemplates\\BeginingBalancesTemplate.xlsx";
+                    templatePath = System.AppDomain.CurrentDomain.BaseDirectory + "wwwroot\\ExcelTemplates\\BuildingModuleTemplate.xlsx";
                     break;
 
                 case ReportType.AccountPayable:

@@ -7,11 +7,14 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
     {
         public int ID { get; set; }
 
-        [Display(Name = "Date")]
+        [Display(Name = "Issue Date")]
         public DateTime? ApplicationDate { get; set; }
 
         [Display(Name = "#")]
         public decimal? ApplicationNumber { get; set; }
+
+        [Display(Name ="App #")]
+        public string ApplicationNumberDisplay { get { return ApplicationYear + (ApplicationNumber.HasValue? "-" + ApplicationNumber:""); } }
 
         [Display(Name = "Business Name")]
         public string ApplicantBusinessName { get; set; }
@@ -27,6 +30,9 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 
         [Display(Name = "Permit #")]
         public decimal? PermitNumber { get; set; }
+
+        [Display(Name = "Permit #")]
+        public string PermitNumberDisplay { get { return (PermitYear.HasValue && PermitYear.Value!=0 ? PermitYear.Value.ToString() : "") + "-" + (PermitNumber.HasValue && PermitNumber.Value!=0?PermitNumber.Value.ToString():""); } }
 
         [Display(Name ="Permit Year")]
         public decimal? PermitYear { get; set; }

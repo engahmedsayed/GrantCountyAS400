@@ -153,7 +153,7 @@
                 @Html.DisplayNameFor(model => model.FirstOrDefault().ApplicationDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().ApplicationNumber)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ApplicationNumberDisplay)
             </th>
 
             <th>
@@ -163,10 +163,7 @@
                 @Html.DisplayNameFor(model => model.FirstOrDefault().PermitStatus)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().ApplicationYear)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().PermitNumber)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().PermitNumberDisplay)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FirstOrDefault().PermitYear)
@@ -208,7 +205,7 @@
             </td>
             <td>
                 @{ var formattedApplicaionNumber = item.ApplicationNumber.HasValue ? item.ApplicationNumber.ToString() : "";}
-                <a asp-action="Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => formattedApplicaionNumber)</a>
+                <a asp-action="Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.ApplicationNumberDisplay)</a>
             </td>
 
             <td>
@@ -218,12 +215,8 @@
                 @Html.DisplayFor(modelItem => item.PermitStatus)
             </td>
             <td>
-                @{ var formattedApplicationYear = item.ApplicationYear.HasValue ? int.Parse(item.ApplicationYear.Value.ToString()).ToString() : "";}
-                @Html.DisplayFor(modelItem => formattedApplicationYear)
-            </td>
-            <td>
                 @{ var formattedPermitNumber = item.PermitNumber.HasValue ? item.PermitNumber.Value.ToString() : "";}
-                @Html.DisplayFor(modelItem => formattedPermitNumber)
+                @Html.DisplayFor(modelItem => item.PermitNumberDisplay)
             </td>
             <td>
                 @{ var formattedPermitYear = item.PermitYear.HasValue ? int.Parse(item.PermitYear.Value.ToString()).ToString() : "";}
