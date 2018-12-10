@@ -166,9 +166,6 @@
                 @Html.DisplayNameFor(model => model.FirstOrDefault().PermitNumberDisplay)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().PermitYear)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.FirstOrDefault().ApplicantBusinessName)
             </th>
             <th>
@@ -218,10 +215,7 @@
                 @{ var formattedPermitNumber = item.PermitNumber.HasValue ? item.PermitNumber.Value.ToString() : "";}
                 @Html.DisplayFor(modelItem => item.PermitNumberDisplay)
             </td>
-            <td>
-                @{ var formattedPermitYear = item.PermitYear.HasValue ? int.Parse(item.PermitYear.Value.ToString()).ToString() : "";}
-                @Html.DisplayFor(modelItem => formattedPermitYear)
-            </td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.ApplicantBusinessName)
             </td>
