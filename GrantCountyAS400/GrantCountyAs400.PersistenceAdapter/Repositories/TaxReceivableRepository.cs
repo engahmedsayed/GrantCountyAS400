@@ -69,7 +69,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                                     .OrderByDescending(x => x.TaxYear)
                                                     .ToList();
 
-            var targetYears = propTaxReceivablesRecords.Select(x => x.TaxYear.Value);
+            var targetYears = propTaxReceivablesRecords.Select(x => x.TaxYear.Value).Distinct();
             var specialAssessmentTaxReceivableRecords = _context.TreasspecialAssessmentsTaxReceivableMaster
                                                                 .Where(x => x.ParcelNumber == parcelNumber && targetYears.Contains(x.TaxYear.Value))
                                                                 .ToList();
