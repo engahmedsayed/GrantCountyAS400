@@ -2,6 +2,7 @@
 using GrantCountyAs400.Domain.Treasurer.Repository;
 using GrantCountyAs400.PersistenceAdapter.Mappers.Treasurer;
 using GrantCountyAs400.PersistenceAdapter.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,6 +15,58 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
         public TaxReceiptRepository(GrantCountyDbContext dbContext)
         {
             _context = dbContext;
+        }
+
+        public IEnumerable<TaxReceipt> GetAll(
+            decimal minReceiptNumber, decimal? maxReceiptNumber, DateTime? minDate, DateTime? maxDate, out int resultCount, int pageNumber = 1, int pageSize = 50)
+        {
+            List<TaxReceipt> results = new List<TaxReceipt>();
+
+            // if Max TransactionNumber is null or zero, make it same as Min value as if "single" value was provided
+            if (!maxReceiptNumber.HasValue || maxReceiptNumber.Value == 0)
+            {
+                maxReceiptNumber = minReceiptNumber;
+            }
+
+            var cashReceipts = (from x in _context.TreascashReceiptsTender
+                                where ((minReceiptNumber <= 0) || x.ReceiptTranNumber >= minReceiptNumber)
+                                && ((maxReceiptNumber <= 0) || x.ReceiptTranNumber <= maxReceiptNumber)
+                                && ((!minDate.HasValue) || x.ReceiptDate >= minDate.Value)
+                                && ((!maxDate.HasValue) || x.ReceiptDate <= maxDate.Value)
+                                select new TaxReceipt(x.ReceiptTranNumber.Value, x.ReceiptDate));
+
+            var generalReceipts = (from x in _context.TreastenderGeneralReceipts
+                                   where ((minReceiptNumber <= 0) || x.ReceiptTranNumber >= minReceiptNumber)
+                                   && ((maxReceiptNumber <= 0) || x.ReceiptTranNumber <= maxReceiptNumber)
+                                   && ((!minDate.HasValue) || x.TranDate >= minDate.Value)
+                                   && ((!maxDate.HasValue) || x.TranDate <= maxDate.Value)
+                                   select new TaxReceipt(x.ReceiptTranNumber.Value, x.TranDate));
+
+            var affadavitReceipts = (from x in _context.TreastenderAffadavits
+                                     where ((minReceiptNumber <= 0) || x.ReceiptTranNumber >= minReceiptNumber)
+                                     && ((maxReceiptNumber <= 0) || x.ReceiptTranNumber <= maxReceiptNumber)
+                                     && ((!minDate.HasValue) || x.AffidavitDate >= minDate.Value)
+                                     && ((!maxDate.HasValue) || x.AffidavitDate <= maxDate.Value)
+                                     && (x.TotalPaid > 0)
+                                     select new TaxReceipt(x.ReceiptTranNumber.Value, x.AffidavitDate));
+
+            var query = cashReceipts.Union(generalReceipts).Union(affadavitReceipts).Distinct();
+            if (pageNumber > 0)
+            {
+                resultCount = query.Count();
+                results = query.Skip((pageNumber - 1) * pageSize)
+                               .Take(pageSize)
+                               .OrderBy(t => t.ReceiptNumber)
+                               .ToList();
+            }
+            else
+            {
+                results = query.OrderBy(t => t.ReceiptNumber)
+                               .ToList();
+                resultCount = results.Count();
+            }
+
+            return results;
         }
 
         public TaxReceiptDetails Details(decimal transactionNumber)

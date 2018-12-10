@@ -31,6 +31,7 @@ namespace GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceipt
         public int Id { get; set; }
         public int TransactionYear { get; set; }
         [Display(Name = "Receipt Number")]
+        [DisplayFormat(DataFormatString = "{0:F0}")]
         public decimal ReceiptNumber { get; set; }
         public string TaxpayerCode { get; set; }
         [Display(Name = "Taxpayer Name")]
@@ -99,7 +100,7 @@ namespace GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceipt
     {
         public int Id { get; set; }
         public int TransactionYear { get; set; }
-        [DisplayFormat(DataFormatString = "{0:n0}")]
+        [DisplayFormat(DataFormatString = "{0:F0}")]
         [Display(Name = "General Receipt")]
         public decimal ReceiptNumber { get; set; }
         [Display(Name = "Description")]
@@ -122,7 +123,7 @@ namespace GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceipt
     {
         public int Id { get; set; }
         public int TransactionYear { get; set; }
-        [DisplayFormat(DataFormatString = "{0:n0}")]
+        [DisplayFormat(DataFormatString = "{0:F0}")]
         [Display(Name = "Affdvt Number")]
         public decimal ReceiptNumber { get; set; }
         [Display(Name = "Buyer")]
