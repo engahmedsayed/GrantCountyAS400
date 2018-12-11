@@ -113,10 +113,10 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.PropertyReceipts.FirstOrDefault().TaxAmount)
                             </th>
-                            <th>
+                            <th class="text-center">
                                 @Html.DisplayNameFor(model => model.PropertyReceipts.FirstOrDefault().TotalAssessmentPaid)
                             </th>
-                            <th>
+                            <th class="text-center">
                                 @Html.DisplayNameFor(model => model.PropertyReceipts.FirstOrDefault().TotalInterestAndPenaltyPaid)
                             </th>
                             <th>
@@ -131,8 +131,8 @@
                                 <td>@Html.DisplayFor(_ => receipt.ParcelNumber)</td>
                                 <td>@Html.DisplayFor(_ => receipt.TaxYear)</td>
                                 <td>@Html.DisplayFor(_ => receipt.TaxAmount)</td>
-                                <td>@Html.DisplayFor(_ => receipt.TotalAssessmentPaid)</td>
-                                <td>@Html.DisplayFor(_ => receipt.TotalInterestAndPenaltyPaid)</td>
+                                <td class="text-center">@Html.DisplayFor(_ => receipt.TotalAssessmentPaid)</td>
+                                <td class="text-center">@Html.DisplayFor(_ => receipt.TotalInterestAndPenaltyPaid)</td>
                                 <td>@Html.DisplayFor(_ => receipt.TotalPaid)</td>
                             </tr>
                         }
