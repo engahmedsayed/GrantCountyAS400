@@ -1,0 +1,122 @@
+﻿@model IEnumerable<AccountPayrollViewModel>
+@using GrantCountyAs400.Web.ViewModels.AccountingVM.AccountPayroll
+@{
+    ViewData["Title"] = "Export Account Payroll As Pdf";
+}
+
+<h2>Export Account Payroll As Pdf</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PersonNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SSNumberDisplay)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a class="toggle-row-details" data-toggle="expand" data-target="#@item.Id" aria-expanded="true" aria-controls="@item.Id">
+                        <i class="glyphicon glyphicon-chevron-right pull-right"></i>
+                        <i class="glyphicon glyphicon-chevron-down pull-right"></i>
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PersonNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SSNumberDisplay)
+                </td>
+            </tr>
+            <tr class="row-details">
+                <td colspan="100">
+                    <div class="expand" id="@item.Id">
+                        <table class="table table-hover">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(modelItem => item.PayrollWarrants.FirstOrDefault().WarrantNumber)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(modelItem => item.PayrollWarrants.FirstOrDefault().CheckNumber)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(modelItem => item.PayrollWarrants.FirstOrDefault().Date)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(modelItem => item.PayrollWarrants.FirstOrDefault().Gross)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(modelItem => item.PayrollWarrants.FirstOrDefault().Fica)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(modelItem => item.PayrollWarrants.FirstOrDefault().Medical)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(modelItem => item.PayrollWarrants.FirstOrDefault().RetirementBenefitsEmployee)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(modelItem => item.PayrollWarrants.FirstOrDefault().RetirementBenefitsEmployer)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(modelItem => item.PayrollWarrants.FirstOrDefault().NetPay)
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var warrant in item.PayrollWarrants)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => warrant.WarrantNumber)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => warrant.CheckNumber)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => warrant.Date)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => warrant.Gross)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => warrant.Fica)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => warrant.Medical)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => warrant.RetirementBenefitsEmployee)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => warrant.RetirementBenefitsEmployer)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => warrant.NetPay)
+                                        </td>
+                                    </tr>
+                                }
+                            <tbody>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

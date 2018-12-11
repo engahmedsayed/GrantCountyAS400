@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<AccountPayrollViewModel>
 @using GrantCountyAs400.Web.ViewModels.AccountingVM.AccountPayroll
 @using X.PagedList.Mvc.Core;
+@using GrantCountyAs400.Web.Extensions;
 @using X.PagedList;
 @{
     ViewData["Title"] = "Accounts Payroll - Index";
@@ -67,6 +68,24 @@
         </div>
     }
 </p>
+
+<div class="row col-md-12 pad-bottom-15">
+    @if (Model.Any())
+    {
+        <div class="row">
+            <div class="dropdown pull-right">
+                <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">
+                    <i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Export
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    @*<li><a class="export" target="_blank" href="@Url.Action("ExportAccountPayableAsExcel", "AccountPayable")?@filterViewModel.GetQueryString()">Export To Excel</a></li>*@
+                    <li><a class="export" target="_blank" href="@Url.Action("ExportAccountPayrollAsPdf", "AccountPayroll")?@filterViewModel.GetQueryString()">Export To PDF</a></li>
+                </ul>
+            </div>
+        </div>
+    }
+</div>
 
 <nav aria-label="navigation">
     @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
