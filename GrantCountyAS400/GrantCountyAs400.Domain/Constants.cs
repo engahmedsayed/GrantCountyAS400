@@ -9,5 +9,6 @@ namespace GrantCountyAs400.Domain
         public const string ExcelFilesMimeType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
         public const string BuildingPermitTemplateExcelFileName = "Building Permit.xlsx";
+        public const string AccountPayrollTemplateExcelFileName = "Account Payroll.xlsx";
     }
 }

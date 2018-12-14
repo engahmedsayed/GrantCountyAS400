@@ -7,7 +7,7 @@ namespace GrantCountyAs400.Domain.Enums
     public enum ReportType
     {
         BuildingPermitType = 1,
-        AccountPayable = 2
-
+        AccountPayable = 2,
+        AccountPayroll = 3
     }
 }

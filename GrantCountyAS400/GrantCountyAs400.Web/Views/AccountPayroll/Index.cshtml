@@ -79,7 +79,7 @@
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    @*<li><a class="export" target="_blank" href="@Url.Action("ExportAccountPayableAsExcel", "AccountPayable")?@filterViewModel.GetQueryString()">Export To Excel</a></li>*@
+                    <li><a class="export" target="_blank" href="@Url.Action("ExportAccountPayrollAsExcel", "AccountPayroll")?@filterViewModel.GetQueryString()">Export To Excel</a></li>
                     <li><a class="export" target="_blank" href="@Url.Action("ExportAccountPayrollAsPdf", "AccountPayroll")?@filterViewModel.GetQueryString()">Export To PDF</a></li>
                 </ul>
             </div>

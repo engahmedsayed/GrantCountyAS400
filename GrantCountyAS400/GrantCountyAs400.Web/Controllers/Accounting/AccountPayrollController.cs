@@ -1,4 +1,5 @@
-﻿using GrantCountyAs400.Domain.Accounting;
+﻿using GrantCountyAs400.Domain;
+using GrantCountyAs400.Domain.Accounting;
 using GrantCountyAs400.Domain.Accounting.Repository;
 using GrantCountyAs400.Domain.ExportingService;
 using GrantCountyAs400.Web.Extensions;
@@ -6,6 +7,7 @@ using GrantCountyAs400.Web.ViewModels;
 using GrantCountyAs400.Web.ViewModels.AccountingVM.AccountPayroll;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
 using System.Linq;
 
 namespace GrantCountyAs400.Web.Controllers.Accounting
@@ -51,6 +53,19 @@ namespace GrantCountyAs400.Web.Controllers.Accounting
                             AppSettings.PageSize)
                     .ToList();
             return new Rotativa.AspNetCore.ViewAsPdf(entities.ToMappedPagedList<AccountPayroll, AccountPayrollViewModel>(pagingInfo)) { FileName = $"AccountPayroll.pdf" };
+        }
+
+        [HttpGet]
+        [Route("export/excel",Name = "ExportAccountPayrollAsExcel")]
+        public ActionResult ExportAccountPayrollAsExcel(AccountPayrollFilterViewModel filter)
+        {
+            //In order to get all data that match the given filter.
+            var pagingInfo = new PagingInfo() { PageNumber = -1 };
+
+            MemoryStream stream = _exportingService.GetAccountPayroll(filter.FirstName, filter.LastName, filter.SSN, filter.MinDate, filter.MaxDate, filter.EmployeeNumber, out int resultCount, pagingInfo.PageNumber,
+                            AppSettings.PageSize);
+            return File(stream, Constants.ExcelFilesMimeType,
+            Constants.AccountPayrollTemplateExcelFileName);
         }
     }
 }

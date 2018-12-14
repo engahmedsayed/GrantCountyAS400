@@ -17,12 +17,29 @@ namespace GrantCountyAs400.Domain.ExportingService
 
         private readonly IBuildingPermitSystemRepository _buildingPermitRepo;
         private readonly IAccountPayableRepository _accountPayableRepository;
+        private readonly IAccountPayrollRepository _accountPayrollRepository;
 
-        public ExportingService(IBuildingPermitSystemRepository buildingPermitSystemRepository, IAccountPayableRepository accountPayableRepository)
+        public ExportingService(IBuildingPermitSystemRepository buildingPermitSystemRepository, IAccountPayableRepository accountPayableRepository,IAccountPayrollRepository accountPayrollRepository)
         {
             _buildingPermitRepo = buildingPermitSystemRepository;
             _accountPayableRepository = accountPayableRepository;
+            _accountPayrollRepository = accountPayrollRepository;
         }
+
+        public MemoryStream GetAccountPayroll(string firstName, string lastName, decimal sSN, DateTime? minDate, DateTime? maxDate, decimal employeeNumber, out int resultCount, int pageNumber, int pageSize)
+        {
+            string excelTemplate = GetExcelTemplate(ReportType.AccountPayroll);
+            var templateFile = new FileInfo(excelTemplate);
+            ExcelPackage package = new ExcelPackage(templateFile, true);
+            GenerateAccountPayrollReportExcel(package, _accountPayrollRepository
+                    .GetAll(firstName, lastName, sSN, minDate, maxDate, employeeNumber, out resultCount, pageNumber,
+                            pageSize).ToList());
+
+            var stream = new MemoryStream(package.GetAsByteArray());
+            return stream;
+        }
+
+       
 
         public MemoryStream GetAccountsPayable(string vendorId, string name, string representative, DateTime? minPayDate, DateTime? maxPayDate, out int resultCount, int pageNumber = 1, int pageSize = 50)
         {
@@ -81,6 +98,47 @@ namespace GrantCountyAs400.Domain.ExportingService
             dataSheet.View.TabSelected = false;
         }
 
+        private void GenerateAccountPayrollReportExcel(ExcelPackage excelPackage, List<AccountPayroll> reportData)
+        {
+            var dataSheet = excelPackage.Workbook.Worksheets[0];
+            var sheetStartingIndex =2;
+            var rowIndex = sheetStartingIndex;
+            var rowDetailIndex = 2;
+            foreach (var item in reportData.Distinct())
+            {
+                var detailSheet = excelPackage.Workbook.Worksheets.Add(item.Name.ToString().Trim()+"-"+item.Id.ToString(), excelPackage.Workbook.Worksheets["Detail"]);
+                rowDetailIndex = 2;
+                if (item.PayrollWarrants.Any())
+                {
+                    foreach (var detailItem in item.PayrollWarrants)
+                    {
+                        detailSheet.Cells[$"A{rowDetailIndex}:I{rowDetailIndex}"].Style.Font.Bold = true;
+                        detailSheet.Cells["A" + rowDetailIndex].Value = detailItem.WarrantNumber;
+                        detailSheet.Cells["B" + rowDetailIndex].Value = detailItem.CheckNumber;
+                        detailSheet.Cells["C" + rowDetailIndex].Value = detailItem.Date;
+                        detailSheet.Cells["D" + rowDetailIndex].Value = detailItem.Gross;
+                        detailSheet.Cells["E" + rowDetailIndex].Value = detailItem.Fica;
+                        detailSheet.Cells["F" + rowDetailIndex].Value = detailItem.Medical;
+                        detailSheet.Cells["G" + rowDetailIndex].Value = detailItem.RetirementBenefitsEmployee;
+                        detailSheet.Cells["H" + rowDetailIndex].Value = detailItem.RetirementBenefitsEmployer;
+                        detailSheet.Cells["I" + rowDetailIndex].Value = detailItem.NetPay;
+                        detailSheet.Cells.AutoFitColumns();
+                        detailSheet.View.TabSelected = false;
+                        rowDetailIndex++;
+                    }
+                    
+
+                }
+                dataSheet.Cells["A" + rowIndex].Value = item.Name;
+                dataSheet.Cells["B" + rowIndex].Value = item.PersonNumber;
+                dataSheet.Cells["C" + rowIndex].Value = item.SSNumber;
+                rowIndex++;
+            }
+            dataSheet.Cells.AutoFitColumns();
+            dataSheet.View.TabSelected = false;
+            excelPackage.Workbook.Worksheets.Delete("Detail");
+        }
+
         private void GenerateBuildingModuleReportExcel(ExcelPackage excelPackage, List<BuildingPermitSystem> reportData)
         {
             var dataSheet = excelPackage.Workbook.Worksheets[0];
@@ -123,6 +181,9 @@ namespace GrantCountyAs400.Domain.ExportingService
 
                 case ReportType.AccountPayable:
                     templatePath = System.AppDomain.CurrentDomain.BaseDirectory + "wwwroot\\ExcelTemplates\\AccountPayableTemplate.xlsx";
+                    break;
+                case ReportType.AccountPayroll:
+                    templatePath = System.AppDomain.CurrentDomain.BaseDirectory + "wwwroot\\ExcelTemplates\\AccountPayrollTemplate.xlsx";
                     break;
 
                 default:
