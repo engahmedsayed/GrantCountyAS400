@@ -12,6 +12,6 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers
 
         private static AccountPayrollWarrant Map(AcctPrWarrant warrant)
             => new AccountPayrollWarrant(warrant.Id, warrant.WarrantNumber, warrant.CheckNumber, warrant.EmployeeNumber, warrant.Date, warrant.Gross, warrant.Fica,
-                warrant.Medical, warrant.RetirementBenefitsEmployee, warrant.RetirementBenefitsEmployer, warrant.NetPay);
+                warrant.Medical, warrant.RetirementPay, warrant.RetirementBenefitsEmployer, warrant.NetPay);
     }
 }

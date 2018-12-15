@@ -119,7 +119,7 @@ namespace GrantCountyAs400.Domain.ExportingService
                         detailSheet.Cells["D" + rowDetailIndex].Value = detailItem.Gross;
                         detailSheet.Cells["E" + rowDetailIndex].Value = detailItem.Fica;
                         detailSheet.Cells["F" + rowDetailIndex].Value = detailItem.Medical;
-                        detailSheet.Cells["G" + rowDetailIndex].Value = detailItem.RetirementBenefitsEmployee;
+                        detailSheet.Cells["G" + rowDetailIndex].Value = detailItem.RetirementPay;
                         detailSheet.Cells["H" + rowDetailIndex].Value = detailItem.RetirementBenefitsEmployer;
                         detailSheet.Cells["I" + rowDetailIndex].Value = detailItem.NetPay;
                         detailSheet.Cells.AutoFitColumns();

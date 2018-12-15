@@ -23,11 +23,14 @@ namespace GrantCountyAs400.Web.ViewModels.AccountingVM.AccountPayroll
     public class AccountPayrollWarrantViewModel
     {
         [Display(Name = "Warrant #")]
+        [DisplayFormat(DataFormatString = "{0:F0}")]
         public decimal? WarrantNumber { get; set; }
         [Display(Name = "Check #")]
+        [DisplayFormat(DataFormatString = "{0:F0}")]
         public decimal? CheckNumber { get; set; }
         [Display(Name = "Date")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime? Date { get; set; }
         [Display(Name = "Gross")]
         public decimal? Gross { get; set; }
@@ -35,9 +38,9 @@ namespace GrantCountyAs400.Web.ViewModels.AccountingVM.AccountPayroll
         public decimal? Fica { get; set; }
         [Display(Name = "Medical")]
         public decimal? Medical { get; set; }
-        [Display(Name = "Retirement Benefits Employee")]
-        public decimal? RetirementBenefitsEmployee { get; set; }
-        [Display(Name = "Retirement Benefits Employer")]
+        [Display(Name = "Ret Emp")]
+        public decimal? RetirementPay { get; set; }
+        [Display(Name = "Ret ER")]
         public decimal? RetirementBenefitsEmployer { get; set; }
         [Display(Name = "Net Pay")]
         public decimal? NetPay { get; set; }
