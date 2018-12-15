@@ -36,7 +36,6 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          && (string.IsNullOrEmpty(taxpayer) || valueMaster.TaxpayerName.ToLower().Contains(taxpayer.Trim().ToLower()))
                          && (string.IsNullOrEmpty(owner) || valueMaster.TitleOwnerName.ToLower().Contains(owner.Trim().ToLower()))
                          && (string.IsNullOrEmpty(contractHolder) || valueMaster.ContractHolderName.ToLower().Contains(contractHolder.Trim().ToLower()))
-                         orderby valueMaster.TaxpayerName
                          select RealPropertyMapper.Map(valueMaster, codeArea));
 
             if (pageNumber > 0)
@@ -44,12 +43,12 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                 resultCount = query.Count();
                 results = query.Skip((pageNumber - 1) * pageSize)
                                .Take(pageSize)
-                               .OrderBy(t => t.TaxPayerName)
+                               .OrderBy(t => t.ParcelNumber)
                                .ToList();
             }
             else
             {
-                results = query.OrderBy(t => t.TaxPayerName)
+                results = query.OrderBy(t => t.ParcelNumber)
                                .ToList();
                 resultCount = results.Count();
             }
