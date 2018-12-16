@@ -22,7 +22,7 @@ namespace GrantCountyAs400.Web.Controllers.Treasurer
         public IActionResult Index(TaxReceivableFilterViewModel filter, int pageNumber = 1)
         {
             var pagingInfo = new PagingInfo() { PageNumber = pageNumber };
-            var results = _taxReceivableRepository.GetAll(filter.ParcelNumber, out int resultCount, pageNumber, AppSettings.PageSize).ToList();
+            var results = _taxReceivableRepository.GetAll(filter.MinParcelNumber, filter.MaxParcelNumber, out int resultCount, pageNumber, AppSettings.PageSize).ToList();
 
             pagingInfo.Total = resultCount;
             ViewBag.FilterViewModel = filter;

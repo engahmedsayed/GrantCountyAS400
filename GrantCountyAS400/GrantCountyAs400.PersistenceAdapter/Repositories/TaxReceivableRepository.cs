@@ -17,15 +17,23 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
         }
 
         public IEnumerable<TaxReceivable> GetAll(
-            decimal parcelNumber,
+            decimal minParcelNumber,
+            decimal? maxParcelNumber,
             out int resultCount,
             int pageNumber = 1,
             int pageSize = 50)
         {
             List<TaxReceivable> results = new List<TaxReceivable>();
 
+            // if Max ParcelNumber is null or zero, make it same as Min value as if "single" value was provided
+            if (!maxParcelNumber.HasValue || maxParcelNumber.Value == 0)
+            {
+                maxParcelNumber = minParcelNumber;
+            }
+
             var query = (from treasurerProperty in _context.TreasPropertyMasterInfoView
-                         where ((parcelNumber <= 0) || treasurerProperty.ParcelNumber == parcelNumber)
+                         where ((minParcelNumber <= 0) || treasurerProperty.ParcelNumber >= minParcelNumber)
+                         && ((maxParcelNumber <= 0) || treasurerProperty.ParcelNumber <= maxParcelNumber)
                          select TaxReceivableMapper.Map(treasurerProperty));
 
             if (pageNumber > 0)
