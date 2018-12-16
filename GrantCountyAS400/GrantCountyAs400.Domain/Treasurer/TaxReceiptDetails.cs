@@ -102,8 +102,10 @@ namespace GrantCountyAs400.Domain.Treasurer
         public string NewOwnerBuyer { get; }
         public string PreviousOwnerSeller { get; }
         public decimal? TotalPaid { get; }
+        public decimal? AffadavitNumber { get; }
 
-        public AffadavitReceipt(int id, int transactionYear, decimal receiptNumber, string newOwnerBuyer, string previousOwnerSeller, decimal? totalPaid)
+        public AffadavitReceipt(
+            int id, int transactionYear, decimal receiptNumber, string newOwnerBuyer, string previousOwnerSeller, decimal? totalPaid, decimal? affadavitNumber)
         {
             Id = id;
             TransactionYear = transactionYear;
@@ -111,6 +113,7 @@ namespace GrantCountyAs400.Domain.Treasurer
             NewOwnerBuyer = newOwnerBuyer;
             PreviousOwnerSeller = previousOwnerSeller;
             TotalPaid = totalPaid;
+            AffadavitNumber = affadavitNumber;
         }
     }
 }

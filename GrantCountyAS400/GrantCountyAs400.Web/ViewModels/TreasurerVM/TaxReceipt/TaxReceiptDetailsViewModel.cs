@@ -122,9 +122,7 @@ namespace GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceipt
     public class AffadavitReceiptViewModel
     {
         public int Id { get; set; }
-        public int TransactionYear { get; set; }
-        [DisplayFormat(DataFormatString = "{0:F0}")]
-        [Display(Name = "Affdvt Number")]
+        public int TransactionYear { get; set; }        
         public decimal ReceiptNumber { get; set; }
         [Display(Name = "Buyer")]
         public string NewOwnerBuyer { get; set; }
@@ -132,6 +130,9 @@ namespace GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceipt
         public string PreviousOwnerSeller { get; set; }
         [Display(Name = "Paid")]
         public decimal? TotalPaid { get; set; }
+        [DisplayFormat(DataFormatString = "{0:F0}")]
+        [Display(Name = "Affdvt Number")]
+        public decimal? AffadavitNumber { get; set; }
     }
 
     public class PropertyTaxReceivableReceiptViewModel

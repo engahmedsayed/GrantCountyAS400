@@ -145,7 +145,7 @@
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.AffadavitReceipts.FirstOrDefault().ReceiptNumber)
+                                @Html.DisplayNameFor(model => model.AffadavitReceipts.FirstOrDefault().AffadavitNumber)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.AffadavitReceipts.FirstOrDefault().NewOwnerBuyer)
@@ -162,7 +162,7 @@
                         @foreach (var receipt in Model.AffadavitReceipts)
                         {
                             <tr>
-                                <td>@Html.DisplayFor(_ => receipt.ReceiptNumber)</td>
+                                <td>@Html.DisplayFor(_ => receipt.AffadavitNumber)</td>
                                 <td>@Html.DisplayFor(_ => receipt.NewOwnerBuyer)</td>
                                 <td>@Html.DisplayFor(_ => receipt.PreviousOwnerSeller)</td>
                                 <td>@Html.DisplayFor(_ => receipt.TotalPaid)</td>
