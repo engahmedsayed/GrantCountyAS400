@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -91,10 +91,13 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
         public virtual DbSet<TreascashReceiptsTender> TreascashReceiptsTender { get; set; }
         public virtual DbSet<TreasexciseTaxRate> TreasexciseTaxRate { get; set; }
         public virtual DbSet<TreaspersonalPropertyMaster> TreaspersonalPropertyMaster { get; set; }
+        public virtual DbSet<TreasrealPropertyHistoricValues> TreasrealPropertyHistoricValues { get; set; }
         public virtual DbSet<TreasspecialAssessmentsTaxReceivableMaster> TreasspecialAssessmentsTaxReceivableMaster { get; set; }
         public virtual DbSet<TreasspecialAssessmentsTransactions> TreasspecialAssessmentsTransactions { get; set; }
         public virtual DbSet<TreastenderAffadavits> TreastenderAffadavits { get; set; }
         public virtual DbSet<TreastenderGeneralReceipts> TreastenderGeneralReceipts { get; set; }
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -5444,6 +5447,112 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                 entity.Property(e => e.TitleOwnerCode)
                     .HasMaxLength(8)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<TreasrealPropertyHistoricValues>(entity =>
+            {
+                entity.ToTable("TREASRealPropertyHistoricValues");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.BuildingValue).HasColumnType("decimal(9, 0)");
+
+                entity.Property(e => e.CUimprovedLandValue)
+                    .HasColumnName("C/UImprovedLandValue")
+                    .HasColumnType("decimal(9, 0)");
+
+                entity.Property(e => e.CUtimberlandValue)
+                    .HasColumnName("C/UTimberlandValue")
+                    .HasColumnType("decimal(9, 0)");
+
+                entity.Property(e => e.CUunimprovedLandValue)
+                    .HasColumnName("C/UUnimprovedLandValue")
+                    .HasColumnType("decimal(9, 0)");
+
+                entity.Property(e => e.ChangeDate).HasColumnType("date");
+
+                entity.Property(e => e.ChangeId)
+                    .HasColumnName("ChangeID")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ChangeReasonCode)
+                    .HasMaxLength(2)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FMbuildingValue)
+                    .HasColumnName("F/MBuildingValue")
+                    .HasColumnType("decimal(9, 0)");
+
+                entity.Property(e => e.FMimprovedLandValue)
+                    .HasColumnName("F/MImprovedLandValue")
+                    .HasColumnType("decimal(9, 0)");
+
+                entity.Property(e => e.FMtimberValue)
+                    .HasColumnName("F/MTimberValue")
+                    .HasColumnType("decimal(9, 0)");
+
+                entity.Property(e => e.FMunimprovedLandValue)
+                    .HasColumnName("F/MUnimprovedLandValue")
+                    .HasColumnType("decimal(9, 0)");
+
+                entity.Property(e => e.Filler)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FirePatrolAcres).HasColumnType("decimal(5, 2)");
+
+                entity.Property(e => e.ImprovedLandAcres).HasColumnType("decimal(5, 2)");
+
+                entity.Property(e => e.ImprovedLandValue).HasColumnType("decimal(9, 0)");
+
+                entity.Property(e => e.LandUseCode).HasColumnType("numeric(4, 0)");
+
+                entity.Property(e => e.MobileHomeValue).HasColumnType("decimal(9, 0)");
+
+                entity.Property(e => e.ParcelNumber).HasColumnType("numeric(16, 0)");
+
+                entity.Property(e => e.ProcessStatusCode)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecordCode)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RevaluationPhase)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SeniorCitizenCode)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SourceOfTaxablevalues)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SubsidiaryParcelCode)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TaxCodeArea).HasColumnType("numeric(4, 0)");
+
+                entity.Property(e => e.TaxStatus)
+                    .HasMaxLength(2)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TaxYear).HasColumnType("numeric(4, 0)");
+
+                entity.Property(e => e.TimberAcres).HasColumnType("decimal(5, 2)");
+
+                entity.Property(e => e.TimberlandValue).HasColumnType("decimal(9, 0)");
+
+                entity.Property(e => e.UndividedInterestPercent).HasColumnType("decimal(5, 3)");
+
+                entity.Property(e => e.UnimprovedLandAcres).HasColumnType("decimal(5, 2)");
+
+                entity.Property(e => e.UnimprovedLandValue).HasColumnType("decimal(9, 0)");
             });
 
             modelBuilder.Entity<TreasspecialAssessmentsTaxReceivableMaster>(entity =>
