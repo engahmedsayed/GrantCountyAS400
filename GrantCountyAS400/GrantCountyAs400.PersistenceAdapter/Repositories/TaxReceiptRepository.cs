@@ -18,7 +18,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
         }
 
         public IEnumerable<TaxReceipt> GetAll(
-            decimal minReceiptNumber, decimal? maxReceiptNumber, DateTime? minDate, DateTime? maxDate, out int resultCount, int pageNumber = 1, int pageSize = 50)
+            decimal minReceiptNumber, decimal? maxReceiptNumber, decimal minAffidavitNumber, decimal? maxAffidavitNumber, DateTime? minDate, DateTime? maxDate,
+            out int resultCount, int pageNumber = 1, int pageSize = 50)
         {
             List<TaxReceipt> results = new List<TaxReceipt>();
 
@@ -26,6 +27,11 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             if (!maxReceiptNumber.HasValue || maxReceiptNumber.Value == 0)
             {
                 maxReceiptNumber = minReceiptNumber;
+            }
+
+            if (!maxAffidavitNumber.HasValue || maxAffidavitNumber.Value == 0)
+            {
+                maxAffidavitNumber = minAffidavitNumber;
             }
 
             var cashReceipts = (from x in _context.TreascashReceiptsTender
@@ -38,6 +44,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             var generalReceipts = (from x in _context.TreastenderGeneralReceipts
                                    where ((minReceiptNumber <= 0) || x.ReceiptTranNumber >= minReceiptNumber)
                                    && ((maxReceiptNumber <= 0) || x.ReceiptTranNumber <= maxReceiptNumber)
+                                   && ((minAffidavitNumber <= 0) || x.ReceiptTran >= minAffidavitNumber)
+                                   && ((maxAffidavitNumber <= 0) || x.ReceiptTran <= maxAffidavitNumber)
                                    && ((!minDate.HasValue) || x.TranDate >= minDate.Value)
                                    && ((!maxDate.HasValue) || x.TranDate <= maxDate.Value)
                                    select new TaxReceipt(x.ReceiptTranNumber.Value, x.TranDate));
@@ -45,6 +53,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             var affadavitReceipts = (from x in _context.TreastenderAffadavits
                                      where ((minReceiptNumber <= 0) || x.ReceiptTranNumber >= minReceiptNumber)
                                      && ((maxReceiptNumber <= 0) || x.ReceiptTranNumber <= maxReceiptNumber)
+                                     && ((minAffidavitNumber <= 0) || x.ReceiptTran >= minAffidavitNumber)
+                                     && ((maxAffidavitNumber <= 0) || x.ReceiptTran <= maxAffidavitNumber)
                                      && ((!minDate.HasValue) || x.AffidavitDate >= minDate.Value)
                                      && ((!maxDate.HasValue) || x.AffidavitDate <= maxDate.Value)
                                      && (x.TotalPaid > 0)
