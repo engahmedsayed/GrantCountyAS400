@@ -9,8 +9,9 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Treasurer
     {
         internal static TaxReceivable Map(TreasPropertyMasterInfoView treasurerProperty)
             => new TaxReceivable(
-                treasurerProperty.Id, treasurerProperty.ParcelNumber, treasurerProperty.ParentParcelNumber, treasurerProperty.TaxpayerCode, treasurerProperty.TitleOwnerCode,
-                treasurerProperty.TaxCodeArea, treasurerProperty.LandUseCode, treasurerProperty.TaxpayerName.Trim(), treasurerProperty.TitleOwnerName.Trim());
+                treasurerProperty.Id, treasurerProperty.ParcelNumber, treasurerProperty.ParentParcelNumber, treasurerProperty.TaxpayerCode,
+                treasurerProperty.TitleOwnerCode, treasurerProperty.TaxCodeArea, treasurerProperty.LandUseCode, treasurerProperty.TaxpayerName.Trim(),
+                treasurerProperty.TitleOwnerName.Trim(), treasurerProperty.ParcelExtension);
 
         internal static TaxReceivableDetails Map(
             TreasPropertyMasterInfoView taxReceivable,

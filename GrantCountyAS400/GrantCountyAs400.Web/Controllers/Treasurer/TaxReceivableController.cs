@@ -30,10 +30,10 @@ namespace GrantCountyAs400.Web.Controllers.Treasurer
         }
 
         [HttpGet]
-        [Route("{id}")]
-        public IActionResult Details(int id)
+        [Route("{parcelNumber}/{parcelExtension}")]
+        public IActionResult Details(decimal parcelNumber, decimal parcelExtension)
         {
-            var entity = _taxReceivableRepository.Details(id);
+            var entity = _taxReceivableRepository.Details(parcelNumber, parcelExtension);
             if (entity == null)
                 return NotFound();
 

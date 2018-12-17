@@ -54,13 +54,12 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             return results;
         }
 
-        public TaxReceivableDetails Details(int id)
+        public TaxReceivableDetails Details(decimal parcelNumber, decimal parcelExtension)
         {
-            var taxReceivable = _context.TreasPropertyMasterInfoView.FirstOrDefault(x => x.Id == id);
+            var taxReceivable = _context.TreasPropertyMasterInfoView.FirstOrDefault(x => x.ParcelNumber == parcelNumber && x.ParcelExtension == parcelExtension);
             if (taxReceivable != null)
             {
-                decimal parcelNumber = taxReceivable.ParcelNumber.Value;
-                var propertyTaxReceivables = GetPropertyTaxReceivables(parcelNumber);
+                var propertyTaxReceivables = GetPropertyTaxReceivables(parcelNumber, parcelExtension);
                 TaxReceivableDetails taxReceivableDetails = TaxReceivableMapper.Map(taxReceivable, propertyTaxReceivables);
 
                 return taxReceivableDetails;
@@ -69,11 +68,11 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             return null;
         }
 
-        private IEnumerable<PropertyTaxReceivable> GetPropertyTaxReceivables(decimal parcelNumber)
+        private IEnumerable<PropertyTaxReceivable> GetPropertyTaxReceivables(decimal parcelNumber, decimal parcelExtension)
         {
             List<PropertyTaxReceivable> result = new List<PropertyTaxReceivable>();
             var propTaxReceivablesRecords = _context.TreasallPropertyTaxReceivableMaster
-                                                    .Where(x => x.ParcelNumber == parcelNumber)
+                                                    .Where(x => x.ParcelNumber == parcelNumber && x.ParcelExtension == parcelExtension)
                                                     .OrderByDescending(x => x.TaxYear)
                                                     .ToList();
 
@@ -82,7 +81,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                                                 .Where(x => x.ParcelNumber == parcelNumber && targetYears.Contains(x.TaxYear.Value))
                                                                 .ToList();
 
-            var propertyTransactions = GetPropertyTaxReceivableTransactions(targetYears, parcelNumber);
+            var propertyTransactions = GetPropertyTaxReceivableTransactions(targetYears, parcelNumber, parcelExtension);
             foreach (var propertyTaxReceivable in propTaxReceivablesRecords)
             {
                 var targetYearSpecialTaxReceivables = specialAssessmentTaxReceivableRecords.Where(x => x.TaxYear == propertyTaxReceivable.TaxYear);
@@ -94,7 +93,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             return result;
         }
 
-        private IEnumerable<PropertyTaxReceivableTransaction> GetPropertyTaxReceivableTransactions(IEnumerable<decimal> targetYears, decimal parcelNumber)
+        private IEnumerable<PropertyTaxReceivableTransaction> GetPropertyTaxReceivableTransactions(
+            IEnumerable<decimal> targetYears, decimal parcelNumber, decimal parcelExtension)
         {
             // Query for propertyTransaction(TreasallPropertyTaxReceivableTransactions), along with all related specialTransaction(TreasspecialAssessmentsTransactions)
             // A single "propertyTransaction" could have multiple or none "specialTransaction"
@@ -110,7 +110,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                              specialTransaction.ParcelNumber,
                              specialTransaction.TaxYear,
                          }
-                         where (propertyTransaction.ParcelNumber == parcelNumber && targetYears.Contains(propertyTransaction.TaxYear.Value)) &&
+                         where (propertyTransaction.ParcelNumber == parcelNumber && propertyTransaction.ParcelExtension == parcelExtension && targetYears.Contains(propertyTransaction.TaxYear.Value)) &&
                                (specialTransaction.ParcelNumber == parcelNumber && targetYears.Contains(specialTransaction.TaxYear.Value))
                          select new
                          {

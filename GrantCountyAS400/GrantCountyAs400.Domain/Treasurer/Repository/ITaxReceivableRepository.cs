@@ -6,6 +6,6 @@ namespace GrantCountyAs400.Domain.Treasurer.Repository
     {
         IEnumerable<TaxReceivable> GetAll(decimal minParcelNumber, decimal? maxParcelNumber, out int resultCount, int pageNumber = 1, int pageSize = 50);
 
-        TaxReceivableDetails Details(int id);
+        TaxReceivableDetails Details(decimal parcelNumber, decimal parcelExtension);
     }
 }

@@ -50,7 +50,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th class="col-xs-2 col-md-1">
+            <th class="col-xs-3 col-md-2">
                 @Html.DisplayNameFor(model => model.ParcelNumber)
             </th>
             <th>
@@ -74,8 +74,8 @@
         {
             <tr>
                 <td>
-                    <a asp-action="Details" asp-route-id="@item.Id">
-                        @Html.DisplayFor(modelItem => item.ParcelNumber)
+                    <a asp-action="Details" asp-route-parcelNumber="@item.ParcelNumber" asp-route-parcelExtension="@item.ParcelExtension">
+                        @Html.DisplayFor(modelItem => item.ParcelNumber)&nbsp;-&nbsp;@Html.DisplayFor(modelItem => item.ParcelExtension)
                     </a>
                 </td>
                 <td>
