@@ -12,5 +12,9 @@ namespace GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceipt
         [Display(Name = "Receipt Date")]
         [DataType(DataType.Date)]
         public DateTime? ReceiptDate { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:F0}")]
+        [Display(Name = "Affdvt Number")]
+        public decimal? AffidavitNumber { get; set; }
     }
 }

@@ -92,6 +92,9 @@
             <th class="col-xs-2 col-md-1">
                 @Html.DisplayNameFor(model => model.ReceiptDate)
             </th>
+            <th class="col-xs-2 col-md-1">
+                @Html.DisplayNameFor(model => model.AffidavitNumber)
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -105,6 +108,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(_ => item.ReceiptDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => item.AffidavitNumber)
                 </td>
             </tr>
         }

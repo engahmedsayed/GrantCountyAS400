@@ -39,7 +39,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                 && ((maxReceiptNumber <= 0) || x.ReceiptTranNumber <= maxReceiptNumber)
                                 && ((!minDate.HasValue) || x.ReceiptDate >= minDate.Value)
                                 && ((!maxDate.HasValue) || x.ReceiptDate <= maxDate.Value)
-                                select new TaxReceipt(x.ReceiptTranNumber.Value, x.ReceiptDate));
+                                select new TaxReceipt(x.ReceiptTranNumber.Value, x.ReceiptDate, null));
 
             var generalReceipts = (from x in _context.TreastenderGeneralReceipts
                                    where ((minReceiptNumber <= 0) || x.ReceiptTranNumber >= minReceiptNumber)
@@ -48,7 +48,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                    && ((maxAffidavitNumber <= 0) || x.ReceiptTran <= maxAffidavitNumber)
                                    && ((!minDate.HasValue) || x.TranDate >= minDate.Value)
                                    && ((!maxDate.HasValue) || x.TranDate <= maxDate.Value)
-                                   select new TaxReceipt(x.ReceiptTranNumber.Value, x.TranDate));
+                                   select new TaxReceipt(x.ReceiptTranNumber.Value, x.TranDate, x.ReceiptTran));
 
             var affadavitReceipts = (from x in _context.TreastenderAffadavits
                                      where ((minReceiptNumber <= 0) || x.ReceiptTranNumber >= minReceiptNumber)
@@ -58,7 +58,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                      && ((!minDate.HasValue) || x.AffidavitDate >= minDate.Value)
                                      && ((!maxDate.HasValue) || x.AffidavitDate <= maxDate.Value)
                                      && (x.TotalPaid > 0)
-                                     select new TaxReceipt(x.ReceiptTranNumber.Value, x.AffidavitDate));
+                                     select new TaxReceipt(x.ReceiptTranNumber.Value, x.AffidavitDate, x.ReceiptTran));
 
             var query = cashReceipts.Union(generalReceipts).Union(affadavitReceipts).Distinct();
             if (pageNumber > 0)
