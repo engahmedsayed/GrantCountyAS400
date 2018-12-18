@@ -54,7 +54,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                         (legalDocument, exciseTaxData)
                             => LegalDocumentMapper.Map(
                                     legalDocument,
-                                    exciseTaxData.SingleOrDefault(x => x.AffidavitNumber == legalDocument.AffidavitNumber && 
+                                    exciseTaxData.FirstOrDefault(x => x.AffidavitNumber == legalDocument.AffidavitNumber && 
                                                                        x.AffidavitNumberExtension == legalDocument.AffidavitNumberExtension))
                                ).ToList();
 
