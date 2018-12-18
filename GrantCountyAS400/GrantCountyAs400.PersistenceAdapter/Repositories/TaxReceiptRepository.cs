@@ -34,12 +34,17 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                 maxAffidavitNumber = minAffidavitNumber;
             }
 
-            var cashReceipts = (from x in _context.TreascashReceiptsTender
+            IQueryable<TaxReceipt> cashReceipts = Enumerable.Empty<TaxReceipt>().AsQueryable();
+            // when filtering by "AffidavitNumber", ignore CashReceipts as it doesn't have matching propety for "AffidavitNumber"
+            if (minAffidavitNumber <= 0)
+            {
+                cashReceipts = (from x in _context.TreascashReceiptsTender
                                 where ((minReceiptNumber <= 0) || x.ReceiptTranNumber >= minReceiptNumber)
                                 && ((maxReceiptNumber <= 0) || x.ReceiptTranNumber <= maxReceiptNumber)
                                 && ((!minDate.HasValue) || x.ReceiptDate >= minDate.Value)
                                 && ((!maxDate.HasValue) || x.ReceiptDate <= maxDate.Value)
                                 select new TaxReceipt(x.ReceiptTranNumber.Value, x.ReceiptDate, null));
+            }
 
             var generalReceipts = (from x in _context.TreastenderGeneralReceipts
                                    where ((minReceiptNumber <= 0) || x.ReceiptTranNumber >= minReceiptNumber)
