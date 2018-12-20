@@ -44,6 +44,57 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
 
         }
 
+        public HistoricValuesMain GetHistoricValues(decimal? parcelNumber, string taxPayerCode, out int resultCount, int pageNumber = 1, int pageSize = 50)
+        {
+            var query = (from rpavm in _context.AsmtrealPropertyAssessedValueMaster
+                         join RPHV in _context.TreasrealPropertyHistoricValues
+                         on   rpavm.ParcelNumber  equals   RPHV.ParcelNumber 
+                         join NNAME in _context.AsmtmasterNameAddress
+                         on rpavm.TaxpayerCode equals NNAME.NameCode
+                         where ((parcelNumber == null) || (parcelNumber == 0) || (rpavm.ParcelNumber == parcelNumber))
+                         && ((string.IsNullOrWhiteSpace(taxPayerCode)) || (taxPayerCode == rpavm.TaxpayerCode))
+                         orderby rpavm.TaxYear descending
+                         select new { rpavm = rpavm, rphv = RPHV, nname = NNAME });
+            if (query != null)
+            {
+                var result = new HistoricValuesMain();
+                result.Items = new List<HistoricValuesItems>();
+                if (pageNumber > 0)
+                {
+                    var filterdResults = query.Skip((pageNumber - 1) * pageSize)
+                                      .Take(pageSize)
+                                      .OrderByDescending(t => t.rphv.TaxYear)
+                                      .ToList();
+                    foreach (var item in filterdResults)
+                    {
+                        result.Items.Add(new HistoricValuesItems(item.rpavm?.ParcelNumber,(int)item.rphv?.TaxYear,item.rphv?.RevaluationPhase,
+                                                                item.rpavm?.TaxpayerCode +" " + item.nname?.Name, item.rphv?.TaxCodeArea,item.rpavm?.Description1,item.rpavm?.Description2,
+                                                                item.rpavm?.Description3,item.rpavm?.Description4,item.rphv?.LandUseCode,item?.rphv.TaxStatus,
+                                                                item.rphv?.BuildingValue,item.rphv?.ImprovedLandValue,item.rphv?.UnimprovedLandValue,
+                                                                item.rphv?.UndividedInterestPercent,item.rphv?.SubsidiaryParcelCode,item.rphv?.UnimprovedLandAcres,
+                                                                item.rphv?.ImprovedLandAcres,item.rphv?.FirePatrolAcres,item.rphv?.MobileHomeValue,item.rphv?.ChangeReasonCode));
+                    }
+                    resultCount = query.Count();
+                }
+                else
+                {
+                    foreach (var item in query.OrderByDescending(t=>t.rpavm.TaxYear))
+                    {
+                        result.Items.Add(new HistoricValuesItems(item.rpavm?.ParcelNumber, (int)item.rphv?.TaxYear, item.rphv?.RevaluationPhase,
+                                                                item.rpavm?.TaxpayerCode +" " + item.nname?.Name, item.rphv?.TaxCodeArea, item.rpavm?.Description1, item.rpavm?.Description2,
+                                                                item.rpavm?.Description3, item.rpavm?.Description4, item.rphv?.LandUseCode, item?.rphv.TaxStatus,
+                                                                item.rphv?.BuildingValue, item.rphv?.ImprovedLandValue, item.rphv?.UnimprovedLandValue,
+                                                                item.rphv?.UndividedInterestPercent, item.rphv?.SubsidiaryParcelCode, item.rphv?.UnimprovedLandAcres,
+                                                                item.rphv?.ImprovedLandAcres, item.rphv?.FirePatrolAcres, item.rphv?.MobileHomeValue, item.rphv?.ChangeReasonCode));
+                    }
+                    resultCount = result.Items.Count();
+                }
+                return result;
+            }
+            resultCount = 0;
+            return null;
+        }
+
         public BuildingPermits GetParcelBuildingPermits(decimal parcelNumber, string ownerCode)
         {
             var parcelNumberWithTaxPayerCodeQuery = (from RPAV in _context.AsmtrealPropertyAssessedValueMaster

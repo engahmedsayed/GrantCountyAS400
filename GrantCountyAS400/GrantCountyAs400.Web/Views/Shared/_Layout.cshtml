@@ -64,7 +64,16 @@
                                 <li><a asp-controller="ManufacturedHomePark" asp-action="Index">Manufactured Home Parks</a></li>
                                 <li><a asp-controller="LegalDescription" asp-action="Index">Legal Descriptions</a></li>
                                 <li><a asp-controller="AssociatedPersons" asp-action="Index">Associated Persons</a></li>
-                                <li><a asp-controller="BuildingPermits" asp-action="Index">Building Permits</a></li>
+                                <li class="dropdown-submenu">
+                                    <a href="#" class="sub-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        Building Permits <span class="caret"></span>
+                                    </a>
+                                    @*<a asp-controller="BuildingPermits" asp-action="Index">Building Permits</a>*@
+                                    <ul class="dropdown-menu">
+                                        <li><a asp-controller="BuildingPermits" asp-action="Index">Building Permits</a></li>
+                                        <li><a asp-controller="BuildingPermits" asp-action="HistoricValues">Historic Values</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
                         <li>
@@ -93,7 +102,7 @@
                                     <a href="#" class="sub-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                         Assessment<span class="caret"></span>
                                     </a>
-                                    <ul class="dropdown-menu">
+                                    <ul class="dropdown-menu multi-level">
                                         <li><a asp-controller="RealProperty" asp-action="Index">Real Property</a></li>
                                         <li><a asp-controller="LegalDocument" asp-action="Index">Legal Documents</a></li>
                                         <li><a asp-controller="ChildParentParcel" asp-action="Index">Child-Parent Parcels</a></li>
@@ -101,7 +110,15 @@
                                         <li><a asp-controller="ManufacturedHomePark" asp-action="Index">Manufactured Home Parks</a></li>
                                         <li><a asp-controller="LegalDescription" asp-action="Index">Legal Descriptions</a></li>
                                         <li><a asp-controller="AssociatedPersons" asp-action="Index">Associated Persons</a></li>
-                                        <li><a asp-controller="BuildingPermits" asp-action="Index">Building Permits</a></li>
+                                        <li class="dropdown-submenu">
+                                            <a href="#">
+                                                Building Permits<span class="caret"></span>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a asp-controller="BuildingPermits" asp-action="Index">Building Permits</a></li>
+                                                <li><a asp-controller="BuildingPermits" asp-action="HistoricValues">Historic Values</a></li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li class="dropdown-submenu">

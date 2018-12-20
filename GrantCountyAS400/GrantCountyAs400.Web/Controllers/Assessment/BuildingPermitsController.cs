@@ -37,6 +37,26 @@ namespace GrantCountyAs400.Web.Controllers.Assessment
         }
 
         [HttpGet]
+        [Route("HistoricValues",Name = "HistoricValues")]
+        public IActionResult HistoricValues(HistoricValuesFilterViewModel filter,int pageNumber = 1)
+        {
+            int resultCount;
+            var pagingInfo = new PagingInfo() { PageNumber = pageNumber };
+            if(filter.ParcelNumber == 0)
+            {
+                return View();
+            }
+            var results = _buildingPermitsRepository.GetHistoricValues(filter.ParcelNumber, filter.TaxPayerCode, out resultCount, pageNumber);
+            ViewBag.FilterViewModel = filter;
+            if (results != null)
+            {
+                pagingInfo.Total = resultCount;
+                return View(results.Items.ToMappedPagedList<HistoricValuesItems, HistoricValuesViewModel>(pagingInfo));
+            }
+            return View();
+        }
+
+        [HttpGet]
         [Route("Details/{parcelNumber}/{ownerCode?}")]
         public IActionResult Details(decimal parcelNumber, string ownerCode)
         {

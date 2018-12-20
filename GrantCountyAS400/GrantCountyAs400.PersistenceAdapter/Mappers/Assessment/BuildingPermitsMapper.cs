@@ -16,6 +16,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Assessment
             new BuildingPermits(rPAV.ParcelNumber, nNAME.Name, nNAME.Name, rPAV.Description1, Lu.UseCodeDesc, rPAV.Description2
                                 , rPAV.ImprovedLandAcers + rPAV.UnimprovedLandAcres, rPAV.Description3, rPAV.ImprovedLandValue, rPAV.Description4
                                 , rPAV.BuildingValue,lineValues);
+
         
     }
 }

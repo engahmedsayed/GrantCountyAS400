@@ -111,6 +111,8 @@ namespace GrantCountyAs400.Web
 
                 cfg.CreateMap<BuildingPermitSystemFilterViewModel, BuildingSearchCriteria>();
 
+                cfg.CreateMap<HistoricValuesItems, HistoricValuesViewModel>();
+
                 #endregion BuildingModule
 
                 #region Treasurer

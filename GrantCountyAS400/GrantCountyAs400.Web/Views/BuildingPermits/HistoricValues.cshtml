@@ -1,0 +1,182 @@
+﻿@model IEnumerable<GrantCountyAs400.Web.ViewModels.Assessment.BuildingPermits.HistoricValuesViewModel>
+@using X.PagedList.Mvc.Core;
+@using GrantCountyAs400.Web.ViewModels.Assessment.BuildingPermits;
+@using GrantCountyAs400.Web.ViewModels.BuildingVM;
+@using GrantCountyAs400.Web.Extensions;
+@using X.PagedList;
+@{
+    ViewData["Title"] = "Historic Values";
+    var filterViewModel = ViewBag.FilterViewModel as HistoricValuesFilterViewModel;
+}
+
+<h2>Historic Values</h2>
+
+<p>
+    @using (Html.BeginForm("HistoricValues", "BuildingPermitSystem", FormMethod.Get))
+    {
+        <div class="form-horizontal">
+            <hr />
+            <div class="row">
+
+                <div class="form-group">
+                    <label asp-for="@filterViewModel.ParcelNumber" class="control-label col-md-2"></label>
+                    <div class="col-md-2">
+                        <input type="number" asp-for="@filterViewModel.ParcelNumber" name="parcelNumber" class="form-control" />
+                    </div>
+
+                    <label asp-for="@filterViewModel.TaxPayerCode" class="control-label col-md-2"></label>
+                    <div class="col-md-2">
+                        <input asp-for="@filterViewModel.TaxPayerCode" name="taxPayerCode" class="form-control" />
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <div class="form-group pull-right">
+                        <input type="submit" value="Filter" class="btn btn-success" />
+                        <input type="reset" value="Clear" class="btn btn-default" id="btnReset" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</p>
+
+<div>
+    <div class="entity-details row">
+        <div class="entity-info clearfix">
+            @{var firstItem = Model?.FirstOrDefault(); }
+            @if (Model != null && Model.Any())
+            {
+                <partial name="_HistoricValuesHeader" for="@firstItem" />
+
+                <div class="col-xs-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FirstOrDefault().TaxYear)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FirstOrDefault().UndividedInterestPercent)
+                                </th>
+
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FirstOrDefault().TaxCodeArea)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FirstOrDefault().SubsidiaryParcelCode)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FirstOrDefault().LandAcresDisplay)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FirstOrDefault().FirePatrolAcres)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FirstOrDefault().BuildingValue)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FirstOrDefault().LandValueDisplay)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FirstOrDefault().BuildingValueDisplay)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FirstOrDefault().MobileHomeValue)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FirstOrDefault().ChangeReasonCode)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FirstOrDefault().LandUseCode)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TaxYear)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UndividedInterestPercent)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TaxCodeArea)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SubsidiaryParcelCode)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LandAcresDisplay)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FirePatrolAcres)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.BuildingValue)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LandValueDisplay)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.BuildingValueDisplay)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MobileHomeValue)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ChangeReasonCode)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LandUseCode)
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <nav aria-label="navigation">
+                        @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("HistoricValues", new
+                   {
+                       pageNumber = pageNumber,
+                       parcelNumber = filterViewModel.ParcelNumber,
+                       taxPayerCode = filterViewModel.TaxPayerCode
+                   }))
+                    </nav>
+
+                </div>
+            }
+                </div>
+        </div>
+    </div>
+
+
+
+    @section Scripts{
+
+        <script>
+            $(function () {
+                $('#btnReset').click(function () {
+                    $('input[type="text"]', 'div.row[data-search-type]').val('');
+                    $('input[type="number"]', 'div.row[data-search-type]').val('');
+                });
+                $('.date-datepicker').datetimepicker({
+                    format: 'MM/DD/YYYY',
+                    showTodayButton: true,
+                    ignoreReadonly: true,
+                    showClear: true,
+                    useCurrent: false,
+                });
+            });
+
+        </script>
+
+    }
+
+
