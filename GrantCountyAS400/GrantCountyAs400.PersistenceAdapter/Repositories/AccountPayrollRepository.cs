@@ -37,6 +37,10 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             {
                 query = query.Where(t => t.Ssnumber == ssn);
             }
+            if (employeeNumber > 0)
+            {
+                query = query.Where(t => t.PersonNumber == employeeNumber);
+            }
 
             List<AcctPersonnel> personnelRecords = new List<AcctPersonnel>();
             if (pageNumber > 0)
@@ -58,7 +62,6 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
 
             var warrants = _context.AcctPrWarrant
                                    .Where(warrant => listOfRetrievedSSNumbers.Contains(warrant.Ssnubmer.Value) &&
-                                                     ((employeeNumber <= 0) || (warrant.EmployeeNumber == employeeNumber)) &&
                                                      ((!minDate.HasValue) || warrant.Date >= minDate.Value) &&
                                                      ((!maxDate.HasValue) || warrant.Date <= maxDate.Value))
                                    .ToList();
