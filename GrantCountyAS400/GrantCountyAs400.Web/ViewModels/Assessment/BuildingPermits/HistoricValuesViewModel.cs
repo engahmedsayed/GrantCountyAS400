@@ -8,13 +8,16 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.BuildingPermits
 {
     public class HistoricValuesViewModel
     {
-        [Display(Name ="Tax Year")]
+        [Display(Name ="Tax Yr")]
         public int? TaxYear { get; set; }
 
+        [Display(Name = "Undiv Int %")]
         public decimal? UndividedInterestPercent { get; set; }
 
+        [Display(Name = "TCA")]
         public int? TaxCodeArea { get; set; }
 
+        [Display(Name = "S C")]
         public string SubsidiaryParcelCode { get; set; }
 
         public decimal? UnimprovedLandAcres { get; set; }
@@ -30,6 +33,7 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.BuildingPermits
             }
         }
 
+        [Display(Name = "F/P Acres")]
         public decimal? FirePatrolAcres { get; set; }
 
         [Display(Name = "Building Value")]
@@ -57,10 +61,13 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.BuildingPermits
             }
         }
 
+        [Display(Name = "M/H Value")]
         public decimal? MobileHomeValue { get; set; }
 
+        [Display(Name = "Chg Cd")]
         public string ChangeReasonCode { get; set; }
 
+        [Display(Name = "Land Use")]
         public int? LandUseCode { get; set; }
 
         //
