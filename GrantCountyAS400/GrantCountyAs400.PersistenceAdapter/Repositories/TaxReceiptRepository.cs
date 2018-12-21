@@ -99,12 +99,13 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                            x.TotalPaid > 0
                                      select TaxReceiptMapper.Map(x)).ToList();
 
-            var propertyTransactions = GetPropertyTaxReceivableTransactions(transactionNumber);
+            IEnumerable<int> transactionYears = cashReceipts.Select(x => x.TransactionYear);
+            var propertyTransactions = GetPropertyTaxReceivableTransactions(transactionNumber, transactionYears);
 
             return new TaxReceiptDetails(transactionNumber, cashReceipts, generalReceipts, affadavitReceipts, propertyTransactions);
         }
 
-        private List<PropertyTaxReceivableTransaction> GetPropertyTaxReceivableTransactions(decimal transactionNumber)
+        private List<PropertyTaxReceivableTransaction> GetPropertyTaxReceivableTransactions(decimal transactionNumber, IEnumerable<int> transactionYears)
         {
             // Query for propertyTransaction(TreasallPropertyTaxReceivableTransactions), along with all related specialTransaction(TreasspecialAssessmentsTransactions)
             // A single "propertyTransaction" could have multiple or none "specialTransaction"
@@ -120,8 +121,12 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                              specialTransaction.ParcelNumber,
                              specialTransaction.TaxYear,
                          }
-                         where (propertyTransaction.ReceiptTranNumber == transactionNumber && specialTransaction.ReceiptTransactionNumber == transactionNumber)
-                         orderby propertyTransaction.TaxYear
+                         where
+                         propertyTransaction.ReceiptTranNumber == transactionNumber &&
+                         specialTransaction.ReceiptTransactionNumber == transactionNumber &&
+                         transactionYears.Contains((int)propertyTransaction.TaxYear) &&
+                         transactionYears.Contains((int)specialTransaction.TaxYear)
+                         orderby propertyTransaction.TaxYear, propertyTransaction.ParcelNumber, propertyTransaction.TaxAmount
                          select new
                          {
                              PropertyTransactionRecord = propertyTransaction,
