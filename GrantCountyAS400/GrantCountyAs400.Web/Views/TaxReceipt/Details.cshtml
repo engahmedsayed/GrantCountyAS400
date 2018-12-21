@@ -4,7 +4,12 @@
 }
 
 <div>
-    <h2>Receipt Number: @Model.TransactionNumber</h2>
+    <h3>
+        Grant County Treasurer<br />
+        PO Box 37<br />
+        Ephrata, WA 98823<br />
+        @Model.CashReceipts.Count()
+    </h3>
 
     <div class="entity-details">
         <div class="entity-info clearfix">
@@ -178,16 +183,19 @@
                         <td>
                             <strong>Totals</strong>
                         </td>
-                        <th>
-                            @Html.DisplayNameFor(model => model.TotalTaxAmount)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.TotalAssessment)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.TotalTotalInterestAndPenalty)
-                        </th>
-                        <th>
+                        @if (Model.PropertyReceipts.Any()) // these data coming from PropertyReceipts, so hide them if got 0 PropertyReceipts records
+                        {
+                            <th>
+                                @Html.DisplayNameFor(model => model.TotalTaxAmount)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TotalAssessment)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TotalTotalInterestAndPenalty)
+                            </th>
+                        }
+                        <th class="text-right">
                             @Html.DisplayNameFor(model => model.TotalPaid)
                         </th>
                     </tr>
@@ -195,10 +203,13 @@
                 <tbody>
                     <tr>
                         <td></td>
-                        <td>@Html.DisplayFor(model => model.TotalTaxAmount)</td>
-                        <td>@Html.DisplayFor(model => model.TotalAssessment)</td>
-                        <td>@Html.DisplayFor(model => model.TotalTotalInterestAndPenalty)</td>
-                        <td>@Html.DisplayFor(model => model.TotalPaid)</td>
+                        @if (Model.PropertyReceipts.Any())
+                        {
+                            <td>@Html.DisplayFor(model => model.TotalTaxAmount)</td>
+                            <td>@Html.DisplayFor(model => model.TotalAssessment)</td>
+                            <td>@Html.DisplayFor(model => model.TotalTotalInterestAndPenalty)</td>
+                        }
+                        <td class="text-right">@Html.DisplayFor(model => model.TotalPaid)</td>
                     </tr>
                 </tbody>
             </table>
