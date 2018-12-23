@@ -33,16 +33,17 @@ namespace GrantCountyAs400.Web.Controllers.Building
         {
             var pagingInfo = new PagingInfo() { PageNumber = pageNumber };
 
-            var results = _buildingModuleRepository.GetAll(
-                Mapper.Map<BuildingSearchCriteria>(filter),
-                out int resultCount,
-                pageNumber,
-                AppSettings.PageSize).ToList();
+            var results =
+                _buildingModuleRepository.GetAll(
+                    Mapper.Map<BuildingSearchCriteria>(filter),
+                    out int resultCount,
+                    pageNumber,
+                    AppSettings.PageSize)
+                .ToList();
             pagingInfo.Total = resultCount;
             ViewBag.FilterViewModel = filter;
             return View(results.ToMappedPagedList<BuildingPermitSystem, BuildingPermitSystemViewModel>(pagingInfo));
         }
-
 
         [HttpGet]
         [Route("export/excel", Name = "ExportBuildingPermitSystemAsExcel")]
@@ -181,9 +182,10 @@ namespace GrantCountyAs400.Web.Controllers.Building
             result.TotalValue = valuationAndFeesEntity?.ExtendedValue;
             result.TotalPlanReviewFees = valuationAndFeesEntity?.AssignPlanReviewFee;
             result.BuildingPermit = valuationAndFeesEntity?.AssignStructNanNodFees;
-                
+
             return View(result);
         }
+
         [HttpGet]
         [Route("/building-permit-system/valuation-fee-details/{id}", Name = "valuationFeeDetailsRoute")]
         public IActionResult ValuationFeeDetails(int id)
@@ -212,9 +214,8 @@ namespace GrantCountyAs400.Web.Controllers.Building
             }
             return View(result);
         }
-        
 
-       [Route("/building-permit-system/fire-marshal-fees-details/{id}", Name = "fireMarshalFeesDetailsRoute")]
+        [Route("/building-permit-system/fire-marshal-fees-details/{id}", Name = "fireMarshalFeesDetailsRoute")]
         public IActionResult FireMarchalFeesDetails(int id)
         {
             FireMarshalFeesDetailsViewModel result = new FireMarshalFeesDetailsViewModel();
@@ -256,7 +257,6 @@ namespace GrantCountyAs400.Web.Controllers.Building
         }
 
         ///totalFeesDetailsRoute
-
 
         private (string viewName, dynamic permitDetail) GetPermitDetail(int id, string permitCode)
         {

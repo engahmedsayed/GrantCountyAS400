@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GrantCountyAs400.Web.ViewModels.BuildingVM.BuildingPermitSystemViewModel>
+@model IEnumerable<GrantCountyAs400.Web.ViewModels.BuildingVM.BuildingPermitSystemViewModel>
 @using X.PagedList.Mvc.Core;
 @using GrantCountyAs400.Web.ViewModels.BuildingVM;
 @using GrantCountyAs400.Web.Extensions;
@@ -33,8 +33,6 @@
                         <input type="number" asp-for="@filterViewModel.PermitNumber" name="permitnumber" class="form-control" />
                     </div>
                 </div>
-
-
             </div>
             <div class="row">
                 <div class="form-group">
@@ -93,13 +91,9 @@
                     <div class="col-md-2">
                         <input type="text" asp-for="@filterViewModel.EnforcementActionDesc" name="enforcementActionDesc" class="form-control" />
                     </div>
-                    <label asp-for="@filterViewModel.CityJurisdictionApprovalRequired" class="control-label col-md-2"></label>
+                    <label asp-for="@filterViewModel.CityApprovalRequired" class="control-label col-md-2"></label>
                     <div class="col-md-2">
-                        <select asp-for="@filterViewModel.CityJurisdictionApproval" name="cityJurisdictionApproval" asp-items="@filterViewModel.CityJurisdictionApprovalRequired" class="form-control"></select>
-                    </div>
-                    <label asp-for="@filterViewModel.CityUtilityApprovalRequired" class="control-label col-md-2"></label>
-                    <div class="col-md-2">
-                        <select type="text" asp-for="@filterViewModel.CityUtilityApproval" name="cityUtilityApproval" asp-items="@filterViewModel.CityUtilityApprovalRequired" class="form-control"></select>
+                        <select asp-for="@filterViewModel.CityApproval" name="cityapproval" asp-items="@filterViewModel.CityApprovalRequired" class="form-control"></select>
                     </div>
                 </div>
             </div>
@@ -261,8 +255,7 @@
     officeProjectDescription = filterViewModel.OfficeProjectDescription,
     contractorBusinessName = filterViewModel.ContractorBusinessName,
     enforcementActionDesc = filterViewModel.EnforcementActionDesc,
-    cityJurisdictionApproval = filterViewModel.CityJurisdictionApproval,
-    cityUtilityApproval = filterViewModel.CityUtilityApproval,
+    cityApproval = filterViewModel.CityApproval,
     fromDate = filterViewModel.FromDate,
     toDate = filterViewModel.ToDate,
     permitYear = filterViewModel.PermitYear
@@ -285,7 +278,6 @@
                 useCurrent: false,
             });
         });
-
     </script>
 
 }
