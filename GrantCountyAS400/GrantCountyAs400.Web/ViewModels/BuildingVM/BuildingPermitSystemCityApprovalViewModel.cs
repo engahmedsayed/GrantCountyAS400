@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 {
@@ -24,13 +21,12 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         [DataType(DataType.Date)]
         public DateTime? ChangeDate { get; set; }
 
-        
         public string JurisdictionCode { get; set; }
 
         public string ShortDepartmentName { get; set; }
 
         [Display(Name = "What city is this inside?")]
-        public string JurisdictionDisplay => JurisdictionCode + ShortDepartmentName;
+        public string CityCode { get; set; }
 
         [Display(Name = "City approval for zoning, etc?")]
         public string ZoniongApproval { get; set; }

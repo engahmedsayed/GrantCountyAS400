@@ -347,8 +347,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                             cityJoinRecord = cityJoinRecord,
                                             jurisdictionRecord = jurisdictionRecord
                                         }).SingleOrDefault();
-                    query.SetCityApproval(BuildingPermitSystemMapper.MapToCityApproval(cityApproval.bldgpermit,
-                                          cityApproval.cityJoinRecord, cityApproval.jurisdictionRecord));
+                    query.SetCityApproval(
+                        BuildingPermitSystemMapper.MapToCityApproval(cityApproval.bldgpermit, cityApproval.cityJoinRecord, cityApproval.jurisdictionRecord));
                 }
             }
 

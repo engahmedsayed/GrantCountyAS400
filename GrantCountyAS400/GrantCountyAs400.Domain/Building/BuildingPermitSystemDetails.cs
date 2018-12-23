@@ -398,25 +398,19 @@ namespace GrantCountyAs400.Domain.Building
     public class CityApproval
     {
         public string ApplicantProjectDescription { get; }
-
         public string JurisdictionCode { get; }
-
         public string ShortDepartmentName { get;}
-
         public string ZoniongApproval { get;}
         public string UtilitiesApproval { get;}
-
-
         public string Comments { get; }
         public string ApprovedBy { get; }
-
         public string UserID { get; }
-
         public DateTime? ChangeDate { get; }
+        public string CityCode { get; }
 
         public CityApproval(string applicantProjectDescription, string jurisdictionCode, string shortDepartmentName,
                             string zoniongApproval, string utilitiesApproval, string comments, string approvedBy,
-                            string userID, DateTime? changeDate)
+                            string userID, DateTime? changeDate, string cityCode)
         {
             ApplicantProjectDescription = applicantProjectDescription;
             JurisdictionCode = jurisdictionCode;
@@ -427,6 +421,7 @@ namespace GrantCountyAs400.Domain.Building
             ApprovedBy = approvedBy;
             UserID = userID;
             ChangeDate = changeDate;
+            CityCode = cityCode;
         }
     }
 }
