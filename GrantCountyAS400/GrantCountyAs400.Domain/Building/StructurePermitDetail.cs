@@ -1,95 +1,53 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GrantCountyAs400.Domain.Building
+﻿namespace GrantCountyAs400.Domain.Building
 {
     public class StructurePermitDetail
     {
-        public string OfficeProjectDescription { get;   }
-
-        public string ResAgCommOther { get;   }
-
-        public decimal? NumberOfBedrooms { get;   }
-
-        public decimal? NumberOfBathrooms { get;   }
-
-        public decimal? NumberOfUnits { get;   }
-
-        public string Heated { get;   }
-
-        public string HeatSourceDescription { get;   }
-
-        public string PrescriptiveReviewDone { get;   }
-
-        public string WattsunRunReviewDone { get;   }
-
-        public string NRECReceived { get;   }
-
-        public string PlansAnalystReviewDone { get;   }
-
-        public string PlansAnalystReviewDescription { get;   }
-
+        public string OfficeProjectDescription { get; }
+        public string ResAgCommOther { get; }
+        public decimal? NumberOfBedrooms { get; }
+        public decimal? NumberOfBathrooms { get; }
+        public decimal? NumberOfUnits { get; }
+        public string Heated { get; }
+        public string HeatSourceDescription { get; }
+        public string PrescriptiveReviewDone { get; }
+        public string WattsunRunReviewDone { get; }
+        public string NRECReceived { get; }
+        public string PlansAnalystReviewDone { get; }
+        public string PlansAnalystReviewDescription { get; }
         public string PlansAnalystReviewDoneDisplay => PlansAnalystReviewDone + PlansAnalystReviewDescription;
-
-        public string SprinklerSystemRequired { get;   }
-
-        public string SprinklerSyustemDescription { get;   }
-
+        public string SprinklerSystemRequired { get; }
+        public string SprinklerSyustemDescription { get; }
         public string SprinklerSystemRequiredDisplay => SprinklerSystemRequired + SprinklerSyustemDescription;
-
-
-        public string AlarmSystemRequired { get;   }
-
-        public string AlarmSystemDescription { get;   }
-
+        public string AlarmSystemRequired { get; }
+        public string AlarmSystemDescription { get; }
         public string AlarmSystemRequiredDisplay => AlarmSystemRequired + AlarmSystemDescription;
-
-        public string SpecialInspectionRequired { get;   }
-
-        public string SpecialInspectionDescription { get;   }
-
+        public string SpecialInspectionRequired { get; }
+        public string SpecialInspectionDescription { get; }
         public string SpecialInspectionRequiredDisplay => SpecialInspectionRequired + SpecialInspectionDescription;
-
-        public string PermitIncludePlumbing { get;   }
-
-        public string PermitIncludeMechanical { get;   }
-
-        public string FireDistrictCode { get;   }
-
-        public string LongFireDistrictName { get;   }
-
+        public string PermitIncludePlumbing { get; }
+        public string PermitIncludeMechanical { get; }
+        public string FireDistrictCode { get; }
+        public string LongFireDistrictName { get; }
         public string FireDistrictCodeDisplay => FireDistrictCode + " " + LongFireDistrictName;
-
-        public string FireFlowAlreadyProvided { get;   }
-
-        public string AdditionalFireFlowRequired { get;   }
-
-        public string AmountOfFireFlowRequired { get;   }
-
-        public decimal? BldgDeptSetback { get;   }
-
-        public decimal? FireMarshalSetback { get;   }
-        public bool IsConditionExistInApcn { get;   }
-
-        public bool IsConditionExistInApin { get;   }
-
-        public decimal? ExtendedValue { get;   }
+        public string FireFlowAlreadyProvided { get; }
+        public string AdditionalFireFlowRequired { get; }
+        public string AmountOfFireFlowRequired { get; }
+        public decimal? BldgDeptSetback { get; }
+        public decimal? FireMarshalSetback { get; }
+        public bool IsConditionExistInApcn { get; }
+        public bool IsConditionExistInApin { get; }
+        public decimal? ExtendedValue { get; }
         public PermitApprovedInfo BldgDept { get; }
         public PermitApprovedInfo FireMarshal { get; }
 
-        public StructurePermitDetail(string officeProjectDescription, string resAgCommOther, decimal? numberOfBedrooms,
-                                     decimal? numberOfBathrooms, decimal? numberOfUnits, string heated,
-                                     string heatSourceDescription, string prescriptiveReviewDone, string wattsunRunReviewDone,
-                                     string nRECReceived, string plansAnalystReviewDone, string plansAnalystReviewDescription,
-                                     string sprinklerSystemRequired, string sprinklerSyustemDescription,
-                                     string alarmSystemRequired, string alarmSystemDescription, string specialInspectionRequired,
-                                     string specialInspectionDescription, string permitIncludePlumbing,
-                                     string permitIncludeMechanical, string fireDistrictCode, string longFireDistrictName,
-                                     string fireFlowAlreadyProvided, string additionalFireFlowRequired,
-                                     string amountOfFireFlowRequired, decimal? bldgDeptSetback, decimal? fireMarshalSetback,
-                                     bool isConditionExistInApcn, bool isConditionExistInApin, decimal? extendedValue,
-                                     PermitApprovedInfo bldgDept, PermitApprovedInfo fireMarshal)
+        public StructurePermitDetail(
+            string officeProjectDescription, string resAgCommOther, decimal? numberOfBedrooms, decimal? numberOfBathrooms, decimal? numberOfUnits, string heated,
+            string heatSourceDescription, string prescriptiveReviewDone, string wattsunRunReviewDone, string nRECReceived, string plansAnalystReviewDone,
+            string plansAnalystReviewDescription, string sprinklerSystemRequired, string sprinklerSyustemDescription, string alarmSystemRequired,
+            string alarmSystemDescription, string specialInspectionRequired, string specialInspectionDescription, string permitIncludePlumbing,
+            string permitIncludeMechanical, string fireDistrictCode, string longFireDistrictName, string fireFlowAlreadyProvided, string additionalFireFlowRequired,
+            string amountOfFireFlowRequired, decimal? bldgDeptSetback, decimal? fireMarshalSetback, bool isConditionExistInApcn, bool isConditionExistInApin,
+            decimal? extendedValue, PermitApprovedInfo bldgDept, PermitApprovedInfo fireMarshal)
         {
             OfficeProjectDescription = officeProjectDescription;
             ResAgCommOther = resAgCommOther;
