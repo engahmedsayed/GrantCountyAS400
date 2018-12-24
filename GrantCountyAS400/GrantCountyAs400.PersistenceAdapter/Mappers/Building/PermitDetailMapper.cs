@@ -76,7 +76,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                                                      BldgmobileHomeDealersInstallersArchitects bldgDealer,
                                                      BldgmobileHomeDealersInstallersArchitects bldgInstaller) =>
            new ManufactureModularPermit(permit.OfficeProjectDescription, permit.ManorMod, permit.YearManufactured.Value, permit.NewOrUsed, permit.SquareFeet.Value, permit.Dimensions, permit.BuildingDescription,
-               permit.ResCommStor, permit.CommercialUseDesc1, permit.CommercialUseDesc2, permit.DealerNameCode, permit.ManufacturerName, permit.LotorMan, permit.ApproxPurchaseDate,
+               permit.ResCommStor.Trim(), permit.CommercialUseDesc1, permit.CommercialUseDesc2, permit.DealerNameCode, permit.ManufacturerName, permit.LotorMan, permit.ApproxPurchaseDate,
                permit.ApproxDeliveryDate, permit.InstallationIncludedInPrice, permit.MovingFromGrantCounty, permit.CountyStateIfNotGrant, permit.TitleOwnerName, permit.TaxpayerName,
                permit.MovingFromParcelNumber.Value, permit.MovingFromAddress, permit.CertInstallerCode, permit.FireDistrictCode, permit.FireFlowAlreadyProvided, permit.AdditionalFireFlowRequired,
                permit.AmountOfFireFlowRequired, permit.BldgDeptSetback.Value, permit.FireMarshalSetback.Value, bldgValue.ExtendedValue.Value, bldgfire.LongFireDistrictName,

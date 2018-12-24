@@ -76,7 +76,7 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         public PermitApprovedInfoViewModel BldgDept { get; set; }
         public PermitApprovedInfoViewModel FireMarshal { get; set; }
 
-        public bool ShowCommercialUse => (ResCommStor == "C");
+        public bool ShowCommercialUse => (ResCommStor.ToLower() == "c");
         public string CommercialUseDescDisplay => $"{CommercialUseDesc1} {CommercialUseDesc2}";
         [Display(Name = "Fire District")]
         public string FireDistrictDisplay => $"{FireDistrictCode} - {LongFireDistrictName}";
