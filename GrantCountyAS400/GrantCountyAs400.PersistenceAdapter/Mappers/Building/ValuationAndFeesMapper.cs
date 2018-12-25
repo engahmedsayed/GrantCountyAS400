@@ -11,7 +11,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
         internal static ValuationAndFees Map(List<ValuationAndFeesRecord> valuationAndFeesClass,string feeCode=null)
         {
             ValuationAndFees result = new ValuationAndFees(valuationAndFeesClass.Sum(t => t?.Appf?.ExtendedAmount),
-              valuationAndFeesClass.Select(t => t.Appv).Distinct()?.Sum(t => t.ExtendedValue),
+              valuationAndFeesClass.Select(t => t.Appv).Distinct()?.Sum(t => t?.ExtendedValue),
               GetFeesAmount(valuationAndFeesClass, "bldg"),
               GetFeesAmount(valuationAndFeesClass, "plrvw"),
               GetFeesAmount(valuationAndFeesClass, "plmb"),
@@ -39,7 +39,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
               .Where(t => t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode))?.Select(t=>t.UnitCharge)?.ToList(),
             valuationAndFeesClass.Select(t => t.Appf)?
              .Where(t => t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode))?.Select(t => t.ExtendedAmount)?.ToList(), 
-            valuationAndFeesClass.Select(t=>t.Bldg)?.Sum(t=>t.AssignedValue),valuationAndFeesClass.Select(t=>t.Bldg)?.FirstOrDefault()?.StateClassCode,
+            valuationAndFeesClass.Select(t=>t.Bldg)?.Sum(t=>t?.AssignedValue),valuationAndFeesClass.Select(t=>t.Bldg)?.FirstOrDefault()?.StateClassCode,
             valuationAndFeesClass.Select(t=>t.Bldg)?.FirstOrDefault(t=>t!=null && t.ProjectedExpireDate.HasValue)?.ProjectedExpireDate,
             valuationAndFeesClass.Select(t => t.Bldg)?.FirstOrDefault(t =>t!=null && t.ActualExpireDate.HasValue)?.ActualExpireDate,
             valuationAndFeesClass.Select(t => t.Bldg)?.FirstOrDefault(t =>t!=null && !string.IsNullOrWhiteSpace(t.ExpiredByUser))?.ExpiredByUser) ;
