@@ -222,12 +222,12 @@
                                 <td><strong>Tender</strong></td>
                                 <td class="text-right">
                                     <span> @Model.CashReceipts.FirstOrDefault().PaymentMethodDisplay</span>
-                                    <span>&nbsp; &nbsp;@Model.CashReceipts.FirstOrDefault().AmountTenderedDisplay</span>
+                                    <span>&nbsp; &nbsp;@Model.CashReceipts.FirstOrDefault().AmountTendered</span>
                                     @if (Model.CashReceipts.Skip(1).FirstOrDefault() != null)
                                     {
                                         <br />
                                         <span> @Model.CashReceipts.Skip(1).FirstOrDefault().PaymentMethodDisplay</span>
-                                        <span>&nbsp; &nbsp;@Model.CashReceipts.Skip(1).FirstOrDefault().AmountTenderedDisplay</span>
+                                        <span>&nbsp; &nbsp;@Model.CashReceipts.Skip(1).FirstOrDefault().AmountTendered</span>
                                     }
                                 </td>
                             </tr>

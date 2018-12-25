@@ -52,7 +52,6 @@ namespace GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceipt
         public string PaymentMethod { get; set; }
         public decimal? AmountTendered { get; set; }
 
-        public decimal? AmountTenderedDisplay => (AmountTendered.HasValue) ? Math.Abs(AmountTendered.Value) : AmountTendered;
         public string PaymentMethodDisplay
         {
             get
