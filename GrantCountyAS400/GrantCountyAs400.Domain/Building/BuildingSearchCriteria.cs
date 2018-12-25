@@ -14,6 +14,10 @@ namespace GrantCountyAs400.Domain.Building
         public int? PermitYear { get; }
         public DateTime? FromDate { get; }
         public DateTime? ToDate { get; }
+
+        public DateTime? ApplicationDateFrom { get; }
+        
+        public DateTime? ApplicationDateTo { get; }
         public decimal? PreliminaryParcelNumber { get; }
         public decimal? AssessorParcelNumber { get; }
         public decimal? StateClassCode { get; }
@@ -29,7 +33,8 @@ namespace GrantCountyAs400.Domain.Building
         public BuildingSearchCriteria(
             decimal? applicationNumber, int? applicationYear, decimal? permitNumber, string applicantBusinessName, string applicantLastName, string applicantFirstName,
             int? permitYear, decimal? preliminaryParcelNumber, decimal? assessorParcelNumber, decimal? stateClassCode, string officeProjectDescription,
-            string projectDescription, string contractorBusinessName, string enforcementActionDesc, string cityApproval, DateTime? fromDate, DateTime? toDate)
+            string projectDescription, string contractorBusinessName, string enforcementActionDesc, string cityApproval, DateTime? fromDate, DateTime? toDate,
+            DateTime? applicationDateFrom,DateTime? applicationDateTo)
         {
             ApplicationNumber = applicationNumber;
             ApplicationYear = applicationYear;
@@ -47,6 +52,8 @@ namespace GrantCountyAs400.Domain.Building
             CityApproval = cityApproval;
             FromDate = fromDate;
             ToDate = toDate;
+            ApplicationDateFrom = applicationDateFrom;
+            ApplicationDateTo = applicationDateTo;
             PermitYear = permitYear;
         }
     }

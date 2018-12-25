@@ -68,5 +68,13 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         [Display(Name = "Issue Date To")]
         [UIHint("DatePicker")]
         public DateTime? ToDate { get; set; } = null;
+
+        [Display(Name ="Application Date From")]
+        [UIHint("DatePicker")]
+        public DateTime? ApplicationDateFrom { get; set; } = null;
+
+        [Display(Name ="Application Date To")]
+        [UIHint("DatePicker")]
+        public DateTime? ApplicationDateTo { get; set; } = null;
     }
 }

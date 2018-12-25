@@ -4,15 +4,17 @@ namespace GrantCountyAs400.Domain.Building
 {
     public class BuildingPermitSystem
     {
-        public BuildingPermitSystem(int id,DateTime? applicationDate,string businessName, decimal? applicationNumber, decimal? addendumNumber, string permitCode, string permitStatus, decimal? applicationYear,
+        public BuildingPermitSystem(int id,DateTime? permitIssueDate,DateTime?applicationDate,decimal? assessorParcelNumber,string businessName, decimal? applicationNumber, decimal? addendumNumber, string permitCode, string permitStatus, decimal? applicationYear,
                                   decimal? permitNumber,decimal?permitYear, string applicationName, string buildingApprovalRequired, string buildingApprovalDate, string fireMarchalRequired,
                                   string fireMarshalDate, string planningApprovalRequired, string planningApprovalDate, string healthApprovalRequired, string healthApprovalDate,
                                   string assessorApprovalRequired, string assessorApprovalDate, string publicWorkApprovalRequired, string publicWorkApprovalDate,
                                   string cityJurisdictionApprovalRequired, string cityJurisdictionApprovalDate, string cityUtilityApprovalRequired, string cityUtilityApprovalDate,
                                   string officeProjectDescription,string projectDescription,string contractorBusinessName,string resultOfEnforcementAction)
         {
+            PermitIssueDate = permitIssueDate;
             ApplicationDate = applicationDate;
             ApplicantBusinessName = businessName;
+            AssessorParcelNumber = assessorParcelNumber;
             ApplicationNumber = applicationNumber;
             AddendumNumber = addendumNumber;
             PermitCode = permitCode;
@@ -45,7 +47,10 @@ namespace GrantCountyAs400.Domain.Building
         }
 
         public int ID { get; }
-        public DateTime? ApplicationDate { get; }
+        public DateTime? PermitIssueDate { get; }
+        public DateTime? ApplicationDate { get;}
+
+        public decimal? AssessorParcelNumber { get; }
         public string ApplicantBusinessName { get; }
         public string ResultOfEnforcementAction { get; set; }
         public string ContractorBusinessName { get; }

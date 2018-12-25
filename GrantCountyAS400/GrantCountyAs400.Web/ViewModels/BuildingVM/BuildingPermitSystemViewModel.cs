@@ -7,8 +7,14 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
     {
         public int ID { get; set; }
 
-        [Display(Name = "Issue Date")]
+        [Display(Name = "Application Date")]
         public DateTime? ApplicationDate { get; set; }
+
+        [Display(Name = "Issue Date")]
+        public DateTime? PermitIssueDate { get; set; }
+
+        [Display(Name ="Assessor Parcel Number")]
+        public int AssessorParcelNumber { get; set; }
 
         [Display(Name = "#")]
         public decimal? ApplicationNumber { get; set; }
@@ -58,12 +64,8 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         public string PublicWorkApprovalRequired { get; set; }
         public string PublicWorkApprovalDate { get; set; }
 
-        [Display(Name = "City Jur. App. Req.")]
-        public string CityJurisdictionApprovalRequired { get; set; }
         public string CityJurisdictionApprovalDate { get; set; }
 
-        [Display(Name = "City Utility App. Req.")]
-        public string CityUtilityApprovalRequired { get; set; }
         public string CityUtilityApprovalDate { get; set; }
 
         [Display(Name = "Office Project Description")]

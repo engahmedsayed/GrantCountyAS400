@@ -77,6 +77,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          appm.CityUtilityApprovalRequired.TrimAndLower() == searchCriteria.CityApproval.TrimAndLower()))
                     && ((!searchCriteria.FromDate.HasValue) || appm.PermitIssuedDate >= searchCriteria.FromDate)
                     && ((!searchCriteria.ToDate.HasValue) || appm.PermitIssuedDate <= searchCriteria.ToDate)
+                    && ((!searchCriteria.ApplicationDateFrom.HasValue) || appm.ApplicationDate >= searchCriteria.ApplicationDateFrom)
+                    && ((!searchCriteria.ApplicationDateTo.HasValue) || appm.ApplicationDate <= searchCriteria.ToDate)
                     select BuildingPermitSystemMapper.Map(appm, appm.PermitCode.TrimAndLower() == gradString ? grdRecord.OfficeProjectDescription :
                                                           appm.PermitCode.TrimAndLower() == mechString ? mechRecord.OfficeProjectDescription :
                                                           appm.PermitCode.TrimAndLower() == firemString ? firemRecord.OfficeProjectDescription :
@@ -92,14 +94,19 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             if (pageNumber > 0)
             {
                 resultCount = query.Count();
-                results = query.Skip((pageNumber - 1) * pageSize)
+                results = query.OrderBy(t => (searchCriteria.ApplicationDateFrom == null &&
+                                             searchCriteria.ApplicationDateTo == null &&
+                                             searchCriteria.FromDate == null &&
+                                             searchCriteria.ToDate == null) ? t.ApplicationDate : t.PermitIssueDate).Skip((pageNumber - 1) * pageSize)
                                .Take(pageSize)
-                               .OrderBy(t => t.ApplicationDate)
                                .ToList();
             }
             else
             {
-                results = query.OrderBy(t => t.ApplicationDate)
+                results = query.OrderBy(t => (searchCriteria.ApplicationDateFrom == null &&
+                                             searchCriteria.ApplicationDateTo == null &&
+                                             searchCriteria.FromDate == null &&
+                                             searchCriteria.ToDate == null) ? t.ApplicationDate : t.PermitIssueDate)
                                .ToList();
                 resultCount = results.Count();
             }
