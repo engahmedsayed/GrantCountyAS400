@@ -152,6 +152,8 @@ namespace GrantCountyAs400.Domain.Building
         public string ContractLicenseNumber { get; }
         public string ContractorBusinessName { get; }
         public string ApplicantProjectDescription { get; }
+
+        public string AdditionalProjectInformation { get;}
         public string ResultOfEnforcementAction { get; }
         public string EnforcementDescription { get; }
         public string PlotPlanReceived { get; }
@@ -162,12 +164,13 @@ namespace GrantCountyAs400.Domain.Building
         public string EngineerBusinessName { get; }
         public string EngineerFirmNumber { get; }
 
-        public BuildingPermitSystemApplicantDetails(string contractLicenseNumber, string applicantProjectDescription, string resultOfEnforcementAction,
+        public BuildingPermitSystemApplicantDetails(string contractLicenseNumber,string additionalProjectInformation, string applicantProjectDescription, string resultOfEnforcementAction,
             string enforcementDescription, string plotPlanReceived, string onlyStructureOnParcel, string onlyResidenceOnParcel, string contractorBusinessName,
             string architectFirmNumber, string architectBusinessName, string engineerFirmNumber, string engineerBusinessName)
         {
             ContractLicenseNumber = contractLicenseNumber;
             ApplicantProjectDescription = applicantProjectDescription;
+            AdditionalProjectInformation = additionalProjectInformation;
             ResultOfEnforcementAction = resultOfEnforcementAction;
             EnforcementDescription = enforcementDescription;
             PlotPlanReceived = plotPlanReceived;

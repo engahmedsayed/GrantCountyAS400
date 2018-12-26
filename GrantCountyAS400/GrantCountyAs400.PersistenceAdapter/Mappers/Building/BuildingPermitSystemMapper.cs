@@ -64,7 +64,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                                                                                   BldgmobileHomeDealersInstallersArchitects mdia,
                                                                                   BldgmobileHomeDealersInstallersArchitects mdiaBusinessEngineer,
                                                                                   Bldgcontractors bldgContractor) =>
-            new BuildingPermitSystemApplicantDetails(bldgpermit.ContractLicenseNumber,
+            new BuildingPermitSystemApplicantDetails(bldgpermit.ContractLicenseNumber,bldgpermit.AdditionalInformation,
                 bldgpermit.ApplicantProjectDescription, bldgpermit.ResultOfEnforcementAction, bldgpermit.EnforcementDescription, bldgpermit.PlotPlanReceived,
                 bldgpermit.OnlyStructureOnParcel, bldgpermit.OnlyResidenceOnParcel, bldgContractor?.ContractorBusinessName,
                 bldgpermit.ArchitectFirmNumber, mdia?.BusinessName, bldgpermit.EngineerFirmNumber, mdiaBusinessEngineer?.BusinessName);

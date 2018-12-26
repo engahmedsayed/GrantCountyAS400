@@ -9,6 +9,9 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 
         public string ContractLicenseNumber { get; set; }
 
+        [Display(Name ="Additional Project Information")]
+        public string AdditionalProjectInformation { get; set; }
+
         [Display(Name = "Owner")]
         public string ContractorBusinessName { get; set; }
 
