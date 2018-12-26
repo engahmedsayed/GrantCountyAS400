@@ -45,7 +45,7 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         public List<ApplicationReceiptInfoViewModel> ReceiptInfos { get; set; }
 
         [Display(Name = "Total Receipt")]
-        public decimal? TotalReceipt => CheckAmount + CashAmount + OtherAmount + CheckAmount;
+        public decimal? TotalReceipt => CheckAmount + CashAmount + OtherAmount;
         [Display(Name = "Receipt #")]
         public string ReceiptNumberDisplay => ReceiptNumber?.ToString();
     }
