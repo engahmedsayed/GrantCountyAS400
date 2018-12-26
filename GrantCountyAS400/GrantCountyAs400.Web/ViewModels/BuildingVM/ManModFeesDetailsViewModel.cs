@@ -19,6 +19,8 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         [Display(Name = "Total")]
         public decimal? TotalValue { get; set; }
 
+        public List<string> FeeCode { get; set; }
+
         public List<decimal?> ExtendedAmount { get; set; }
 
 

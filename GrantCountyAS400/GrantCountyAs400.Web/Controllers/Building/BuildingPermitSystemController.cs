@@ -160,6 +160,7 @@ namespace GrantCountyAs400.Web.Controllers.Building
             result.ExtendedAmount = valuationAndFeesEntity?.BaseFee;
             result.SequenceNumber = valuationAndFeesEntity?.SequenceNumber;
             result.FeeDescription = valuationAndFeesEntity?.Description;
+            result.FeeCode = valuationAndFeesEntity?.FeeCode;
             result.NumberOfUnits = valuationAndFeesEntity.NumberOfUnits;
             result.BaseFee = valuationAndFeesEntity?.BaseFee;
             result.TotalValue = valuationAndFeesEntity?.ExtendedValue;

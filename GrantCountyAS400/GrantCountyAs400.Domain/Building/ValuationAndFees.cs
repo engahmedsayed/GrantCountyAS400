@@ -54,8 +54,9 @@ namespace GrantCountyAs400.Domain.Building
         public DateTime? ActualExpireDate { get;}
 
         public string ExpiredByUser { get; }
+        public List<string> FeeCode { get; set; }
 
-        public ValuationAndFees(decimal? extendedAmountTotal, decimal? extendedValue, decimal? assignStructNanNodFees,
+        public ValuationAndFees(decimal? extendedAmountTotal,List<string> feeCode, decimal? extendedValue, decimal? assignStructNanNodFees,
                                 decimal? assignPlanReviewFee, decimal? assignPlumbingFees, decimal? assignMechanicalFees,
                                 decimal? assignGradingFees, decimal? assignDemolitionFees, decimal? assignBidPermitFee, 
                                 decimal? assignBidPlanReview, decimal? assignBidBuildingCodeFee, decimal? assignFireMarshalFees, 
@@ -65,6 +66,7 @@ namespace GrantCountyAs400.Domain.Building
                                 DateTime? actualExpireDate,string expiredByUser)
         {
             ExtendedAmountTotal = extendedAmountTotal;
+            FeeCode = feeCode;
             ExtendedValue = extendedValue;
             AssignStructNanNodFees = assignStructNanNodFees;
             AssignPlanReviewFee = assignPlanReviewFee;

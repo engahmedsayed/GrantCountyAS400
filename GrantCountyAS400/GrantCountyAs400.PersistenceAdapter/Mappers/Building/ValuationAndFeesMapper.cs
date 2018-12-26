@@ -11,6 +11,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
         internal static ValuationAndFees Map(List<ValuationAndFeesRecord> valuationAndFeesClass,string feeCode=null)
         {
             ValuationAndFees result = new ValuationAndFees(valuationAndFeesClass.Sum(t => t?.Appf?.ExtendedAmount),
+                valuationAndFeesClass.Select(t => t.Appf)?.Distinct().Where(t => t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode))?
+              .Select(t => t.FeeCode)?.ToList(),
               valuationAndFeesClass.Select(t => t.Appv).Distinct()?.Sum(t => t?.ExtendedValue),
               GetFeesAmount(valuationAndFeesClass, "bldg"),
               GetFeesAmount(valuationAndFeesClass, "plrvw"),
@@ -23,21 +25,21 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
               GetFeesAmount(valuationAndFeesClass, "stbcd"),
               GetFeesAmount(valuationAndFeesClass, "fire"),
               GetFeesAmount(valuationAndFeesClass, "othrb"), 
-              valuationAndFeesClass.Select(t => t.Appf)?.Where(t => t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode))?
+              valuationAndFeesClass.Select(t => t.Appf)?.Distinct().Where(t => t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode))?
               .Select(t=>t.SequenceNumber)?.ToList(),
-              valuationAndFeesClass.Select(t=>t.Appf)?
+              valuationAndFeesClass.Select(t=>t.Appf)?.Distinct()
               .Where(t=>t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode))?.Select(t=>t.FeeDescription)?.ToList(),
-              valuationAndFeesClass.Select(t => t.Appf)?
+              valuationAndFeesClass.Select(t => t.Appf)?.Distinct()
               .Where(t => t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode))?.Select(t=>t.BaseFee)?.ToList(),
-              valuationAndFeesClass.Select(t => t.Appf)?
+              valuationAndFeesClass.Select(t => t.Appf)?.Distinct()
               .Where(t => t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode))?.Select(t=>t.FeeIncrement)?.ToList(),
-              valuationAndFeesClass.Select(t => t.Appf)?
+              valuationAndFeesClass.Select(t => t.Appf)?.Distinct()
               .Where(t => t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode))?.Select(t=>t.MinMaxFlag)?.ToList(),
-              valuationAndFeesClass.Select(t => t.Appf)?
+              valuationAndFeesClass.Select(t => t.Appf)?.Distinct()
               .Where(t => t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode))?.Select(t=>t.NumberOfUnits)?.ToList(),
-              valuationAndFeesClass.Select(t => t.Appf)?
+              valuationAndFeesClass.Select(t => t.Appf)?.Distinct()
               .Where(t => t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode))?.Select(t=>t.UnitCharge)?.ToList(),
-            valuationAndFeesClass.Select(t => t.Appf)?
+            valuationAndFeesClass.Select(t => t.Appf)?.Distinct()
              .Where(t => t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode))?.Select(t => t.ExtendedAmount)?.ToList(), 
             valuationAndFeesClass.Select(t=>t.Bldg)?.Sum(t=>t?.AssignedValue),valuationAndFeesClass.Select(t=>t.Bldg)?.FirstOrDefault()?.StateClassCode,
             valuationAndFeesClass.Select(t=>t.Bldg)?.FirstOrDefault(t=>t!=null && t.ProjectedExpireDate.HasValue)?.ProjectedExpireDate,
