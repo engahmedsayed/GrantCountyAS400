@@ -119,7 +119,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
         internal static CityApproval MapToCityApproval(
             BldgpermitApplicationMaster appm, BldgcityApproval cityJoinRecord, Bldgjurisdictions jurisdictionRecord)
                 => new CityApproval(appm?.ApplicantProjectDescription, cityJoinRecord?.JurisdictionCode, jurisdictionRecord?.ShortDepartmentName,
-                    cityJoinRecord.ZoningApproval, cityJoinRecord?.UtilitiesApproval, cityJoinRecord?.Comments, cityJoinRecord?.ApprovedBy, cityJoinRecord?.UserId,
+                    cityJoinRecord?.ZoningApproval, cityJoinRecord?.UtilitiesApproval, cityJoinRecord?.Comments, cityJoinRecord?.ApprovedBy, cityJoinRecord?.UserId,
                     cityJoinRecord?.ChangeDate, cityJoinRecord?.CityCode);
 
 

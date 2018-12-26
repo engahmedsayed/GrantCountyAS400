@@ -247,6 +247,12 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                                                mdiaEngineerRecord,
                                                                bldgContractorRecord,
                                                                rpmasRecord, nNameRecord)).SingleOrDefault();
+            query.Notes = (from bldgpermit in _context.BldgpermitApplicationMaster
+                           join notes in _context.BldgapplicationNotes
+                           on new { applicationNumber = bldgpermit.ApplicationNumber, applicationYear = bldgpermit.ApplicationYear, addendumNumber = bldgpermit.AddendumNumber } equals
+                           new { applicationNumber = notes.ApplicationNumber, applicationYear = notes.ApplicationYear, addendumNumber = notes.AddendumNumber }
+                           where bldgpermit.Id == id
+                           select notes.Note).ToList();
             if (query != null && query.ApprovalStatus != null)
             {
                 if (query.ApprovalStatus.Planning != null)

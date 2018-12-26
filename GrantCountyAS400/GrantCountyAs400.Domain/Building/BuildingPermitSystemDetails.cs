@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace GrantCountyAs400.Domain.Building
 {
@@ -7,7 +8,7 @@ namespace GrantCountyAs400.Domain.Building
         public string ApplicantLastName { get; }
         public string ApplicantFirstName { get; }
 
-        
+        public IEnumerable<string> Notes { get; set; }
         public string PermitCode { get; }
         public string ProcessedForJurisdiction { get; }
         public DateTime ApplicationDate { get; }

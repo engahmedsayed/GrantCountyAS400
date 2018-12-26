@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace GrantCountyAs400.Web.ViewModels.BuildingVM
@@ -91,6 +92,8 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         public BuildingPermitSystemHealthApprovalViewModel HealthApproval { get; set; }
 
         public BuildingPermitSystemCityApprovalViewModel CityApproval { get; set; }
+
+        public List<string> Notes { get; set; }
     }
 
     public class BuildingValueMasterNameInfoViewModel
