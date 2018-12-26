@@ -42,14 +42,14 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
             BldgstructureBuildingPermitDetail strd, 
             BldgfireDistrictCodes fdst, 
             IEnumerable<BldgapplicationValues> appv) 
-            => new StructurePermitDetail(strd.OfficeProjectDescription, strd.ResAgCommOther, strd.NumberOfBedrooms, strd.NumberOfBathrooms, strd.NumberOfUnits,
-                strd.Heated, strd.HeatSourceDescription, strd.PrescriptiveReviewDone, strd.WattsunRunReviewDone, strd.Nrecreceived, strd.PlansAnalystReviewDone, 
-                strd.PlansAnalystReviewDescription, strd.SprinklerSystemRequired, strd.SprinklerSystemDescription, strd.AlarmSystemRequired, strd.AlarmSystemDescription,
-                strd.SpecialInspectionRequired, strd.SpecialInspectionDescription, strd.PermitIncludePlumbing, strd.PermitIncludeMechanical, strd.FireDistrictCode, 
-                fdst.LongFireDistrictName, strd.FireFlowAlreadyProvided, strd.AdditionalFireFlowRequired, strd.AmountOfFireFlowRequired, strd.BldgDeptSetback,
-                strd.FireMarshalSetback, apcnConditionRecord == null,apinConditionRecord == null, appv?.Sum(t=>t.ExtendedValue), 
-                new PermitApprovedInfo(strd.BldgDeptApprovedBy, strd.BldgDepDateApproved, strd.BldgDeptApprovedUserId, strd.BldgDeptApprovedChangeDate),
-                new PermitApprovedInfo(strd.FireMarshalApprovedBy, strd.FireMarshalDateApproved, strd.FireMarshalApprovedUserId, strd.FireMarshalApprovedChangeDate));
+            => new StructurePermitDetail(strd?.OfficeProjectDescription, strd?.ResAgCommOther, strd?.NumberOfBedrooms, strd?.NumberOfBathrooms, strd?.NumberOfUnits,
+                strd?.Heated, strd?.HeatSourceDescription, strd?.PrescriptiveReviewDone, strd?.WattsunRunReviewDone, strd?.Nrecreceived, strd?.PlansAnalystReviewDone, 
+                strd?.PlansAnalystReviewDescription, strd?.SprinklerSystemRequired, strd?.SprinklerSystemDescription, strd?.AlarmSystemRequired, strd?.AlarmSystemDescription,
+                strd?.SpecialInspectionRequired, strd?.SpecialInspectionDescription, strd?.PermitIncludePlumbing, strd?.PermitIncludeMechanical, strd?.FireDistrictCode, 
+                fdst?.LongFireDistrictName, strd?.FireFlowAlreadyProvided, strd?.AdditionalFireFlowRequired, strd?.AmountOfFireFlowRequired, strd?.BldgDeptSetback,
+                strd?.FireMarshalSetback, apcnConditionRecord == null,apinConditionRecord == null, appv?.Sum(t=>t.ExtendedValue), 
+                new PermitApprovedInfo(strd?.BldgDeptApprovedBy, strd?.BldgDepDateApproved, strd?.BldgDeptApprovedUserId, strd?.BldgDeptApprovedChangeDate),
+                new PermitApprovedInfo(strd?.FireMarshalApprovedBy, strd?.FireMarshalDateApproved, strd?.FireMarshalApprovedUserId, strd?.FireMarshalApprovedChangeDate));
 
         internal static GradingExcavationPermitDetail Map(BldgpermitApplicationMaster bldg,
                                                           BldgfireDistrictCodes fdst,

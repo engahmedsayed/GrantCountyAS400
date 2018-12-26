@@ -201,6 +201,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
 
         public BuildingPermitSystemDetails Details(int id)
         {
+
             var query = (from bldgpermit in _context.BldgpermitApplicationMaster
                          join juri in _context.Bldgjurisdictions on bldgpermit.JurisdictionCode equals juri.DepartmentCode
                          join processedJuri in _context.Bldgjurisdictions on bldgpermit.ProcessedForJurisdiction equals processedJuri.DepartmentCode
@@ -248,9 +249,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                                                rpmasRecord, nNameRecord)).SingleOrDefault();
             if (query != null && query.ApprovalStatus != null)
             {
-                if (query.ApprovalStatus.Planning != null &&
-                   query.ApprovalStatus.Planning.Required.ToLower() == "y" &&
-                   query.ApprovalStatus.Planning.Date.HasValue)
+                if (query.ApprovalStatus.Planning != null)
                 {
                     var planningApproval = (from bldgpermit in _context.BldgpermitApplicationMaster
                                             join plap in _context.BldgplanningApproval
@@ -264,9 +263,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                           BuildingPermitSystemMapper.MapToPlanningApproval(planningApproval.plapRecord,
                                                                            planningApproval.bldgpermit));
                 }
-                if (query.ApprovalStatus.Assessor != null &&
-                    query.ApprovalStatus.Assessor.Required.ToLower() == "y" &&
-                    query.ApprovalStatus.Assessor.Date.HasValue)
+                if (query.ApprovalStatus.Assessor != null)
                 {
                     var assessorApproval = (from bldgpermit in _context.BldgpermitApplicationMaster
                                             join assessor in _context.BldgassessorApproval
@@ -295,9 +292,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                                                                                 assessorApproval.nNameRecord,
                                                                                                 assessorApproval.bldgpermit));
                 }
-                if (query.ApprovalStatus.PublicWroks != null &&
-                    query.ApprovalStatus.PublicWroks.Required.ToLower() == "y" &&
-                    query.ApprovalStatus.PublicWroks.Date.HasValue)
+                if (query.ApprovalStatus.PublicWroks != null)
                 {
                     var publicWorkAppproval = (from bldgpermit in _context.BldgpermitApplicationMaster
                                                join publicWork in _context.BldgpublicWorksApproval
@@ -314,9 +309,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                     query.SetPublicWorkApproval(BuildingPermitSystemMapper.MapToPublicWorkApproval(publicWorkAppproval.bldgpermit,
                                                 publicWorkAppproval.publicWorkRecord));
                 }
-                if (query.ApprovalStatus.Health != null &&
-                    query.ApprovalStatus.Health.Required.ToLower() == "y" &&
-                    query.ApprovalStatus.Health.Date.HasValue)
+                if (query.ApprovalStatus.Health != null)
                 {
                     var healthApproval = (from bldgpermit in _context.BldgpermitApplicationMaster
                                           join health in _context.BldghealthApproval
@@ -333,9 +326,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                     query.SetHealthApproval(BuildingPermitSystemMapper.MapToHealthApproval(healthApproval.bldgpermit,
                                             healthApproval.healthRecord));
                 }
-                if (query.ApprovalStatus.CityUtility != null &&
-                    query.ApprovalStatus.CityUtility.Required.ToLower() == "y" &&
-                    query.ApprovalStatus.CityUtility.Date.HasValue)
+                if (query.ApprovalStatus.CityUtility != null)
                 {
                     var cityApproval = (from bldgpermit in _context.BldgpermitApplicationMaster
                                         join city in _context.BldgcityApproval
@@ -475,9 +466,9 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
 
             if (query != null)
             {
-                return PermitDetailMapper.Map(query.FirstOrDefault().bldg, query.FirstOrDefault().apcnConditionRecord,
-                                              query.FirstOrDefault().apinConditionRecord, query.FirstOrDefault().strd, query.FirstOrDefault().fdst,
-                                              query.SelectMany(t => t.appvApplicationValues).Distinct());
+                return PermitDetailMapper.Map(query.FirstOrDefault()?.bldg, query.FirstOrDefault()?.apcnConditionRecord,
+                                              query.FirstOrDefault()?.apinConditionRecord, query.FirstOrDefault()?.strd, query.FirstOrDefault()?.fdst,
+                                              query.SelectMany(t => t.appvApplicationValues)?.Distinct());
             }
             return null;
         }

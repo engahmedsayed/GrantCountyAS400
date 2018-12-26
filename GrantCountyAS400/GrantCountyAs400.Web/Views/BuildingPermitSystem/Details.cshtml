@@ -29,10 +29,6 @@
                             <td class="text-right"><span> @Html.DisplayFor(model => model.CityStateZip) </span></td>
                         </tr>
                         <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.PhoneNumber) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.PhoneNumber) </span></td>
-                        </tr>
-                        <tr>
                             <td><strong>@Html.DisplayNameFor(model => model.PreliminaryParcelDisplay) </strong></td>
                             <td class="text-right">
                                 <span> @Html.DisplayFor(model => model.PreliminaryParcelDisplay) </span><br />
@@ -119,7 +115,7 @@
                         </div>
                     </div>
                 </div>
-                @if (Model.ApprovalStatus != null && Model.ApprovalStatus.Planning.Date.HasValue && Model.ApprovalStatus.Planning.Required.ToLower() == "y")
+                @if (Model.ApprovalStatus != null && Model.PlanningApproval != null)
                 {
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -136,7 +132,7 @@
                         </div>
                     </div>
                 }
-                @if (Model.ApprovalStatus != null && Model.ApprovalStatus.Assessor.Date.HasValue && Model.ApprovalStatus.Assessor.Required.ToLower() == "y")
+                @if (Model.ApprovalStatus != null  && Model.AssessorApproval != null)
                 {
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -153,7 +149,7 @@
                         </div>
                     </div>
                 }
-                @if (Model.ApprovalStatus != null && Model.ApprovalStatus.PublicWroks.Date.HasValue && Model.ApprovalStatus.PublicWroks.Required.ToLower() == "y")
+                @if (Model.ApprovalStatus != null && Model.PublicWorkApproval !=null)
                 {
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -170,7 +166,7 @@
                         </div>
                     </div>
                 }
-                @if (Model.ApprovalStatus != null && Model.ApprovalStatus.Health.Date.HasValue && Model.ApprovalStatus.Health.Required.ToLower() == "y")
+                @if (Model.ApprovalStatus != null &&  Model.HealthApproval!=null)
                 {
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -187,7 +183,7 @@
                         </div>
                     </div>
                 }
-                @if (Model.ApprovalStatus != null && Model.ApprovalStatus.CityUtility.Date.HasValue && Model.ApprovalStatus.CityUtility.Required.ToLower() == "y")
+                @if (Model.ApprovalStatus != null && Model.CityApproval != null)
                 {
                     <div class="panel panel-default">
                         <div class="panel-heading">
