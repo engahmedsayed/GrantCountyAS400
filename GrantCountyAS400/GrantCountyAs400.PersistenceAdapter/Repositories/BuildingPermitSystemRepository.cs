@@ -580,7 +580,28 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
 
         public ValuationAndFees GetValuationAndFees(int id, decimal? applicationYear, decimal? applicationNumber, string feeCode = null)
         {
-            var query = (from appf in _context.BldgapplicationFees
+            List<ValuationAndFeesRecord> query = null;
+            if(feeCode != null)
+            {
+                query = (from appf in _context.BldgapplicationFees
+                         join distributionCategory in _context.BldgfeeDistributionCategories
+                         on appf.FeeDistributionCategory equals distributionCategory.FeeDistributionCategory
+                         join bldg in _context.BldgpermitApplicationMaster
+                         on new { appf.ApplicationYear, appf.ApplicationNumber, appf.AddendumNumber } equals new { bldg.ApplicationYear, bldg.ApplicationNumber, bldg.AddendumNumber }
+                         join appv in _context.BldgapplicationValues
+                         on new { appf.ApplicationYear, appf.ApplicationNumber, appf.AddendumNumber } equals new { appv.ApplicationYear, appv.ApplicationNumber, appv.AddendumNumber }
+                         into appvJoin
+                         from appvDetail in appvJoin.DefaultIfEmpty()
+                         where bldg.Id == id &&
+                               bldg.ApplicationYear == applicationYear &&
+                               bldg.ApplicationNumber == applicationNumber && appf.FeeCode.Trim().ToLower() == feeCode.Trim().ToLower()
+                         select new ValuationAndFeesRecord { Appv = appvDetail, Appf = appf, BldgDistributionCategories = distributionCategory, Bldg = bldg }).ToList();
+            }
+            else
+            {
+                query = (from appf in _context.BldgapplicationFees
+                         join distributionCategory in _context.BldgfeeDistributionCategories
+                         on appf.FeeDistributionCategory equals distributionCategory.FeeDistributionCategory
                          join bldg in _context.BldgpermitApplicationMaster
                          on new { appf.ApplicationYear, appf.ApplicationNumber, appf.AddendumNumber } equals new { bldg.ApplicationYear, bldg.ApplicationNumber, bldg.AddendumNumber }
                          join appv in _context.BldgapplicationValues
@@ -590,7 +611,9 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          where bldg.Id == id &&
                                bldg.ApplicationYear == applicationYear &&
                                bldg.ApplicationNumber == applicationNumber
-                         select new ValuationAndFeesRecord { Appv = appvDetail, Appf = appf, Bldg = bldg }).ToList();
+                         select new ValuationAndFeesRecord { Appv = appvDetail, Appf = appf, BldgDistributionCategories = distributionCategory, Bldg = bldg }).ToList();
+            }
+            
 
             return ValuationAndFeesMapper.Map(query, feeCode);
         }
@@ -663,5 +686,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
         public BldgapplicationFees Appf { get; set; }
         public BldgpermitApplicationMaster Bldg { get; set; }
         public BldgapplicationValues Appv { get; set; }
+
+        public BldgfeeDistributionCategories BldgDistributionCategories { get; set; }
     }
 }

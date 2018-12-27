@@ -11,8 +11,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
         internal static ValuationAndFees Map(List<ValuationAndFeesRecord> valuationAndFeesClass,string feeCode=null)
         {
             ValuationAndFees result = new ValuationAndFees(valuationAndFeesClass.Sum(t => t?.Appf?.ExtendedAmount),
-                valuationAndFeesClass.Select(t => t.Appf)?.Distinct().Where(t => t.FeeCode.Trim().ToLower() == (feeCode == null ? "grad" : feeCode))?
-              .Select(t => t.FeeCode)?.ToList(),
+                valuationAndFeesClass.Select(t => t.BldgDistributionCategories)?.Distinct()?
+              .Select(t => t.FeeDistributionDescription)?.ToList(),
               valuationAndFeesClass.Select(t => t.Appv).Distinct()?.Sum(t => t?.ExtendedValue),
               GetFeesAmount(valuationAndFeesClass, "bldg"),
               GetFeesAmount(valuationAndFeesClass, "plrvw"),
