@@ -112,7 +112,7 @@ a.toggle-row-details {
         margin-top: -1px;
     }
 
-    /******/
+/******/
 
 .dropdown-submenu {
     position: relative;
@@ -162,15 +162,19 @@ a.toggle-row-details {
             border-radius: 6px 0 6px 6px;
         }
 
-        /*****Table header*******/
+/*****Table header*******/
 thead {
-    display: table-header-group
+    display: table-header-group;
 }
 
-/*tfoot {
-    display: table-row-group
-}*/
-
 tr {
-    page-break-inside: avoid
+    page-break-inside: avoid;
+}
+
+.nested-tables thead {
+    display: table-row-group !important;
+}
+
+tr.parent-row {
+    background-color: #eee;
 }
