@@ -65,7 +65,7 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         public string AssessorParcelNameDisplay => $"{AssessorValueMasterName.TitleOwnerName} - {AssessorValueMasterName.Description2}";
 
         [Display(Name = "Situs Address")]
-        public string SitusAddressDisplay => $"{SitusAddress?.HouseNumber} - {SitusAddress?.StreetDirectionQuadrant} {SitusAddress?.StreetName} - {SitusAddress?.LocationCityCode}";
+        public string SitusAddressDisplay => $"{SitusAddress?.HouseNumber} {SitusAddress?.HouseNumberExtension} - {SitusAddress?.StreetDirectionQuadrant} {SitusAddress?.StreetName} - {SitusAddress?.LocationCityCode}";
 
         [Display(Name = "City/State/Zipcode")]
         public string CityStateZip => $"{City} / {State} / {ZipCode}";
@@ -106,6 +106,8 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
     public class BuildingSitusAddressInfoViewModel
     {
         public decimal HouseNumber { get; set; }
+
+        public string HouseNumberExtension { get; set; }
         public string StreetDirectionQuadrant { get; set; }
         public string LocationCode { get; set; }
         public string StreetName { get; set; }

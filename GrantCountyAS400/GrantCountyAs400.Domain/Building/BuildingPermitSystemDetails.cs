@@ -201,14 +201,17 @@ namespace GrantCountyAs400.Domain.Building
     public class BuildingSitusAddressInfo
     {
         public decimal HouseNumber { get; }
+
+        public string HouseNumberExtension { get; set; }
         public string StreetDirectionQuadrant { get; }
         public string LocationCode { get; }
         public string StreetName { get; }
         public string LocationCityCode { get; }
 
-        public BuildingSitusAddressInfo(decimal houseNumber, string streetDirectionQuadrant, string locationCode, string streetName, string locationCityCode)
+        public BuildingSitusAddressInfo(decimal houseNumber,string houseNumberExtension, string streetDirectionQuadrant, string locationCode, string streetName, string locationCityCode)
         {
             HouseNumber = houseNumber;
+            HouseNumberExtension = houseNumberExtension;
             StreetDirectionQuadrant = streetDirectionQuadrant;
             LocationCode = locationCode;
             StreetName = streetName;

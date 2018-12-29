@@ -75,7 +75,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
         private static BuildingSitusAddressInfo Map(AsmtsitusAddress situs, AsmtcityCodeFile cityCode) =>
             (situs == null) ?
             null :
-            new BuildingSitusAddressInfo(situs.HouseNumber.Value, situs.StreetDirectionQuadrant, situs.LocationCode, situs.StreetName, cityCode?.LocationCityCode);
+            new BuildingSitusAddressInfo(situs.HouseNumber.Value,situs.HouseNumberExtension, situs.StreetDirectionQuadrant, situs.LocationCode, situs.StreetName, cityCode?.LocationCityCode);
 
         private static BuildingPermitSystemApprovalStatusInfo MapToApprovalStatus(BldgpermitApplicationMaster bldgpermit) =>
             new BuildingPermitSystemApprovalStatusInfo(
