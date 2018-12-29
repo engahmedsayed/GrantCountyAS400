@@ -129,10 +129,13 @@ namespace GrantCountyAs400.Domain.Building
 
         public decimal? StateClassCode { get; }
 
+        public string ClassificationDescription { get; }
+
 
 
         public BuildingPermitSystemBasicInfo(string jurisdictionCode, string departmentCode, decimal applicationYear, decimal applicationNumber, decimal addendumNumber,
-            string permitStatus, string jurisidictionShortDepartmentName, string departmentShortDepartmentName, decimal?permitYear,decimal?permitNumber, decimal?stateClassCode)
+            string permitStatus, string jurisidictionShortDepartmentName, string departmentShortDepartmentName, decimal?permitYear,decimal?permitNumber, decimal?stateClassCode,
+            string classificationDescription)
         {
             JurisdictionCode = jurisdictionCode;
             DepartmentCode = departmentCode;
@@ -145,6 +148,7 @@ namespace GrantCountyAs400.Domain.Building
             PermitStatus = permitStatus;
             JurisidictionShortDepartmentName = jurisidictionShortDepartmentName;
             DepartmentShortDepartmentName = departmentShortDepartmentName;
+            ClassificationDescription = classificationDescription;
         }
     }
 

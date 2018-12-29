@@ -250,7 +250,6 @@ namespace GrantCountyAs400.Web.Controllers.Building
             result.TotalPaid = receiptHeader?.ReceiptHeaders.Where(t=>t.ApplicationNumber == result.BasicInfo.ApplicationNumber && t.ApplicationYear == result.BasicInfo.ApplicationYear).
                                Select(t=>t.TotalReceipt-t.CheckAmount).Sum();
             result.BalanceDue = result.TotalFeesDue - result.TotalPaid;
-            result.StateClassification = valuationAndFeesEntity?.StateClassCode;
             result.ProjectedExpireDate = valuationAndFeesEntity?.ProjectedExpireDate;
             result.ActualExpireDate = valuationAndFeesEntity?.ActualExpireDate;
             result.ByUser = valuationAndFeesEntity?.ExpiredByUser;

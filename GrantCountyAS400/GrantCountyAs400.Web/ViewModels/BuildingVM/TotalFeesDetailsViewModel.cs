@@ -22,9 +22,6 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         [Display(Name ="Balance Due")]
         public decimal? BalanceDue { get; set; }
 
-        [Display(Name ="State Classification")]
-        public decimal? StateClassification { get; set; }
-
         public string IsRequirementsReceived { get; set; }
 
         public string ViewIssuePermit { get; set; }

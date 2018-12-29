@@ -75,15 +75,14 @@
             <td>@Html.DisplayFor(model => model.OtherSpecial.Date) </td>
             <td>@Html.DisplayFor(model => model.OtherSpecial.User) </td>
         </tr>
-        @if (Model.OtherSpecial.Required == "Y")
-        {
+       
             <tr>
                 <td></td>
                 <td colspan="3">
                     @Model.OtherSpecialDescription
                 </td>
             </tr>
-        }
+        
         <tr></tr>
         <tr>
             <td><strong>@Html.DisplayNameFor(model => model.Application) </strong></td>

@@ -203,6 +203,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
         {
 
             var query = (from bldgpermit in _context.BldgpermitApplicationMaster
+                         join bldgstateClassification in _context.BldgstateClassifications
+                         on bldgpermit.StateClassCode equals bldgstateClassification.StateClassCode
                          join juri in _context.Bldgjurisdictions on bldgpermit.JurisdictionCode equals juri.DepartmentCode
                          join processedJuri in _context.Bldgjurisdictions on bldgpermit.ProcessedForJurisdiction equals processedJuri.DepartmentCode
                          join dept in _context.Bldgdepartments on bldgpermit.DepartmentCode equals dept.DepartmentCode
@@ -246,7 +248,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                                                mdiaArchitectRecord,
                                                                mdiaEngineerRecord,
                                                                bldgContractorRecord,
-                                                               rpmasRecord, nNameRecord)).SingleOrDefault();
+                                                               rpmasRecord, nNameRecord,bldgstateClassification)).SingleOrDefault();
             query.Notes = (from bldgpermit in _context.BldgpermitApplicationMaster
                            join notes in _context.BldgapplicationNotes
                            on new { applicationNumber = bldgpermit.ApplicationNumber, applicationYear = bldgpermit.ApplicationYear, addendumNumber = bldgpermit.AddendumNumber } equals
@@ -362,12 +364,14 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
         public BuildingPermitSystemBasicInfo GetBasicInfo(int id)
         {
             var query = (from bldgpermit in _context.BldgpermitApplicationMaster
+                         join bldgstateClassification in _context.BldgstateClassifications
+                         on bldgpermit.StateClassCode equals bldgstateClassification.StateClassCode
                          join juri in _context.Bldgjurisdictions on bldgpermit.JurisdictionCode equals juri.DepartmentCode
                          join dept in _context.Bldgdepartments on bldgpermit.DepartmentCode equals dept.DepartmentCode
                          where bldgpermit.Id == id
-                         select new { bldgpermit, juri, dept }).SingleOrDefault();
+                         select new { bldgpermit, juri, dept,bldgstateClassification }).SingleOrDefault();
 
-            return BuildingPermitSystemMapper.MapToBasicInfo(query.bldgpermit, query.juri, query.dept);
+            return BuildingPermitSystemMapper.MapToBasicInfo(query.bldgpermit, query.juri, query.dept,query.bldgstateClassification);
         }
 
         public DemolitionPermit GetDemolitionPermitByBuildingPermitSystemId(int id)

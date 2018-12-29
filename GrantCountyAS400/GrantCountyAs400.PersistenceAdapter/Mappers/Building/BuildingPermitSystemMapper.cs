@@ -45,20 +45,21 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                                                         BldgmobileHomeDealersInstallersArchitects mdiaBusinessEngineer,
                                                         Bldgcontractors bldgContractor,
                                                         AsmtrealPropertyAssessedValueMaster rpmas,
-                                                        AsmtmasterNameAddress nName) =>
+                                                        AsmtmasterNameAddress nName,BldgstateClassifications bldgstateClassification) =>
             new BuildingPermitSystemDetails(bldgpermit.ApplicantLastName, bldgpermit.ApplicantFirstName, bldgpermit.PermitCode.Trim(), bldgpermit.ProcessedForJurisdiction,
                 bldgpermit.ApplicationDate.Value, bldgpermit.ApplicationUserId, bldgpermit.ApplicantBusinessName, bldgpermit.AddressLine1, bldgpermit.AddressLine2,
                 bldgpermit.City, bldgpermit.State, bldgpermit.ZipCode, bldgpermit.PhoneNumber.Value, bldgpermit.PreliminaryParcelNumber.Value,
                 bldgpermit.AssessorParcelNumber.Value, bldgpermit.AdditionalInformation, bldgpermit.ParkInformation, perm.PermitDescription, processedJuri.ShortDepartmentName,
-                MapToBasicInfo(bldgpermit, juri, dept), MapToApplicantDetails(bldgpermit, mdia, mdiaBusinessEngineer, bldgContractor), Map(preliminaryValueMaster),
+                MapToBasicInfo(bldgpermit, juri, dept,bldgstateClassification), MapToApplicantDetails(bldgpermit, mdia, mdiaBusinessEngineer, bldgContractor), Map(preliminaryValueMaster),
                 Map(assessorValueMaster), Map(situs, cityCode),
                 MapToApprovalStatus(bldgpermit));
 
         public static BuildingPermitSystemBasicInfo MapToBasicInfo(BldgpermitApplicationMaster bldgpermit,
                                                                     Bldgjurisdictions juri,
-                                                                    Bldgdepartments dept) =>
+                                                                    Bldgdepartments dept,BldgstateClassifications bldgstateClassification) =>
             new BuildingPermitSystemBasicInfo(bldgpermit.JurisdictionCode, bldgpermit.DepartmentCode, bldgpermit.ApplicationYear.Value, bldgpermit.ApplicationNumber.Value,
-                bldgpermit.AddendumNumber.Value, bldgpermit.PermitStatus, juri.ShortDepartmentName, dept.ShortDepartmentName,bldgpermit.PermitYear,bldgpermit.PermitNumber,bldgpermit.StateClassCode);
+                bldgpermit.AddendumNumber.Value, bldgpermit.PermitStatus, juri.ShortDepartmentName, dept.ShortDepartmentName,bldgpermit.PermitYear,bldgpermit.PermitNumber,bldgpermit.StateClassCode,
+                bldgstateClassification.ClassificationDescription);
 
         private static BuildingPermitSystemApplicantDetails MapToApplicantDetails(BldgpermitApplicationMaster bldgpermit,
                                                                                   BldgmobileHomeDealersInstallersArchitects mdia,

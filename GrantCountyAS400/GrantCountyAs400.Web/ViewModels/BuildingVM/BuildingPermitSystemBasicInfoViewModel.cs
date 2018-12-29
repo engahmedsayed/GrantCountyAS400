@@ -21,6 +21,9 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         [DisplayFormat(DataFormatString = "{0:n0}")]
         public string StateClassCode { get; set; }
 
+        [Display(Name ="Classification Description")]
+        public string ClassificationDescription { get; set; }
+
         [Display(Name = "Application Yr/#")]
         public int ApplicationYear { get; set; }
 
