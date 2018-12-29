@@ -87,9 +87,9 @@
         <div class="row">
             <div class="form-group">
 
-                <label asp-for="@filterViewModel.EnforcementActionDesc" class="control-label col-md-2"></label>
+                <label asp-for="@filterViewModel.EnforcementActionRequired" class="control-label col-md-2"></label>
                 <div class="col-md-2">
-                    <input type="text" asp-for="@filterViewModel.EnforcementActionDesc" name="enforcementActionDesc" class="form-control" />
+                    <select asp-for="@filterViewModel.EnforcementAction" name="enforcementAction" asp-items="@filterViewModel.EnforcementActionRequired" class="form-control"></select>
                 </div>
                 <label asp-for="@filterViewModel.CityApprovalRequired" class="control-label col-md-2"></label>
                 <div class="col-md-2">
@@ -256,7 +256,7 @@
     projectDescription = filterViewModel.ProjectDescription,
     officeProjectDescription = filterViewModel.OfficeProjectDescription,
     contractorBusinessName = filterViewModel.ContractorBusinessName,
-    enforcementActionDesc = filterViewModel.EnforcementActionDesc,
+    enforcementAction = filterViewModel.EnforcementAction,
     cityApproval = filterViewModel.CityApproval,
     fromDate = filterViewModel.FromDate,
     toDate = filterViewModel.ToDate,

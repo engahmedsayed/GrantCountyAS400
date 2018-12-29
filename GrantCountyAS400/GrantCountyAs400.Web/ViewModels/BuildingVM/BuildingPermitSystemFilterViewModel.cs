@@ -25,7 +25,7 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         [Display(Name = "Applicant First Name")]
         public string ApplicantFirstName { get; set; }
 
-        [Display(Name ="Permit Year")]
+        [Display(Name = "Permit Year")]
         public int? PermitYear { get; set; }
 
         [Display(Name = "Preliminary Parcel Number")]
@@ -46,8 +46,18 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         [Display(Name = "General Contractor")]
         public string ContractorBusinessName { get; set; }
 
-        [Display(Name = "Enforcement Action Description")]
-        public string EnforcementActionDesc { get; set; }
+        [Display(Name = "Enforcement Action (Y/N)")]
+        public List<SelectListItem> EnforcementActionRequired
+        {
+            get
+            {
+                return new List<SelectListItem> { new SelectListItem { Text = "", Value = "" },
+                       new SelectListItem { Text = "Y", Value = "Y" },
+                       new SelectListItem { Text = "N", Value = "N" } };
+            }
+        }
+
+        public string EnforcementAction { get; set; }
 
         [Display(Name = "City Jurisdiction/Utility Approved (Y/N)")]
         public List<SelectListItem> CityApprovalRequired
@@ -58,8 +68,8 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
                        new SelectListItem { Text = "Y", Value = "Y" },
                        new SelectListItem { Text = "N", Value = "N" } };
             }
-        }        
-        
+        }
+
         public string CityApproval { get; set; }
 
         [Display(Name = "Issue Date From")]
@@ -69,11 +79,11 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         [UIHint("DatePicker")]
         public DateTime? ToDate { get; set; } = null;
 
-        [Display(Name ="Application Date From")]
+        [Display(Name = "Application Date From")]
         [UIHint("DatePicker")]
         public DateTime? ApplicationDateFrom { get; set; } = null;
 
-        [Display(Name ="Application Date To")]
+        [Display(Name = "Application Date To")]
         [UIHint("DatePicker")]
         public DateTime? ApplicationDateTo { get; set; } = null;
     }

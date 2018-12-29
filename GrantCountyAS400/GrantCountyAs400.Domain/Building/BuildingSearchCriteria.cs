@@ -26,14 +26,14 @@ namespace GrantCountyAs400.Domain.Building
 
         public string ProjectDescription { get; }
         public string ContractorBusinessName { get; }
-        public string EnforcementActionDesc { get; }
+        public string EnforcementAction { get; }
 
         public string CityApproval { get; }
 
         public BuildingSearchCriteria(
             decimal? applicationNumber, int? applicationYear, decimal? permitNumber, string applicantBusinessName, string applicantLastName, string applicantFirstName,
             int? permitYear, decimal? preliminaryParcelNumber, decimal? assessorParcelNumber, decimal? stateClassCode, string officeProjectDescription,
-            string projectDescription, string contractorBusinessName, string enforcementActionDesc, string cityApproval, DateTime? fromDate, DateTime? toDate,
+            string projectDescription, string contractorBusinessName, string enforcementAction, string cityApproval, DateTime? fromDate, DateTime? toDate,
             DateTime? applicationDateFrom,DateTime? applicationDateTo)
         {
             ApplicationNumber = applicationNumber;
@@ -48,7 +48,7 @@ namespace GrantCountyAs400.Domain.Building
             OfficeProjectDescription = officeProjectDescription;
             ProjectDescription = projectDescription;
             ContractorBusinessName = contractorBusinessName;
-            EnforcementActionDesc = enforcementActionDesc;
+            EnforcementAction = enforcementAction;
             CityApproval = cityApproval;
             FromDate = fromDate;
             ToDate = toDate;

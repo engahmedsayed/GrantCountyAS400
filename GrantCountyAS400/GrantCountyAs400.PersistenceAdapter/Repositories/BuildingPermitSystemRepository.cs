@@ -71,7 +71,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                     && (searchCriteria.StateClassCode == null || appm.StateClassCode == searchCriteria.StateClassCode)
                     && (string.IsNullOrWhiteSpace(searchCriteria.ProjectDescription) || appm.ApplicantProjectDescription.TrimAndLower().Contains(searchCriteria.ProjectDescription.TrimAndLower()))
                     && (string.IsNullOrWhiteSpace(searchCriteria.ContractorBusinessName) || ctr.ContractorBusinessName.TrimAndLower().Contains(searchCriteria.ContractorBusinessName))
-                    && (string.IsNullOrWhiteSpace(searchCriteria.EnforcementActionDesc) || appm.EnforcementDescription.Contains(searchCriteria.EnforcementActionDesc))
+                    && (string.IsNullOrWhiteSpace(searchCriteria.EnforcementAction) || appm.ResultOfEnforcementAction.TrimAndLower()==searchCriteria.EnforcementAction.TrimAndLower())
                     && (string.IsNullOrWhiteSpace(searchCriteria.CityApproval) ||
                         (appm.CityJurisdictionApprovalRequired.TrimAndLower() == searchCriteria.CityApproval.TrimAndLower() ||
                          appm.CityUtilityApprovalRequired.TrimAndLower() == searchCriteria.CityApproval.TrimAndLower()))
