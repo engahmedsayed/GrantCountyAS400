@@ -31,6 +31,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             query = from appm in _context.BldgpermitApplicationMaster
                     join ctr in _context.Bldgcontractors
                     on appm.ContractLicenseNumber equals ctr.ContractLicenseNumber
+                    into ctrRecords
+                    from ctrRecord in ctrRecords.DefaultIfEmpty()
                     join grd in _context.BldggradingExcavatingPermitDetail on
                     new { appm.ApplicationYear, appm.ApplicationNumber, appm.AddendumNumber, permitCode = appm.PermitCode.TrimAndLower() } equals new { grd.ApplicationYear, grd.ApplicationNumber, grd.AddendumNumber, permitCode = gradString }
                     into grdRecordrs
@@ -70,7 +72,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                     && (searchCriteria.AssessorParcelNumber == null || appm.AssessorParcelNumber == searchCriteria.AssessorParcelNumber)
                     && (searchCriteria.StateClassCode == null || appm.StateClassCode == searchCriteria.StateClassCode)
                     && (string.IsNullOrWhiteSpace(searchCriteria.ProjectDescription) || appm.ApplicantProjectDescription.TrimAndLower().Contains(searchCriteria.ProjectDescription.TrimAndLower()))
-                    && (string.IsNullOrWhiteSpace(searchCriteria.ContractorBusinessName) || ctr.ContractorBusinessName.TrimAndLower().Contains(searchCriteria.ContractorBusinessName))
+                    && (string.IsNullOrWhiteSpace(searchCriteria.ContractorBusinessName) ||(ctrRecord!=null && ctrRecord.ContractorBusinessName.TrimAndLower().Contains(searchCriteria.ContractorBusinessName)))
                     && (string.IsNullOrWhiteSpace(searchCriteria.EnforcementAction) || appm.ResultOfEnforcementAction.TrimAndLower()==searchCriteria.EnforcementAction.TrimAndLower())
                     && (string.IsNullOrWhiteSpace(searchCriteria.CityApproval) ||
                         (appm.CityJurisdictionApprovalRequired.TrimAndLower() == searchCriteria.CityApproval.TrimAndLower() ||
@@ -85,7 +87,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                                           appm.PermitCode.TrimAndLower() == demoString ? demoRecord.OfficeProjectDescription :
                                                           appm.PermitCode.TrimAndLower() == manhString ? manhRecord.OfficeProjectDescription :
                                                           appm.PermitCode.TrimAndLower() == plmbString ? plmbRecord.OfficeProjectDescription :
-                                                          appm.PermitCode.TrimAndLower() == strutString ? strutRecord.OfficeProjectDescription : string.Empty, ctr.ContractorBusinessName);
+                                                          appm.PermitCode.TrimAndLower() == strutString ? strutRecord.OfficeProjectDescription : string.Empty, ctrRecord.ContractorBusinessName);
             if (!string.IsNullOrWhiteSpace(searchCriteria.OfficeProjectDescription))
             {
                 query = query.Where(t => !string.IsNullOrWhiteSpace(t.OfficeProjectDescription) && t.OfficeProjectDescription.TrimAndLower().Contains(searchCriteria.OfficeProjectDescription.TrimAndLower()));
@@ -249,12 +251,16 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                                                mdiaEngineerRecord,
                                                                bldgContractorRecord,
                                                                rpmasRecord, nNameRecord,bldgstateClassification)).SingleOrDefault();
-            query.Notes = (from bldgpermit in _context.BldgpermitApplicationMaster
-                           join notes in _context.BldgapplicationNotes
-                           on new { applicationNumber = bldgpermit.ApplicationNumber, applicationYear = bldgpermit.ApplicationYear, addendumNumber = bldgpermit.AddendumNumber } equals
-                           new { applicationNumber = notes.ApplicationNumber, applicationYear = notes.ApplicationYear, addendumNumber = notes.AddendumNumber }
-                           where bldgpermit.Id == id
-                           select notes.Note).ToList();
+            if(query != null)
+            {
+                query.Notes = (from bldgpermit in _context.BldgpermitApplicationMaster
+                               join notes in _context.BldgapplicationNotes
+                               on new { applicationNumber = bldgpermit.ApplicationNumber, applicationYear = bldgpermit.ApplicationYear, addendumNumber = bldgpermit.AddendumNumber } equals
+                               new { applicationNumber = notes.ApplicationNumber, applicationYear = notes.ApplicationYear, addendumNumber = notes.AddendumNumber }
+                               where bldgpermit.Id == id
+                               select notes.Note).ToList();
+            }
+            
             if (query != null && query.ApprovalStatus != null)
             {
                 if (query.ApprovalStatus.Planning != null)
