@@ -62,6 +62,6 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
            
 
         private static decimal? GetFeesAmount(List<ValuationAndFeesRecord> valuationAndFeesClass, string feeCode)
-            => valuationAndFeesClass.Select(t => t.Appf).FirstOrDefault(t => t.FeeCode?.Trim().ToLower() == feeCode)?.ExtendedAmount;
+            => valuationAndFeesClass.Select(t => t.Appf).Where(t => t.FeeCode?.Trim().ToLower() == feeCode)?.Sum(t=>t?.ExtendedAmount);
     }
 }
