@@ -32,7 +32,7 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 
         public List<decimal?> FeeIncrement { get; set; }
 
-        public List<string> ExtendedAmount { get; set; }
+        public List<decimal?> ExtendedAmount { get; set; }
 
         public List<string> MinMaxFlag { get; set; }
 

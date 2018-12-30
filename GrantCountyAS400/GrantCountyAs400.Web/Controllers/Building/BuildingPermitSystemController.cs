@@ -112,6 +112,7 @@ namespace GrantCountyAs400.Web.Controllers.Building
             result.FeeDescription = valuationAndFeesEntity?.Description;
             result.BaseFee = valuationAndFeesEntity.BaseFee;
             result.FeeIncrement = valuationAndFeesEntity.FeeIncrement;
+            result.ExtendedAmount = valuationAndFeesEntity.ExtendedAmount;
             result.MinMaxFlag = valuationAndFeesEntity.MinMaxFlag;
             return View(result);
         }
