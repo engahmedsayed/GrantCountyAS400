@@ -71,7 +71,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                 bldgpermit.ArchitectFirmNumber, mdia?.BusinessName, bldgpermit.EngineerFirmNumber, mdiaBusinessEngineer?.BusinessName);
 
         private static BuildingValueMasterNameInfo Map(ASMTValueMasterNameView valueMaster) =>
-            new BuildingValueMasterNameInfo(valueMaster.TitleOwnerName, valueMaster.Description1.Trim(), valueMaster.Description2.Trim());
+            new BuildingValueMasterNameInfo(valueMaster?.TitleOwnerName, valueMaster?.Description1.Trim(), valueMaster?.Description2.Trim());
 
         private static BuildingSitusAddressInfo Map(AsmtsitusAddress situs, AsmtcityCodeFile cityCode) =>
             (situs == null) ?

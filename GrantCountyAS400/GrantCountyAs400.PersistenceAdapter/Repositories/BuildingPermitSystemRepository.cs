@@ -212,7 +212,11 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          join dept in _context.Bldgdepartments on bldgpermit.DepartmentCode equals dept.DepartmentCode
                          join perm in _context.BldgpermitCodes on bldgpermit.PermitCode equals perm.PermitCode
                          join preliminaryNames in _context.ASMTValueMasterNameView on bldgpermit.PreliminaryParcelNumber equals preliminaryNames.ParcelNumber
+                         into preliminaryNamesJoin
+                         from preliminaryNamesRecord in preliminaryNamesJoin.DefaultIfEmpty()
                          join assessorNames in _context.ASMTValueMasterNameView on bldgpermit.PreliminaryParcelNumber equals assessorNames.ParcelNumber
+                         into assessorNamesJoin
+                         from assessorNamesRecord in assessorNamesJoin.DefaultIfEmpty()
                          join bldgContractor in _context.Bldgcontractors on bldgpermit.ContractLicenseNumber equals bldgContractor.ContractLicenseNumber
                          into bldgContractorJoin
                          from bldgContractorRecord in bldgContractorJoin.DefaultIfEmpty()
@@ -239,8 +243,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          from nNameRecord in nNameJoin.DefaultIfEmpty()
                          where bldgpermit.Id == id
                          select BuildingPermitSystemMapper.Map(bldgpermit,
-                                                               preliminaryNames,
-                                                               assessorNames,
+                                                               preliminaryNamesRecord,
+                                                               assessorNamesRecord,
                                                                juri,
                                                                processedJuri,
                                                                dept,
