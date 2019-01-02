@@ -1,0 +1,63 @@
+﻿
+
+@model GrantCountyAs400.Web.ViewModels.BuildingVM.BidPlanFeesDetailsViewModel
+@{
+    ViewData["Title"] = "Plan Review Fees";
+}
+
+<h2>Plan Review Fees</h2>
+
+<div>
+    <div class="entity-details row">
+        <div class="entity-info clearfix">
+            <partial name="_Header" for="@Model.BasicInfo" />
+            <div class="col-xs-6">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><strong>Total Building Fees </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.NumberOfUnitsTotal) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong> Total Bid Amount</strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.BidPlanExtendedAmount) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Inspect/Pln-Rvw </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.PlrvwExtendedAmount) </span></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-6">
+                <table class="table">
+                    <thead>
+                        <tr>
+                         
+                            <td>Building Permit</td>
+                            <td>Plan Review %</td>
+                            <td>Extended Amt</td>
+                        </tr>
+
+                        @for (int i = 0; i < Model.SequenceNumber.Count; i++)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(t => t.NumberOfUnits[i])
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(t => t.BaseFee[i]) %
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(t => t.ExtendedAmount[i])
+                                </td>
+                            </tr>
+                        }
+
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
