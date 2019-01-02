@@ -44,5 +44,20 @@ namespace GrantCountyAs400.Web.Controllers.Treasurer
             var viewmodel = AutoMapper.Mapper.Map<TaxReceiptDetailsViewModel>(entity);
             return View(viewmodel);
         }
+
+        [HttpGet]
+        [Route("tax-payment")]
+        public IActionResult TaxPaymentReceipts(TaxPaymentReceiptFilterViewModel filter, int pageNumber = 1)
+        {
+            var pagingInfo = new PagingInfo() { PageNumber = pageNumber };
+            var results =
+                _taxReceiptRepository.GetAllTaxPaymentReceipts(
+                    filter.ParcelNumber, filter.ParcelExtension, filter.TaxYear, out int resultCount, pageNumber, AppSettings.PageSize)
+                .ToList();
+
+            pagingInfo.Total = resultCount;
+            ViewBag.FilterViewModel = filter;
+            return View(results.ToMappedPagedList<TaxPaymentReceipt, TaxPaymentReceiptViewModel>(pagingInfo));
+        }
     }
 }

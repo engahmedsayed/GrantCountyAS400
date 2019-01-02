@@ -12,7 +12,7 @@
     <PackageReference Include="AutoMapper" Version="7.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.1.1" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.2" />
     <PackageReference Include="Rotativa.AspNetCore" Version="1.1.1" />
     <PackageReference Include="X.PagedList.Mvc.Core" Version="7.5.0" />
   </ItemGroup>
@@ -51,6 +51,9 @@
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\LegalDocument\Details.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\TaxReceipt\TaxPaymentReceipts.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\TaxReceipt\Index.cshtml">
