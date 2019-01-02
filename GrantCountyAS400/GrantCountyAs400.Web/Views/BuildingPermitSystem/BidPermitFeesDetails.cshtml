@@ -1,0 +1,81 @@
+﻿
+
+@model GrantCountyAs400.Web.ViewModels.BuildingVM.BidPermitFeesDetailsViewModel
+@{
+    ViewData["Title"] = "Bid Based Fees";
+}
+
+<h2>Bid Based Fees</h2>
+
+<div>
+    <div class="entity-details row">
+        <div class="entity-info clearfix">
+            <partial name="_Header" for="@Model.BasicInfo" />
+            <div class="col-xs-6">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><strong>Total Bid Amount </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.NumberOfUnitsTotal) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Total Building Fees </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.ExtendedAmountTotal) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Inspect/Pln-Rvw </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.PlrvwExtendedAmount) </span></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-6">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>
+                                <strong>Fee Code</strong>
+                            </td>
+                            <td>Fee Description</td>
+                            <td>Value/Hrs</td>
+                            <td>Base Fee</td>
+                            <td>Inc. Fee</td>
+                            <td>Extended Amount Less Disc. %</td>
+                            <td>Fee Category</td>
+                        </tr>
+
+                        @for (int i = 0; i < Model.SequenceNumber.Count; i++)
+                        {
+                        <tr>
+                            <td class="text-right">
+                                @{ var formattedSequenceNumber = (int?)Model.SequenceNumber[i];}
+                                @Html.DisplayFor(t => formattedSequenceNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(t => t.FeeDescription[i])
+                            </td>
+                            <td>
+                                @Html.DisplayFor(t => t.NumberOfUnits[i])
+                            </td>
+                            <td>
+                                @Html.DisplayFor(t => t.BaseFee[i])
+                            </td>
+                            <td>
+                                @Html.DisplayFor(t => t.FeeIncrement[i])
+                            </td>
+                            <td>
+                                @Html.DisplayFor(t => t.ExtendedAmount[i])
+                            </td>
+                            <td>
+                                Structure
+                            </td>
+                        </tr>
+                        }
+
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
