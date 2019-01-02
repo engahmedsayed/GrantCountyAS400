@@ -118,6 +118,26 @@ namespace GrantCountyAs400.Web.Controllers.Building
         }
 
         [HttpGet]
+        [Route("/building-permit-system/plumbing-details/{id}", Name = "plumbingDetailsRoute")]
+        public IActionResult PlumbingFeesDetails(int id)
+        {
+            PlumbingFeesDetailsViewModel result = new PlumbingFeesDetailsViewModel();
+
+            result.BasicInfo = Mapper.Map<BuildingPermitSystemBasicInfoViewModel>(_buildingModuleRepository.GetBasicInfo(id));
+
+            var gradingExcavationPermitDetailEntity = _buildingModuleRepository.GetGradingExcavationPermitDetail(id);
+            var valuationAndFeesEntity = GetValuationAndFees(id, result.BasicInfo.ApplicationYear,
+                                                             result.BasicInfo.ApplicationNumber, "plmb");
+            result.SequenceNumber = valuationAndFeesEntity?.SequenceNumber;
+            result.FeeDescription = valuationAndFeesEntity?.Description;
+            result.UnitCharge = valuationAndFeesEntity?.UnitCharge;
+            result.ExtendedAmount = valuationAndFeesEntity?.ExtendedAmount;
+            result.PlrvwExtendedAmount = valuationAndFeesEntity?.AssignPlanReviewFee;
+            result.PlumbingExtendedAmount = valuationAndFeesEntity?.AssignPlumbingFees;
+            return View(result);
+        }
+
+        [HttpGet]
         [Route("/building-permit-system/statebuilding-fee-details/{id}", Name = "stateBuildingfeeDetailsRoute")]
         public IActionResult StateBuildingFeeDetails(int id)
         {
