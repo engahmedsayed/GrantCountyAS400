@@ -160,6 +160,27 @@ namespace GrantCountyAs400.Web.Controllers.Building
         }
 
         [HttpGet]
+        [Route("/building-permit-system/demolition-details/{id}", Name = "demolitionFeesDetailsRoute")]
+        public IActionResult DemolitionFeesDetails(int id)
+        {
+            DemolitionFeesDetailsViewModel result = new DemolitionFeesDetailsViewModel();
+
+            result.BasicInfo = Mapper.Map<BuildingPermitSystemBasicInfoViewModel>(_buildingModuleRepository.GetBasicInfo(id));
+
+            var gradingExcavationPermitDetailEntity = _buildingModuleRepository.GetGradingExcavationPermitDetail(id);
+            var valuationAndFeesEntity = GetValuationAndFees(id, result.BasicInfo.ApplicationYear,
+                                                             result.BasicInfo.ApplicationNumber, "demo");
+            result.SequenceNumber = valuationAndFeesEntity?.SequenceNumber;
+            result.FeeDescription = valuationAndFeesEntity?.Description;
+            result.UnitCharge = valuationAndFeesEntity?.UnitCharge;
+            result.NumberOfUnits = valuationAndFeesEntity?.NumberOfUnits;
+            result.ExtendedAmount = valuationAndFeesEntity?.ExtendedAmount;
+            result.PlrvwExtendedAmount = valuationAndFeesEntity?.AssignPlanReviewFee;
+            result.DemolitionExtendedAmount = valuationAndFeesEntity?.AssignDemolitionFees;
+            return View(result);
+        }
+
+        [HttpGet]
         [Route("/building-permit-system/statebuilding-fee-details/{id}", Name = "stateBuildingfeeDetailsRoute")]
         public IActionResult StateBuildingFeeDetails(int id)
         {

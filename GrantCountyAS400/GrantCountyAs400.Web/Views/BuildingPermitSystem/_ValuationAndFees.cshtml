@@ -74,7 +74,13 @@
             </tr>
             <tr>
                 <td><strong>@Html.DisplayNameFor(model => model.AssignDemolitionFees) </strong></td>
-                <td class="text-right"><span> @Html.DisplayFor(model => model.AssignDemolitionFees) </span></td>
+                <td class="text-right">
+                    <span>
+                        <a asp-route="demolitionFeesDetailsRoute" asp-route-id="@Model.Id">
+                            @Html.DisplayFor(model => model.AssignDemolitionFees)
+                        </a>
+                    </span>
+                </td>
             </tr>
             <tr>
                 <td><strong>-- OR --</strong></td>

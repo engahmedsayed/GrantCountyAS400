@@ -1,11 +1,11 @@
 ﻿
 
-@model GrantCountyAs400.Web.ViewModels.BuildingVM.MechanicalFeesDetailsViewModel
+@model GrantCountyAs400.Web.ViewModels.BuildingVM.DemolitionFeesDetailsViewModel
 @{
-    ViewData["Title"] = "Mechanical Fees";
+    ViewData["Title"] = "Demolition Fees";
 }
 
-<h2>Mechanical Fees</h2>
+<h2>Demolition Fees</h2>
 
 <div>
     <div class="entity-details row">
@@ -15,8 +15,8 @@
                 <table class="table">
                     <tbody>
                         <tr>
-                            <td><strong>Total Mechanical Fees </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.MechanicalExtendedAmount) </span></td>
+                            <td><strong>Total Demolition Fees </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.DemolitionExtendedAmount) </span></td>
                         </tr>
                         <tr>
                             <td><strong>Inspect/Pln-Rvw </strong></td>
@@ -60,7 +60,10 @@
                                     @Html.DisplayFor(t => t.ExtendedAmount[i])
                                 </td>
                                 <td>
-                                    Mechanical
+                                    @Html.DisplayFor(t => t.ExtendedAmount[i])
+                                </td>
+                                <td>
+                                    Plumbing
                                 </td>
                             </tr>
                         }
