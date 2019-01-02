@@ -132,8 +132,30 @@ namespace GrantCountyAs400.Web.Controllers.Building
             result.FeeDescription = valuationAndFeesEntity?.Description;
             result.UnitCharge = valuationAndFeesEntity?.UnitCharge;
             result.ExtendedAmount = valuationAndFeesEntity?.ExtendedAmount;
+            result.NumberOfUnits = valuationAndFeesEntity?.NumberOfUnits;
             result.PlrvwExtendedAmount = valuationAndFeesEntity?.AssignPlanReviewFee;
             result.PlumbingExtendedAmount = valuationAndFeesEntity?.AssignPlumbingFees;
+            return View(result);
+        }
+
+        [HttpGet]
+        [Route("/building-permit-system/mechanical-details/{id}", Name = "mechanicalFeesDetailsRoute")]
+        public IActionResult MechanicalFeesDetails(int id)
+        {
+            MechanicalFeesDetailsViewModel result = new MechanicalFeesDetailsViewModel();
+
+            result.BasicInfo = Mapper.Map<BuildingPermitSystemBasicInfoViewModel>(_buildingModuleRepository.GetBasicInfo(id));
+
+            var gradingExcavationPermitDetailEntity = _buildingModuleRepository.GetGradingExcavationPermitDetail(id);
+            var valuationAndFeesEntity = GetValuationAndFees(id, result.BasicInfo.ApplicationYear,
+                                                             result.BasicInfo.ApplicationNumber, "mech");
+            result.SequenceNumber = valuationAndFeesEntity?.SequenceNumber;
+            result.FeeDescription = valuationAndFeesEntity?.Description;
+            result.UnitCharge = valuationAndFeesEntity?.UnitCharge;
+            result.NumberOfUnits = valuationAndFeesEntity?.NumberOfUnits;
+            result.ExtendedAmount = valuationAndFeesEntity?.ExtendedAmount;
+            result.PlrvwExtendedAmount = valuationAndFeesEntity?.AssignPlanReviewFee;
+            result.MechanicalExtendedAmount = valuationAndFeesEntity?.AssignMechanicalFees;
             return View(result);
         }
 

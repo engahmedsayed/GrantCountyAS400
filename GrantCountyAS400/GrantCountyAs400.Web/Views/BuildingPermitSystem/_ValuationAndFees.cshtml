@@ -54,7 +54,13 @@
             </tr>
             <tr>
                 <td><strong>@Html.DisplayNameFor(model => model.AssignMechanicalFees) </strong></td>
-                <td class="text-right"><span> @Html.DisplayFor(model => model.AssignMechanicalFees) </span></td>
+                <td class="text-right">
+                    <span>
+                        <a asp-route="mechanicalFeesDetailsRoute" asp-route-id="@Model.Id">
+                            @Html.DisplayFor(model => model.AssignMechanicalFees)
+                        </a>
+                    </span>
+                </td>
             </tr>
             <tr>
                 <td><strong>@Html.DisplayNameFor(model => model.AssignGradingFees) </strong></td>
