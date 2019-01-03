@@ -134,6 +134,32 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             return results;
         }
 
+        public IEnumerable<GeneralReceipt> GetAllGeneralReceipts(decimal receiptNumber, out int resultCount, int pageNumber = 1, int pageSize = 50)
+        {
+            var results = new List<GeneralReceipt>();
+            var query = from transaction in _context.TreastenderGeneralReceipts
+                        where ((receiptNumber <= 0) || transaction.ReceiptTranNumber == receiptNumber)
+                        select TaxReceiptMapper.Map(transaction)
+                        ;
+
+            if (pageNumber > 0)
+            {
+                resultCount = query.Count();
+                results = query.Skip((pageNumber - 1) * pageSize)
+                               .Take(pageSize)
+                               .OrderBy(t => t.ReceiptNumber)
+                               .ToList();
+            }
+            else
+            {
+                results = query.OrderBy(t => t.ReceiptNumber)
+                               .ToList();
+                resultCount = results.Count();
+            }
+
+            return results;
+        }
+
         private List<PropertyTaxReceivableTransaction> GetPropertyTaxReceivableTransactions(decimal transactionNumber, IEnumerable<DateTime> receiptDates)
         {
             // Query for propertyTransaction(TreasallPropertyTaxReceivableTransactions), along with all related specialTransaction(TreasspecialAssessmentsTransactions)

@@ -12,7 +12,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Treasurer
 
         internal static GeneralReceipt Map(TreastenderGeneralReceipts receipt)
             => new GeneralReceipt(receipt.Id, (int)receipt.TranYear.Value, receipt.ReceiptTranNumber.Value, receipt.Description, receipt.FundNumber, receipt.BarsNumber,
-                receipt.Element, receipt.Object, receipt.Function, receipt.TaxAmount);
+                receipt.Element, receipt.Object, receipt.Function, receipt.TaxAmount, receipt.TranDate);
 
         internal static AffadavitReceipt Map(TreastenderAffadavits receipt)
             => new AffadavitReceipt(receipt.Id, (int)receipt.TranYear.Value, receipt.ReceiptTranNumber.Value, receipt.NewOwnerBuyer, receipt.PreviousOwnerSeller,

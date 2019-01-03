@@ -25,7 +25,7 @@ namespace GrantCountyAs400.Web.Controllers.Treasurer
             var pagingInfo = new PagingInfo() { PageNumber = pageNumber };
             var results =
                 _taxReceiptRepository.GetAll(
-                    filter.MinReceiptNumber, filter.MaxReceiptNumber,filter.MinAffidavitNumber, filter.MaxAffidavitNumber, filter.MinDate, filter.MaxDate, out int resultCount, pageNumber, AppSettings.PageSize)
+                    filter.MinReceiptNumber, filter.MaxReceiptNumber, filter.MinAffidavitNumber, filter.MaxAffidavitNumber, filter.MinDate, filter.MaxDate, out int resultCount, pageNumber, AppSettings.PageSize)
                 .ToList();
 
             pagingInfo.Total = resultCount;
@@ -58,6 +58,19 @@ namespace GrantCountyAs400.Web.Controllers.Treasurer
             pagingInfo.Total = resultCount;
             ViewBag.FilterViewModel = filter;
             return View(results.ToMappedPagedList<TaxPaymentReceipt, TaxPaymentReceiptViewModel>(pagingInfo));
+        }
+        [HttpGet]
+        [Route("general")]
+        public IActionResult GeneralReceipts(GeneralReceiptFilterViewModel filter, int pageNumber = 1)
+        {
+            var pagingInfo = new PagingInfo() { PageNumber = pageNumber };
+            var results =
+                _taxReceiptRepository.GetAllGeneralReceipts(filter.ReceiptNumber, out int resultCount, pageNumber, AppSettings.PageSize)
+                .ToList();
+
+            pagingInfo.Total = resultCount;
+            ViewBag.FilterViewModel = filter;
+            return View(results.ToMappedPagedList<GeneralReceipt, GeneralReceiptViewModel>(pagingInfo));
         }
     }
 }

@@ -98,6 +98,7 @@ namespace GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceipt
     public class GeneralReceiptViewModel
     {
         public int Id { get; set; }
+        [Display(Name = "Tran Year")]
         public int TransactionYear { get; set; }
         [DisplayFormat(DataFormatString = "{0:F0}")]
         [Display(Name = "General Receipt")]
@@ -113,6 +114,9 @@ namespace GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceipt
         public decimal? Function { get; set; }
         [Display(Name = "Paid")]
         public decimal? TaxAmount { get; set; }
+        [Display(Name = "Tran Date")]
+        [DataType(DataType.Date)]
+        public DateTime? TransactionDate { get; set; }
 
         [Display(Name = "Revenue")]
         public string RevenueDisplay => $"{BarsNumber}  {Element}  {Object}  {Function}";
@@ -121,7 +125,7 @@ namespace GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceipt
     public class AffadavitReceiptViewModel
     {
         public int Id { get; set; }
-        public int TransactionYear { get; set; }        
+        public int TransactionYear { get; set; }
         public decimal ReceiptNumber { get; set; }
         [Display(Name = "Buyer")]
         public string NewOwnerBuyer { get; set; }
