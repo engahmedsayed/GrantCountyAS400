@@ -46,6 +46,22 @@ namespace GrantCountyAs400.Web.Controllers.Treasurer
         }
 
         [HttpGet]
+        [Route("affadavit")]
+        public IActionResult AffadavitReceipts(TaxReceiptFilterViewModel filter, int pageNumber = 1)
+        {
+            var pagingInfo = new PagingInfo() { PageNumber = pageNumber };
+            var results =
+                _taxReceiptRepository.GetAllAffadavitReceipts(
+                    filter.MinReceiptNumber, filter.MaxReceiptNumber, filter.MinAffidavitNumber, filter.MaxAffidavitNumber, out int resultCount, pageNumber, 
+                    AppSettings.PageSize)
+                .ToList();
+
+            pagingInfo.Total = resultCount;
+            ViewBag.FilterViewModel = filter;
+            return View(results.ToMappedPagedList<AffadavitReceipt, AffadavitReceiptViewModel>(pagingInfo));
+        }
+
+        [HttpGet]
         [Route("tax-payment")]
         public IActionResult TaxPaymentReceipts(TaxPaymentReceiptFilterViewModel filter, int pageNumber = 1)
         {
@@ -59,6 +75,7 @@ namespace GrantCountyAs400.Web.Controllers.Treasurer
             ViewBag.FilterViewModel = filter;
             return View(results.ToMappedPagedList<TaxPaymentReceipt, TaxPaymentReceiptViewModel>(pagingInfo));
         }
+
         [HttpGet]
         [Route("general")]
         public IActionResult GeneralReceipts(GeneralReceiptFilterViewModel filter, int pageNumber = 1)

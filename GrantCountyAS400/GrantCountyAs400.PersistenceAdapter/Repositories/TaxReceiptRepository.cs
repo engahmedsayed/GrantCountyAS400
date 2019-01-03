@@ -105,6 +105,38 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             return new TaxReceiptDetails(transactionNumber, cashReceipts, generalReceipts, affadavitReceipts, propertyTransactions);
         }
 
+        public IEnumerable<AffadavitReceipt> GetAllAffadavitReceipts(
+            decimal minReceiptNumber, decimal? maxReceiptNumber, decimal minAffidavitNumber, decimal? maxAffidavitNumber, out int resultCount, int pageNumber = 1,
+            int pageSize = 50)
+        {
+            var results = new List<AffadavitReceipt>();
+
+            var query = from receipt in _context.TreastenderAffadavits
+                        where ((minReceiptNumber <= 0) || receipt.ReceiptTranNumber >= minReceiptNumber)
+                        && ((maxReceiptNumber <= 0) || receipt.ReceiptTranNumber <= maxReceiptNumber)
+                        && ((minAffidavitNumber <= 0) || receipt.ReceiptTran >= minAffidavitNumber)
+                        && ((maxAffidavitNumber <= 0) || receipt.ReceiptTran <= maxAffidavitNumber)
+                        && (receipt.TotalPaid > 0)
+                        select TaxReceiptMapper.Map(receipt);
+
+            if (pageNumber > 0)
+            {
+                resultCount = query.Count();
+                results = query.Skip((pageNumber - 1) * pageSize)
+                               .Take(pageSize)
+                               .OrderBy(t => t.AffidavitDate)
+                               .ToList();
+            }
+            else
+            {
+                results = query.OrderBy(t => t.AffidavitDate)
+                               .ToList();
+                resultCount = results.Count();
+            }
+
+            return results;
+        }
+
         public IEnumerable<TaxPaymentReceipt> GetAllTaxPaymentReceipts(
             decimal parcelNumber, decimal parcelExtension, int taxyear, out int resultCount, int pageNumber = 1, int pageSize = 50)
         {

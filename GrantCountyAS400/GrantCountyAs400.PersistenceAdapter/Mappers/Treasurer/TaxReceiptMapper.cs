@@ -16,7 +16,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Treasurer
 
         internal static AffadavitReceipt Map(TreastenderAffadavits receipt)
             => new AffadavitReceipt(receipt.Id, (int)receipt.TranYear.Value, receipt.ReceiptTranNumber.Value, receipt.NewOwnerBuyer, receipt.PreviousOwnerSeller,
-                receipt.TotalPaid, receipt.ReceiptTran);
+                receipt.TotalPaid, receipt.ReceiptTran, receipt.AffidavitDate, receipt.ParcelNumber);
 
         internal static TaxPaymentReceipt Map(TreasallPropertyTaxReceivableTransactions transaction)
             => new TaxPaymentReceipt(transaction.Id, transaction.ParcelNumber.Value, transaction.ParcelExtension, (int)transaction.TaxYear.Value, transaction.TranDate,
