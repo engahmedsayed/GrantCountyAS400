@@ -291,7 +291,7 @@ namespace GrantCountyAs400.Web.Controllers.Building
             result.PlanReviewFee = valuationAndFeesEntity?.BaseFee.FirstOrDefault();
             result.TotalValue = valuationAndFeesEntity?.ExtendedValue;
             result.TotalPlanReviewFees = valuationAndFeesEntity?.AssignPlanReviewFee;
-            result.BuildingPermit = valuationAndFeesEntity?.AssignStructNanNodFees;
+            result.BuildingPermit = valuationAndFeesEntity?.BaseFee.Sum();
 
             return View(result);
         }
