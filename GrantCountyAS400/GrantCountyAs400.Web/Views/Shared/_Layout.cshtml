@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -82,10 +82,16 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a asp-controller="TaxReceivable" asp-action="Index">Tax Receivable</a></li>
-                                <li><a asp-controller="TaxReceipt" asp-action="Index">Receipts</a></li>
-                                <li><a asp-controller="TaxPaymentReceipts" asp-action="Index">Tax Payment Receipts</a></li>
-                                <li><a asp-controller="GeneralReceipts" asp-action="Index">General Receipts</a></li>
-                                <li><a asp-controller="AffadavitReceipts" asp-action="Index">Affadavit Receipts</a></li>
+                                <li class="dropdown-submenu">
+                                    <a href="#" class="sub-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        Receipts<span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu multi-level">
+                                        <li><a asp-controller="TaxReceipt" asp-action="TaxPaymentReceipts">Tax Payment Receipts</a></li>
+                                        <li><a asp-controller="TaxReceipt" asp-action="GeneralReceipts">General Receipts</a></li>
+                                        <li><a asp-controller="TaxReceipt" asp-action="AffadavitReceipts">Affadavit Receipts</a></li>
+                                    </ul>
+                                </li>                                
                             </ul>
                         </li>
                         <li>
