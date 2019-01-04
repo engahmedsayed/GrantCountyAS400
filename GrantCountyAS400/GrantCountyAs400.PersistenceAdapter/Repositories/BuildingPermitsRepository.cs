@@ -118,7 +118,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             var lineValuesQuery = (from RPAV in _context.AsmtrealPropertyAssessedValueMaster
                                    join PM in _context.AsmtpermitMaster
                                    on RPAV.ParcelNumber equals PM.ParcelNumber
-                                   where RPAV.ParcelNumber == parcelNumber && RPAV.TaxpayerCode == ownerCode
+                                   where RPAV.ParcelNumber == parcelNumber && RPAV.TitleOwnerCode == ownerCode
                                    select PM );
             List<BuildingPermitsLineValue> lineValues = new List<BuildingPermitsLineValue>();
             foreach (var item in lineValuesQuery)
