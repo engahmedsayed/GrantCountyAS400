@@ -75,10 +75,11 @@ namespace GrantCountyAs400.Domain.Treasurer
         public decimal? Object { get; }
         public decimal? Function { get; }
         public decimal? TaxAmount { get; }
+        public DateTime? TransactionDate { get; }
 
         public GeneralReceipt(
             int id, int transactionYear, decimal receiptNumber, string description, decimal? fundNumber, decimal? barsNumber, decimal? element, decimal? @object,
-            decimal? function, decimal? taxAmount)
+            decimal? function, decimal? taxAmount, DateTime? transactionDate)
         {
             Id = id;
             TransactionYear = transactionYear;
@@ -90,6 +91,7 @@ namespace GrantCountyAs400.Domain.Treasurer
             Object = @object;
             Function = function;
             TaxAmount = taxAmount;
+            TransactionDate = transactionDate;
         }
     }
 
@@ -103,9 +105,12 @@ namespace GrantCountyAs400.Domain.Treasurer
         public string PreviousOwnerSeller { get; }
         public decimal? TotalPaid { get; }
         public decimal? AffadavitNumber { get; }
+        public DateTime? AffidavitDate { get; }
+        public decimal? ParcelNumber { get; }
 
         public AffadavitReceipt(
-            int id, int transactionYear, decimal receiptNumber, string newOwnerBuyer, string previousOwnerSeller, decimal? totalPaid, decimal? affadavitNumber)
+            int id, int transactionYear, decimal receiptNumber, string newOwnerBuyer, string previousOwnerSeller, decimal? totalPaid, decimal? affadavitNumber,
+            DateTime? affidavitDate, decimal? parcelNumber)
         {
             Id = id;
             TransactionYear = transactionYear;
@@ -114,6 +119,8 @@ namespace GrantCountyAs400.Domain.Treasurer
             PreviousOwnerSeller = previousOwnerSeller;
             TotalPaid = totalPaid;
             AffadavitNumber = affadavitNumber;
+            AffidavitDate = affidavitDate;
+            ParcelNumber = parcelNumber;
         }
     }
 }

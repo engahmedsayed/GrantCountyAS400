@@ -1,0 +1,116 @@
+﻿@model IEnumerable<TaxPaymentReceiptViewModel>
+@using  GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceipt
+
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@{
+    ViewData["Title"] = "Tax Payment Receipts - Index";
+    var filterViewModel = ViewBag.FilterViewModel as TaxPaymentReceiptFilterViewModel;
+}
+
+<h2>Tax Payment Receipts</h2>
+
+<p>
+    @using (Html.BeginForm("TaxPaymentReceipts", "TaxReceipt", FormMethod.Get))
+    {
+        <div class="form-horizontal">
+            <hr />
+            <div class="form-group">
+                <label asp-for="@filterViewModel.ParcelNumber" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input type="number" asp-for="@filterViewModel.ParcelNumber" name="parcelnumber" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@filterViewModel.ParcelExtension" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input type="number" asp-for="@filterViewModel.ParcelExtension" name="parcelextension" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@filterViewModel.TaxYear" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input type="number" asp-for="@filterViewModel.TaxYear" name="taxyear" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="form-group pull-right">
+                    <input type="submit" value="Filter" class="btn btn-success" />
+                    <input type="reset" value="Clear" class="btn btn-default" id="btnReset" />
+                </div>
+            </div>
+        </div>
+    }
+</p>
+
+<nav aria-label="navigation">
+    @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("TaxPaymentReceipts", new {
+    pageNumber = pageNumber,
+    parcelnumber = filterViewModel.ParcelNumber,
+    parcelextension = filterViewModel.ParcelExtension,
+    taxyear = filterViewModel.TaxYear,
+}))
+</nav>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ParcelNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParcelExtension)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaxYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaxAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReceiptTranNumber)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(_ => item.ParcelNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => item.ParcelExtension)
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => item.TaxYear)
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => item.TransactionDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => item.TaxAmount)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-transactionNumber="@item.ReceiptTranNumber">
+                        @Html.DisplayFor(_ => item.ReceiptTranNumber)
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<nav aria-label="navigation">
+    @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("TaxPaymentReceipts", new {
+    pageNumber = pageNumber,
+    parcelnumber = filterViewModel.ParcelNumber,
+    parcelextension = filterViewModel.ParcelExtension,
+    taxyear = filterViewModel.TaxYear,
+}))
+</nav>

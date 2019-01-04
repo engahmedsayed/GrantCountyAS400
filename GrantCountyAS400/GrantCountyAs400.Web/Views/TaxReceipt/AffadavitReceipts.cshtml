@@ -1,0 +1,123 @@
+﻿@model IEnumerable<AffadavitReceiptViewModel>
+@using  GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceipt
+
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@{
+    ViewData["Title"] = "Affadavit Receipts - Index";
+    var filterViewModel = ViewBag.FilterViewModel as TaxReceiptFilterViewModel;
+}
+
+<h2>Affadavit Receipts</h2>
+
+<p>
+    @using (Html.BeginForm("AffadavitReceipts", "TaxReceipt", FormMethod.Get))
+    {
+        <div class="form-horizontal">
+            <hr />
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <label asp-for="@filterViewModel.MinReceiptNumber" class="control-label col-md-2"></label>
+                        <div class="col-md-10">
+                            <input type="number" asp-for="@filterViewModel.MinReceiptNumber" name="minreceiptnumber" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@filterViewModel.MaxReceiptNumber" class="control-label col-md-2"></label>
+                        <div class="col-md-10">
+                            <input type="number" asp-for="@filterViewModel.MaxReceiptNumber" name="maxreceiptnumber" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <label asp-for="@filterViewModel.MinAffidavitNumber" class="control-label col-md-2"></label>
+                        <div class="col-md-10">
+                            <input type="number" asp-for="@filterViewModel.MinAffidavitNumber" name="minaffidavitnumber" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@filterViewModel.MaxAffidavitNumber" class="control-label col-md-2"></label>
+                        <div class="col-md-10">
+                            <input type="number" asp-for="@filterViewModel.MaxAffidavitNumber" name="maxaffidavitnumber" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <div class="form-group pull-right">
+                        <input type="submit" value="Filter" class="btn btn-success" />
+                        <input type="reset" value="Clear" class="btn btn-default" id="btnReset" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</p>
+
+<nav aria-label="navigation">
+    @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("AffadavitReceipts", new {
+    pageNumber = pageNumber,
+    minreceiptnumber = filterViewModel.MinReceiptNumber,
+    maxreceiptnumber = filterViewModel.MaxReceiptNumber,
+    minaffidavitnumber = filterViewModel.MinAffidavitNumber,
+    maxaffidavitnumber = filterViewModel.MaxAffidavitNumber,
+}))
+</nav>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ReceiptNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AffadavitNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AffidavitDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParcelNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalPaid)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-route-transactionNumber="@item.ReceiptNumber">
+                        @Html.DisplayFor(_ => item.ReceiptNumber)
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => item.AffadavitNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => item.AffidavitDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => item.ParcelNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => item.TotalPaid)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<nav aria-label="navigation">
+    @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("AffadavitReceipts", new {
+    pageNumber = pageNumber,
+    minreceiptnumber = filterViewModel.MinReceiptNumber,
+    maxreceiptnumber = filterViewModel.MaxReceiptNumber,
+    minaffidavitnumber = filterViewModel.MinAffidavitNumber,
+    maxaffidavitnumber = filterViewModel.MaxAffidavitNumber,
+}))
+</nav>

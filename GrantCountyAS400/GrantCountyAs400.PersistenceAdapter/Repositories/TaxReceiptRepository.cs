@@ -105,6 +105,93 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             return new TaxReceiptDetails(transactionNumber, cashReceipts, generalReceipts, affadavitReceipts, propertyTransactions);
         }
 
+        public IEnumerable<AffadavitReceipt> GetAllAffadavitReceipts(
+            decimal minReceiptNumber, decimal? maxReceiptNumber, decimal minAffidavitNumber, decimal? maxAffidavitNumber, out int resultCount, int pageNumber = 1,
+            int pageSize = 50)
+        {
+            var results = new List<AffadavitReceipt>();
+
+            var query = from receipt in _context.TreastenderAffadavits
+                        where ((minReceiptNumber <= 0) || receipt.ReceiptTranNumber >= minReceiptNumber)
+                        && ((maxReceiptNumber <= 0) || receipt.ReceiptTranNumber <= maxReceiptNumber)
+                        && ((minAffidavitNumber <= 0) || receipt.ReceiptTran >= minAffidavitNumber)
+                        && ((maxAffidavitNumber <= 0) || receipt.ReceiptTran <= maxAffidavitNumber)
+                        && (receipt.TotalPaid > 0)
+                        select TaxReceiptMapper.Map(receipt);
+
+            if (pageNumber > 0)
+            {
+                resultCount = query.Count();
+                results = query.Skip((pageNumber - 1) * pageSize)
+                               .Take(pageSize)
+                               .OrderBy(t => t.AffidavitDate)
+                               .ToList();
+            }
+            else
+            {
+                results = query.OrderBy(t => t.AffidavitDate)
+                               .ToList();
+                resultCount = results.Count();
+            }
+
+            return results;
+        }
+
+        public IEnumerable<TaxPaymentReceipt> GetAllTaxPaymentReceipts(
+            decimal parcelNumber, decimal parcelExtension, int taxyear, out int resultCount, int pageNumber = 1, int pageSize = 50)
+        {
+            var results = new List<TaxPaymentReceipt>();
+            var query = from transaction in _context.TreasallPropertyTaxReceivableTransactions
+                        where ((parcelNumber <= 0) || transaction.ParcelNumber == parcelNumber)
+                        && ((parcelExtension <= 0) || transaction.ParcelExtension == parcelExtension)
+                        && ((taxyear <= 0) || transaction.TaxYear == taxyear)
+                        select TaxReceiptMapper.Map(transaction)
+                        ;
+
+            if (pageNumber > 0)
+            {
+                resultCount = query.Count();
+                results = query.Skip((pageNumber - 1) * pageSize)
+                               .Take(pageSize)
+                               .OrderBy(t => t.ParcelNumber)
+                               .ToList();
+            }
+            else
+            {
+                results = query.OrderBy(t => t.ParcelNumber)
+                               .ToList();
+                resultCount = results.Count();
+            }
+
+            return results;
+        }
+
+        public IEnumerable<GeneralReceipt> GetAllGeneralReceipts(decimal receiptNumber, out int resultCount, int pageNumber = 1, int pageSize = 50)
+        {
+            var results = new List<GeneralReceipt>();
+            var query = from transaction in _context.TreastenderGeneralReceipts
+                        where ((receiptNumber <= 0) || transaction.ReceiptTranNumber == receiptNumber)
+                        select TaxReceiptMapper.Map(transaction)
+                        ;
+
+            if (pageNumber > 0)
+            {
+                resultCount = query.Count();
+                results = query.Skip((pageNumber - 1) * pageSize)
+                               .Take(pageSize)
+                               .OrderBy(t => t.ReceiptNumber)
+                               .ToList();
+            }
+            else
+            {
+                results = query.OrderBy(t => t.ReceiptNumber)
+                               .ToList();
+                resultCount = results.Count();
+            }
+
+            return results;
+        }
+
         private List<PropertyTaxReceivableTransaction> GetPropertyTaxReceivableTransactions(decimal transactionNumber, IEnumerable<DateTime> receiptDates)
         {
             // Query for propertyTransaction(TreasallPropertyTaxReceivableTransactions), along with all related specialTransaction(TreasspecialAssessmentsTransactions)

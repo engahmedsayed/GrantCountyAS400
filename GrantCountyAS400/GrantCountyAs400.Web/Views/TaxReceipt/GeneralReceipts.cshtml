@@ -1,0 +1,94 @@
+﻿@model IEnumerable<GeneralReceiptViewModel>
+@using  GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceipt
+
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@{
+    ViewData["Title"] = "General Receipts - Index";
+    var filterViewModel = ViewBag.FilterViewModel as GeneralReceiptFilterViewModel;
+}
+
+<h2>General Receipts</h2>
+
+<p>
+    @using (Html.BeginForm("GeneralReceipts", "TaxReceipt", FormMethod.Get))
+    {
+        <div class="form-horizontal">
+            <hr />
+            <div class="form-group">
+                <label asp-for="@filterViewModel.ReceiptNumber" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input type="number" asp-for="@filterViewModel.ReceiptNumber" name="receiptnumber" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="form-group pull-right">
+                    <input type="submit" value="Filter" class="btn btn-success" />
+                    <input type="reset" value="Clear" class="btn btn-default" id="btnReset" />
+                </div>
+            </div>
+        </div>
+    }
+</p>
+
+<nav aria-label="navigation">
+    @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("GeneralReceipts", new {
+    pageNumber = pageNumber,
+    receiptnumber = filterViewModel.ReceiptNumber,
+}))
+</nav>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReceiptNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaxAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionDate)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(_ => item.TransactionYear)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-transactionNumber="@item.ReceiptNumber">
+                        @Html.DisplayFor(_ => item.ReceiptNumber)
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => item.TaxAmount)
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => item.TransactionDate)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<nav aria-label="navigation">
+    @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("GeneralReceipts", new {
+    pageNumber = pageNumber,
+    receiptnumber = filterViewModel.ReceiptNumber,
+}))
+</nav>
