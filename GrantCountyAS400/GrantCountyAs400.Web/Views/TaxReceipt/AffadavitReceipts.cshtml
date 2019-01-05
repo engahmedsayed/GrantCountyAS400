@@ -96,7 +96,9 @@
                     </a>
                 </td>
                 <td>
-                    @Html.DisplayFor(_ => item.AffadavitNumber)
+                    <a asp-action="AffadavitReceiptDetails" asp-route-affadavitReceiptId="@item.Id">
+                        @Html.DisplayFor(_ => item.AffadavitNumber)
+                    </a>
                 </td>
                 <td>
                     @Html.DisplayFor(_ => item.AffidavitDate)

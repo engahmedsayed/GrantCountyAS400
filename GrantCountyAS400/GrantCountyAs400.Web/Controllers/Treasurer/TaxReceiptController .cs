@@ -89,5 +89,17 @@ namespace GrantCountyAs400.Web.Controllers.Treasurer
             ViewBag.FilterViewModel = filter;
             return View(results.ToMappedPagedList<GeneralReceipt, GeneralReceiptViewModel>(pagingInfo));
         }
+
+        [HttpGet]
+        [Route("affadavit/{affadavitReceiptId}")]
+        public IActionResult AffadavitReceiptDetails(int affadavitReceiptId)
+        {
+            var entity = _taxReceiptRepository.AffadavitReceiptDetails(affadavitReceiptId);
+            if (entity == null)
+                return NotFound();
+
+            var viewmodel = AutoMapper.Mapper.Map<AffadavitReceiptDetailsViewModel>(entity);
+            return View(viewmodel);
+        }
     }
 }

@@ -1,4 +1,4 @@
-using GrantCountyAs400.Domain.Treasurer;
+﻿using GrantCountyAs400.Domain.Treasurer;
 using GrantCountyAs400.Domain.Treasurer.Repository;
 using GrantCountyAs400.PersistenceAdapter.Mappers.Treasurer;
 using GrantCountyAs400.PersistenceAdapter.Models;
@@ -201,6 +201,40 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             }
 
             return results;
+        }
+
+        public AffadavitReceiptDetails AffadavitReceiptDetails(int affadavitReceiptId)
+        {
+            var query = (from receipt in _context.TreastenderAffadavits
+                         join cashReceipt in _context.TreascashReceiptsTender
+                         on new { receipt.TranYear, receipt.ReceiptTranNumber } equals new { cashReceipt.TranYear, cashReceipt.ReceiptTranNumber }
+                         into cashReceiptJoin
+                         from cashReceiptRecord in cashReceiptJoin.DefaultIfEmpty()
+                         join codeArea in _context.AsmttaxCodeArea on receipt.TaxCodeArea equals codeArea.TaxCodeArea
+                         into codeAreaJoin
+                         from codeAreaRecord in codeAreaJoin.DefaultIfEmpty()
+                         where receipt.Id == affadavitReceiptId
+                         select new
+                         {
+                             AffadavitReceipt = receipt,
+                             CashReceipt = cashReceiptRecord,
+                             CodeArea = codeAreaRecord
+                         }).FirstOrDefault();
+
+            var affadavitParcels = (from receipt in _context.TreastenderAffadavits
+                                    join valueMaster in _context.AsmtrealPropertyAssessedValueMaster on receipt.ParcelNumber equals valueMaster.ParcelNumber
+                                    join nameAddress in _context.AsmtmasterNameAddress
+                                    on valueMaster.TitleOwnerCode equals nameAddress.NameCode
+                                    join legalDescription in _context.AsmtfullLegalDescription.Where(t => t.SequenceNumber == 1)
+                                    on receipt.ParcelNumber equals legalDescription.ParcelNumber
+                                    into legalDescriptionJoin
+                                    from legalDescriptionRecord in legalDescriptionJoin.DefaultIfEmpty()
+                                    where receipt.ReceiptTran == query.AffadavitReceipt.ReceiptTran
+                                    select TaxReceiptMapper.MapToParcel(receipt, valueMaster, nameAddress, legalDescriptionRecord)
+                                   ).ToList();
+
+            return TaxReceiptMapper.MapToDetails(query.AffadavitReceipt, query.CashReceipt, query.CodeArea, affadavitParcels);
+            //throw new NotImplementedException();
         }
 
         private List<PropertyTaxReceivableTransaction> GetPropertyTaxReceivableTransactions(decimal transactionNumber, IEnumerable<DateTime> receiptDates)

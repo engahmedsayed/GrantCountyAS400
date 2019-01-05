@@ -53,6 +53,9 @@
     <Content Update="Views\LegalDocument\Details.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Views\TaxReceipt\AffadavitReceiptDetails.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\TaxReceipt\GeneralReceipts.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

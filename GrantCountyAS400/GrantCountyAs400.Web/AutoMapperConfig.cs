@@ -127,6 +127,8 @@ namespace GrantCountyAs400.Web
                 cfg.CreateMap<PropertyTaxReceivableTransaction, PropertyTaxReceivableReceiptViewModel>();
                 cfg.CreateMap<TaxPaymentReceipt, TaxPaymentReceiptViewModel>();
                 cfg.CreateMap<AffadavitReceipt, AffadavitReceiptViewModel>();
+                cfg.CreateMap<AffadavitReceiptDetails, AffadavitReceiptDetailsViewModel>();
+                cfg.CreateMap<AffadavitReceiptParcel, AffadavitReceiptParcelViewModel>();
 
                 #endregion Treasurer
             });

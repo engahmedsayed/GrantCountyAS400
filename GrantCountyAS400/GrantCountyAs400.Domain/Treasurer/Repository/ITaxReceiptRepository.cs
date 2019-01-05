@@ -19,5 +19,7 @@ namespace GrantCountyAs400.Domain.Treasurer.Repository
             decimal parcelNumber, decimal parcelExtension, int taxyear, out int resultCount, int pageNumber = 1, int pageSize = 50);
 
         IEnumerable<GeneralReceipt> GetAllGeneralReceipts(decimal transactionNumber, out int resultCount, int pageNumber = 1, int pageSize = 50);
+
+        AffadavitReceiptDetails AffadavitReceiptDetails(int affadavitReceiptId);
     }
 }
