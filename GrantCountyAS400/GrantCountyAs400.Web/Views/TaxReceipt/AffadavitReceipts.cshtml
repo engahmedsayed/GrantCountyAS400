@@ -4,11 +4,11 @@
 @using X.PagedList.Mvc.Core;
 @using X.PagedList;
 @{
-    ViewData["Title"] = "Affadavit Receipts - Index";
+    ViewData["Title"] = "Affidavits - Index";
     var filterViewModel = ViewBag.FilterViewModel as TaxReceiptFilterViewModel;
 }
 
-<h2>Affadavit Receipts</h2>
+<h2>Affidavits</h2>
 
 <p>
     @using (Html.BeginForm("AffadavitReceipts", "TaxReceipt", FormMethod.Get))
