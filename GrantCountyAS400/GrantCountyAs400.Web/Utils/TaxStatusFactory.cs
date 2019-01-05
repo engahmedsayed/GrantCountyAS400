@@ -4,7 +4,7 @@
     {
         public static string TaxStatusCodeToDescription(string taxStatus)
         {
-            switch (taxStatus)
+            switch (taxStatus.ToUpperInvariant())
             {
                 case "AE":
                     return "Atomic Energy";
