@@ -1,4 +1,4 @@
-﻿using GrantCountyAs400.Domain.Treasurer;
+using GrantCountyAs400.Domain.Treasurer;
 using GrantCountyAs400.Domain.Treasurer.Repository;
 using GrantCountyAs400.Web.Extensions;
 using GrantCountyAs400.Web.ViewModels;
@@ -19,10 +19,10 @@ namespace GrantCountyAs400.Web.Controllers.Treasurer
         }
 
         [HttpGet]
-        [Route("{transactionNumber}")]
-        public IActionResult Details(decimal transactionNumber)
+        [Route("{receiptNumber}")]
+        public IActionResult Details(decimal receiptNumber)
         {
-            var entity = _taxReceiptRepository.Details(transactionNumber);
+            var entity = _taxReceiptRepository.Details(receiptNumber);
             if (entity == null)
                 return NotFound();
 

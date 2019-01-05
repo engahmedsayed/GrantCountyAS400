@@ -22,12 +22,9 @@ namespace GrantCountyAs400.Domain.Treasurer
 
         public IEnumerable<AffadavitReceiptParcel> AffadavitReceiptParcels { get; }
 
-        public AffadavitReceiptDetails(int id, int transactionYear, decimal receiptNumber, decimal? totalPaid, decimal? affadavitNumber, DateTime? affidavitDate, decimal? parcelNumber, string legalDocumentType, DateTime? documentDate, decimal? taxCodeArea, string taxStatus, DateTime? receiptDate, string taxCodeDesc, IEnumerable<AffadavitReceiptParcel> affadavitReceiptParcels) : this(id, transactionYear, receiptNumber, totalPaid, affadavitNumber, affidavitDate, parcelNumber, legalDocumentType, documentDate, taxCodeArea, taxStatus, receiptDate, taxCodeDesc)
-        {
-            AffadavitReceiptParcels = affadavitReceiptParcels;
-        }
-
-        public AffadavitReceiptDetails(int id, int transactionYear, decimal receiptNumber, decimal? totalPaid, decimal? affadavitNumber, DateTime? affidavitDate, decimal? parcelNumber, string legalDocumentType, DateTime? documentDate, decimal? taxCodeArea, string taxStatus, DateTime? receiptDate, string taxCodeDesc)
+        public AffadavitReceiptDetails(
+            int id, int transactionYear, decimal receiptNumber, decimal? totalPaid, decimal? affadavitNumber, DateTime? affidavitDate, decimal? parcelNumber,
+            string legalDocumentType, DateTime? documentDate, decimal? taxCodeArea, string taxStatus, DateTime? receiptDate, string taxCodeDesc)
         {
             Id = id;
             TransactionYear = transactionYear;
@@ -42,6 +39,16 @@ namespace GrantCountyAs400.Domain.Treasurer
             TaxStatus = taxStatus;
             ReceiptDate = receiptDate;
             TaxCodeDesc = taxCodeDesc;
+        }
+
+        public AffadavitReceiptDetails(
+            int id, int transactionYear, decimal receiptNumber, decimal? totalPaid, decimal? affadavitNumber, DateTime? affidavitDate, decimal? parcelNumber,
+            string legalDocumentType, DateTime? documentDate, decimal? taxCodeArea, string taxStatus, DateTime? receiptDate, string taxCodeDesc,
+            IEnumerable<AffadavitReceiptParcel> affadavitReceiptParcels)
+            : this(id, transactionYear, receiptNumber, totalPaid, affadavitNumber, affidavitDate, parcelNumber, legalDocumentType, documentDate, taxCodeArea, taxStatus,
+                  receiptDate, taxCodeDesc)
+        {
+            AffadavitReceiptParcels = affadavitReceiptParcels;
         }
     }
 
@@ -74,7 +81,11 @@ namespace GrantCountyAs400.Domain.Treasurer
 
         public string LegalDescription { get; }
 
-        public AffadavitReceiptParcel(int id, decimal? parcelNumber, decimal? affadavitNumber, string newOwnerBuyer, string previousOwnerSeller, decimal? taxAmount, decimal? totalPaid, decimal? stateTaxPaid, decimal? assessedValue, decimal? pPvalue, decimal? giftDebt, decimal? localTaxPaid, decimal? statePenalty, decimal? localPenalty, decimal? localInterest, decimal? technicalFee, decimal? subsidizedFee, decimal? unimprovedLandValue, decimal? improvedLandValue, decimal? buildingValue, string addressLine1, string city, string legalDescription)
+        public AffadavitReceiptParcel(
+            int id, decimal? parcelNumber, decimal? affadavitNumber, string newOwnerBuyer, string previousOwnerSeller, decimal? taxAmount, decimal? totalPaid,
+            decimal? stateTaxPaid, decimal? assessedValue, decimal? pPvalue, decimal? giftDebt, decimal? localTaxPaid, decimal? statePenalty, decimal? localPenalty,
+            decimal? localInterest, decimal? technicalFee, decimal? subsidizedFee, decimal? unimprovedLandValue, decimal? improvedLandValue, decimal? buildingValue,
+            string addressLine1, string city, string legalDescription)
         {
             Id = id;
             ParcelNumber = parcelNumber;

@@ -15,6 +15,6 @@ namespace GrantCountyAs400.Domain.Treasurer.Repository
 
         AffadavitReceiptDetails AffadavitReceiptDetails(int affadavitReceiptId);
 
-        TaxReceiptDetails Details(decimal transactionNumber);
+        TaxReceiptDetails Details(decimal receiptNumber);
     }
 }

@@ -17,25 +17,25 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             _context = dbContext;
         }
 
-        public TaxReceiptDetails Details(decimal transactionNumber)
+        public TaxReceiptDetails Details(decimal receiptNumber)
         {
             var cashReceipts = (from x in _context.TreascashReceiptsTender
-                                where x.ReceiptTranNumber == transactionNumber
+                                where x.ReceiptTranNumber == receiptNumber
                                 select TaxReceiptMapper.Map(x)).ToList();
 
             var generalReceipts = (from x in _context.TreastenderGeneralReceipts
-                                   where x.ReceiptTranNumber == transactionNumber
+                                   where x.ReceiptTranNumber == receiptNumber
                                    select TaxReceiptMapper.Map(x)).ToList();
 
             var affadavitReceipts = (from x in _context.TreastenderAffadavits
-                                     where x.ReceiptTranNumber == transactionNumber &&
+                                     where x.ReceiptTranNumber == receiptNumber &&
                                            x.TotalPaid > 0
                                      select TaxReceiptMapper.Map(x)).ToList();
 
             IEnumerable<DateTime> receiptDates = cashReceipts.Select(x => x.ReceiptDate.Value);
-            var propertyTransactions = GetPropertyTaxReceivableTransactions(transactionNumber, receiptDates);
+            var propertyTransactions = GetPropertyTaxReceivableTransactions(receiptNumber, receiptDates);
 
-            return new TaxReceiptDetails(transactionNumber, cashReceipts, generalReceipts, affadavitReceipts, propertyTransactions);
+            return new TaxReceiptDetails(receiptNumber, cashReceipts, generalReceipts, affadavitReceipts, propertyTransactions);
         }
 
         public IEnumerable<AffadavitReceipt> GetAllAffadavitReceipts(
@@ -167,7 +167,6 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                    ).ToList();
 
             return TaxReceiptMapper.MapToDetails(query.AffadavitReceipt, query.CashReceipt, query.CodeArea, affadavitParcels);
-            //throw new NotImplementedException();
         }
 
         private List<PropertyTaxReceivableTransaction> GetPropertyTaxReceivableTransactions(decimal transactionNumber, IEnumerable<DateTime> receiptDates)
