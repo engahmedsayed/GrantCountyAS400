@@ -1,4 +1,4 @@
-﻿using GrantCountyAs400.Domain.Treasurer;
+using GrantCountyAs400.Domain.Treasurer;
 using GrantCountyAs400.Domain.Treasurer.Repository;
 using GrantCountyAs400.PersistenceAdapter.Mappers.Treasurer;
 using GrantCountyAs400.PersistenceAdapter.Models;
@@ -110,6 +110,17 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             int pageSize = 50)
         {
             var results = new List<AffadavitReceipt>();
+
+            // if Max TransactionNumber is null or zero, make it same as Min value as if "single" value was provided
+            if (!maxReceiptNumber.HasValue || maxReceiptNumber.Value == 0)
+            {
+                maxReceiptNumber = minReceiptNumber;
+            }
+
+            if (!maxAffidavitNumber.HasValue || maxAffidavitNumber.Value == 0)
+            {
+                maxAffidavitNumber = minAffidavitNumber;
+            }
 
             var query = from receipt in _context.TreastenderAffadavits
                         where ((minReceiptNumber <= 0) || receipt.ReceiptTranNumber >= minReceiptNumber)
