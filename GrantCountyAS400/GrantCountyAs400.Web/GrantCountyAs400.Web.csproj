@@ -65,9 +65,6 @@
     <Content Update="Views\TaxReceipt\TaxPaymentReceipts.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Views\TaxReceipt\Index.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
     <Content Update="wwwroot\ExcelTemplates\AccountPayableTemplate.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

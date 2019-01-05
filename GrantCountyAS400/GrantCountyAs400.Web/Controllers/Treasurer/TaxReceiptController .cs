@@ -3,7 +3,6 @@ using GrantCountyAs400.Domain.Treasurer.Repository;
 using GrantCountyAs400.Web.Extensions;
 using GrantCountyAs400.Web.ViewModels;
 using GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceipt;
-using GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceivable;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
@@ -20,20 +19,6 @@ namespace GrantCountyAs400.Web.Controllers.Treasurer
         }
 
         [HttpGet]
-        public IActionResult Index(TaxReceiptFilterViewModel filter, int pageNumber = 1)
-        {
-            var pagingInfo = new PagingInfo() { PageNumber = pageNumber };
-            var results =
-                _taxReceiptRepository.GetAll(
-                    filter.MinReceiptNumber, filter.MaxReceiptNumber, filter.MinAffidavitNumber, filter.MaxAffidavitNumber, filter.MinDate, filter.MaxDate, out int resultCount, pageNumber, AppSettings.PageSize)
-                .ToList();
-
-            pagingInfo.Total = resultCount;
-            ViewBag.FilterViewModel = filter;
-            return View(results.ToMappedPagedList<TaxReceipt, TaxReceiptViewModel>(pagingInfo));
-        }
-
-        [HttpGet]
         [Route("{transactionNumber}")]
         public IActionResult Details(decimal transactionNumber)
         {
@@ -47,12 +32,12 @@ namespace GrantCountyAs400.Web.Controllers.Treasurer
 
         [HttpGet]
         [Route("affadavit")]
-        public IActionResult AffadavitReceipts(TaxReceiptFilterViewModel filter, int pageNumber = 1)
+        public IActionResult AffadavitReceipts(AffadavitReceiptFilterViewModel filter, int pageNumber = 1)
         {
             var pagingInfo = new PagingInfo() { PageNumber = pageNumber };
             var results =
                 _taxReceiptRepository.GetAllAffadavitReceipts(
-                    filter.MinReceiptNumber, filter.MaxReceiptNumber, filter.MinAffidavitNumber, filter.MaxAffidavitNumber, out int resultCount, pageNumber, 
+                    filter.MinReceiptNumber, filter.MaxReceiptNumber, filter.MinAffidavitNumber, filter.MaxAffidavitNumber, out int resultCount, pageNumber,
                     AppSettings.PageSize)
                 .ToList();
 
