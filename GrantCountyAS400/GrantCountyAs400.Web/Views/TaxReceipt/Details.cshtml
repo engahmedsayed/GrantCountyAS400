@@ -166,7 +166,11 @@
                         @foreach (var receipt in Model.AffadavitReceipts)
                         {
                             <tr>
-                                <td>@Html.DisplayFor(_ => receipt.AffadavitNumber)</td>
+                                <td>
+                                    <a asp-action="AffadavitReceiptDetails" asp-route-affadavitReceiptId="@receipt.Id">
+                                        @Html.DisplayFor(_ => receipt.AffadavitNumber)
+                                    </a>
+                                </td>
                                 <td>@Html.DisplayFor(_ => receipt.NewOwnerBuyer)</td>
                                 <td>@Html.DisplayFor(_ => receipt.PreviousOwnerSeller)</td>
                                 <td>@Html.DisplayFor(_ => receipt.TotalPaid)</td>
