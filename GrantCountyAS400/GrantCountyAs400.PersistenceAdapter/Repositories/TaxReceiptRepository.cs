@@ -17,11 +17,32 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             _context = dbContext;
         }
 
-        public IEnumerable<TaxReceipt> GetAll(
-            decimal minReceiptNumber, decimal? maxReceiptNumber, decimal minAffidavitNumber, decimal? maxAffidavitNumber, DateTime? minDate, DateTime? maxDate,
-            out int resultCount, int pageNumber = 1, int pageSize = 50)
+        public TaxReceiptDetails Details(decimal receiptNumber)
         {
-            List<TaxReceipt> results = new List<TaxReceipt>();
+            var cashReceipts = (from x in _context.TreascashReceiptsTender
+                                where x.ReceiptTranNumber == receiptNumber
+                                select TaxReceiptMapper.Map(x)).ToList();
+
+            var generalReceipts = (from x in _context.TreastenderGeneralReceipts
+                                   where x.ReceiptTranNumber == receiptNumber
+                                   select TaxReceiptMapper.Map(x)).ToList();
+
+            var affadavitReceipts = (from x in _context.TreastenderAffadavits
+                                     where x.ReceiptTranNumber == receiptNumber &&
+                                           x.TotalPaid > 0
+                                     select TaxReceiptMapper.Map(x)).ToList();
+
+            IEnumerable<DateTime> receiptDates = cashReceipts.Select(x => x.ReceiptDate.Value);
+            var propertyTransactions = GetPropertyTaxReceivableTransactions(receiptNumber, receiptDates);
+
+            return new TaxReceiptDetails(receiptNumber, cashReceipts, generalReceipts, affadavitReceipts, propertyTransactions);
+        }
+
+        public IEnumerable<AffadavitReceipt> GetAllAffadavitReceipts(
+            decimal minReceiptNumber, decimal? maxReceiptNumber, decimal minAffidavitNumber, decimal? maxAffidavitNumber, out int resultCount, int pageNumber = 1,
+            int pageSize = 50)
+        {
+            var results = new List<AffadavitReceipt>();
 
             // if Max TransactionNumber is null or zero, make it same as Min value as if "single" value was provided
             if (!maxReceiptNumber.HasValue || maxReceiptNumber.Value == 0)
@@ -33,83 +54,6 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             {
                 maxAffidavitNumber = minAffidavitNumber;
             }
-
-            IQueryable<TaxReceipt> cashReceipts = Enumerable.Empty<TaxReceipt>().AsQueryable();
-            // when filtering by "AffidavitNumber", ignore CashReceipts as it doesn't have matching propety for "AffidavitNumber"
-            if (minAffidavitNumber <= 0)
-            {
-                cashReceipts = (from x in _context.TreascashReceiptsTender
-                                where ((minReceiptNumber <= 0) || x.ReceiptTranNumber >= minReceiptNumber)
-                                && ((maxReceiptNumber <= 0) || x.ReceiptTranNumber <= maxReceiptNumber)
-                                && ((!minDate.HasValue) || x.ReceiptDate >= minDate.Value)
-                                && ((!maxDate.HasValue) || x.ReceiptDate <= maxDate.Value)
-                                select new TaxReceipt(x.ReceiptTranNumber.Value, x.ReceiptDate, null));
-            }
-
-            var generalReceipts = (from x in _context.TreastenderGeneralReceipts
-                                   where ((minReceiptNumber <= 0) || x.ReceiptTranNumber >= minReceiptNumber)
-                                   && ((maxReceiptNumber <= 0) || x.ReceiptTranNumber <= maxReceiptNumber)
-                                   && ((minAffidavitNumber <= 0) || x.ReceiptTran >= minAffidavitNumber)
-                                   && ((maxAffidavitNumber <= 0) || x.ReceiptTran <= maxAffidavitNumber)
-                                   && ((!minDate.HasValue) || x.TranDate >= minDate.Value)
-                                   && ((!maxDate.HasValue) || x.TranDate <= maxDate.Value)
-                                   select new TaxReceipt(x.ReceiptTranNumber.Value, x.TranDate, x.ReceiptTran));
-
-            var affadavitReceipts = (from x in _context.TreastenderAffadavits
-                                     where ((minReceiptNumber <= 0) || x.ReceiptTranNumber >= minReceiptNumber)
-                                     && ((maxReceiptNumber <= 0) || x.ReceiptTranNumber <= maxReceiptNumber)
-                                     && ((minAffidavitNumber <= 0) || x.ReceiptTran >= minAffidavitNumber)
-                                     && ((maxAffidavitNumber <= 0) || x.ReceiptTran <= maxAffidavitNumber)
-                                     && ((!minDate.HasValue) || x.AffidavitDate >= minDate.Value)
-                                     && ((!maxDate.HasValue) || x.AffidavitDate <= maxDate.Value)
-                                     && (x.TotalPaid > 0)
-                                     select new TaxReceipt(x.ReceiptTranNumber.Value, x.AffidavitDate, x.ReceiptTran));
-
-            var query = cashReceipts.Union(generalReceipts).Union(affadavitReceipts).Distinct();
-            if (pageNumber > 0)
-            {
-                resultCount = query.Count();
-                results = query.Skip((pageNumber - 1) * pageSize)
-                               .Take(pageSize)
-                               .OrderBy(t => t.ReceiptNumber)
-                               .ToList();
-            }
-            else
-            {
-                results = query.OrderBy(t => t.ReceiptNumber)
-                               .ToList();
-                resultCount = results.Count();
-            }
-
-            return results;
-        }
-
-        public TaxReceiptDetails Details(decimal transactionNumber)
-        {
-            var cashReceipts = (from x in _context.TreascashReceiptsTender
-                                where x.ReceiptTranNumber == transactionNumber
-                                select TaxReceiptMapper.Map(x)).ToList();
-
-            var generalReceipts = (from x in _context.TreastenderGeneralReceipts
-                                   where x.ReceiptTranNumber == transactionNumber
-                                   select TaxReceiptMapper.Map(x)).ToList();
-
-            var affadavitReceipts = (from x in _context.TreastenderAffadavits
-                                     where x.ReceiptTranNumber == transactionNumber &&
-                                           x.TotalPaid > 0
-                                     select TaxReceiptMapper.Map(x)).ToList();
-
-            IEnumerable<DateTime> receiptDates = cashReceipts.Select(x => x.ReceiptDate.Value);
-            var propertyTransactions = GetPropertyTaxReceivableTransactions(transactionNumber, receiptDates);
-
-            return new TaxReceiptDetails(transactionNumber, cashReceipts, generalReceipts, affadavitReceipts, propertyTransactions);
-        }
-
-        public IEnumerable<AffadavitReceipt> GetAllAffadavitReceipts(
-            decimal minReceiptNumber, decimal? maxReceiptNumber, decimal minAffidavitNumber, decimal? maxAffidavitNumber, out int resultCount, int pageNumber = 1,
-            int pageSize = 50)
-        {
-            var results = new List<AffadavitReceipt>();
 
             var query = from receipt in _context.TreastenderAffadavits
                         where ((minReceiptNumber <= 0) || receipt.ReceiptTranNumber >= minReceiptNumber)
@@ -190,6 +134,39 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             }
 
             return results;
+        }
+
+        public AffadavitReceiptDetails AffadavitReceiptDetails(int affadavitReceiptId)
+        {
+            var query = (from receipt in _context.TreastenderAffadavits
+                         join cashReceipt in _context.TreascashReceiptsTender
+                         on new { receipt.TranYear, receipt.ReceiptTranNumber } equals new { cashReceipt.TranYear, cashReceipt.ReceiptTranNumber }
+                         into cashReceiptJoin
+                         from cashReceiptRecord in cashReceiptJoin.DefaultIfEmpty()
+                         join codeArea in _context.AsmttaxCodeArea on receipt.TaxCodeArea equals codeArea.TaxCodeArea
+                         into codeAreaJoin
+                         from codeAreaRecord in codeAreaJoin.DefaultIfEmpty()
+                         where receipt.Id == affadavitReceiptId
+                         select new
+                         {
+                             AffadavitReceipt = receipt,
+                             CashReceipt = cashReceiptRecord,
+                             CodeArea = codeAreaRecord
+                         }).FirstOrDefault();
+
+            var affadavitParcels = (from receipt in _context.TreastenderAffadavits
+                                    join valueMaster in _context.AsmtrealPropertyAssessedValueMaster on receipt.ParcelNumber equals valueMaster.ParcelNumber
+                                    join nameAddress in _context.AsmtmasterNameAddress
+                                    on valueMaster.TitleOwnerCode equals nameAddress.NameCode
+                                    join legalDescription in _context.AsmtfullLegalDescription.Where(t => t.SequenceNumber == 1)
+                                    on receipt.ParcelNumber equals legalDescription.ParcelNumber
+                                    into legalDescriptionJoin
+                                    from legalDescriptionRecord in legalDescriptionJoin.DefaultIfEmpty()
+                                    where receipt.ReceiptTran == query.AffadavitReceipt.ReceiptTran
+                                    select TaxReceiptMapper.MapToParcel(receipt, valueMaster, nameAddress, legalDescriptionRecord)
+                                   ).ToList();
+
+            return TaxReceiptMapper.MapToDetails(query.AffadavitReceipt, query.CashReceipt, query.CodeArea, affadavitParcels);
         }
 
         private List<PropertyTaxReceivableTransaction> GetPropertyTaxReceivableTransactions(decimal transactionNumber, IEnumerable<DateTime> receiptDates)

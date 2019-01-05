@@ -21,5 +21,24 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Treasurer
         internal static TaxPaymentReceipt Map(TreasallPropertyTaxReceivableTransactions transaction)
             => new TaxPaymentReceipt(transaction.Id, transaction.ParcelNumber.Value, transaction.ParcelExtension, (int)transaction.TaxYear.Value, transaction.TranDate,
                 transaction.TaxAmount, transaction.ReceiptTranNumber);
+
+        internal static AffadavitReceiptDetails MapToDetails(
+            TreastenderAffadavits receipt,
+            TreascashReceiptsTender cashReceipt,
+            AsmttaxCodeArea codeArea,
+            System.Collections.Generic.List<AffadavitReceiptParcel> affadavitParcels)
+            => new AffadavitReceiptDetails(receipt.Id, (int)receipt.TranYear.Value, receipt.ReceiptTranNumber.Value, receipt.TotalPaid, receipt.ReceiptTran,
+                receipt.AffidavitDate, receipt.ParcelNumber, receipt.LegalDocumentType, receipt.DocumentDate, receipt.TaxCodeArea, receipt.TaxStatus,
+                cashReceipt?.ReceiptDate, codeArea?.TaxCodeDesc, affadavitParcels);
+
+        internal static AffadavitReceiptParcel MapToParcel(
+            TreastenderAffadavits receipt,
+            AsmtrealPropertyAssessedValueMaster valueMaster,
+            AsmtmasterNameAddress nameAddress,
+            AsmtfullLegalDescription legalDescription)
+            => new AffadavitReceiptParcel(receipt.Id, receipt.ParcelNumber, receipt.ReceiptTran, receipt.NewOwnerBuyer, receipt.PreviousOwnerSeller, receipt.TaxAmount,
+                receipt.TotalPaid, receipt.StateTaxPaid, receipt.AssessedValue, receipt.PPvalue, receipt.GiftDebt, receipt.LocalTaxPaid, receipt.StatePenalty,
+                receipt.LocalPenalty, receipt.LocalInterest, receipt.TechnicalFee, receipt.SubsidizedFee, valueMaster.UnimprovedLandValue, valueMaster.ImprovedLandValue,
+                valueMaster.BuildingValue, nameAddress.AddressLine1.Trim(), nameAddress.City.Trim(), legalDescription?.Descrtiption.Trim());
     }
 }

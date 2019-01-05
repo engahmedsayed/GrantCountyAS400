@@ -1,9 +1,8 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceipt
 {
-    public class TaxReceiptFilterViewModel
+    public class AffadavitReceiptFilterViewModel
     {
         [Display(Name = "Receipt From")]
         public decimal MinReceiptNumber { get; set; }
@@ -16,13 +15,5 @@ namespace GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceipt
 
         [Display(Name = "Affidavit To")]
         public decimal MaxAffidavitNumber { get; set; }
-
-        [Display(Name = "Date From")]
-        [UIHint("DatePicker")]
-        public DateTime? MinDate { get; set; } = null;
-
-        [Display(Name = "Date To")]
-        [UIHint("DatePicker")]
-        public DateTime? MaxDate { get; set; } = null;
     }
 }

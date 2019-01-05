@@ -53,6 +53,9 @@
     <Content Update="Views\LegalDocument\Details.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Views\TaxReceipt\AffadavitReceiptDetails.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\TaxReceipt\GeneralReceipts.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
@@ -60,9 +63,6 @@
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\TaxReceipt\TaxPaymentReceipts.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-    <Content Update="Views\TaxReceipt\Index.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="wwwroot\ExcelTemplates\AccountPayableTemplate.xlsx">

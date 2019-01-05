@@ -4,11 +4,11 @@
 @using X.PagedList.Mvc.Core;
 @using X.PagedList;
 @{
-    ViewData["Title"] = "Affadavit Receipts - Index";
-    var filterViewModel = ViewBag.FilterViewModel as TaxReceiptFilterViewModel;
+    ViewData["Title"] = "Affidavits - Index";
+    var filterViewModel = ViewBag.FilterViewModel as AffadavitReceiptFilterViewModel;
 }
 
-<h2>Affadavit Receipts</h2>
+<h2>Affidavits</h2>
 
 <p>
     @using (Html.BeginForm("AffadavitReceipts", "TaxReceipt", FormMethod.Get))
@@ -91,12 +91,14 @@
         {
             <tr>
                 <td>
-                    <a asp-action="Details" asp-route-transactionNumber="@item.ReceiptNumber">
+                    <a asp-action="Details" asp-route-receiptNumber="@item.ReceiptNumber">
                         @Html.DisplayFor(_ => item.ReceiptNumber)
                     </a>
                 </td>
                 <td>
-                    @Html.DisplayFor(_ => item.AffadavitNumber)
+                    <a asp-action="AffadavitReceiptDetails" asp-route-affadavitReceiptId="@item.Id">
+                        @Html.DisplayFor(_ => item.AffadavitNumber)
+                    </a>
                 </td>
                 <td>
                     @Html.DisplayFor(_ => item.AffidavitDate)

@@ -115,7 +115,7 @@
                                                         @Html.DisplayFor(modelItem => transaction.TotalInterestPaid)
                                                     </td>
                                                     <td>
-                                                        <a asp-controller="TaxReceipt" asp-action="details" asp-route-transactionNumber="@transaction.TransactionNumber">
+                                                        <a asp-controller="TaxReceipt" asp-action="details" asp-route-receiptNumber="@transaction.TransactionNumber">
                                                             @Html.DisplayFor(modelItem => transaction.TransactionNumber)
                                                         </a>                                                        
                                                         &nbsp;&nbsp;
