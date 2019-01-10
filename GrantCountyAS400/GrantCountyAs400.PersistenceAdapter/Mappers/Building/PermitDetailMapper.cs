@@ -79,7 +79,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                permit.ResCommStor.Trim(), permit.CommercialUseDesc1, permit.CommercialUseDesc2, permit.DealerNameCode, permit.ManufacturerName, permit.LotorMan, permit.ApproxPurchaseDate,
                permit.ApproxDeliveryDate, permit.InstallationIncludedInPrice, permit.MovingFromGrantCounty, permit.CountyStateIfNotGrant, permit.TitleOwnerName, permit.TaxpayerName,
                permit.MovingFromParcelNumber.Value, permit.MovingFromAddress, permit.CertInstallerCode, permit.FireDistrictCode, permit.FireFlowAlreadyProvided, permit.AdditionalFireFlowRequired,
-               permit.AmountOfFireFlowRequired, permit.BldgDeptSetback.Value, permit.FireMarshalSetback.Value, bldgValue.ExtendedValue.Value, bldgfire.LongFireDistrictName,
+               permit.AmountOfFireFlowRequired, permit.BldgDeptSetback.Value, permit.FireMarshalSetback.Value, bldgValue?.ExtendedValue, bldgfire.LongFireDistrictName,
                (bldgCondition != null), (bldgInspection != null),
                new PermitApprovedInfo(permit.BldgDeptApprovedBy, permit.BldgDeptDateApproved, permit.BldgDeptApprovedUserId, permit.BldgDeptApprovedChangeDate),
                new PermitApprovedInfo(permit.FireMarshalApprovedBy, permit.FireMarshalDateApproved, permit.FireMarshalApprovedUserId, permit.FireMarshalApprovedChangeDate),

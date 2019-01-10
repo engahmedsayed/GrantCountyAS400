@@ -67,7 +67,7 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         [Display(Name = "Fire Marshal Setback ")]
         public decimal FireMarshalSetback { get; set; }
         [Display(Name = "Total Valuation")]
-        public decimal ExtendedValue { get; set; }
+        public decimal? ExtendedValue { get; set; }
         public string LongFireDistrictName { get; set; }
         public bool HasBuildingApplicationCondition { get; set; }
         public bool HasBuildingApplicationInspection { get; set; }

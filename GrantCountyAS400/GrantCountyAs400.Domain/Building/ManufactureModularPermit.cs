@@ -34,7 +34,7 @@ namespace GrantCountyAs400.Domain.Building
         public decimal BldgDeptSetback { get; }
         public decimal FireMarshalSetback { get; }
 
-        public decimal ExtendedValue { get; }
+        public decimal? ExtendedValue { get; }
         public string LongFireDistrictName { get; }
         public bool HasBuildingApplicationCondition { get; }
         public bool HasBuildingApplicationInspection { get; }
@@ -48,7 +48,7 @@ namespace GrantCountyAs400.Domain.Building
             string manufacturerName, string lotorMan, DateTime? approxPurchaseDate, DateTime? approxDeliveryDate, string installationIncludedInPrice,
             string movingFromGrantCounty, string countyStateIfNotGrant, string titleOwnerName, string taxpayerName, decimal movingFromParcelNumber,
             string movingFromAddress, string certInstallerCode, string fireDistrictCode, string fireFlowAlreadyProvided, string additionalFireFlowRequired,
-            string amountOfFireFlowRequired, decimal bldgDeptSetback, decimal fireMarshalSetback, decimal extendedValue, string longFireDistrictName,
+            string amountOfFireFlowRequired, decimal bldgDeptSetback, decimal fireMarshalSetback, decimal? extendedValue, string longFireDistrictName,
             bool hasBuildingApplicationCondition, bool hasBuildingApplicationInspection, PermitApprovedInfo bldgDept, PermitApprovedInfo fireMarshal,
             DealersInstallersArchitectInfo dealerInfo, DealersInstallersArchitectInfo installerInfo)
         {
