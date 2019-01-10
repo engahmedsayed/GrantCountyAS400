@@ -54,7 +54,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                         (legalDocument, exciseTaxData)
                             => LegalDocumentMapper.Map(
                                     legalDocument,
-                                    exciseTaxData.FirstOrDefault(x => x.AffidavitNumber == legalDocument.AffidavitNumber && 
+                                    exciseTaxData.FirstOrDefault(x => x.AffidavitNumber == legalDocument.AffidavitNumber &&
                                                                        x.AffidavitNumberExtension == legalDocument.AffidavitNumberExtension))
                                ).ToList();
 
@@ -81,12 +81,14 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                              legalDocument.ParcelNumber,
                              legalDocument.AffidavitNumber,
                              legalDocument.AffidavitNumberExtension,
+                             legalDocument.LegalInstrumentDate,
                          }
                          equals new
                          {
                              exciseTaxData.ParcelNumber,
                              exciseTaxData.AffidavitNumber,
                              exciseTaxData.AffidavitNumberExtension,
+                             LegalInstrumentDate = exciseTaxData.SaleDate
                          }
                          into exciseTaxDataJoin
                          from exciseTaxDataRecord in exciseTaxDataJoin.DefaultIfEmpty()
@@ -97,7 +99,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          into instrumentJoin
                          from defaultInstrument in instrumentJoin.DefaultIfEmpty()
                          where legalDocument.Id == legalDocumentId
-                         select new { namesRecord, codeArea, valueMasterRecord, landUseCode, exciseTaxDataRecord, legalDocument, defaultInstrument, defaultRejection }).SingleOrDefault();
+                         select new { namesRecord, codeArea, valueMasterRecord, landUseCode, exciseTaxDataRecord, legalDocument, defaultInstrument, defaultRejection }
+                         ).SingleOrDefault();
 
             if (query != null)
             {
