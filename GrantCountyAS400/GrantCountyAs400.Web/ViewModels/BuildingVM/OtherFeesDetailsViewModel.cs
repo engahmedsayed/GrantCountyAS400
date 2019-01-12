@@ -27,5 +27,7 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         [Display(Name ="Unit Fee")]
         public List<decimal?> UnitCharge { get; set; }
 
+        public List<string> FeeCode { get; set; }
+
     }
 }
