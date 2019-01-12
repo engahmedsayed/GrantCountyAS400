@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 {
@@ -43,6 +44,11 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         // computed properties
         [Display(Name = "Application(Year-Number)")]
         public string ApplicationYearDisplay => $"{ApplicationYear} - {ApplicationNumber}";
+
+        [Display(Name ="Permit Issue Date")]
+        public DateTime? PermitIssuedDate { get; set; }
+
+        public string PermitIssueDateDisplay => PermitIssuedDate.HasValue ? PermitIssuedDate.Value.ToString("MM/dd/yyyy") : "";
 
         [Display(Name = "Jurisdiction")]
         public string JurisdictionDisplay => $"{JurisdictionCode} - {JurisidictionShortDepartmentName}";
