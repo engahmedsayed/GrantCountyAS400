@@ -266,8 +266,7 @@ namespace GrantCountyAs400.Web.Controllers.Building
             result.BasicInfo = Mapper.Map<BuildingPermitSystemBasicInfoViewModel>(_buildingModuleRepository.GetBasicInfo(id));
             var valuationAndFeesEntity = GetValuationAndFees(id, result.BasicInfo.ApplicationYear,
                                                              result.BasicInfo.ApplicationNumber, "bldg");
-            result.TotalBuildingFees = valuationAndFeesEntity?.AssignStructNanNodFees;
-            result.ExtendedAmount = valuationAndFeesEntity?.BaseFee;
+            result.ExtendedAmount = valuationAndFeesEntity?.ExtendedAmount;
             result.SequenceNumber = valuationAndFeesEntity?.SequenceNumber;
             result.FeeDescription = valuationAndFeesEntity?.Description;
             result.FeeCode = valuationAndFeesEntity?.FeeCode;
@@ -276,7 +275,7 @@ namespace GrantCountyAs400.Web.Controllers.Building
             result.TotalValue = valuationAndFeesEntity?.ExtendedValue;
             result.FeeIncrement = valuationAndFeesEntity?.FeeIncrement;
             result.MinMaxFlag = valuationAndFeesEntity?.MinMaxFlag;
-            result.TotalBuildingFees = valuationAndFeesEntity?.BaseFee.Where(t=>t.HasValue).Sum();
+            result.TotalBuildingFees = valuationAndFeesEntity?.ExtendedAmount.Where(t=>t.HasValue).Sum();
             return View(result);
         }
 
