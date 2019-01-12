@@ -342,6 +342,7 @@ namespace GrantCountyAs400.Web.Controllers.Building
             result.NumberOfUnits = valuationAndFeesEntity?.NumberOfUnits;
             result.UnitCharge = valuationAndFeesEntity?.UnitCharge;
             result.ExtendedAmount = valuationAndFeesEntity?.ExtendedAmount;
+            result.FeeCategory = valuationAndFeesEntity?.FeeCode;
             return View(result);
         }
 

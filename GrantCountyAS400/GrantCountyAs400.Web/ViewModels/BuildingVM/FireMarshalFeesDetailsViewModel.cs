@@ -26,6 +26,8 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 
         public List<decimal?> ExtendedAmount { get; set; }
 
+        public List<string> FeeCategory { get; set; }
+
 
     }
 }
