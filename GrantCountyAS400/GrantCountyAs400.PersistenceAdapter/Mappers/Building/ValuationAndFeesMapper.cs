@@ -53,11 +53,11 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
             List<ValuationFeeDetailsItem> items = new List<ValuationFeeDetailsItem>();
             for (int i = 0; i < bldgvalues?.Count; i++)
             {
-                items.Add(new ValuationFeeDetailsItem(bldgvalues[i].SequenceNumber, bldgvalues[i].ComponentDescription, bldgvalues[i].OccupantType, bldgvalues[i].NumberOfOccupants,
-                                                      bldgvalues[i].TableNumberSectLineSeq, bldgvalues[i].SquareFeet,
-                                                      bldgvalues[i].SectionDescription, bldgvalues[i].ConstructionTypeDescription, bldgvalues[i].Cost, bldgvalues[i].ExtendedValue));
+                items.Add(new ValuationFeeDetailsItem(bldgvalues[i]?.SequenceNumber, bldgvalues[i]?.ComponentDescription, bldgvalues[i]?.OccupantType, bldgvalues[i]?.NumberOfOccupants,
+                                                      bldgvalues[i]?.TableNumberSectLineSeq, bldgvalues[i]?.SquareFeet,
+                                                      bldgvalues[i]?.SectionDescription, bldgvalues[i]?.ConstructionTypeDescription, bldgvalues[i]?.Cost, bldgvalues[i]?.ExtendedValue));
             }
-            return new ValuationFeeDetails(bldgvalues?.Sum(t => t.ExtendedValue), bldgvalues?.Sum(t => t.SquareFeet), items);
+            return new ValuationFeeDetails(bldgvalues?.Sum(t => t?.ExtendedValue), bldgvalues?.Sum(t => t?.SquareFeet), items);
         }
            
 

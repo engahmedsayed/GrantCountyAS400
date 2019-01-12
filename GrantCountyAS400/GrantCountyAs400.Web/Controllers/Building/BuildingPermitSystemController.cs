@@ -317,7 +317,7 @@ namespace GrantCountyAs400.Web.Controllers.Building
                     NumberOfOccupants = valuationAndFeesEntity.Items[i].NumberOfOccupants,
                     OccupantType = valuationAndFeesEntity.Items[i].OccupantType,
                     SectionDescription = valuationAndFeesEntity.Items[i].SectionDescription,
-                    SequenceNumber = (int)valuationAndFeesEntity.Items[i].SequenceNumber,
+                    SequenceNumber = valuationAndFeesEntity.Items[i].SequenceNumber.HasValue? (int)valuationAndFeesEntity.Items[i].SequenceNumber:default(int?),
                     SquareFeet = valuationAndFeesEntity.Items[i].SquareFeet,
                     TableNumberSectLineSeq = valuationAndFeesEntity.Items[i].TableNumberSectLineSeq
                 });
