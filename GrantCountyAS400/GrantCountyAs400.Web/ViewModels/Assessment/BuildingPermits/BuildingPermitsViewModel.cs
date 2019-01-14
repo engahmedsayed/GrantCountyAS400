@@ -40,14 +40,19 @@ namespace GrantCountyAs400.Web.ViewModels.Assessment.BuildingPermits
 
     public class BuildingPermitsLineValueViewModel
     {
-        [Display(Name ="Permit Number")]
-        public decimal? PermitNumber { get; set; }
+        [Display(Name ="Permit #")]
+        public int? PermitNumber { get; set; }
+
+        [Display(Name ="Permit Year")]
+        public int? PermitYear { get; set; }
 
         [Display(Name = "Seq")]
         public decimal? PermitAddenDum { get; set; }
 
         [Display(Name = "Issue Date")]
         public DateTime? PermitIssueDate { get; set; }
+
+        public string PermitIssueDateDisplay => PermitIssueDate.HasValue ? PermitIssueDate.Value.ToString("MM/dd/yyyy") : "";
 
         [Display(Name = "Jurisdiction")]
         public string JurisdictionCode { get; set; }

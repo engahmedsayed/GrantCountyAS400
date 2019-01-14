@@ -123,7 +123,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             List<BuildingPermitsLineValue> lineValues = new List<BuildingPermitsLineValue>();
             foreach (var item in lineValuesQuery)
             {
-                lineValues.Add(new BuildingPermitsLineValue(item.PermitNumber, item.PermitAddendum, item.PermitIssuedDate
+                lineValues.Add(new BuildingPermitsLineValue(item.PermitNumber,item.PermitYear, item.PermitAddendum, item.PermitIssuedDate
                                                            , item.JurisdictionCode, item.PercentComplete, item.EstimatedValue
                                                            , item.NewOrDemo, item.Comments));
             }

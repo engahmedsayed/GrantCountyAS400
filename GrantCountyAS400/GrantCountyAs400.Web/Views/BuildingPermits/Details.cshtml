@@ -71,6 +71,9 @@
                 @Html.DisplayNameFor(model => model.LineValues[0].PermitNumber)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.LineValues[0].PermitYear)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.LineValues[0].PermitAddenDum)
             </th>
             <th>
@@ -104,10 +107,15 @@
 
             </td>
             <td>
+
+                @Html.DisplayFor(modelItem => item.PermitYear)
+
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.PermitAddenDum)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PermitIssueDate)
+                @Html.DisplayFor(modelItem => item.PermitIssueDateDisplay)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.JurisdictionCode)

@@ -92,7 +92,8 @@ namespace GrantCountyAs400.Web.Controllers.Assessment
                     PercentComplete = item.PercentComplete,
                     PermitAddenDum = item.PermitAddenDum,
                     PermitIssueDate = item.PermitIssueDate,
-                    PermitNumber = item.PermitNumber
+                    PermitNumber = item.PermitNumber.HasValue ? (int?)item.PermitNumber : null,
+                    PermitYear= item.PermitYear.HasValue?(int?)item.PermitYear:null
                 });
             }
             result.LineValues = lineValues.OrderByDescending(t=>t.PermitIssueDate).ToList();

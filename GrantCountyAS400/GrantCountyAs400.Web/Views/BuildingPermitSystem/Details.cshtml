@@ -115,7 +115,7 @@
                         </div>
                     </div>
                 </div>
-                @if (Model.ApprovalStatus != null && Model.PlanningApproval != null)
+                @if (Model.ApprovalStatus != null)
                 {
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -127,7 +127,15 @@
                         </div>
                         <div id="planningApproval" class="panel-collapse collapse in">
                             <div class="panel-body">
+                                @if(Model.PlanningApproval != null)
+                                {
                                 <partial name="_PlanningApproval" for="@Model.PlanningApproval" />
+                                }
+                                else
+                                {
+                                    <span>No Data available in this section</span>
+
+                                }
                             </div>
                         </div>
                     </div>
