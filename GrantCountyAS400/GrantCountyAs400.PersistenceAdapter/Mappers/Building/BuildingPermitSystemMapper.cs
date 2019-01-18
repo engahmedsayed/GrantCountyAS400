@@ -95,11 +95,9 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Building
                 bldgpermit.OtherSpecialApprovalDescription);
 
         public static PlanningApproval MapToPlanningApproval(BldgplanningApproval plap, BldgpermitApplicationMaster appm) =>
-            (plap == null) ?
-            null :
-            new PlanningApproval(appm.ApplicantProjectDescription, plap.ZoneCode, plap.FrontPropertySetback, plap.SideFlankingSetback,
-                                 plap.SidePropertySetback, plap.BackPropertySetback, plap.FloodZone, plap.FloodZoneMapNumber,
-                                 plap.LUpermitRequired, plap.Comments, plap.ApprovedBy, plap.UserId, plap.ChangeDate);
+            new PlanningApproval(appm?.ApplicantProjectDescription, plap?.ZoneCode, plap?.FrontPropertySetback, plap?.SideFlankingSetback,
+                                 plap?.SidePropertySetback, plap?.BackPropertySetback, plap?.FloodZone, plap?.FloodZoneMapNumber,
+                                 plap?.LUpermitRequired, plap?.Comments, plap?.ApprovedBy, plap?.UserId, plap?.ChangeDate);
 
         public static AssessorApproval MaptToAssessorApproval(AsmtrealPropertyAssessedValueMaster rpmas, BldgassessorApproval assessorApproval,
                                                         AsmtmasterNameAddress nName, BldgpermitApplicationMaster appm) =>
