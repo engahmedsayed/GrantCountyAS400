@@ -52,7 +52,7 @@ namespace GrantCountyAs400.Domain.Building
 
         public decimal? AssessorParcelNumber { get; }
         public string ApplicantBusinessName { get; }
-        public string ResultOfEnforcementAction { get; set; }
+        public string ResultOfEnforcementAction { get; }
         public string ContractorBusinessName { get; }
         public decimal? ApplicationNumber { get; }
         public decimal? AddendumNumber { get; }

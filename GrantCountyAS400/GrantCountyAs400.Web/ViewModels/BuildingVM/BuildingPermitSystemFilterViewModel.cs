@@ -86,5 +86,11 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
         [Display(Name = "Application Date To")]
         [UIHint("DatePicker")]
         public DateTime? ApplicationDateTo { get; set; } = null;
+
+        [Display(Name = "Assessor Parcel From")]
+        public decimal? AssessorParcelFrom { get; set; } = null;
+
+        [Display(Name = "Assessor Parcel To")]
+        public decimal? AssessorParcelTo { get; set; } = null;
     }
 }

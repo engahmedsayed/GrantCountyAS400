@@ -58,10 +58,6 @@
                 <div class="col-md-2">
                     <input type="number" asp-for="@filterViewModel.PreliminaryParcelNumber" name="preliminaryparcelnumber" class="form-control" />
                 </div>
-                <label asp-for="@filterViewModel.AssessorParcelNumber" class="control-label col-md-2"></label>
-                <div class="col-md-2">
-                    <input type="number" asp-for="@filterViewModel.AssessorParcelNumber" name="assessorparcelnumber" class="form-control" />
-                </div>
                 <label asp-for="@filterViewModel.StateClassCode" class="control-label col-md-2"></label>
                 <div class="col-md-2">
                     <input type="number" asp-for="@filterViewModel.StateClassCode" name="stateClassCode" class="form-control" />
@@ -120,6 +116,19 @@
                 <label asp-for="@filterViewModel.ApplicationDateTo" class="control-label col-md-2"></label>
                 <div class="col-md-2">
                     @Html.EditorFor(model => filterViewModel.ApplicationDateTo, null, "applicationDateTo", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+
+                <label asp-for="@filterViewModel.AssessorParcelFrom" class="control-label col-md-2"></label>
+                <div class="col-md-2">
+                    @Html.EditorFor(model => filterViewModel.AssessorParcelFrom, null, "assessorParcelfrom", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <label asp-for="@filterViewModel.AssessorParcelTo" class="control-label col-md-2"></label>
+                <div class="col-md-2">
+                    @Html.EditorFor(model => filterViewModel.AssessorParcelTo, null, "assessorParcelTo", new { htmlAttributes = new { @class = "form-control" } })
                 </div>
             </div>
         </div>
@@ -251,7 +260,6 @@
     applicantlastname = filterViewModel.ApplicantLastName,
     applicantfirstname = filterViewModel.ApplicantFirstName,
     preliminaryparcelnumber = filterViewModel.PreliminaryParcelNumber,
-    assessorparcelnumber = filterViewModel.AssessorParcelNumber,
     stateClassCode = filterViewModel.StateClassCode,
     projectDescription = filterViewModel.ProjectDescription,
     officeProjectDescription = filterViewModel.OfficeProjectDescription,
@@ -262,7 +270,9 @@
     toDate = filterViewModel.ToDate,
     permitYear = filterViewModel.PermitYear,
     applicationDateFrom = filterViewModel.ApplicationDateFrom,
-    applicationDateTo = filterViewModel.ApplicationDateTo
+    applicationDateTo = filterViewModel.ApplicationDateTo,
+    assessorParcelFrom = filterViewModel.AssessorParcelFrom,
+    assessorParcelTo = filterViewModel.AssessorParcelTo
 }))
 </nav>
 

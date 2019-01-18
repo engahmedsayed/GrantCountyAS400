@@ -69,7 +69,6 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                     && (string.IsNullOrWhiteSpace(searchCriteria.ApplicantLastName) || appm.ApplicantLastName.TrimAndLower().Contains(searchCriteria.ApplicantLastName.TrimAndLower()))
                     && (string.IsNullOrWhiteSpace(searchCriteria.ApplicantFirstName) || appm.ApplicantFirstName.TrimAndLower().Contains(searchCriteria.ApplicantFirstName.TrimAndLower()))
                     && (searchCriteria.PreliminaryParcelNumber == null || appm.PreliminaryParcelNumber == searchCriteria.PreliminaryParcelNumber)
-                    && (searchCriteria.AssessorParcelNumber == null || appm.AssessorParcelNumber == searchCriteria.AssessorParcelNumber)
                     && (searchCriteria.StateClassCode == null || appm.StateClassCode == searchCriteria.StateClassCode)
                     && (string.IsNullOrWhiteSpace(searchCriteria.ProjectDescription) || appm.ApplicantProjectDescription.TrimAndLower().Contains(searchCriteria.ProjectDescription.TrimAndLower()))
                     && (string.IsNullOrWhiteSpace(searchCriteria.ContractorBusinessName) ||(ctrRecord!=null && ctrRecord.ContractorBusinessName.TrimAndLower().Contains(searchCriteria.ContractorBusinessName)))
@@ -81,6 +80,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                     && ((!searchCriteria.ToDate.HasValue) || appm.PermitIssuedDate <= searchCriteria.ToDate)
                     && ((!searchCriteria.ApplicationDateFrom.HasValue) || appm.ApplicationDate >= searchCriteria.ApplicationDateFrom)
                     && ((!searchCriteria.ApplicationDateTo.HasValue) || appm.ApplicationDate <= searchCriteria.ToDate)
+                    && ((!searchCriteria.AssessorParcelFrom.HasValue) || appm.AssessorParcelNumber >= searchCriteria.AssessorParcelFrom)
+                    && ((!searchCriteria.AssessorParcelTo.HasValue) || appm.AssessorParcelNumber <= searchCriteria.AssessorParcelTo)
                     select BuildingPermitSystemMapper.Map(appm, appm.PermitCode.TrimAndLower() == gradString ? grdRecord.OfficeProjectDescription :
                                                           appm.PermitCode.TrimAndLower() == mechString ? mechRecord.OfficeProjectDescription :
                                                           appm.PermitCode.TrimAndLower() == firemString ? firemRecord.OfficeProjectDescription :
@@ -95,21 +96,42 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
 
             if (pageNumber > 0)
             {
-                resultCount = query.Count();
-                results = query.OrderBy(t => (searchCriteria.ApplicationDateFrom == null &&
-                                             searchCriteria.ApplicationDateTo == null &&
-                                             searchCriteria.FromDate == null &&
-                                             searchCriteria.ToDate == null) ? t.ApplicationDate : t.PermitIssueDate).Skip((pageNumber - 1) * pageSize)
+                
+                if (searchCriteria.AssessorParcelFrom != null || searchCriteria.AssessorParcelTo != null)
+                {
+                   results = query.OrderBy(t => t.AssessorParcelNumber).Skip((pageNumber - 1) * pageSize)
                                .Take(pageSize)
                                .ToList();
+                    resultCount = query.Count();
+                }
+                else
+                {
+                    results = query.OrderBy(t =>  (searchCriteria.ApplicationDateFrom == null &&
+                                            searchCriteria.ApplicationDateTo == null &&
+                                            searchCriteria.FromDate == null &&
+                                            searchCriteria.ToDate == null) ? t.ApplicationDate : t.PermitIssueDate).Skip((pageNumber - 1) * pageSize)
+                              .Take(pageSize)
+                              .ToList();
+                    resultCount = query.Count();
+                }
+               
             }
             else
             {
-                results = query.OrderBy(t => (searchCriteria.ApplicationDateFrom == null &&
-                                             searchCriteria.ApplicationDateTo == null &&
-                                             searchCriteria.FromDate == null &&
-                                             searchCriteria.ToDate == null) ? t.ApplicationDate : t.PermitIssueDate)
-                               .ToList();
+                if(searchCriteria.AssessorParcelFrom != null || searchCriteria.AssessorParcelTo != null)
+                {
+                   results = query.OrderBy(t => t.AssessorParcelNumber).ToList();
+                }
+                else
+                {
+                    results = query.OrderBy(t =>  (searchCriteria.ApplicationDateFrom == null &&
+                                            searchCriteria.ApplicationDateTo == null &&
+                                            searchCriteria.FromDate == null &&
+                                            searchCriteria.ToDate == null) ? t.ApplicationDate : t.PermitIssueDate)
+                              .ToList();
+
+                }
+                   
                 resultCount = results.Count();
             }
 

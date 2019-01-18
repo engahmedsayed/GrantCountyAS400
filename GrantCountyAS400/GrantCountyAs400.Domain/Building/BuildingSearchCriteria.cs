@@ -18,8 +18,11 @@ namespace GrantCountyAs400.Domain.Building
         public DateTime? ApplicationDateFrom { get; }
         
         public DateTime? ApplicationDateTo { get; }
+
+        public decimal? AssessorParcelFrom { get;}
+
+        public decimal? AssessorParcelTo { get; }
         public decimal? PreliminaryParcelNumber { get; }
-        public decimal? AssessorParcelNumber { get; }
         public decimal? StateClassCode { get; }
 
         public string OfficeProjectDescription { get; }
@@ -32,9 +35,9 @@ namespace GrantCountyAs400.Domain.Building
 
         public BuildingSearchCriteria(
             decimal? applicationNumber, int? applicationYear, decimal? permitNumber, string applicantBusinessName, string applicantLastName, string applicantFirstName,
-            int? permitYear, decimal? preliminaryParcelNumber, decimal? assessorParcelNumber, decimal? stateClassCode, string officeProjectDescription,
+            int? permitYear, decimal? preliminaryParcelNumber,  decimal? stateClassCode, string officeProjectDescription,
             string projectDescription, string contractorBusinessName, string enforcementAction, string cityApproval, DateTime? fromDate, DateTime? toDate,
-            DateTime? applicationDateFrom,DateTime? applicationDateTo)
+            DateTime? applicationDateFrom,DateTime? applicationDateTo,decimal? assessorParcelFrom, decimal? assessorParcelTo)
         {
             ApplicationNumber = applicationNumber;
             ApplicationYear = applicationYear;
@@ -43,7 +46,6 @@ namespace GrantCountyAs400.Domain.Building
             ApplicantLastName = applicantLastName;
             ApplicantFirstName = applicantFirstName;
             PreliminaryParcelNumber = preliminaryParcelNumber;
-            AssessorParcelNumber = assessorParcelNumber;
             StateClassCode = stateClassCode;
             OfficeProjectDescription = officeProjectDescription;
             ProjectDescription = projectDescription;
@@ -55,6 +57,8 @@ namespace GrantCountyAs400.Domain.Building
             ApplicationDateFrom = applicationDateFrom;
             ApplicationDateTo = applicationDateTo;
             PermitYear = permitYear;
+            AssessorParcelFrom = assessorParcelFrom;
+            AssessorParcelTo = assessorParcelTo;
         }
     }
 }
