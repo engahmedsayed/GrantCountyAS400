@@ -39,15 +39,15 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
         }
 
         public IEnumerable<AffadavitReceipt> GetAllAffadavitReceipts(
-            decimal minReceiptNumber, decimal? maxReceiptNumber, decimal minAffidavitNumber, decimal? maxAffidavitNumber, out int resultCount, int pageNumber = 1,
+            decimal minParcelNumber, decimal? maxParcelNumber, decimal minAffidavitNumber, decimal? maxAffidavitNumber, out int resultCount, int pageNumber = 1,
             int pageSize = 50)
         {
             var results = new List<AffadavitReceipt>();
 
             // if Max TransactionNumber is null or zero, make it same as Min value as if "single" value was provided
-            if (!maxReceiptNumber.HasValue || maxReceiptNumber.Value == 0)
+            if (!maxParcelNumber.HasValue || maxParcelNumber.Value == 0)
             {
-                maxReceiptNumber = minReceiptNumber;
+                maxParcelNumber = minParcelNumber;
             }
 
             if (!maxAffidavitNumber.HasValue || maxAffidavitNumber.Value == 0)
@@ -56,8 +56,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
             }
 
             var query = from receipt in _context.TreastenderAffadavits
-                        where ((minReceiptNumber <= 0) || receipt.ReceiptTranNumber >= minReceiptNumber)
-                        && ((maxReceiptNumber <= 0) || receipt.ReceiptTranNumber <= maxReceiptNumber)
+                        where ((minParcelNumber <= 0) || receipt.ParcelNumber >= minParcelNumber)
+                        && ((maxParcelNumber <= 0) || receipt.ParcelNumber <= maxParcelNumber)
                         && ((minAffidavitNumber <= 0) || receipt.ReceiptTran >= minAffidavitNumber)
                         && ((maxAffidavitNumber <= 0) || receipt.ReceiptTran <= maxAffidavitNumber)
                         && (receipt.TotalPaid > 0)

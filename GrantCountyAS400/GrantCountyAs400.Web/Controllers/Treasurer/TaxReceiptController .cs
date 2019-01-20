@@ -37,7 +37,7 @@ namespace GrantCountyAs400.Web.Controllers.Treasurer
             var pagingInfo = new PagingInfo() { PageNumber = pageNumber };
             var results =
                 _taxReceiptRepository.GetAllAffadavitReceipts(
-                    filter.MinReceiptNumber, filter.MaxReceiptNumber, filter.MinAffidavitNumber, filter.MaxAffidavitNumber, out int resultCount, pageNumber,
+                    filter.MinParcelNumber, filter.MaxParcelNumber, filter.MinAffidavitNumber, filter.MaxAffidavitNumber, out int resultCount, pageNumber,
                     AppSettings.PageSize)
                 .ToList();
 

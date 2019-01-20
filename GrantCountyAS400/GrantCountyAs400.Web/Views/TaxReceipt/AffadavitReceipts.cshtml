@@ -18,15 +18,15 @@
             <div class="row">
                 <div class="col-md-6 col-xs-12">
                     <div class="form-group">
-                        <label asp-for="@filterViewModel.MinReceiptNumber" class="control-label col-md-2"></label>
+                        <label asp-for="@filterViewModel.MinParcelNumber" class="control-label col-md-2"></label>
                         <div class="col-md-10">
-                            <input type="number" asp-for="@filterViewModel.MinReceiptNumber" name="minreceiptnumber" class="form-control" />
+                            <input type="number" asp-for="@filterViewModel.MinParcelNumber" name="minparcelnumber" class="form-control" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label asp-for="@filterViewModel.MaxReceiptNumber" class="control-label col-md-2"></label>
+                        <label asp-for="@filterViewModel.MaxParcelNumber" class="control-label col-md-2"></label>
                         <div class="col-md-10">
-                            <input type="number" asp-for="@filterViewModel.MaxReceiptNumber" name="maxreceiptnumber" class="form-control" />
+                            <input type="number" asp-for="@filterViewModel.MaxParcelNumber" name="maxparcelnumber" class="form-control" />
                         </div>
                     </div>
                 </div>
@@ -60,8 +60,8 @@
 <nav aria-label="navigation">
     @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("AffadavitReceipts", new {
     pageNumber = pageNumber,
-    minreceiptnumber = filterViewModel.MinReceiptNumber,
-    maxreceiptnumber = filterViewModel.MaxReceiptNumber,
+    minparcelnumber = filterViewModel.MinParcelNumber,
+    maxparcelnumber = filterViewModel.MaxParcelNumber,
     minaffidavitnumber = filterViewModel.MinAffidavitNumber,
     maxaffidavitnumber = filterViewModel.MaxAffidavitNumber,
 }))
@@ -117,8 +117,8 @@
 <nav aria-label="navigation">
     @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("AffadavitReceipts", new {
     pageNumber = pageNumber,
-    minreceiptnumber = filterViewModel.MinReceiptNumber,
-    maxreceiptnumber = filterViewModel.MaxReceiptNumber,
+    minparcelnumber = filterViewModel.MinParcelNumber,
+    maxparcelnumber = filterViewModel.MaxParcelNumber,
     minaffidavitnumber = filterViewModel.MinAffidavitNumber,
     maxaffidavitnumber = filterViewModel.MaxAffidavitNumber,
 }))
