@@ -31,6 +31,7 @@ namespace GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceipt
         public decimal? TaxCodeArea { get; set; }
         public string TaxStatus { get; set; }
         [DataType(DataType.Date)]
+        [Display(Name = "Receipt Date")]
         public DateTime? ReceiptDate { get; set; }
         public string TaxCodeDesc { get; set; }
 
@@ -82,8 +83,21 @@ namespace GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceipt
         public string City { get; set; }
         [Display(Name = "Legal Description")]
         public string LegalDescription { get; set; }
+        [Display(Name = "Legal Document Type")]
+        public string LegalDocumentType { get; set; }
+        [DataType(DataType.Date)]
+        [Display(Name = "Document Date")]
+        public DateTime? DocumentDate { get; set; }
+        [Display(Name = "Exempt Reg Number ")]
+        public string ExemptRegNumber { get; set; }
+        public string Description { get; set; }
+        public string Description2 { get; set; }
+        [Display(Name = "Mobile Home Notation")]
+        public string MobileHomeNotation { get; set; }
 
         [Display(Name = "Market Value")]
         public decimal? MarketValue => UnimprovedLandValue + ImprovedLandValue + BuildingValue;
+        [Display(Name = "Description")]
+        public string DescriptionDisplay => $"{Description} & {Description2}";
     }
 }

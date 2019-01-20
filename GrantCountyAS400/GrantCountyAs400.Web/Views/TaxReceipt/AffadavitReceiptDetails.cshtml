@@ -12,10 +12,6 @@
                 <table class="table">
                     <tbody>
                         <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.AffadavitNumber) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.AffadavitNumber) </span></td>
-                        </tr>
-                        <tr>
                             <td><strong>@Html.DisplayNameFor(model => model.ReceiptDate) </strong></td>
                             <td class="text-right"><span> @Html.DisplayFor(model => model.ReceiptDate) </span></td>
                         </tr>
@@ -28,24 +24,7 @@
             </div>
             <div class="col-xs-6">
                 <table class="table">
-                    <tbody>
-                        <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.LegalDocumentType) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.LegalDocumentType) </span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.DocumentDate) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.DocumentDate) </span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.TaxStatusDisplay) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.TaxStatusDisplay) </span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>@Html.DisplayNameFor(model => model.TaxCodeDisplay) </strong></td>
-                            <td class="text-right"><span> @Html.DisplayFor(model => model.TaxCodeDisplay) </span></td>
-                        </tr>
-                    </tbody>
+                    <tbody></tbody>
                 </table>
             </div>
             <div class="row clearfix">
@@ -59,6 +38,9 @@
                             </th>
                             <th>
                                 @Html.DisplayNameFor(_ => Model.AffadavitReceiptParcels.FirstOrDefault().MarketValue)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(_ => Model.AffadavitReceiptParcels.FirstOrDefault().DescriptionDisplay)
                             </th>
                         </tr>
                     </thead>
@@ -77,6 +59,9 @@
                                 </td>
                                 <td>
                                     @Html.DisplayFor(_ => parcel.MarketValue)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(_ => parcel.DescriptionDisplay)
                                 </td>
                             </tr>
                             <tr class="row-details">
@@ -134,6 +119,22 @@
                                             <table class="table">
                                                 <tbody>
                                                     <tr>
+                                                        <td><strong>@Html.DisplayNameFor(_ => parcel.DocumentDate) </strong></td>
+                                                        <td class="text-right"><span> @Html.DisplayFor(_ => parcel.DocumentDate) </span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>@Html.DisplayNameFor(_ => parcel.LegalDocumentType) </strong></td>
+                                                        <td class="text-right"><span> @Html.DisplayFor(_ => parcel.LegalDocumentType) </span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>@Html.DisplayNameFor(_ => parcel.ExemptRegNumber) </strong></td>
+                                                        <td class="text-right"><span> @Html.DisplayFor(_ => parcel.ExemptRegNumber) </span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>@Html.DisplayNameFor(_ => parcel.MobileHomeNotation) </strong></td>
+                                                        <td class="text-right"><span> @Html.DisplayFor(_ => parcel.MobileHomeNotation) </span></td>
+                                                    </tr>
+                                                    <tr>
                                                         <td><strong>@Html.DisplayNameFor(_ => parcel.TaxAmount) </strong></td>
                                                         <td class="text-right"><span> @Html.DisplayFor(_ => parcel.TaxAmount) </span></td>
                                                     </tr>
@@ -149,6 +150,12 @@
                                                         <td><strong>@Html.DisplayNameFor(_ => parcel.AssessedValue) </strong></td>
                                                         <td class="text-right"><span> @Html.DisplayFor(_ => parcel.AssessedValue) </span></td>
                                                     </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <table class="table">
+                                                <tbody>
                                                     <tr>
                                                         <td><strong>@Html.DisplayNameFor(_ => parcel.PPvalue) </strong></td>
                                                         <td class="text-right"><span> @Html.DisplayFor(_ => parcel.PPvalue) </span></td>
@@ -157,12 +164,6 @@
                                                         <td><strong>@Html.DisplayNameFor(_ => parcel.GiftDebt) </strong></td>
                                                         <td class="text-right"><span> @Html.DisplayFor(_ => parcel.GiftDebt) </span></td>
                                                     </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <table class="table">
-                                                <tbody>
                                                     <tr>
                                                         <td><strong>@Html.DisplayNameFor(_ => parcel.LocalTaxPaid) </strong></td>
                                                         <td class="text-right"><span> @Html.DisplayFor(_ => parcel.LocalTaxPaid) </span></td>

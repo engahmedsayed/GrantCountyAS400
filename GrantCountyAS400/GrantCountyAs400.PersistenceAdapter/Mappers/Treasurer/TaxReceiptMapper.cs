@@ -38,7 +38,8 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers.Treasurer
             AsmtfullLegalDescription legalDescription)
             => new AffadavitReceiptParcel(receipt.Id, receipt.ParcelNumber, receipt.ReceiptTran, receipt.NewOwnerBuyer, receipt.PreviousOwnerSeller, receipt.TaxAmount,
                 receipt.TotalPaid, receipt.StateTaxPaid, receipt.AssessedValue, receipt.PPvalue, receipt.GiftDebt, receipt.LocalTaxPaid, receipt.StatePenalty,
-                receipt.LocalPenalty, receipt.LocalInterest, receipt.TechnicalFee, receipt.SubsidizedFee, valueMaster.UnimprovedLandValue, valueMaster.ImprovedLandValue,
-                valueMaster.BuildingValue, nameAddress.AddressLine1.Trim(), nameAddress.City.Trim(), legalDescription?.Descrtiption.Trim());
+                receipt.LocalPenalty, receipt.LocalInterest, receipt.TechnicalFee, receipt.SubsidizedFee, receipt.LegalDocumentType, receipt.DocumentDate,
+                receipt.ExemptRegNumber, receipt.Description.Trim(), receipt.Description2.Trim(), receipt.MobileHomeNotation, valueMaster.UnimprovedLandValue,
+                valueMaster.ImprovedLandValue, valueMaster.BuildingValue, nameAddress.AddressLine1.Trim(), nameAddress.City.Trim(), legalDescription?.Descrtiption.Trim());
     }
 }

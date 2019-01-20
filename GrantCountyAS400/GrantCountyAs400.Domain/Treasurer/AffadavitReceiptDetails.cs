@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace GrantCountyAs400.Domain.Treasurer
@@ -71,6 +71,12 @@ namespace GrantCountyAs400.Domain.Treasurer
         public decimal? LocalInterest { get; }
         public decimal? TechnicalFee { get; }
         public decimal? SubsidizedFee { get; }
+        public DateTime? DocumentDate { get; }
+        public string LegalDocumentType { get; }
+        public string ExemptRegNumber { get; }
+        public string Description { get; }
+        public string Description2 { get; }
+        public string MobileHomeNotation { get; }
 
         public decimal? UnimprovedLandValue { get; }
         public decimal? ImprovedLandValue { get; }
@@ -84,7 +90,8 @@ namespace GrantCountyAs400.Domain.Treasurer
         public AffadavitReceiptParcel(
             int id, decimal? parcelNumber, decimal? affadavitNumber, string newOwnerBuyer, string previousOwnerSeller, decimal? taxAmount, decimal? totalPaid,
             decimal? stateTaxPaid, decimal? assessedValue, decimal? pPvalue, decimal? giftDebt, decimal? localTaxPaid, decimal? statePenalty, decimal? localPenalty,
-            decimal? localInterest, decimal? technicalFee, decimal? subsidizedFee, decimal? unimprovedLandValue, decimal? improvedLandValue, decimal? buildingValue,
+            decimal? localInterest, decimal? technicalFee, decimal? subsidizedFee, string legalDocumentType, DateTime? documentDate, string exemptRegNumber,
+            string description, string description2, string mobileHomeNotation, decimal? unimprovedLandValue, decimal? improvedLandValue, decimal? buildingValue,
             string addressLine1, string city, string legalDescription)
         {
             Id = id;
@@ -104,6 +111,12 @@ namespace GrantCountyAs400.Domain.Treasurer
             LocalInterest = localInterest;
             TechnicalFee = technicalFee;
             SubsidizedFee = subsidizedFee;
+            LegalDocumentType = LegalDocumentType;
+            DocumentDate = documentDate;
+            ExemptRegNumber = ExemptRegNumber;
+            Description = description;
+            Description2 = description2;
+            MobileHomeNotation = mobileHomeNotation;
             UnimprovedLandValue = unimprovedLandValue;
             ImprovedLandValue = improvedLandValue;
             BuildingValue = buildingValue;
