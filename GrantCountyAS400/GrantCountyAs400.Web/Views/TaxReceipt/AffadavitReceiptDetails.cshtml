@@ -4,7 +4,7 @@
 }
 
 <div>
-    <h2>Affadavit Number: @Model.AffadavitNumber</h2>
+    <h2>Affidavit Number: @Model.AffadavitNumber</h2>
 
     <div class="entity-details">
         <div class="entity-info clearfix">
@@ -60,9 +60,6 @@
                             <th>
                                 @Html.DisplayNameFor(_ => Model.AffadavitReceiptParcels.FirstOrDefault().MarketValue)
                             </th>
-                            <th>
-                                @Html.DisplayNameFor(_ => Model.AffadavitReceiptParcels.FirstOrDefault().LegalDescription)
-                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -81,13 +78,10 @@
                                 <td>
                                     @Html.DisplayFor(_ => parcel.MarketValue)
                                 </td>
-                                <td>
-                                    @Html.DisplayFor(_ => parcel.LegalDescription)
-                                </td>
                             </tr>
                             <tr class="row-details">
                                 <td colspan="100">
-                                    <div class="collapse" id="@parcel.Id">
+                                    <div class="collapse in" id="@parcel.Id">
                                         <table class="table table-bordered table-striped col-xs-12">
                                             <thead>
                                                 <tr>
