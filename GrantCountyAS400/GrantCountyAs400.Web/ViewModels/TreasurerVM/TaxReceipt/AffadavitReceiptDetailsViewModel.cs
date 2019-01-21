@@ -98,6 +98,6 @@ namespace GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceipt
         [Display(Name = "Market Value")]
         public decimal? MarketValue => UnimprovedLandValue + ImprovedLandValue + BuildingValue;
         [Display(Name = "Description")]
-        public string DescriptionDisplay => $"{Description} & {Description2}";
+        public string DescriptionDisplay => $"{Description}" + (string.IsNullOrWhiteSpace(Description2) ? "" : " & {Description2}");
     }
 }
