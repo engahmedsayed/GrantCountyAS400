@@ -15,7 +15,7 @@ namespace GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceipt
         [Display(Name = "Paid")]
         public decimal? TotalPaid { get; set; }
         [DisplayFormat(DataFormatString = "{0:F0}")]
-        [Display(Name = "Affdvt Number")]
+        [Display(Name = "Affidavit Number")]
         public decimal? AffadavitNumber { get; set; }
         [Display(Name = "Affdvt Date")]
         [DataType(DataType.Date)]
@@ -88,11 +88,11 @@ namespace GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceipt
         [DataType(DataType.Date)]
         [Display(Name = "Document Date")]
         public DateTime? DocumentDate { get; set; }
-        [Display(Name = "Exempt Reg Number ")]
+        [Display(Name = "Exemption Code")]
         public string ExemptRegNumber { get; set; }
         public string Description { get; set; }
         public string Description2 { get; set; }
-        [Display(Name = "Mobile Home Notation")]
+        [Display(Name = "Includes MH?")]
         public string MobileHomeNotation { get; set; }
 
         [Display(Name = "Market Value")]

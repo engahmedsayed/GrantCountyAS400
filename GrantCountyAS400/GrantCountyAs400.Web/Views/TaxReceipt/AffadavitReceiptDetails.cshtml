@@ -1,6 +1,7 @@
 ﻿@model GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceipt.AffadavitReceiptDetailsViewModel
 @{
     ViewData["Title"] = "Affidavit Number: " + Model.AffadavitNumber;
+    var firstAffadavitParcel = Model.AffadavitReceiptParcels.FirstOrDefault();
 }
 
 <div>
@@ -11,6 +12,10 @@
             <div class="col-xs-6">
                 <table class="table">
                     <tbody>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.AffadavitNumber) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.AffadavitNumber) </span></td>
+                        </tr>
                         <tr>
                             <td><strong>@Html.DisplayNameFor(model => model.ReceiptDate) </strong></td>
                             <td class="text-right"><span> @Html.DisplayFor(model => model.ReceiptDate) </span></td>
@@ -24,180 +29,183 @@
             </div>
             <div class="col-xs-6">
                 <table class="table">
-                    <tbody></tbody>
+                    <tbody>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.LegalDocumentType) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.LegalDocumentType) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.DocumentDate) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.DocumentDate) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.TaxStatusDisplay) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.TaxStatusDisplay) </span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.TaxCodeDisplay) </strong></td>
+                            <td class="text-right"><span> @Html.DisplayFor(model => model.TaxCodeDisplay) </span></td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
             <div class="row clearfix">
-                <table class="table">
+                <table class="table table-bordered table-striped col-xs-12">
                     <thead>
                         <tr>
                             <th>
+                                Name
                             </th>
                             <th>
-                                @Html.DisplayNameFor(_ => Model.AffadavitReceiptParcels.FirstOrDefault().ParcelNumber)
+                                Address
                             </th>
                             <th>
-                                @Html.DisplayNameFor(_ => Model.AffadavitReceiptParcels.FirstOrDefault().MarketValue)
+                                City
                             </th>
                             <th>
-                                @Html.DisplayNameFor(_ => Model.AffadavitReceiptParcels.FirstOrDefault().DescriptionDisplay)
+                                Type
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var parcel in Model.AffadavitReceiptParcels)
-                        {
-                            <tr>
-                                <td>
-                                    <a class="toggle-row-details" data-toggle="collapse" data-target="#@parcel.Id" aria-expanded="false" aria-controls="@parcel.Id">
-                                        <i class="glyphicon glyphicon-chevron-right pull-right"></i>
-                                        <i class="glyphicon glyphicon-chevron-down pull-right"></i>
-                                    </a>
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(_ => parcel.ParcelNumber)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(_ => parcel.MarketValue)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(_ => parcel.DescriptionDisplay)
-                                </td>
-                            </tr>
-                            <tr class="row-details">
-                                <td colspan="100">
-                                    <div class="collapse in" id="@parcel.Id">
-                                        <table class="table table-bordered table-striped col-xs-12">
-                                            <thead>
-                                                <tr>
-                                                    <th>
-                                                        Name
-                                                    </th>
-                                                    <th>
-                                                        Address
-                                                    </th>
-                                                    <th>
-                                                        City
-                                                    </th>
-                                                    <th>
-                                                        Type
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        @Html.DisplayFor(_ => parcel.PreviousOwnerSeller)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(_ => parcel.AddressLine1)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(_ => parcel.City)
-                                                    </td>
-                                                    <td>
-                                                        Grantor
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        @Html.DisplayFor(_ => parcel.NewOwnerBuyer)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(_ => parcel.AddressLine1)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(_ => parcel.City)
-                                                    </td>
-                                                    <td>
-                                                        Grantee
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <div class="col-xs-6">
-                                            <table class="table">
-                                                <tbody>
-                                                    <tr>
-                                                        <td><strong>@Html.DisplayNameFor(_ => parcel.DocumentDate) </strong></td>
-                                                        <td class="text-right"><span> @Html.DisplayFor(_ => parcel.DocumentDate) </span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><strong>@Html.DisplayNameFor(_ => parcel.LegalDocumentType) </strong></td>
-                                                        <td class="text-right"><span> @Html.DisplayFor(_ => parcel.LegalDocumentType) </span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><strong>@Html.DisplayNameFor(_ => parcel.ExemptRegNumber) </strong></td>
-                                                        <td class="text-right"><span> @Html.DisplayFor(_ => parcel.ExemptRegNumber) </span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><strong>@Html.DisplayNameFor(_ => parcel.MobileHomeNotation) </strong></td>
-                                                        <td class="text-right"><span> @Html.DisplayFor(_ => parcel.MobileHomeNotation) </span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><strong>@Html.DisplayNameFor(_ => parcel.TaxAmount) </strong></td>
-                                                        <td class="text-right"><span> @Html.DisplayFor(_ => parcel.TaxAmount) </span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><strong>@Html.DisplayNameFor(_ => parcel.TotalPaid) </strong></td>
-                                                        <td class="text-right"><span> @Html.DisplayFor(_ => parcel.TotalPaid) </span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><strong>@Html.DisplayNameFor(_ => parcel.StateTaxPaid) </strong></td>
-                                                        <td class="text-right"><span> @Html.DisplayFor(_ => parcel.StateTaxPaid) </span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><strong>@Html.DisplayNameFor(_ => parcel.AssessedValue) </strong></td>
-                                                        <td class="text-right"><span> @Html.DisplayFor(_ => parcel.AssessedValue) </span></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <table class="table">
-                                                <tbody>
-                                                    <tr>
-                                                        <td><strong>@Html.DisplayNameFor(_ => parcel.PPvalue) </strong></td>
-                                                        <td class="text-right"><span> @Html.DisplayFor(_ => parcel.PPvalue) </span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><strong>@Html.DisplayNameFor(_ => parcel.GiftDebt) </strong></td>
-                                                        <td class="text-right"><span> @Html.DisplayFor(_ => parcel.GiftDebt) </span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><strong>@Html.DisplayNameFor(_ => parcel.LocalTaxPaid) </strong></td>
-                                                        <td class="text-right"><span> @Html.DisplayFor(_ => parcel.LocalTaxPaid) </span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><strong>@Html.DisplayNameFor(_ => parcel.StatePenalty) </strong></td>
-                                                        <td class="text-right"><span> @Html.DisplayFor(_ => parcel.StatePenalty) </span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><strong>@Html.DisplayNameFor(_ => parcel.LocalPenalty) </strong></td>
-                                                        <td class="text-right"><span> @Html.DisplayFor(_ => parcel.LocalPenalty) </span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><strong>@Html.DisplayNameFor(_ => parcel.LocalInterest) </strong></td>
-                                                        <td class="text-right"><span> @Html.DisplayFor(_ => parcel.LocalInterest) </span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><strong>@Html.DisplayNameFor(_ => parcel.TechnicalFee) </strong></td>
-                                                        <td class="text-right"><span> @Html.DisplayFor(_ => parcel.TechnicalFee) </span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><strong>@Html.DisplayNameFor(_ => parcel.SubsidizedFee) </strong></td>
-                                                        <td class="text-right"><span> @Html.DisplayFor(_ => parcel.SubsidizedFee) </span></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        }
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(_ => firstAffadavitParcel.PreviousOwnerSeller)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(_ => firstAffadavitParcel.AddressLine1)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(_ => firstAffadavitParcel.City)
+                            </td>
+                            <td>
+                                Grantor
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(_ => firstAffadavitParcel.NewOwnerBuyer)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(_ => firstAffadavitParcel.AddressLine1)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(_ => firstAffadavitParcel.City)
+                            </td>
+                            <td>
+                                Grantee
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
+                <div class="col-xs-6">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(_ => firstAffadavitParcel.DocumentDate) </strong></td>
+                                <td class="text-right"><span> @Html.DisplayFor(_ => firstAffadavitParcel.DocumentDate) </span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(_ => firstAffadavitParcel.LegalDocumentType) </strong></td>
+                                <td class="text-right"><span> @Html.DisplayFor(_ => firstAffadavitParcel.LegalDocumentType) </span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(_ => firstAffadavitParcel.ExemptRegNumber) </strong></td>
+                                <td class="text-right"><span> @Html.DisplayFor(_ => firstAffadavitParcel.ExemptRegNumber) </span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(_ => firstAffadavitParcel.MobileHomeNotation) </strong></td>
+                                <td class="text-right"><span> @Html.DisplayFor(_ => firstAffadavitParcel.MobileHomeNotation) </span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(_ => firstAffadavitParcel.TaxAmount) </strong></td>
+                                <td class="text-right"><span> @Html.DisplayFor(_ => firstAffadavitParcel.TaxAmount) </span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(_ => firstAffadavitParcel.TotalPaid) </strong></td>
+                                <td class="text-right"><span> @Html.DisplayFor(_ => firstAffadavitParcel.TotalPaid) </span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(_ => firstAffadavitParcel.StateTaxPaid) </strong></td>
+                                <td class="text-right"><span> @Html.DisplayFor(_ => firstAffadavitParcel.StateTaxPaid) </span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(_ => firstAffadavitParcel.AssessedValue) </strong></td>
+                                <td class="text-right"><span> @Html.DisplayFor(_ => firstAffadavitParcel.AssessedValue) </span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-xs-6">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(_ => firstAffadavitParcel.PPvalue) </strong></td>
+                                <td class="text-right"><span> @Html.DisplayFor(_ => firstAffadavitParcel.PPvalue) </span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(_ => firstAffadavitParcel.GiftDebt) </strong></td>
+                                <td class="text-right"><span> @Html.DisplayFor(_ => firstAffadavitParcel.GiftDebt) </span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(_ => firstAffadavitParcel.LocalTaxPaid) </strong></td>
+                                <td class="text-right"><span> @Html.DisplayFor(_ => firstAffadavitParcel.LocalTaxPaid) </span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(_ => firstAffadavitParcel.StatePenalty) </strong></td>
+                                <td class="text-right"><span> @Html.DisplayFor(_ => firstAffadavitParcel.StatePenalty) </span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(_ => firstAffadavitParcel.LocalPenalty) </strong></td>
+                                <td class="text-right"><span> @Html.DisplayFor(_ => firstAffadavitParcel.LocalPenalty) </span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(_ => firstAffadavitParcel.LocalInterest) </strong></td>
+                                <td class="text-right"><span> @Html.DisplayFor(_ => firstAffadavitParcel.LocalInterest) </span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(_ => firstAffadavitParcel.TechnicalFee) </strong></td>
+                                <td class="text-right"><span> @Html.DisplayFor(_ => firstAffadavitParcel.TechnicalFee) </span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(_ => firstAffadavitParcel.SubsidizedFee) </strong></td>
+                                <td class="text-right"><span> @Html.DisplayFor(_ => firstAffadavitParcel.SubsidizedFee) </span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(_ => Model.AffadavitReceiptParcels.FirstOrDefault().ParcelNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(_ => Model.AffadavitReceiptParcels.FirstOrDefault().MarketValue)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(_ => Model.AffadavitReceiptParcels.FirstOrDefault().DescriptionDisplay)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var parcel in Model.AffadavitReceiptParcels)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(_ => parcel.ParcelNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(_ => parcel.MarketValue)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(_ => parcel.DescriptionDisplay)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
