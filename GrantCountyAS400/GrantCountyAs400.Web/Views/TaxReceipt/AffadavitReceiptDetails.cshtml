@@ -118,6 +118,10 @@
                                 <td class="text-right"><span> @Html.DisplayFor(_ => firstAffadavitParcel.MobileHomeNotation) </span></td>
                             </tr>
                             <tr>
+                                <td><strong>@Html.DisplayNameFor(_ => firstAffadavitParcel.DescriptionDisplay) </strong></td>
+                                <td class="text-right"><span> @Html.DisplayFor(_ => firstAffadavitParcel.DescriptionDisplay) </span></td>
+                            </tr>
+                            <tr>
                                 <td><strong>@Html.DisplayNameFor(_ => firstAffadavitParcel.TaxAmount) </strong></td>
                                 <td class="text-right"><span> @Html.DisplayFor(_ => firstAffadavitParcel.TaxAmount) </span></td>
                             </tr>
@@ -129,16 +133,16 @@
                                 <td><strong>@Html.DisplayNameFor(_ => firstAffadavitParcel.StateTaxPaid) </strong></td>
                                 <td class="text-right"><span> @Html.DisplayFor(_ => firstAffadavitParcel.StateTaxPaid) </span></td>
                             </tr>
-                            <tr>
-                                <td><strong>@Html.DisplayNameFor(_ => firstAffadavitParcel.AssessedValue) </strong></td>
-                                <td class="text-right"><span> @Html.DisplayFor(_ => firstAffadavitParcel.AssessedValue) </span></td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="col-xs-6">
                     <table class="table">
                         <tbody>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(_ => firstAffadavitParcel.AssessedValue) </strong></td>
+                                <td class="text-right"><span> @Html.DisplayFor(_ => firstAffadavitParcel.AssessedValue) </span></td>
+                            </tr>
                             <tr>
                                 <td><strong>@Html.DisplayNameFor(_ => firstAffadavitParcel.PPvalue) </strong></td>
                                 <td class="text-right"><span> @Html.DisplayFor(_ => firstAffadavitParcel.PPvalue) </span></td>
@@ -184,9 +188,6 @@
                         <th>
                             @Html.DisplayNameFor(_ => Model.AffadavitReceiptParcels.FirstOrDefault().MarketValue)
                         </th>
-                        <th>
-                            @Html.DisplayNameFor(_ => Model.AffadavitReceiptParcels.FirstOrDefault().DescriptionDisplay)
-                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -198,9 +199,6 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(_ => parcel.MarketValue)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(_ => parcel.DescriptionDisplay)
                             </td>
                         </tr>
                     }
