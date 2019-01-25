@@ -29,5 +29,14 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 
         public List<string> FeeCode { get; set; }
 
+        public int CoutOfLargestList
+        {
+            get
+            {
+                List<int> totalNumbers = new List<int>() { SequenceNumber.Count, FeeDescription.Count, NumberOfUnits.Count, UnitCharge.Count, FeeCode.Count };
+                return totalNumbers.OrderByDescending(t => t).FirstOrDefault();
+            }
+        }
+
     }
 }

@@ -19,5 +19,14 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 
         [Display(Name ="Extended Amount")]
         public List<decimal?> ExtendedAmount { get; set; }
+
+        public int CoutOfLargestList
+        {
+            get
+            {
+                List<int> totalNumbers = new List<int>() { NumberOfUnits.Count, ExtendedAmount.Count};
+                return totalNumbers.OrderByDescending(t => t).FirstOrDefault();
+            }
+        }
     }
 }

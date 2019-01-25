@@ -40,24 +40,39 @@
                             <td>Fee Category</td>
                         </tr>
 
-                        @for (int i = 0; i < Model.SequenceNumber.Count; i++)
+                        @for (int i = 0; i < Model.CoutOfLargestList; i++)
                         {
                             <tr>
                                 <td class="text-right">
-                                    @{ var formattedSequenceNumber = (int?)Model.SequenceNumber[i];}
-                                    @Html.DisplayFor(t => formattedSequenceNumber)
+                                    @if(i < Model.SequenceNumber.Count)
+                                    {
+                                        int? sequenceNumberDisplay = Model.SequenceNumber[i].HasValue ? (int?)Model.SequenceNumber[i] : null;
+                                        @Html.DisplayFor(t => sequenceNumberDisplay)
+                                    }
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(t => t.FeeDescription[i])
+                                    @if(i < Model.FeeDescription.Count)
+                                    {
+                                        @Html.DisplayFor(t => t.FeeDescription[i])
+                                    }
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(t => t.NumberOfUnits[i])
+                                    @if(i < Model.NumberOfUnits.Count)
+                                    {
+                                        @Html.DisplayFor(t => t.NumberOfUnits[i])
+                                    }
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(t => t.UnitCharge[i])
+                                    @if(i < Model.UnitCharge.Count)
+                                    {
+                                        @Html.DisplayFor(t => t.UnitCharge[i])
+                                    }
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(t => t.ExtendedAmount[i])
+                                    @if(i < Model.ExtendedAmount.Count)
+                                    {
+                                        @Html.DisplayFor(t => t.ExtendedAmount[i])
+                                    }
                                 </td>
                                 <td>
                                     Plumbing

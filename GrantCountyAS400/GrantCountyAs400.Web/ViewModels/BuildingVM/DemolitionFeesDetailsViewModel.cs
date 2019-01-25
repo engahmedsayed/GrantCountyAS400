@@ -23,7 +23,18 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 
         public List<decimal?> ExtendedAmount { get; set; }
 
+        public List<string> FeeCategory { get;  set; }
+
         public decimal? DemolitionExtendedAmount { get; set; }
+
+        public int CoutOfLargestList
+        {
+            get
+            {
+                List<int> totalNumbers = new List<int>() { SequenceNumber.Count, FeeDescription.Count,NumberOfUnits.Count,UnitCharge.Count,ExtendedAmount.Count };
+                return totalNumbers.OrderByDescending(t => t).FirstOrDefault();
+            }
+        }
 
         public decimal? PlrvwExtendedAmount { get; set; }
     }

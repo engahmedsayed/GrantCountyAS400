@@ -36,6 +36,16 @@ namespace GrantCountyAs400.Web.ViewModels.BuildingVM
 
         public List<string> MinMaxFlag { get; set; }
 
+        public int CoutOfLargestList
+        {
+            get
+            {
+                List<int> totalNumbers = new List<int>() { SequenceNumber.Count, FeeDescription.Count, CubicYardsOfFill.Count, BaseFee.Count, FeeIncrement.Count,
+                                                           ExtendedAmount.Count, MinMaxFlag.Count };
+                return totalNumbers.OrderByDescending(t => t).FirstOrDefault();
+            }
+        }
+
 
 
     }

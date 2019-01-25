@@ -51,27 +51,46 @@
 
                     </thead>
 
-                    @for (int i = 0; i < Model.SequenceNumber.Count; i++)
+                    @for (int i = 0; i < Model.CoutOfLargestList; i++)
                     {
                         <tr>
                             <td class="text-left">
-                                @Html.DisplayFor(t => t.SequenceNumber[i])
+                                @if(i < Model.SequenceNumber.Count)
+                                {
+                                    int? sequenceNumberDisplay = Model.SequenceNumber[i].HasValue ? (int?)Model.SequenceNumber[i] : null;
+                                    @Html.DisplayFor(t => sequenceNumberDisplay)
+                                }
                             </td>
                             <td class="text-left">
-                                @Html.DisplayFor(t => t.FeeDescription[i])
+                                @if(i < Model.FeeDescription.Count)
+                                {
+                                    @Html.DisplayFor(t => t.FeeDescription[i])
+                                }
                             </td>
                             <td class="text-left">
-                                @Html.DisplayFor(t => t.NumberOfUnits[i])
+                                @if(i < Model.NumberOfUnits.Count)
+                                {
+                                    @Html.DisplayFor(t => t.NumberOfUnits[i])
+                                }
                             </td>
                             <td class="text-left">
-                                @Html.DisplayFor(t => t.UnitCharge[i])
+                                @if(i < Model.UnitCharge.Count)
+                                {
+                                    @Html.DisplayFor(t => t.UnitCharge[i])
+                                }
                             </td>
                             <td class="text-left">
-                                @{ var totalAmount = Model.NumberOfUnits[i].GetValueOrDefault() * Model.UnitCharge[i].GetValueOrDefault();}
-                                @Html.DisplayFor(t => totalAmount)
+                                @if(i < Model.NumberOfUnits.Count && i < Model.UnitCharge.Count)
+                                {
+                                    var totalAmount = Model.NumberOfUnits[i].GetValueOrDefault() * Model.UnitCharge[i].GetValueOrDefault();
+                                    @Html.DisplayFor(t => totalAmount)
+                                }
                             </td>
                             <td class="text-left">
-                                @Html.DisplayFor(t => t.FeeCode[i])
+                                @if(i < Model.FeeCode.Count)
+                                {
+                                    @Html.DisplayFor(t => t.FeeCode[i])
+                                }
                             </td>
                         </tr>
 

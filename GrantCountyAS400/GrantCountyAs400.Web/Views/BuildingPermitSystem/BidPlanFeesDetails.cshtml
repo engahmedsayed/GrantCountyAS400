@@ -40,17 +40,27 @@
                             <td>Extended Amt</td>
                         </tr>
 
-                        @for (int i = 0; i < Model.SequenceNumber.Count; i++)
+                        @for (int i = 0; i < Model.CoutOfLargestList; i++)
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(t => t.NumberOfUnits[i])
+                                    @if(i < Model.NumberOfUnits.Count)
+                                    {
+                                        @Html.DisplayFor(t => t.NumberOfUnits[i])
+                                    }
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(t => t.BaseFee[i]) %
+                                    @if(i < Model.BaseFee.Count)
+                                    {
+                                        string baseFeeDisplay = Model.BaseFee[i].HasValue ? Model.SequenceNumber[i].ToString() + "%" : null;
+                                         @Html.DisplayFor(t => baseFeeDisplay)
+                                    }
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(t => t.ExtendedAmount[i])
+                                    @if(i < Model.ExtendedAmount.Count)
+                                    {
+                                        @Html.DisplayFor(t => t.ExtendedAmount[i])
+                                    }
                                 </td>
                             </tr>
                         }

@@ -44,29 +44,51 @@
                             <td>Fee Category</td>
                         </tr>
 
-                        @for (int i = 0; i < Model.SequenceNumber.Count; i++)
+                        @for(int i = 0; i < Model.CoutOfLargestList; i++)
                         {
                             <tr>
                                 <td class="text-right">
-                                    @Html.DisplayFor(t => t.SequenceNumber[i])
+                                    @if (i < Model.SequenceNumber.Count)
+                                    {
+                                        int? sequenceNumberDisplay = Model.SequenceNumber[i].HasValue ? (int?)Model.SequenceNumber[i] : null;
+                                        @Html.DisplayFor(t => sequenceNumberDisplay)
+                                    }
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(t => t.FeeDescription[i])
+                                    @if(i < Model.FeeDescription.Count)
+                                    {
+                                        @Html.DisplayFor(t => t.FeeDescription[i])
+                                    }
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(t => t.CubicYardsOfFill[i])
+                                    @if(i < Model.CubicYardsOfFill.Count)
+                                    {
+                                        @Html.DisplayFor(t => t.CubicYardsOfFill[i])
+                                    }
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(t => t.BaseFee[i])
+                                    @if(i < Model.BaseFee.Count)
+                                    {
+                                        @Html.DisplayFor(t => t.BaseFee[i])
+                                    }
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(t => t.FeeIncrement[i])
+                                    @if(i < Model.FeeIncrement.Count)
+                                    {
+                                        @Html.DisplayFor(t => t.FeeIncrement[i])
+                                    }
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(t => t.ExtendedAmount[i])
+                                    @if(i < Model.ExtendedAmount.Count)
+                                    {
+                                        @Html.DisplayFor(t => t.ExtendedAmount[i])
+                                    }
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(t => t.MinMaxFlag[i])
+                                    @if(i < Model.MinMaxFlag.Count)
+                                    {
+                                        @Html.DisplayFor(t => t.MinMaxFlag[i])
+                                    }
                                 </td>
                                 <td>
                                     Grading

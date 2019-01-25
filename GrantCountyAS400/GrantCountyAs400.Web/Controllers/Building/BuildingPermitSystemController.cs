@@ -157,6 +157,7 @@ namespace GrantCountyAs400.Web.Controllers.Building
             result.ExtendedAmount = valuationAndFeesEntity?.ExtendedAmount;
             result.PlrvwExtendedAmount = valuationAndFeesEntity?.AssignPlanReviewFee;
             result.MechanicalExtendedAmount = valuationAndFeesEntity?.AssignMechanicalFees;
+            result.FeeCategory = valuationAndFeesEntity?.FeeCode;
             return View(result);
         }
 
@@ -178,6 +179,7 @@ namespace GrantCountyAs400.Web.Controllers.Building
             result.ExtendedAmount = valuationAndFeesEntity?.ExtendedAmount;
             result.PlrvwExtendedAmount = valuationAndFeesEntity?.AssignPlanReviewFee;
             result.DemolitionExtendedAmount = valuationAndFeesEntity?.AssignDemolitionFees;
+            result.FeeCategory = valuationAndFeesEntity?.FeeCode;
             return View(result);
         }
 
@@ -201,6 +203,7 @@ namespace GrantCountyAs400.Web.Controllers.Building
             result.BaseFee = valuationAndFeesEntity?.BaseFee;
             result.FeeIncrement = valuationAndFeesEntity?.FeeIncrement;
             result.BidPermitExtendedAmount = valuationAndFeesEntity?.AssignBidPermitFee;
+            result.FeeCategory = valuationAndFeesEntity?.FeeCode;
             return View(result);
         }
 
