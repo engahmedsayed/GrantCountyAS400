@@ -50,6 +50,9 @@
     <Content Update="Views\BuildingPermitSystem\_DemolitionPermit.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Views\ExciseTaxRate\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\LegalDocument\Details.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

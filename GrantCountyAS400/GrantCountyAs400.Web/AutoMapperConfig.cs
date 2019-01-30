@@ -16,6 +16,7 @@ using GrantCountyAs400.Web.ViewModels.Assessment.PlatCondo;
 using GrantCountyAs400.Web.ViewModels.Assessment.RealProperty;
 using GrantCountyAs400.Web.ViewModels.BuildingVM;
 using GrantCountyAs400.Web.ViewModels.GeneralLedgerVM;
+using GrantCountyAs400.Web.ViewModels.TreasurerVM.ExciseTaxRate;
 using GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceipt;
 using GrantCountyAs400.Web.ViewModels.TreasurerVM.TaxReceivable;
 
@@ -129,6 +130,7 @@ namespace GrantCountyAs400.Web
                 cfg.CreateMap<AffadavitReceipt, AffadavitReceiptViewModel>();
                 cfg.CreateMap<AffadavitReceiptDetails, AffadavitReceiptDetailsViewModel>();
                 cfg.CreateMap<AffadavitReceiptParcel, AffadavitReceiptParcelViewModel>();
+                cfg.CreateMap<ExciseTaxRate, ExciseTaxRateViewModel>();
 
                 #endregion Treasurer
             });

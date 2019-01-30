@@ -1,0 +1,104 @@
+﻿@model IEnumerable<ExciseTaxRateViewModel>
+@using  GrantCountyAs400.Web.ViewModels.TreasurerVM.ExciseTaxRate
+
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@{
+    ViewData["Title"] = "Tax Receivable - Index";
+    var filterViewModel = ViewBag.FilterViewModel as ExciseTaxRateFilterViewModel;
+}
+
+<h2>Tax Receivable</h2>
+
+<p>
+    @using (Html.BeginForm("Index", "ExciseTaxRate", FormMethod.Get))
+    {
+        <div class="form-horizontal">
+            <hr />
+            <div class="form-group">
+                <label asp-for="@filterViewModel.Description" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <select asp-items="ViewBag.TaxRateDescriptions" asp-for="@filterViewModel.Description" class="form-control" name="description">
+                        <option value="">--Please Select--</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@filterViewModel.RecordType" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <select asp-items="ViewBag.RecordTypes" asp-for="@filterViewModel.RecordType" class="form-control" name="recordtype">
+                        <option value="">--Please Select--</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <div class="form-group pull-right">
+                        <input type="submit" value="Filter" class="btn btn-success" />
+                        <input type="reset" value="Clear" class="btn btn-default" id="btnReset" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</p>
+
+<nav aria-label="navigation">
+    @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
+    pageNumber = pageNumber,
+    description = filterViewModel.Description,
+    recordtype = filterViewModel.RecordType,
+}))
+</nav>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="col-xs-3 col-md-2">
+                @Html.DisplayNameFor(model => model.RecordTypeStateLocal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaxRate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChangeUserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChangeDate)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RecordTypeStateLocal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaxRate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ChangeUserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ChangeDate)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<nav aria-label="navigation">
+    @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
+    pageNumber = pageNumber,
+    description = filterViewModel.Description,
+    recordtype = filterViewModel.RecordType,
+}))
+</nav>

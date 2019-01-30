@@ -72,6 +72,7 @@ namespace GrantCountyAs400.Web
             services.AddScoped<IAccountPayrollRepository, AccountPayrollRepository>();
             services.AddScoped<IExportingService, ExportingService>();
             services.AddScoped<ITaxReceiptRepository, TaxReceiptRepository>();
+            services.AddScoped<IExciseTaxRateRepository, ExciseTaxRateRepository>();
 
             services.AddAuthorization(options =>
             {
