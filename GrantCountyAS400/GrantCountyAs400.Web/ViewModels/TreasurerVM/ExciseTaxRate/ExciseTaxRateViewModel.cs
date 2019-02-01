@@ -6,7 +6,7 @@ namespace GrantCountyAs400.Web.ViewModels.TreasurerVM.ExciseTaxRate
     public class ExciseTaxRateViewModel
     {
         public int Id { get; set; }
-        [Display(Name = "Record Type")]
+        [Display(Name = "L/S")]
         public string RecordTypeStateLocal { get; set; }
         public string AreaCode { get; set; }
         [Display(Name = "Effective Code")]
@@ -14,7 +14,7 @@ namespace GrantCountyAs400.Web.ViewModels.TreasurerVM.ExciseTaxRate
         public decimal? EffectiveCode { get; set; }
         [Display(Name = "Description")]
         public string Description { get; set; }
-        [Display(Name = "Rate")]
+        [Display(Name = "Excise Tax Rate")]
         public decimal? TaxRate { get; set; }
         [Display(Name = "Penalty Rate 1")]
         public decimal? PenaltyRate { get; set; }
