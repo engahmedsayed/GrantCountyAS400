@@ -108,7 +108,7 @@ namespace GrantCountyAs400.Web.Controllers
             {
                 var user = await this._userManager.FindByEmailAsync(model.Email);
                 if (user == null)
-                    return RedirectToAction("ForgotPasswordEmailSent");
+                    return RedirectToAction("ForgotPasswordEmailNotFound");
 
 
                 var confrimationCode =
@@ -134,6 +134,12 @@ namespace GrantCountyAs400.Web.Controllers
 
         [AllowAnonymous]
         public IActionResult ForgotPasswordEmailSent()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public IActionResult ForgotPasswordEmailNotFound()
         {
             return View();
         }
