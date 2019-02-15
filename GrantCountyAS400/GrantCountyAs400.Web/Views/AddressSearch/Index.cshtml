@@ -1,0 +1,115 @@
+﻿
+
+@model IEnumerable<AddressSearchViewModel>
+@using GrantCountyAs400.Web.ViewModels.Assessment.AddressSearch
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@{
+    ViewData["Title"] = "Address Search - Index";
+    var filterViewModel = ViewBag.FilterViewModel as AddressSearchFilterViewModel;
+}
+
+<h2>Real Property</h2>
+
+<p>
+    @using (Html.BeginForm("Index", "AddressSearch", FormMethod.Get))
+    {
+        <div class="form-horizontal">
+            <hr />
+            <div class="form-group">
+                <label asp-for="@filterViewModel.ParcelNumber" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input type="number" asp-for="@filterViewModel.ParcelNumber" name="parcelNumber" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@filterViewModel.HouseNumber" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input type="number" asp-for="@filterViewModel.HouseNumber" name="houseNumber" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@filterViewModel.StreetName" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input type="text" asp-for="@filterViewModel.StreetName" name="streetName" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <div class="form-group pull-right">
+                        <input type="submit" value="Filter" class="btn btn-success" />
+                        <input type="reset" value="Clear" class="btn btn-default" id="btnReset" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</p>
+
+<nav aria-label="navigation">
+    @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
+    pageNumber = pageNumber,
+    parcelNumber = filterViewModel.ParcelNumber,
+    houseNumber = filterViewModel.HouseNumber,
+    streetName = filterViewModel.StreetName
+}))
+</nav>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="col-xs-2 col-md-1">
+                @Html.DisplayNameFor(model => model.ParcelNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HouseNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HouseNumberExtension)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StreetDirectionQuadrant)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StreetName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationCityCode)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ParcelNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HouseNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HouseNumberExtension)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StreetDirectionQuadrant)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StreetName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LocationCityCode)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<nav aria-label="navigation">
+    @Html.PagedListPager((IPagedList)Model, pageNumber => Url.Action("Index", new {
+     pageNumber = pageNumber,
+     parcelNumber = filterViewModel.ParcelNumber,
+     houseNumber = filterViewModel.HouseNumber,
+     streetName = filterViewModel.StreetName
+ }))
+</nav>

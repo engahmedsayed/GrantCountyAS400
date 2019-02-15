@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GrantCountyAs400.Domain;
 using GrantCountyAs400.Domain.Accounting;
 using GrantCountyAs400.Domain.Assessment;
 using GrantCountyAs400.Domain.Building;
@@ -6,6 +7,7 @@ using GrantCountyAs400.Domain.Treasurer;
 using GrantCountyAs400.Web.ViewModels.AccountingVM;
 using GrantCountyAs400.Web.ViewModels.AccountingVM.AccountPayroll;
 using GrantCountyAs400.Web.ViewModels.AccountingVM.VenderWarrent;
+using GrantCountyAs400.Web.ViewModels.Assessment.AddressSearch;
 using GrantCountyAs400.Web.ViewModels.Assessment.AssociatedPerson;
 using GrantCountyAs400.Web.ViewModels.Assessment.BuildingPermits;
 using GrantCountyAs400.Web.ViewModels.Assessment.ChildParentParcel;
@@ -75,6 +77,8 @@ namespace GrantCountyAs400.Web
                 cfg.CreateMap<LegalDocument, LegalDocumentViewModel>();
                 cfg.CreateMap<RealPropertyLegalDocument, RealPropertyLegalDocumentViewModel>();
                 cfg.CreateMap<LegalDocumentDetails, LegalDocumentDetailsViewModel>();
+
+                cfg.CreateMap<AddressSearch, AddressSearchViewModel>();
 
                 #endregion Assessment Module
 
