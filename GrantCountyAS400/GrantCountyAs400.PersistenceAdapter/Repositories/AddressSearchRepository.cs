@@ -28,19 +28,20 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          where (parcelNumber <= 0 || situsAddress.ParcelNumber == parcelNumber)
                          && (houseNumber <= 0 || situsAddress.HouseNumber == houseNumber)
                          && (string.IsNullOrWhiteSpace(streetName) ||
-                            situsAddress.StreetName.Trim().ToLower() == streetName.Trim().ToLower())
+                            situsAddress.StreetName.Trim().ToLower().Contains(streetName.Trim().ToLower()))
+                            orderby  situsAddress.StreetName, situsAddress.StreetDirectionQuadrant, situsAddress.HouseNumber 
                          select AddressSearchMapper.Map(situsAddress, cityCode));
             if (pageNumber > 0)
             {
                 resultCount = query.Count();
                 results = query.Skip((pageNumber - 1) * pageSize)
                                .Take(pageSize)
-                               .OrderBy(t => t.ParcelNumber)
+                               .OrderBy(t => t.StreetName).ThenBy(t=>t.StreetDirectionQuadrant).ThenBy(t=>t.HouseNumber)
                                .ToList();
             }
             else
             {
-                results = query.OrderBy(t => t.ParcelNumber)
+                results = query.OrderBy(t => t.StreetName).ThenBy(t => t.StreetDirectionQuadrant).ThenBy(t => t.HouseNumber)
                                .ToList();
                 resultCount = results.Count();
             }
