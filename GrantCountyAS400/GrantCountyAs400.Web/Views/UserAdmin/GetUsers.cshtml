@@ -2,7 +2,7 @@
 @model X.PagedList.IPagedList<GrantCountyAs400.PersistenceAdapter.SecurityModule.Models.ApplicationUser>
 
 
-<div id="userList">
+
 
     <table class="table">
         <tr>
@@ -25,34 +25,34 @@
         {
             @foreach (var item in Model)
             {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
 
-            <td>
-                @{ System.Text.StringBuilder formattedRole = new System.Text.StringBuilder();
-                    for (int i = 0; i < item.Roles.Count; i++)
-                    {
-                        formattedRole.AppendLine(item.Roles[i]);
-                    }
-                    string roles = formattedRole.ToString();
-                }
-                @Html.DisplayFor(modelItem => roles)
-            </td>
-            <td>
-                <a href="@Url.Action("Edit", "UserAdmin", new { item.Id })" class="btn btn-info"> <span class="glyphicon glyphicon-edit"></span><span class="hidden-xs"> Edit </span></a>
-                <a href="@Url.Action("Details", "UserAdmin", new { item.Id })" class="btn btn-info"> <span class="fa fa-clipboard"></span><span class="hidden-xs"> Details </span> </a>
-                <a href="@Url.Action("Delete", "UserAdmin", new { item.Id })" class="btn btn-info"> <span class="glyphicon glyphicon-edit"></span><span class="hidden-xs"> Delete </span></a>
-            </td>
-        </tr>
+                    <td>
+                        @{ System.Text.StringBuilder formattedRole = new System.Text.StringBuilder();
+                            for (int i = 0; i < item.Roles.Count; i++)
+                            {
+                                formattedRole.AppendLine(item.Roles[i]);
+                            }
+                            string roles = formattedRole.ToString();
+                        }
+                        @Html.DisplayFor(modelItem => roles)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit", "UserAdmin", new { item.Id })" class="btn btn-info"> <span class="glyphicon glyphicon-edit"></span><span class="hidden-xs"> Edit </span></a>
+                        <a href="@Url.Action("Details", "UserAdmin", new { item.Id })" class="btn btn-info"> <span class="fa fa-clipboard"></span><span class="hidden-xs"> Details </span> </a>
+                        <a href="@Url.Action("Delete", "UserAdmin", new { item.Id })" class="btn btn-info"> <span class="glyphicon glyphicon-edit"></span><span class="hidden-xs"> Delete </span></a>
+                    </td>
+                </tr>
             }
         }
 
@@ -62,8 +62,11 @@
     {
     <div>
         Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) from @Model.PageCount
-        @Html.PagedListPager(Model, page => Url.Action("GetUsers", new { page, searchVal = ViewBag.searchVal }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { UpdateTargetId = "userList" }))
+
+        @Html.PagedListPager(Model, page => Url.Action("GetUsers", new { page, searchVal = ViewBag.searchVal }))
         <input type="hidden" name="currentPage" id="currentPage" value="@Model.PageNumber" />
+        <input type="hidden" name="pageCount" id="pageCount" value="@Model.PageCount" />
     </div>
     }
-</div>
+
+    </div>

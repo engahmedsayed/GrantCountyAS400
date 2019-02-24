@@ -16,7 +16,47 @@ $(function () { // onDomReady
         e.stopPropagation();
         e.preventDefault();
     });
+
+    $('body').on('click', '#userList .pagination a', function (event) {
+        event.preventDefault();
+        console.log('page');
+        var searchVal = $('#searchText').val();
+        var currentPage = $(this).html();
+        if (currentPage == '&gt;') { currentPage = $('#pageCount').val(); }
+        if (currentPage == '&lt;') { currentPage = 1; }
+        if (searchVal == undefined || searchVal == '') {
+            searchVal = '?page=' + currentPage;
+        } else {
+            searchVal = '?searchVal=' + searchVal + '&page=' + currentPage;
+        }
+        var url = refreshUrl + searchVal;
+        console.log(url);
+        $.ajax({
+            url: url,
+            success: function (result) {
+                ChangeUrl('index', url);
+                $('#userList').html(result);
+            }
+        });
+    });
 });
+
+window.addEventListener("popstate", function (e) {
+    $.ajax({
+        url: location.href,
+        success: function (result) {
+            $('#userList').html(result);
+        }
+    });
+});
+function ChangeUrl(page, url) {
+    if (typeof (history.pushState) != "undefined") {
+        var obj = { Page: page, Url: url };
+        history.pushState(null, obj.Page, obj.Url);
+    } else {
+        alert("Browser does not support HTML5.");
+    }
+}
 
 //import { debug } from "util";
 

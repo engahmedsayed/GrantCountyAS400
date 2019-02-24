@@ -23,10 +23,11 @@ namespace GrantCountyAs400.Web.Controllers.UserAdmin
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public async Task<ActionResult> Index(int? page)
+        public async Task<ActionResult> Index(string searchVal,int page=1)
         {
-
-            return View(await GetUsersData(null,""));
+            ViewBag.FromSearch = false;
+            return Request.Headers["x-requested-with"] == "XMLHttpRequest"? GetUsers(  string.Empty, page) :
+             View(GetUsersData( page,  string.Empty));
         }
 
         public UserAdminController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
@@ -35,11 +36,10 @@ namespace GrantCountyAs400.Web.Controllers.UserAdmin
             this._roleManager = roleManager;
         }
         [Route("GetUsers")]
-        public async  Task<ActionResult> GetUsers(int? page, string searchVal)
+        public ActionResult GetUsers( string searchVal, int page=1)
         {
             
-            var query = await GetUsersData(page, searchVal);
-
+            var query =  GetUsersData(page, searchVal);
             return PartialView(query);
         }
 
@@ -272,7 +272,7 @@ namespace GrantCountyAs400.Web.Controllers.UserAdmin
             return View(user);
         }
 
-        private async  Task<IPagedList<ApplicationUser>> GetUsersData(int? page,string searchVal)
+        private  IPagedList<ApplicationUser> GetUsersData(int? page,string searchVal)
         {
             int pageNumber = (page ?? 1);
             var query = _userManager.Users.Where(u => 1 == 1);
@@ -282,9 +282,9 @@ namespace GrantCountyAs400.Web.Controllers.UserAdmin
             }
             foreach (var item in query)
             {
-                item.Roles = (await _userManager.GetRolesAsync(item)).ToList();
+                item.Roles = ( _userManager.GetRolesAsync(item)).Result.ToList();
             }
-            ViewBag.searchVal = searchVal;
+            
             return query.OrderByDescending(u => u.UserName).ToPagedList(pageNumber, pageSize);
         }
     }

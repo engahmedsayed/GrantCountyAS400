@@ -1,4 +1,5 @@
-﻿@model X.PagedList.IPagedList<GrantCountyAs400.PersistenceAdapter.SecurityModule.Models.ApplicationUser>
+﻿@using GrantCountyAs400.Web.Extensions;
+@model X.PagedList.IPagedList<GrantCountyAs400.PersistenceAdapter.SecurityModule.Models.ApplicationUser>
 @{
     ViewBag.Title = "Users";
 }
@@ -22,10 +23,11 @@
 <p>
     <a class="btn btn-default" href="@Url.Action("Create")">Add new user</a>
 </p>
+<div id="userList">
+    <partial name="GetUsers" model="@Model" />
+</div>
 
-<partial name="GetUsers" model="@Model"/>
-
-
-@section scripts{
-    <script src="~/js/site.js" asp-append-version="true"></script>
-}
+    @*@Html.RenderPartial("GetUsers",Model)*@
+    @section scripts{
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    }
