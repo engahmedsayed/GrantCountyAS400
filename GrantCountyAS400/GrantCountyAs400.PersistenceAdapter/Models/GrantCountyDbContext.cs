@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -27,6 +27,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
         public virtual DbSet<AcctPayrollJobCodes> AcctPayrollJobCodes { get; set; }
         public virtual DbSet<AcctPersonnel> AcctPersonnel { get; set; }
         public virtual DbSet<AcctPrWarrant> AcctPrWarrant { get; set; }
+        public virtual DbSet<AcctPrwarrantPay> AcctPrwarrantPay { get; set; }
         public virtual DbSet<AcctVendor> AcctVendor { get; set; }
         public virtual DbSet<AsmtcityCodeFile> AsmtcityCodeFile { get; set; }
         public virtual DbSet<AsmtfullLegalDescription> AsmtfullLegalDescription { get; set; }
@@ -1254,6 +1255,27 @@ namespace GrantCountyAs400.PersistenceAdapter.Models
                 entity.Property(e => e.Weeks).HasColumnType("decimal(2, 0)");
 
                 entity.Property(e => e.Year).HasColumnType("decimal(4, 0)");
+            });
+
+            modelBuilder.Entity<AcctPrwarrantPay>(entity =>
+            {
+                entity.ToTable("AcctPRWarrantPay");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Group).HasColumnType("decimal(2, 0)");
+
+                entity.Property(e => e.HoursWorked).HasColumnType("decimal(9, 4)");
+
+                entity.Property(e => e.PayAmount).HasColumnType("decimal(9, 4)");
+
+                entity.Property(e => e.PayFlag).HasColumnType("decimal(3, 0)");
+
+                entity.Property(e => e.PayValue).HasColumnType("numeric(9, 2)");
+
+                entity.Property(e => e.WarrantNumber).HasColumnType("decimal(6, 0)");
+
+                entity.Property(e => e.WarrantStatus).HasColumnType("numeric(2, 0)");
             });
 
             modelBuilder.Entity<AcctVendor>(entity =>
