@@ -13,7 +13,7 @@ using System.Linq;
 namespace GrantCountyAs400.Web.Controllers.Accounting
 {
     [Route("account-payroll")]
-    //[Authorize(Policy = "RequireEitherAccountantOrAdminRole")]
+    [Authorize(Policy = "RequireEitherAccountantOrAdminRole")]
     public class AccountPayrollController : Controller
     {
         private readonly IAccountPayrollRepository _accountPayrollRepository;
