@@ -44,5 +44,7 @@ namespace GrantCountyAs400.Web.ViewModels.AccountingVM.AccountPayroll
         public decimal? RetirementBenefitsEmployer { get; set; }
         [Display(Name = "Net Pay")]
         public decimal? NetPay { get; set; }
+        [Display(Name = "Hours Worked")]
+        public decimal? HoursWorked { get; set; }
     }
 }

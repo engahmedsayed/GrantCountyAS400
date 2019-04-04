@@ -60,15 +60,24 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
 
             var listOfRetrievedSSNumbers = personnelRecords.Select(personnel => personnel.Ssnumber).ToList();
 
-            var warrants = _context.AcctPrWarrant
-                                   .Where(warrant => listOfRetrievedSSNumbers.Contains(warrant.Ssnubmer.Value) &&
-                                                     ((!minDate.HasValue) || warrant.Date >= minDate.Value) &&
-                                                     ((!maxDate.HasValue) || warrant.Date <= maxDate.Value))
-                                   .ToList();
+            var warrants = (from warrant in _context.AcctPrWarrant
+                            join warrantPay in _context.AcctPrwarrantPay on warrant.WarrantNumber equals warrantPay.WarrantNumber
+                            into warrantPayJoin
+                            from warrantPayRecord in warrantPayJoin.DefaultIfEmpty()
+                            where listOfRetrievedSSNumbers.Contains(warrant.Ssnubmer.Value) &&
+                                  ((!minDate.HasValue) || warrant.Date >= minDate.Value) &&
+                                  ((!maxDate.HasValue) || warrant.Date <= maxDate.Value)
+                            orderby warrant.WarrantNumber
+                            select new { Warrant = warrant, WarrantPay = warrantPayRecord }
+                            )
+                            .GroupBy(t => t.Warrant, t => t.WarrantPay.HoursWorked)
+                            .Select(group => AccountPayrollMapper.Map(group.Key, group.Sum()))
+                            .ToList();
 
             foreach (var personnel in personnelRecords)
             {
-                results.Add(AccountPayrollMapper.Map(personnel, warrants.Where(warrant => warrant.Ssnubmer == personnel.Ssnumber)));
+                var targetWarrants = warrants.Where(warrant => warrant.SSNumber == personnel.Ssnumber).ToList();
+                results.Add(AccountPayrollMapper.Map(personnel, targetWarrants));
             }
 
             return results;
