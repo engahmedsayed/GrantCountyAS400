@@ -61,8 +61,11 @@
                             <div class="col-xs-1 no-pad-horizontal">
                                 @Html.DisplayNameFor(modelItem => item.PayrollWarrants.FirstOrDefault().RetirementBenefitsEmployer)
                             </div>
-                            <div class="col-xs-2">
+                            <div class="col-xs-1">
                                 @Html.DisplayNameFor(modelItem => item.PayrollWarrants.FirstOrDefault().NetPay)
+                            </div>
+                            <div class="col-xs-1">
+                                @Html.DisplayNameFor(modelItem => item.PayrollWarrants.FirstOrDefault().HoursWorked)
                             </div>
                         </div>
                     </td>
@@ -96,8 +99,11 @@
                                 <div class="col-xs-1 no-pad-horizontal">
                                     @Html.DisplayFor(modelItem => warrant.RetirementBenefitsEmployer)
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-xs-1">
                                     @Html.DisplayFor(modelItem => warrant.NetPay)
+                                </div>
+                                <div class="col-xs-1">
+                                    @Html.DisplayFor(modelItem => warrant.HoursWorked)
                                 </div>
                             </div>
                         </td>

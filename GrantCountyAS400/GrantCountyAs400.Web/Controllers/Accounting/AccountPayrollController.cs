@@ -45,27 +45,25 @@ namespace GrantCountyAs400.Web.Controllers.Accounting
         [Route("export/pdf", Name = "ExportAccountPayrollAsPdf")]
         public ActionResult ExportAccountPayrollAsPdf(AccountPayrollFilterViewModel filter)
         {
-            //In order to get all data that match the given filter.
             var pagingInfo = new PagingInfo() { PageNumber = -1 };
 
-            var entities = _accountPayrollRepository
-                    .GetAll(filter.FirstName, filter.LastName, filter.SSN, filter.MinDate, filter.MaxDate, filter.EmployeeNumber, out int resultCount, pagingInfo.PageNumber,
-                            AppSettings.PageSize)
-                    .ToList();
+            var entities =
+                _accountPayrollRepository
+                .GetAll(filter.FirstName, filter.LastName, filter.SSN, filter.MinDate, filter.MaxDate, filter.EmployeeNumber, out int resultCount, pagingInfo.PageNumber)
+                .ToList();
             return new Rotativa.AspNetCore.ViewAsPdf(entities.ToMappedPagedList<AccountPayroll, AccountPayrollViewModel>(pagingInfo)) { FileName = $"AccountPayroll.pdf" };
         }
 
         [HttpGet]
-        [Route("export/excel",Name = "ExportAccountPayrollAsExcel")]
+        [Route("export/excel", Name = "ExportAccountPayrollAsExcel")]
         public ActionResult ExportAccountPayrollAsExcel(AccountPayrollFilterViewModel filter)
         {
-            //In order to get all data that match the given filter.
             var pagingInfo = new PagingInfo() { PageNumber = -1 };
 
-            MemoryStream stream = _exportingService.GetAccountPayroll(filter.FirstName, filter.LastName, filter.SSN, filter.MinDate, filter.MaxDate, filter.EmployeeNumber, out int resultCount, pagingInfo.PageNumber,
-                            AppSettings.PageSize);
-            return File(stream, Constants.ExcelFilesMimeType,
-            Constants.AccountPayrollTemplateExcelFileName);
+            MemoryStream stream =
+                _exportingService
+                .GetAccountPayroll(filter.FirstName, filter.LastName, filter.SSN, filter.MinDate, filter.MaxDate, filter.EmployeeNumber, out int resultCount, pagingInfo.PageNumber);
+            return File(stream, Constants.ExcelFilesMimeType, Constants.AccountPayrollTemplateExcelFileName);
         }
     }
 }
