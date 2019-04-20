@@ -100,7 +100,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                          from defaultInstrument in instrumentJoin.DefaultIfEmpty()
                          where legalDocument.Id == legalDocumentId
                          select new { namesRecord, codeArea, valueMasterRecord, landUseCode, exciseTaxDataRecord, legalDocument, defaultInstrument, defaultRejection }
-                         ).SingleOrDefault();
+                         ).FirstOrDefault();
 
             if (query != null)
             {
