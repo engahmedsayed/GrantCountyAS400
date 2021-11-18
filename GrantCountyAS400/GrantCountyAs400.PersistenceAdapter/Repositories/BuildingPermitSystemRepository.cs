@@ -276,7 +276,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Repositories
                                                                mdiaArchitectRecord,
                                                                mdiaEngineerRecord,
                                                                bldgContractorRecord,
-                                                               rpmasRecord, nNameRecord,bldgstateClassification)).SingleOrDefault();
+                                                               rpmasRecord, nNameRecord,bldgstateClassification)).FirstOrDefault();
             if(query != null)
             {
                 query.Notes = (from bldgpermit in _context.BldgpermitApplicationMaster
