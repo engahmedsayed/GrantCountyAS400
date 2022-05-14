@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using GrantCountyAs400.PersistenceAdapter.SecurityModule.Models;
+﻿using GrantCountyAs400.PersistenceAdapter.SecurityModule.Models;
 using GrantCountyAs400.Web.Extensions;
 using GrantCountyAs400.Web.ViewModels.AccountVM;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 using X.PagedList;
 
 namespace GrantCountyAs400.Web.Controllers.UserAdmin
@@ -19,27 +16,28 @@ namespace GrantCountyAs400.Web.Controllers.UserAdmin
     [Authorize(Policy = "RequireAdminRole")]
     public class UserAdminController : Controller
     {
-        int pageSize = AppSettings.PageSize;
+        private int pageSize = AppSettings.PageSize;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public async Task<ActionResult> Index(string searchVal,int page=1)
+        public ActionResult Index(string searchVal, int page = 1)
         {
             ViewBag.FromSearch = false;
-            return Request.Headers["x-requested-with"] == "XMLHttpRequest"? GetUsers(  string.Empty, page) :
-             View(GetUsersData( page,  string.Empty));
+            return Request.Headers["x-requested-with"] == "XMLHttpRequest"
+                    ? GetUsers(string.Empty, page)
+                    : View(GetUsersData(page, string.Empty));
         }
 
         public UserAdminController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-            this._userManager = userManager;
-            this._roleManager = roleManager;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
+
         [Route("GetUsers")]
-        public ActionResult GetUsers( string searchVal, int page=1)
+        public ActionResult GetUsers(string searchVal, int page = 1)
         {
-            
-            var query =  GetUsersData(page, searchVal);
+            var query = GetUsersData(page, searchVal);
             return PartialView(query);
         }
 
@@ -60,7 +58,7 @@ namespace GrantCountyAs400.Web.Controllers.UserAdmin
                 var user = new ApplicationUser { EmailConfirmed = true, UserName = userViewModel.UserName, Email = userViewModel.Email, PhoneNumber = userViewModel.PhoneNumber, };
                 var adminresult = await _userManager.CreateAsync(user, userViewModel.Password);
 
-                //Add User to the selected Roles 
+                //Add User to the selected Roles
                 if (adminresult.Succeeded)
                 {
                     if (selectedRoles != null)
@@ -68,7 +66,7 @@ namespace GrantCountyAs400.Web.Controllers.UserAdmin
                         var result = await _userManager.AddToRolesAsync(user, selectedRoles);
                         if (!result.Succeeded)
                         {
-                            ModelState.AddModelError("", result.Errors.Select(t=>t.Description).First());
+                            ModelState.AddModelError("", result.Errors.Select(t => t.Description).First());
                             ViewBag.RoleId = new SelectList(await _roleManager.Roles.ToListAsync(), "Name", "Name");
                             return View();
                         }
@@ -76,10 +74,9 @@ namespace GrantCountyAs400.Web.Controllers.UserAdmin
                 }
                 else
                 {
-                    ModelState.AddModelError("", adminresult.Errors.Select(t=>t.Description).First());
+                    ModelState.AddModelError("", adminresult.Errors.Select(t => t.Description).First());
                     ViewBag.RoleId = new SelectList(_roleManager.Roles, "Name", "Name");
                     return View();
-
                 }
                 return RedirectToAction("Index");
             }
@@ -94,16 +91,15 @@ namespace GrantCountyAs400.Web.Controllers.UserAdmin
         /// </summary>
         /// <param name="id">user id</param>
         /// <returns>edit user page html</returns>
-        [Route("Edit")]
+        [Route("Edit/{id}")]
         public async Task<ActionResult> Edit(string id)
         {
             if (id == null)
             {
-                return new StatusCodeResult((int)HttpStatusCode.BadRequest);
+                return BadRequest();
             }
             if (ModelState.IsValid)
             {
-
                 var user = await _userManager.FindByIdAsync(id);
                 if (user == null)
                 {
@@ -113,9 +109,10 @@ namespace GrantCountyAs400.Web.Controllers.UserAdmin
                 bool lockedout = await _userManager.IsLockedOutAsync(user); // Check for lockout
                 // UserManager.ResetAccessFailedCountAsync(user.Id); // Clear failed count after success
                 //UserManager.AccessFailedAsync(user.Id); // Record a failure (this will lockout if enabled)
-                //UserManager.SetLockoutEnabled(user.Id, enabled) // Enables or disables lockout for a user  
+                //UserManager.SetLockoutEnabled(user.Id, enabled) // Enables or disables lockout for a user
 
                 var userRoles = await _userManager.GetRolesAsync(user);
+                var roles = await _roleManager.Roles.ToListAsync();
 
                 return View(new EditUserViewModel()
                 {
@@ -125,12 +122,12 @@ namespace GrantCountyAs400.Web.Controllers.UserAdmin
                     PhoneNumber = user.PhoneNumber,
                     LockedOut = lockedout,
 
-                    RolesList = _roleManager.Roles.ToList().Select(x => new SelectListItem()
+                    RolesList = await roles.Select(x => new SelectListItem()
                     {
                         Selected = userRoles.Contains(x.Name),
                         Text = x.Name,
                         Value = x.Name
-                    }).ToList()
+                    }).ToListAsync()
                 });
             }
             return new StatusCodeResult((int)HttpStatusCode.BadRequest);
@@ -145,9 +142,9 @@ namespace GrantCountyAs400.Web.Controllers.UserAdmin
         /// <param name="selectedRole">user roles</param>
         /// <returns>if success go to users index page if there is error stay in the same page</returns>
         [HttpPost]
-        [Route("Edit")]
+        [Route("Edit/{id}")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(include:  "Email,Id,PhoneNumber, UserName,LockedOut,RolesList")] EditUserViewModel editUser, params string[] selectedRole)
+        public async Task<ActionResult> Edit([Bind(include: "Email,Id,PhoneNumber, UserName,LockedOut,RolesList")] EditUserViewModel editUser, params string[] selectedRole)
         {
             if (ModelState.IsValid)
             {
@@ -183,14 +180,14 @@ namespace GrantCountyAs400.Web.Controllers.UserAdmin
 
                 if (!result.Succeeded)
                 {
-                    ModelState.AddModelError("", result.Errors.Select(t=>t.Description).First());
+                    ModelState.AddModelError("", result.Errors.Select(t => t.Description).First());
                     return View();
                 }
                 result = await _userManager.RemoveFromRolesAsync(user, userRoles.Except(selectedRole).ToArray<string>());
 
                 if (!result.Succeeded)
                 {
-                    ModelState.AddModelError("", result.Errors.Select(t=>t.Description).First());
+                    ModelState.AddModelError("", result.Errors.Select(t => t.Description).First());
 
                     return View();
                 }
@@ -207,7 +204,7 @@ namespace GrantCountyAs400.Web.Controllers.UserAdmin
         /// </summary>
         /// <param name="id">user id</param>
         /// <returns>delete user confirm page html</returns>
-        [Route("Delete")]
+        [Route("Delete/{id}")]
         public async Task<ActionResult> Delete(string id)
         {
             if (id == null)
@@ -230,7 +227,7 @@ namespace GrantCountyAs400.Web.Controllers.UserAdmin
         /// <param name="id">user id</param>
         /// <returns>if success return to users list page if there is error stay on the same page</returns>
         [HttpPost]
-        [Route("Delete")]
+        [Route("Delete/{id}")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
@@ -257,13 +254,12 @@ namespace GrantCountyAs400.Web.Controllers.UserAdmin
             return View();
         }
 
-
-        [Route("Details")]
+        [Route("Details/{id}")]
         public async Task<ActionResult> Details(string id)
         {
             if (id == null)
             {
-                return new StatusCodeResult((int)HttpStatusCode.BadRequest);
+                return BadRequest();
             }
             var user = await _userManager.FindByIdAsync(id);
 
@@ -272,7 +268,51 @@ namespace GrantCountyAs400.Web.Controllers.UserAdmin
             return View(user);
         }
 
-        private  IPagedList<ApplicationUser> GetUsersData(int? page,string searchVal)
+        [Route("reset/{id}")]
+        public async Task<ActionResult> ResetPassword(string id)
+        {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var viewmodel = new ChangePasswordByAdminViewModel { Id = user.Id, UserName = user.UserName };
+            return View(viewmodel);
+        }
+
+        [Route("reset/{id}")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ResetPassword(string id, ChangePasswordByAdminViewModel viewmodel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var result = await _userManager.ResetPasswordAsync(user, token, viewmodel.NewPassword);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View(viewmodel);
+        }
+
+        private IPagedList<ApplicationUser> GetUsersData(int? page, string searchVal)
         {
             int pageNumber = (page ?? 1);
             var query = _userManager.Users.Where(u => 1 == 1);
@@ -282,9 +322,9 @@ namespace GrantCountyAs400.Web.Controllers.UserAdmin
             }
             foreach (var item in query)
             {
-                item.Roles = ( _userManager.GetRolesAsync(item)).Result.ToList();
+                item.Roles = (_userManager.GetRolesAsync(item)).Result.ToList();
             }
-            
+
             return query.OrderByDescending(u => u.UserName).ToPagedList(pageNumber, pageSize);
         }
     }

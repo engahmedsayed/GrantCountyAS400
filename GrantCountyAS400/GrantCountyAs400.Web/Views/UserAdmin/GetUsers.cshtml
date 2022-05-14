@@ -1,65 +1,67 @@
 ﻿@using X.PagedList.Mvc.Core;
 @model X.PagedList.IPagedList<GrantCountyAs400.PersistenceAdapter.SecurityModule.Models.ApplicationUser>
 
-
-
-
-    <table class="table">
+<table class="table">
+    <thead>
         <tr>
-            <td>
+            <th>
                 User name
-            </td>
-            <td>
+            </th>
+            <th>
                 Email
-            </td>
-            <td>
+            </th>
+            <th>
                 Mobile number
-            </td>
-            <td>
+            </th>
+            <th>
                 Roles
-            </td>
-
-            <td></td>
+            </th>
+            <th></th>
         </tr>
-        @if (Model != null)
-        {
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UserName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PhoneNumber)
-                    </td>
-
-                    <td>
-                        @{ System.Text.StringBuilder formattedRole = new System.Text.StringBuilder();
-                            for (int i = 0; i < item.Roles.Count; i++)
-                            {
-                                formattedRole.AppendLine(item.Roles[i]);
-                            }
-                            string roles = formattedRole.ToString();
-                        }
-                        @Html.DisplayFor(modelItem => roles)
-                    </td>
-                    <td>
-                        <a href="@Url.Action("Edit", "UserAdmin", new { item.Id })" class="btn btn-info"> <span class="glyphicon glyphicon-edit"></span><span class="hidden-xs"> Edit </span></a>
-                        <a href="@Url.Action("Details", "UserAdmin", new { item.Id })" class="btn btn-info"> <span class="fa fa-clipboard"></span><span class="hidden-xs"> Details </span> </a>
-                        <a href="@Url.Action("Delete", "UserAdmin", new { item.Id })" class="btn btn-info"> <span class="glyphicon glyphicon-edit"></span><span class="hidden-xs"> Delete </span></a>
-                    </td>
-                </tr>
-            }
-        }
-
-    </table>
-
-    @if(Model != null)
+    </thead>
+    @if (Model != null)
     {
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+
+                <td>
+                    @{ System.Text.StringBuilder formattedRole = new System.Text.StringBuilder();
+                        for (int i = 0; i < item.Roles.Count; i++)
+                        {
+                            formattedRole.AppendLine(item.Roles[i]);
+                        }
+                        string roles = formattedRole.ToString();
+                    }
+                    @Html.DisplayFor(modelItem => roles)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", "UserAdmin", new { item.Id })" class="btn btn-primary"> <span class="glyphicon glyphicon-edit"></span><span class="hidden-xs"> Edit</span></a>
+                    @if (!item.HasAdminRole)
+                    {
+                        <a href="@Url.Action("ResetPassword", "UserAdmin", new { item.Id })" class="btn btn-primary"> <span class="glyphicon glyphicon-cog"></span><span class="hidden-xs"> Reset Password</span></a>
+                    }
+                    <a href="@Url.Action("Delete", "UserAdmin", new { item.Id })" class="btn btn-danger"> <span class="glyphicon glyphicon-remove"></span><span class="hidden-xs"> Delete</span></a>
+                </td>
+            </tr>
+        }
+    }
+</table>
+
+@if (Model != null)
+{
     <div>
         Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) from @Model.PageCount
 
@@ -67,6 +69,4 @@
         <input type="hidden" name="currentPage" id="currentPage" value="@Model.PageNumber" />
         <input type="hidden" name="pageCount" id="pageCount" value="@Model.PageCount" />
     </div>
-    }
-
-    </div>
+}

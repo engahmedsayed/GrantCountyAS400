@@ -5,15 +5,11 @@
 
 }
 
-
-
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-
         <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
@@ -44,8 +40,6 @@
             <span class="col-md-10">
                 @for (int i = 0; i < Model.RolesList.Count; i++)
                 {
-                    @*<input type="checkbox" name="SelectedRole" value="@item.Value" checked="@item.Selected" class="checkbox-inline" />
-                        @Html.Label(item.Value, new { @class = "control-label" })*@
                     @Html.CheckBoxFor(m => m.RolesList[i].Selected)
                     @Html.HiddenFor(m => m.RolesList[i].Text)
                     @Html.HiddenFor(m => m.RolesList[i].Value)
@@ -64,7 +58,6 @@
             <div class="col-md-offset-2 col-md-2">
                 @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
                 <input type="submit" value="Save" class="btn btn-default" />
-
             </div>
         </div>
     </div>

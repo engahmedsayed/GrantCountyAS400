@@ -1,14 +1,7 @@
-﻿@using GrantCountyAs400.Web.Extensions;
-@model X.PagedList.IPagedList<GrantCountyAs400.PersistenceAdapter.SecurityModule.Models.ApplicationUser>
+﻿@model X.PagedList.IPagedList<GrantCountyAs400.PersistenceAdapter.SecurityModule.Models.ApplicationUser>
 @{
     ViewBag.Title = "Users";
 }
-
-
-<script type="text/javascript">
-
-    var refreshUrl = "@Url.Action("GetUsers")";
-</script>
 
 <div class="mar-top3">
     <br>
@@ -21,13 +14,15 @@
     </div>
 </div>
 <p>
-    <a class="btn btn-default" href="@Url.Action("Create")">Add new user</a>
+    <a class="btn btn-primary" href="@Url.Action("Create")">Add new user</a>
 </p>
 <div id="userList">
     <partial name="GetUsers" model="@Model" />
 </div>
 
-    @*@Html.RenderPartial("GetUsers",Model)*@
-    @section scripts{
-        <script src="~/js/site.js" asp-append-version="true"></script>
-    }
+@section scripts{
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+    var refreshUrl = "@Url.Action("GetUsers")";
+    </script>
+}
