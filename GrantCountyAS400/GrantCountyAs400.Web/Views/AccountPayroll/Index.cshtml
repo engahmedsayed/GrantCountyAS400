@@ -172,43 +172,55 @@
                                     <th>
                                         @Html.DisplayNameFor(modelItem => item.PayrollWarrants.FirstOrDefault().HoursWorked)
                                     </th>
+                                    <th>
+                                        @Html.DisplayNameFor(modelItem => item.PayrollWarrants.FirstOrDefault().DeferredGross)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(modelItem => item.PayrollWarrants.FirstOrDefault().Taxable)
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var warrant in item.PayrollWarrants)
                                 {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => warrant.WarrantNumber)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => warrant.CheckNumber)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => warrant.Date)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => warrant.Gross)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => warrant.Fica)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => warrant.Medical)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => warrant.RetirementPay)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => warrant.RetirementBenefitsEmployer)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => warrant.NetPay)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => warrant.HoursWorked)
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => warrant.WarrantNumber)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => warrant.CheckNumber)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => warrant.Date)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => warrant.Gross)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => warrant.Fica)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => warrant.Medical)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => warrant.RetirementPay)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => warrant.RetirementBenefitsEmployer)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => warrant.NetPay)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => warrant.HoursWorked)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => warrant.DeferredGross)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => warrant.Taxable)
+                                    </td>
+                                </tr>
                                 }
                             <tbody>
                         </table>

@@ -67,6 +67,12 @@
                             <div class="col-xs-1">
                                 @Html.DisplayNameFor(modelItem => item.PayrollWarrants.FirstOrDefault().HoursWorked)
                             </div>
+                            <div class="col-xs-1">
+                                @Html.DisplayNameFor(modelItem => item.PayrollWarrants.FirstOrDefault().DeferredGross)
+                            </div>
+                            <div class="col-xs-1">
+                                @Html.DisplayNameFor(modelItem => item.PayrollWarrants.FirstOrDefault().Taxable)
+                            </div>
                         </div>
                     </td>
                 </tr>
@@ -104,6 +110,12 @@
                                 </div>
                                 <div class="col-xs-1">
                                     @Html.DisplayFor(modelItem => warrant.HoursWorked)
+                                </div>
+                                <div class="col-xs-1">
+                                    @Html.DisplayFor(modelItem => warrant.DeferredGross)
+                                </div>
+                                <div class="col-xs-1">
+                                    @Html.DisplayFor(modelItem => warrant.Taxable)
                                 </div>
                             </div>
                         </td>

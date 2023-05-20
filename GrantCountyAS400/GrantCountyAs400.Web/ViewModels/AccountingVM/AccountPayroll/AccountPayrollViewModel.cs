@@ -46,5 +46,13 @@ namespace GrantCountyAs400.Web.ViewModels.AccountingVM.AccountPayroll
         public decimal? NetPay { get; set; }
         [Display(Name = "Hours Worked")]
         public decimal? HoursWorked { get; set; }
+
+        [Display(Name = "Deferred Gross")]
+
+        public decimal? DeferredGross { get; set; }
+
+        [Display(Name = "Taxable")]
+
+        public decimal? Taxable { get; set; }
     }
 }

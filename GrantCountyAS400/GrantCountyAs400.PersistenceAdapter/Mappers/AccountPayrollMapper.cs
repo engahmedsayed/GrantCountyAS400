@@ -11,6 +11,7 @@ namespace GrantCountyAs400.PersistenceAdapter.Mappers
 
         internal static AccountPayrollWarrant Map(AcctPrWarrant warrant, decimal? hoursWorked)
             => new AccountPayrollWarrant(warrant.Id, warrant.WarrantNumber, warrant.Ssnubmer.Value, warrant.CheckNumber, warrant.EmployeeNumber, warrant.Date,
-                warrant.Gross, warrant.Fica, warrant.Medical, warrant.RetirementPay, warrant.RetirementBenefitsEmployer, warrant.NetPay, hoursWorked);
+                warrant.Gross, warrant.Fica, warrant.Medical, warrant.RetirementPay, warrant.RetirementBenefitsEmployer,
+                warrant.NetPay, hoursWorked, warrant.DeferredGross, warrant.Taxable);
     }
 }
