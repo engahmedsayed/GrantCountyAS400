@@ -118,7 +118,9 @@ namespace GrantCountyAs400.Domain.ExportingService
                         detailSheet.Cells["H" + rowDetailIndex].Value = detailItem.RetirementBenefitsEmployer;
                         detailSheet.Cells["I" + rowDetailIndex].Value = detailItem.NetPay;
                         detailSheet.Cells["J" + rowDetailIndex].Value = detailItem.HoursWorked;
-                        detailSheet.Cells.AutoFitColumns();
+						detailSheet.Cells["K" + rowDetailIndex].Value = detailItem.DeferredGross;
+						detailSheet.Cells["L" + rowDetailIndex].Value = detailItem.Taxable;
+						detailSheet.Cells.AutoFitColumns();
                         detailSheet.View.TabSelected = false;
                         rowDetailIndex++;
                     }
